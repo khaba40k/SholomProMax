@@ -1,0 +1,53 @@
+[15-Oct-2023 18:47:48 UTC] PHP Warning:  mysqli_connect(): (HY000/1130): Host '31.131.18.219' is not allowed to connect to this MariaDB server in /home/sholompr/public_html/blok/conn_local.php on line 8
+[15-Oct-2023 18:47:48 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/sholompr/public_html/blok/conn_local.php on line 9
+[18-Oct-2023 16:42:05 UTC] PHP Parse error:  syntax error, unexpected variable "$_SESSION" in /home/sholompr/public_html/work.php on line 23
+[18-Oct-2023 16:42:13 UTC] PHP Parse error:  syntax error, unexpected variable "$_SESSION" in /home/sholompr/public_html/work.php on line 23
+[19-Oct-2023 01:20:49 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:20:50 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:21:04 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:21:25 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:21:39 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:41:47 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:47:37 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:56:43 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:56:43 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 01:56:43 UTC] PHP Warning:  Undefined variable $in in /home/sholompr/public_html/blok/test.php on line 9
+[19-Oct-2023 17:12:13 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/sholompr/public_html/class/universal.php:191
+Stack trace:
+#0 /home/sholompr/public_html/class/universal.php(191): in_array()
+#1 /home/sholompr/public_html/blok/test.php(17): countArraysKey()
+#2 /home/sholompr/public_html/blok/test.php(8): korektArr()
+#3 /home/sholompr/public_html/index.php(22): require('/home/sholompr/...')
+#4 {main}
+  thrown in /home/sholompr/public_html/class/universal.php on line 191
+[19-Oct-2023 17:12:36 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/sholompr/public_html/class/universal.php:191
+Stack trace:
+#0 /home/sholompr/public_html/class/universal.php(191): in_array()
+#1 /home/sholompr/public_html/blok/test.php(17): countArraysKey()
+#2 /home/sholompr/public_html/blok/test.php(8): korektArr()
+#3 /home/sholompr/public_html/index.php(22): require('/home/sholompr/...')
+#4 {main}
+  thrown in /home/sholompr/public_html/class/universal.php on line 191
+[19-Oct-2023 17:12:39 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/sholompr/public_html/class/universal.php:191
+Stack trace:
+#0 /home/sholompr/public_html/class/universal.php(191): in_array()
+#1 /home/sholompr/public_html/blok/test.php(17): countArraysKey()
+#2 /home/sholompr/public_html/blok/test.php(8): korektArr()
+#3 /home/sholompr/public_html/index.php(22): require('/home/sholompr/...')
+#4 {main}
+  thrown in /home/sholompr/public_html/class/universal.php on line 191
+[19-Oct-2023 17:22:23 UTC] PHP Warning:  foreach() argument must be of type array|object, int given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:22:25 UTC] PHP Warning:  foreach() argument must be of type array|object, int given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:22:50 UTC] PHP Warning:  foreach() argument must be of type array|object, int given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:22:54 UTC] PHP Warning:  foreach() argument must be of type array|object, int given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:23:47 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/sholompr/public_html/class/universal.php on line 173
+[19-Oct-2023 17:23:51 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:24:25 UTC] PHP Warning:  foreach() argument must be of type array|object, int given in /home/sholompr/public_html/blok/test.php on line 21
+[19-Oct-2023 17:27:02 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:27:04 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:27:47 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:28:30 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:28:33 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:32:16 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:32:34 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 22
+[19-Oct-2023 17:33:07 UTC] PHP Warning:  foreach() argument must be of type array|object, float given in /home/sholompr/public_html/blok/test.php on line 25

@@ -1,0 +1,9 @@
+<Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup>
+    <EnvName>Custom</EnvName>
+    <RuntimeVersion>8.0</RuntimeVersion>
+    <PublishBeforeDebugProfile>ftp_spm</PublishBeforeDebugProfile>
+    <PublishEvent>AfterSave</PublishEvent>
+    <CustomServerUrl>http://sholompromax.com</CustomServerUrl>
+  </PropertyGroup>
+</Project>

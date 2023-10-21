@@ -1,0 +1,17 @@
+<Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>d5dcad69-08b1-406d-92e4-e60baa2cbc3f</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnvName>PHPDev</EnvName>
+    <RuntimeVersion>5.4</RuntimeVersion>
+    <RootNamespace>SholomProMax</RootNamespace>
+    <WebRoot />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="sql_base\dbo.Table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="sql_base\dbo.Table.sql" />
+  </ItemGroup>
+</Project>

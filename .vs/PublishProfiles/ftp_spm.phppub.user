@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Excluded />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAitdGfIR80Uifk218dys4iwAAAAACAAAAAAAQZgAAAAEAACAAAAC8RtVSVtj9Atsg/j01GSifrM02ZWXnD2Id/HjT6ryzswAAAAAOgAAAAAIAACAAAABs3BapTKuxMk9VVotep7aXfP4Xwj8uAcJPBUMBxq+muSAAAAA7Ry7ry3VnTpFu95KdIpU/ISTp6BMGrg62Jh5nEJmyO0AAAABTgUXaRYpL4+/7Or15qlyg25WOnvGaLnbLHvl0AddQsykPNSQtlpvt2KVOg6i/2/UgR5TfzUbTYdFhpgYi0105</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include=".cpanel.yml">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".ftpquota">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include=".git/.htaccess">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".git/config">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".git/description">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".git/HEAD">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".git/hooks/applypatch-msg.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/commit-msg.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/fsmonitor-watchman.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/post-receive">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/post-update.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/pre-applypatch.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/pre-commit.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/pre-merge-commit.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/pre-push.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/pre-rebase.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/pre-receive.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/prepare-commit-msg.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/push-to-checkout.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/hooks/update.sample">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include=".git/info/exclude">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".htaccess">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include=".vs/phptasks.json">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include=".vs/ProjectSettings.json">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include=".vs/SholomProMax/config/applicationhost.config">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include=".vs/SholomProMax/DesignTimeBuild/.dtbcache.v2">
+      <publishTime>10/21/2023 20:14:22</publishTime>
+    </File>
+    <File Include=".vs/SholomProMax/v16/.suo">
+      <publishTime>10/21/2023 20:14:22</publishTime>
+    </File>
+    <File Include=".vs/slnx.sqlite">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include=".vs/VSWorkspaceState.json">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include="0123.txt">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include="admin.php">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include="blok/active_z.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/ch_var_col_set.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/close_z.php">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include="blok/conn_local.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/error_log">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/expenses.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/expenses_menu.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/header.php">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include="blok/jurnal.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/logout.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/new_Z.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/price_list.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/print_to_work.php">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include="blok/record_new_in.php">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include="blok/record_new_z.php">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include="blok/record_price.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/remowe_info.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/table_count.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/table_sum.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/test.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/zakazi.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="blok/zvit_menu.php">
+      <publishTime>10/21/2023 20:14:17</publishTime>
+    </File>
+    <File Include="class/universal.php">
+      <publishTime>10/21/2023 20:14:22</publishTime>
+    </File>
+    <File Include="error_log">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include="img/img_chn.png">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include="img/img_del.png">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include="img/img_prt.png">
+      <publishTime>10/21/2023 20:14:21</publishTime>
+    </File>
+    <File Include="index.php">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include="info.php">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include="public_html/.gitattributes">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/.gitignore">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/.htaccess">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/admin.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/active_z.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/ch_var_col_set.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/close_z.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/conn_local.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/error_log">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/expenses.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/expenses_menu.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/header.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/jurnal.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/logout.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/new_Z.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/price_list.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/print_to_work.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/record_new_in.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/record_new_z.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/record_price.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/remowe_info.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/table_count.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/table_sum.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/test.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/blok/zakazi.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/blok/zvit_menu.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/class/universal.php">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/error_log">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="public_html/img/img_chn.png">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/img/img_del.png">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/img/img_prt.png">
+      <publishTime>10/21/2023 20:14:20</publishTime>
+    </File>
+    <File Include="public_html/index.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="public_html/info.php">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/open">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/style.css">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="public_html/upload_spm.bat">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="public_html/Web.config">
+      <publishTime>10/21/2023 20:14:19</publishTime>
+    </File>
+    <File Include="public_html/work.php">
+      <publishTime>10/21/2023 20:14:18</publishTime>
+    </File>
+    <File Include="SholomProMax.phpproj">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include="SholomProMax.phpproj.user">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include="SholomProMax.sln">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include="style.css">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/21/2023 20:14:16</publishTime>
+    </File>
+    <File Include="work.php">
+      <publishTime>10/21/2023 20:14:15</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

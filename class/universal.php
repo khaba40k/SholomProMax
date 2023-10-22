@@ -1,4 +1,14 @@
 <?php
+function  HIDE(){
+     if (!isset($_SESSION['logged'])){
+       session_start();
+     }
+     if ($_SESSION['logged'] != 'Administrator'){
+           echo 'ТИМЧАСОВО НЕ ДОСТУПНО... СТОРІНКА В РОЗРОБЦІ!';
+           exit;
+     }
+}
+
 function phpAlert($msg, $location = '')
 {
     if ($location == '') {
@@ -369,6 +379,19 @@ class HTEL {
         }
 
         $this->IS_EMPTY = false;
+    }
+
+    function setAtr($atr_name, $val, $append = false){
+
+        if ($append) {
+            if (isset($this->element_args[$atr_name])) {
+                $this->element_args[$atr_name] .= $val;
+            } else {
+                $this->element_args[$atr_name] = $val;
+            }
+        } else {
+            $this->element_args[$atr_name] = $val;
+        }
     }
 
     private function _sendGlobVars($vars){

@@ -192,6 +192,25 @@
 
         });
 
+        function Search($request) {
+            $('#request').val($request);
+
+            if ($request.trim() == '') return false;
+
+            $.ajax({
+                url: 'blok/active_z.php',
+                method:'get',
+                dataType: 'html',
+                data: 'search=' + $request,
+                success: function (response) {
+                    $('#workfield').html(response);
+                }
+            });
+
+        }
+
+        $("#request").focus();
+
     </script>
 
     <?php
@@ -216,7 +235,10 @@
                 echo new HTEL('script/activeZedit();');
                 break;
         }
-    } else {
+    } else if (isset($_GET['search'])){
+        echo new HTEL('script/Search(`[0]`);', $_GET['search']);
+    }
+    else {
         echo new HTEL('script/activeZedit();'); //Сторінка за замовчуванням
     }
     ?>

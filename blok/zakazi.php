@@ -50,12 +50,15 @@
 </script>
 
 <?php
+
 $_MENU = $_GET['menu_type'] ?? 'list';
 
 //var_dump($_GET);
 //exit;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
+//HIDE();
 
 $div = new HTEL('div .=zakaz_menu');
 
@@ -70,6 +73,7 @@ switch ($_MENU){
             new HTEL("button *=button !=archiv_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ВИКОНАНІ (АРХІВ)",
             [$_GET['page'] == 'archiv' ? ' clicked_but' : '', $style, 'archiv'])
         ]);
+
         echo new HTEL('script/list_Z(`[0]`);', $_GET['page']);
         break;
     case 'create':

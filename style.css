@@ -32,6 +32,54 @@ body {
     font-size: 16px;
 }
 
+div.firstpage{
+    display: block;
+    width:100%;
+    justify-content:center;
+    align-items:center;
+}
+
+    div.firstpage > * {
+        font-size: 30px;
+        margin: 0 5%;
+    }
+
+    div.firstpage > label {
+        background-color: green;
+    }
+
+    div.firstpage > button {
+        margin-top: 10px;
+    }
+
+form#search {
+    display: inline-flex;
+    position: relative;
+    width: 50%;
+    height: 100%;
+    margin: 0 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+    form#search input {
+        text-align: left;
+        width: 80%;
+        height: 100%;
+        padding: 4px 8px;
+        font-size: 20px;
+        border: 2px solid olive;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    form#search button {
+        width: 20%;
+        height: 100%;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
 .autorize {
     height: 80vh;
     display: flex;

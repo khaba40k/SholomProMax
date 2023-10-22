@@ -1,9 +1,20 @@
 <Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>8c2c055a-0d20-450e-86ad-7265002faba3</ProjectGuid>
+  </PropertyGroup>
   <PropertyGroup>
     <EnvName>Custom</EnvName>
     <RuntimeVersion>8.0</RuntimeVersion>
-    <PublishBeforeDebugProfile>ftp_spm</PublishBeforeDebugProfile>
-    <PublishEvent>AfterSave</PublishEvent>
     <CustomServerUrl>http://sholompromax.com</CustomServerUrl>
+    <SaveServerSettingsInUserFile>false</SaveServerSettingsInUserFile>
+    <CustomXdebugPort>9000</CustomXdebugPort>
+    <DebugMappingMethod>Automatic</DebugMappingMethod>
+    <DebugPathMapping />
+    <DBGpProxyEnabled>false</DBGpProxyEnabled>
+    <DBGpProxyHost />
+    <DBGpProxyPort>9001</DBGpProxyPort>
+    <IdeKey>687FD2AA</IdeKey>
+    <RootNamespace>SPM</RootNamespace>
+    <WebRoot>sholompromax.com</WebRoot>
   </PropertyGroup>
 </Project>

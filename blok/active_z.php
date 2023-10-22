@@ -2,16 +2,34 @@
 require("conn_local.php");
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-switch ($_GET['type']){
-    case 'new':
-        $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND `TTN_IN` IS NULL AND `sholom_num` = 0 ORDER BY `date_max` ASC';
-        break;
-    case 'inwork':
-        $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL) ORDER BY `date_max` ASC';
-        break;
-    default:
-        $query = 'SELECT * FROM `client_info` where `date_out` IS NOT NULL ORDER BY `date_out` DESC';
-        break;
+if (!isset($_GET['search']) || $_GET['search'] == ''){
+    switch ($_GET['type']) {
+        case 'new':
+            $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND `TTN_IN` IS NULL AND `sholom_num` = 0 ORDER BY `date_max` ASC';
+            break;
+        case 'inwork':
+            $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL) ORDER BY `date_max` ASC';
+            break;
+        default:
+            $query = 'SELECT * FROM `client_info` where `date_out` IS NOT NULL ORDER BY `date_out` DESC';
+            break;
+    }
+
+}else{
+    $srch = '"%' . $_GET['search'] . '%" ';
+
+    echo new HTEL('label &=margin-bottom:10px;padding:5px+10px;width:100%;font-size:24px;text-weight:bold;/РЕЗУЛЬТАТИ ПОШУКУ: "[0]"',
+    $_GET['search']);
+
+    $query = 'SELECT * FROM `client_info` where
+    `phone` LIKE ' . $srch . '
+    OR `client_name` LIKE ' . $srch . '
+    OR `TTN_IN` LIKE ' . $srch . '
+    OR `TTN_OUT` LIKE ' . $srch . '
+    OR `sold_number` LIKE ' . $srch . '
+    OR `sholom_num` LIKE ' . $srch . '
+    OR `comm` LIKE ' . $srch . '
+    OR `reqv` LIKE ' . $srch;
 }
 
 $result = mysqli_query($link, $query);

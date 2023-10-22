@@ -12,7 +12,7 @@
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="blok/active_z.php">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="blok/ch_var_col_set.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -33,7 +33,7 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/header.php">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="blok/jurnal.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -66,7 +66,7 @@
       <publishTime>10/22/2023 12:41:33</publishTime>
     </File>
     <File Include="blok/table_count.php">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="blok/table_sum.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -81,7 +81,7 @@
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>10/22/2023 23:41:45</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="error_log">
       <publishTime>10/21/2023 20:14:15</publishTime>
@@ -99,40 +99,40 @@
       <publishTime>10/22/2023 11:59:39</publishTime>
     </File>
     <File Include="index.php">
-      <publishTime>10/22/2023 23:29:46</publishTime>
+      <publishTime>10/22/2023 23:43:28</publishTime>
     </File>
     <File Include="info.php">
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="search.php">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:28</publishTime>
     </File>
     <File Include="SholomProMax.phpproj">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:28</publishTime>
     </File>
     <File Include="SholomProMax.phpproj.user">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:28</publishTime>
     </File>
     <File Include="SholomProMax.sln">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:28</publishTime>
     </File>
     <File Include="SPM.phpproj">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="SPM.phpproj.user">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="SPM.sln">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="style.css">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="work.php">
-      <publishTime>10/22/2023 23:41:44</publishTime>
+      <publishTime>10/22/2023 23:43:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

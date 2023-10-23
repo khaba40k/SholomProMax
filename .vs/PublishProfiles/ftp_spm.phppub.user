@@ -12,7 +12,7 @@
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="blok/active_z.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="blok/ch_var_col_set.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -27,16 +27,16 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/expenses.php">
-      <publishTime>10/21/2023 20:14:18</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/expenses_menu.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/header.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/jurnal.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/logout.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -48,7 +48,7 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/print_to_work.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/record_new_in.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
@@ -66,28 +66,28 @@
       <publishTime>10/22/2023 12:41:33</publishTime>
     </File>
     <File Include="blok/table_count.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/table_sum.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/test.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/zakazi.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="blok/zvit_menu.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="error_log">
       <publishTime>10/21/2023 20:14:15</publishTime>
     </File>
     <File Include="img/fon.png">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:45</publishTime>
     </File>
     <File Include="img/img_chn.png">
       <publishTime>10/21/2023 20:14:21</publishTime>
@@ -105,28 +105,28 @@
       <publishTime>10/23/2023 00:23:00</publishTime>
     </File>
     <File Include="info.php">
-      <publishTime>10/23/2023 13:39:51</publishTime>
+      <publishTime>10/23/2023 17:42:46</publishTime>
     </File>
     <File Include="search.php">
       <publishTime>10/23/2023 17:34:59</publishTime>
     </File>
     <File Include="SholomProMax.phpproj">
-      <publishTime>10/23/2023 17:35:21</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="SholomProMax.phpproj.user">
-      <publishTime>10/23/2023 17:35:21</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="SholomProMax.sln">
-      <publishTime>10/23/2023 17:35:21</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="SPM.phpproj">
-      <publishTime>10/23/2023 17:35:21</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="SPM.phpproj.user">
-      <publishTime>10/23/2023 17:35:21</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="SPM.sln">
-      <publishTime>10/23/2023 17:35:21</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
     <File Include="style.css">
       <publishTime>10/23/2023 17:32:09</publishTime>
@@ -135,7 +135,7 @@
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="work.php">
-      <publishTime>10/23/2023 17:35:22</publishTime>
+      <publishTime>10/23/2023 17:50:44</publishTime>
     </File>
   </ItemGroup>
 </Project>

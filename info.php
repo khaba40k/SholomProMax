@@ -40,7 +40,11 @@
         $result = mysqli_query($link, $query);
 
         if (mysqli_num_rows($result) != 0) {
-            echo '<a href="work" class="no-print" > <<АДМІНКА </a>';
+            session_start();
+
+            if (isset($_SESSION['logged'])) {
+                echo '<a href="work" class="no-print" > <<АДМІНКА </a>';
+            }
             echo '<label for="numberToInfo" class="no-print" style=font-size:120%;font-weight:bold;padding:10px;">Незавершені задачі:</label>';
             echo '<div id="numberToInfo" class="no-print">';
 

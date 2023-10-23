@@ -10,5 +10,8 @@
     <FtpPassiveMode>True</FtpPassiveMode>
     <FtpSecurity>None</FtpSecurity>
     <WebPublishMethod>FTP</WebPublishMethod>
+    <PublishScope>ProjectFolder</PublishScope>
+    <LogLevel>Normal</LogLevel>
+    <IgnoreMask>conn_local.php;</IgnoreMask>
   </PropertyGroup>
 </Project>

@@ -11,11 +11,11 @@ $tbody = new HTEL('tbody');
 
 $tr = new HTEL('tr');
 
-$tr(new HTEL('th/Назва послуги'));
+$tr(new HTEL('th /Назва послуги'));
 $tr(new HTEL('th colspan=2/Витрати'));
 $tr(new HTEL('th /Списано'));
 $tr(new HTEL('th colspan=2/Надходження'));
-$tr(new HTEL('th/ВСЬОГО'));
+$tr(new HTEL('th /ВСЬОГО'));
 
 $tbody($tr);
 
@@ -47,7 +47,6 @@ foreach ($result as $row) {
     }
 }
 
-
 //ВИБІРКА ІСНУЮЧИХ ТИПІВ
 
 $query = 'SELECT * FROM `type_ids`';
@@ -57,9 +56,6 @@ $result = mysqli_query($link, $query);
 foreach ($result as $row) {
     $arr_types[$row["service_ID"]][$row["type_ID"]] = "(" . $row["name"] . ")";
 }
-
-//var_dump($arr_types);
-//exit;
 
 //Вибірка витрат
 
@@ -182,18 +178,18 @@ foreach ($arr_serv_name as $i=>$n) {
 
                 switch ($ii) {
                     case 0:
-                        $tr(new HTEL('td &=width:35%;text-align:left;/[0] [1]', [$cell[$ii], $tn]));
+                        $tr(new HTEL('td &=text-align:left;/[0] [1]', [$cell[$ii], $tn]));
                         break;
                     case 1:
                     case 3:
                     case 4:
-                        $tr(new HTEL('td &=width:6%;text-align:center;/[0]', $cell[$ii]));
+                        $tr(new HTEL('td &=text-align:center;/[0]', $cell[$ii]));
                         break;
                     case 6:
-                        $tr(new HTEL('td &=width:17%;text-align:right;font-weight:bold;/[0]', $cell[$ii]));
+                        $tr(new HTEL('td &=text-align:right;font-weight:bold;/[0]', $cell[$ii]));
                         break;
                     default:
-                        $tr(new HTEL('td &=width:15%;text-align:right;/[0]', $cell[$ii]));
+                        $tr(new HTEL('td &=text-align:right;/[0]', $cell[$ii]));
                         break;
                 }
             }
@@ -204,9 +200,9 @@ foreach ($arr_serv_name as $i=>$n) {
 
                 foreach ($arr_com_in[$i][$t] as $com=>$arr){
                     $tr = new HTEL('tr .=row_comm');
-                    $tr(new HTEL("td &=text-align:right;/[0]", $com));
+                    $tr(new HTEL("td/[0]", $com));
                     $tr(new HTEL("td &=text-align:center;/[0]", isset($arr['count']) ? $arr['count'] : ''));
-                    $tr(new HTEL("td &=text-align:right;/[0]",
+                    $tr(new HTEL("td/[0]",
                             $arr['cost'] >  0 ? CostOut($arr['cost']) : '-'));
                     $tr(new HTEL("td &=text-align:center;/[0]", isset($arr['sps']) ? abs($arr['sps']) : '-'));
                     $tr(new HTEL("td colspan=3"));
@@ -222,20 +218,18 @@ $_s_out = floatval(sumArray($arr_sum_out));
 
 $tr = new HTEL('tr', [CostOut($_s_in), CostOut($_s_out), CostOut($_s_out - $_s_in)]);
 
-$tr(new HTEL('th &=text-align:center;font-size:larger;/РАЗОМ'));
+$tr(new HTEL('th &=text-align:center;/РАЗОМ'));
 
-$tr(new HTEL('th colspan=2 &=text-align:right;font-size:larger;/[0]'));
-$tr(new HTEL('th &=text-align:center;font-size:larger;/[0]', sumArray($arr_sps_in)));
-$tr(new HTEL('th colspan=2 &=text-align:right;font-size:larger;/[1]'));
-$tr(new HTEL('th &=text-align:right;font-size:larger;/[2]'));
+$tr(new HTEL('th colspan=2 &=text-align:right;/[0]'));
+$tr(new HTEL('th &=text-align:center;/[0]', sumArray($arr_sps_in)));
+$tr(new HTEL('th colspan=2 &=text-align:right;/[1]'));
+$tr(new HTEL('th &=text-align:right;/[2]'));
 
 $tbody($tr);
 
 $table($tbody);
 
 echo $table;
-
-//var_dump($arr_com_in);
 
 $link->close();
 

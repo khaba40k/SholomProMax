@@ -1,5 +1,5 @@
 ﻿:root{
-    --formbutbckgrnd: olive;
+    --bckgrndclr: rgba(128, 128, 0, 0.60);
 }
 
 input:read-only{
@@ -12,6 +12,8 @@ button {
     padding: 10px 5px;
     font-weight: bold;
     border-radius: 5px;
+    font-size: 90%;
+    color: darkolivegreen;
 }
 
 .clicked_but {
@@ -29,27 +31,33 @@ caption.onlyPrint {
 }
 
 body {
-    font-size: 16px;
+    background-attachment: fixed;
+    font-size: 20px;
+    background-image: url(../img/fon.png);
+    background-repeat: repeat;
+    background-size: 20%;
 }
 
-div.firstpage{
-    display: block;
-    width:100%;
-    justify-content:center;
-    align-items:center;
+div.firstpage {
+    margin: 1%  5%;
+    padding: 1% 1%;
 }
 
     div.firstpage > * {
-        font-size: 30px;
-        margin: 0 5%;
+        display:inline-block;
+        width:100%;
     }
 
     div.firstpage > label {
-        background-color: green;
+        margin-bottom: 20px;
     }
 
     div.firstpage > button {
-        margin-top: 10px;
+        width: 50%;
+        margin-left: 25%;
+        margin-right:25%;
+        margin-top: 15px;
+        padding: 15px 0;
     }
 
 form#search {
@@ -67,7 +75,6 @@ form#search {
         width: 80%;
         height: 100%;
         padding: 4px 8px;
-        font-size: 20px;
         border: 2px solid olive;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
@@ -134,12 +141,10 @@ header a {
     color: #212121;
     padding: 12px;
     text-decoration: none;
-    font-size: 18px;
     border-radius: 4px;
 }
 
     header a.logo {
-        font-size: 25px;
         font-weight: bold;
     }
 
@@ -160,6 +165,18 @@ nav {
 table {
     border: 2px solid #000;
     border-collapse: collapse;
+}
+
+    table td {
+        font-size: 90%;
+    }
+
+    table th {
+        font-size: 110%;
+    }
+
+fieldset, tbody {
+    background: var(--bckgrndclr);
 }
 
 th, td {
@@ -183,17 +200,18 @@ button:hover {
 
 aside {
     float: left;
-    background: linear-gradient(to top left, white, blue);
+    background: linear-gradient(to top left, var(--bckgrndclr), #a5baff);
     width: 20%;
     padding: 10px 10px;
+    border-radius:  10px;
 }
 
     aside button {
         width: 100%;
+        font-size: 70%;
     }
 
     aside label {
-        font-size: large;
         font-weight: bold;
     }
 
@@ -209,22 +227,36 @@ main {
     }
 
     .create_z > fieldset {
-        border: 2px solid #ff0000;
         float: left;
         width: 100%;
         padding: 10px 10px;
     }
-
-        .create_z > fieldset > legend {
-            font-size: large;
-            font-weight: bold;
-        }
 
 .create_z > button {
     width: auto;
     display: flex;
     float: right;
 }
+
+fieldset {
+    border-radius: 10px;
+}
+
+fieldset legend{
+    background-color: yellow;
+    color: blue;
+    border-radius:  10px;
+    padding: 10px 15px;
+}
+
+fieldset#fs1 {
+    border: 5px solid blue;
+    margin-bottom: 20px;
+}
+
+    fieldset#fs1 div {
+        font-size: 70%;
+    }
 
 fieldset#fs1 > div {
     display: inline-block;
@@ -237,10 +269,12 @@ fieldset#fs1 > div > * {
     position: absolute;
     padding: 5px 5px;
     margin: 5px 0;
-    font-size: 16px;
     height: 100%;
     right: 0;
     width: 55%;
+    background:none;
+    color: blue;
+    font-weight:bold;
 }
 
     fieldset#fs1 > div > label {
@@ -248,9 +282,9 @@ fieldset#fs1 > div > * {
         width: 35%;
     }
 
-fieldset#fs2 {
-    border: 2px solid #000;
-}
+    fieldset#fs2 {
+        border: 5px solid yellow;
+    }
 
 div#color_variant {
     display: grid;
@@ -289,19 +323,21 @@ div#color_variant {
     display: grid;
     grid-template-columns: 49% 49%;
     grid-column-gap: 2px;
+    font-size: 90%;
 }
 
 .opt_color {
     display: flex;
     align-items: center;
     position: relative;
-    background: linear-gradient(to right, darkolivegreen, white);
+    background: linear-gradient(to right, yellow, var(--bckgrndclr));
     border-radius: 10px;
     margin: 5px 5px;
     padding: 5px 10px;
-    color: white;
+    color: blue;
     width: 100%;
     height: 30px;
+    font-size: 70%;
 }
 
     .opt_color:hover {
@@ -315,7 +351,6 @@ div#color_variant {
     }
 
 .type_variant {
-    /*appearance: none;*/
     background: none;
     height: 100%;
     border: none;
@@ -339,28 +374,31 @@ div#color_variant {
     display: inline-flex;
 }
 
-    .left_z_menu > label {
-        font-size: small;
+    .left_z_menu:first-child {
+        width:60%;
     }
 
     .convers {
         position: absolute;
+        display:inline-block;
     }
 
 label.convers {
-    right: 23px;
+    right: 20%;
+    width: 20%;
+    text-align:right;
 }
 
 input.convers {
-    right: 2px;
-    width: 20px;
-    height: 100%;
+    right: 13%;
+    width: 7%;
+    height: 80%;
 }
 
 .right_menu {
     display: flex;
     position: absolute;
-    right: 2%;
+    right: 1%;
     height: 85%;
     width: 43%;
     justify-content: right;
@@ -399,7 +437,6 @@ input.convers {
         display:flex;
         position: relative;
         height: 100%;
-/*        width: 60px;*/
         margin-left: 10px;
         border: 1px solid darkolivegreen;
         border-radius: 15px;
@@ -424,14 +461,6 @@ input.convers {
     width: 100%;
 }
 
-    .tbl_price table * {
-        font-size:  20px;
-    }
-
-    .tbl_price table caption {
-        font-size: 26px;
-    }
-
     .tbl_price button {
         float: right;
         margin-top: 15px;
@@ -454,13 +483,8 @@ input.convers {
     padding: 3px 4px;
 }
 
-.tbl_count * {
-    font-size: 20px;
-}
-
 .tbl_sum th {
     padding: 10px;
-    font-size: larger
 }
 
 .tbl_sum td  {
@@ -474,8 +498,8 @@ input.convers {
     background: #febaba;
 }
 
-#infoForm table * {
-    font-size: 20px;
+#infoForm{
+    padding: 0 5%;
 }
 
 #infoForm td {
@@ -491,13 +515,17 @@ input.convers {
     display: grid;
     grid-template-columns: 5% 30% 20% 15% 10% 10% 10%;
     width: 100%;
-    background: linear-gradient(to right, darkolivegreen, white);
+    background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
     border-radius: 10px;
     padding: 5px;
     margin-left: 5px;
     margin-bottom: 5px;
     align-items: center;
 }
+
+    .activeZ * {
+        font-size: 75%;
+    }
 
 #zakaz_workplace{
     padding: 0 10%;
@@ -506,9 +534,9 @@ input.convers {
 
 .activeZ * {
     text-align: center;
-    font-size: inherit;
+    /*font-size: inherit;*/
     font-weight: bold;
-    color: white;
+    color: black;
     position: relative;
     margin: 2px 5px;
 }
@@ -548,9 +576,13 @@ input.convers {
     justify-content: right;
     align-items: center;
     padding: 5px 10px;
-    background: linear-gradient(to bottom, olive, white); 
+    background: linear-gradient(to bottom, olive, var(--bckgrndclr)); 
     border-radius: 5px;
 }
+
+    .doneApply * {
+        font-size: 70%;
+    }
 
     .doneApply > input {
         width: 90px;
@@ -572,16 +604,13 @@ input.convers {
     padding: 0 10%;
 }
 
-#zvitResult > table {
+#zvitResult > * {
     width:100%;
 }
 
-    #zvitResult > form {
-        width: 100%;
-    }
-
 #zvitMenu > button {
     width: 19%;
+    font-size: 60%;
 }
 
 #expensesMenu  > button{
@@ -597,7 +626,7 @@ input.convers {
     .expenses_list th {
         padding: 5px 20px;
         text-align: left;
-        font-size: 170%;
+        font-size: 120%;
         color: blue;
     }
 
@@ -622,21 +651,28 @@ input.convers {
         font-weight: bold;
     }
 
-    .del_cell {
+    td.del_cell {
+        position:relative;
         width:3%;
         padding: 0;
+        margin:0;
+        background-color:white;
     }
 
-.del_cell input{
+input.delrow {
+    position: absolute;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    left: 10%;
+    top:10%;
+    width: 80%;
+    height: 80%;
     border: none;
     color: white;
-    background-color: red;
+    background-color: rgba(255,0,0,0.7);
     font-weight: bold;
     margin: 0;
     padding: 0;
+    border-radius: 30px;
 }
 
     .delrow:hover {
@@ -649,16 +685,12 @@ input.convers {
         display: inline-block;
     }
 
-#zvitResult > * {
-    width: 80%;
-}
-
 #periodVariant {
     color: white;
     font-weight: bold;
     margin-top: 10px;
     padding: 10px;
-    background: linear-gradient(to bottom, darkolivegreen, white);
+    background: linear-gradient(to bottom, darkolivegreen, var(--bckgrndclr));
     border-radius: 10px;
 }
 
@@ -682,17 +714,11 @@ input.convers {
         padding: 10px 10px;
     }
 
-    .expenses_table > * {
-        font-size: 14px;
-    }
-
     .expenses_table > caption{
-        font-size: 20px;
         margin-bottom: 15px;
     }
 
         .expenses_table > caption > input {
-            font-size: 20px;
             width: auto;
         }
 
@@ -730,14 +756,15 @@ input.convers {
 .row_comm {
     color: grey;
     border-top: 2px dotted grey;
-    background: linear-gradient(to left, #d5d5d5, white);
+    background: linear-gradient(to left, #d5d5d5, var(--bckgrndclr));
 }
 
     .row_comm td {
-        font-size: calc(100% * 0.9);
+        font-size: 60%;
         font-style: italic;
-        color: grey;
+        color: darkgreen;
         border-left: 2px dotted grey;
+        text-align:right;
     }
 
 .invalid {
@@ -748,20 +775,32 @@ input.convers {
 
 .color_cell {
     font-weight: lighter;
-    font-size:smaller;
     padding: 0;
     margin: 0;
     width: 5%;
     color: white;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     body * {
-        font-size: 12px;
+        font-size: 18px;
+    }
+
+    #grid_color {
+        grid-template-columns: 100%;
+        grid-column-gap: 0;
+        font-size: 120%;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    body * {
+        font-size: 16px;
     }
 
     aside {
-        font-size: 12px;
         display: flex;
         width: 100%;
     }
@@ -778,48 +817,40 @@ input.convers {
     main {
         float: left;
         width: 100%;
+        margin: 0;
+        padding: 0;
     }
 
-        main * {
-            font-size: 10px;
-        }
-
-        main > form, main > table {
+        main > form, main table {
             width: 100%;
             margin: 0;
         }
 
-    fieldset#fs1 > label, fieldset#fs1 > input {
-        font-size: 12px;
-    }
-
-    #grid_color {
-        grid-template-columns: 100%;
-        grid-column-gap: 0;
-    }
-
-    #workfield{
+    #workfield {
         margin-top: 10px;
+        padding: 0;
+        font-size: 50%;
     }
 
-    #zakaz_workplace {
-        padding: 0;
-    }
+        #workfield > * {
+            font-size: 50%;
+        }
+
+        #workfield td {
+            font-size: 50%;
+        }
+
+        #workfield th {
+            font-size: 60%;
+        }
+
+        #zakaz_workplace {
+            padding: 0;
+        }
 
     #zvitResult {
         padding: 0;
-    }
-
-    .expenses_table * {
-        font-size: 10px;
-    }
-
-    .expenses_table > caption {
-        font-size: 14px;
-    }
-
-    .doneApply *{
-        font-size: 10px;
+        font-size: 50%;
     }
 
     .doneApply > input {
@@ -828,73 +859,84 @@ input.convers {
     }
 
         .doneApply > input[type=number] {
-            width: 50px;
             text-align: right;
         }
-
-    .tbl_count *{
-        font-size: 12px;
-    }
 }
 
 @media screen and (max-width: 720px) {
-
-    aside * {
-        font-size: 10px;
+    body * {
+        font-size: 14px;
     }
-
-    body {
-        font-size: 10px;
+    aside button {
+        font-size: 50%;
     }
-
 }
 
 @media print {
 
-    aside {
-        width: 0;
-        margin:0;
-    }
+        aside {
+            width: 0;
+            margin: 0;
+        }
 
-    main {
-        width: 100%;
-        padding: 0;
-        margin:0;
-    }
+        main {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
 
-        main > * {
+            main > * {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+        form {
             width: 100%;
             margin: 0;
             padding: 0;
         }
 
-    form{
-        width:100%;
-        margin:0;
-        padding:0;
-    }
+        #zvitResult, #workfield, #infoForm {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
 
-    button, .no-print, .no-print * {
-        display: none !important;
-    }
+            #workfield > *, #zvitResult, .printInfo {
+                width: 95%;
+                margin-left: 5%;
+            }
 
-    caption.onlyPrint {
-        display: table-caption;
-    }
+        body, body *, .tbl_sum * {
+            background: none;
+        }
 
-    #zvitResult > * {
-        width: 100%;
-    }
+        .tbl_sum {
+            margin: 0;
+        }
 
-    div {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
+        button, .no-print, .no-print * {
+            display: none !important;
+        }
 
-    table {
-        width: 100%;
-        margin: 0;
-        padding: 0;
+        caption.onlyPrint {
+            display: table-caption;
+        }
+
+        #zvitResult > * {
+            width: 100%;
+        }
+
+        div {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
     }
-}

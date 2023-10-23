@@ -65,9 +65,7 @@ $result = mysqli_query($link, $query);
 
 $serv_for_sol = '';
 
-$style = $hideForWorker ? 'margin:0 5%;width: 90%;' : '';
-
-$table = new HTEL('table .=printInfo &=[0]', $style);
+$table = new HTEL('table .=printInfo');
 
 $ttn = '';
 

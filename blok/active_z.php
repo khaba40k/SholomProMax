@@ -18,7 +18,7 @@ if (!isset($_GET['search']) || $_GET['search'] == ''){
 }else{
     $srch = '"%' . $_GET['search'] . '%" ';
 
-    echo new HTEL('label &=margin-bottom:10px;padding:5px+10px;width:100%;font-size:24px;text-weight:bold;/РЕЗУЛЬТАТИ ПОШУКУ: "[0]"',
+    echo new HTEL('label &=margin-bottom:10px;padding:5px+10px;width:100%;font-size:120%;text-weight:bold;/РЕЗУЛЬТАТИ ПОШУКУ: "[0]"',
     $_GET['search']);
 
     $query = 'SELECT * FROM `client_info` where
@@ -48,8 +48,33 @@ foreach ($result as $row) {
     if ($num == 0)
         $num = '';
 
+    if (isset($_GET['search']) && $_GET['search'] != ''){
+        if (is_null($row['date_out']) && (!is_null($row['TTN_IN']) || $row['sold_number'] !== null)){
+            $_GET['type'] = 'inwork';
+        }else if(is_null($row['date_out']) && is_null($row['TTN_IN'])){
+            $_GET['type'] = 'new';
+        }
+        else{
+            $_GET['type'] = 'archiv';
+        }
+    }
+
+    $style = 'border-left: 25px solid ';
+
+    switch($_GET['type']){
+        case  'new':
+            $style .= 'red;';
+            break;
+        case 'inwork':
+            $style .= 'yellow;';
+            break;
+        default:
+            $style .= 'green;';
+            break;
+    }
+
     $div = new HTEL(
-        'div .=activeZ',
+        'div .=activeZ &=[8]',
         [
             $num,
             $row['client_name'],
@@ -58,7 +83,8 @@ foreach ($result as $row) {
             dateToNorm($row['date_out'], true),
             $_GET['type'],
             $variant,
-            $ID
+            $ID,
+            $style
         ]
     );
 

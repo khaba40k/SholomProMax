@@ -5,12 +5,6 @@
         $(this).toggleClass('clicked_but');
     });
 
-    //$('#activ_z_but').on('click', function () { list_Z('new'); });
-    //$('#inwork_z_but').on('click', function () { list_Z('inwork'); });
-    //$('#archiv_z_but').on('click', function () { list_Z('archiv'); });
-    //$("#create_z_but").on("click", newZ);
-    //$("#sold_z_but").on("click", newZsold);
-
     function newZ() {
 
         $.ajax({
@@ -53,25 +47,19 @@
 
 $_MENU = $_GET['menu_type'] ?? 'list';
 
-//var_dump($_GET);
-//exit;
-
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-
-//HIDE();
 
 $div = new HTEL('div .=zakaz_menu');
 
 switch ($_MENU){
     case 'list':
-        $style = _style(3);
         $div([
             new HTEL("button *=button !=activ_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ЗАРЕЄСТРОВАНІ",
-            [$_GET['page'] == 'new' ? ' clicked_but':'', $style, 'new']),
+            [$_GET['page'] == 'new' ? ' clicked_but':'', _style(3, 'color:red;'), 'new']),
             new HTEL("button *=button !=inwork_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/В РОБОТІ",
-            [$_GET['page'] == 'inwork' ? ' clicked_but' : '', $style, 'inwork']),
+            [$_GET['page'] == 'inwork' ? ' clicked_but' : '', _style(3, 'color:yellow;'), 'inwork']),
             new HTEL("button *=button !=archiv_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ВИКОНАНІ (АРХІВ)",
-            [$_GET['page'] == 'archiv' ? ' clicked_but' : '', $style, 'archiv'])
+            [$_GET['page'] == 'archiv' ? ' clicked_but' : '', _style(3, 'color:green;'), 'archiv'])
         ]);
 
         echo new HTEL('script/list_Z(`[0]`);', $_GET['page']);
@@ -96,16 +84,17 @@ switch ($_MENU){
 
 echo $div(new HTEL('div  !=zakaz_workplace'));
 
-function _style($countBut = 2):string{
+function _style($countBut = 2, $any = ''):string{
     $out = 'style="';
     //40% - 8%
 
     $width = intdiv(80, $countBut);
     $marg_left = intdiv($width, 5);
 
+    $out .= 'font-size:80%;';
     $out .= 'width:' . $width . '%;';
     $out .= 'margin-left:' . $marg_left . '%;';
-
+    $out .= $any;
     return $out . '"';
 }
 

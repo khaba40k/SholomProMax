@@ -40,8 +40,8 @@
         $result = mysqli_query($link, $query);
 
         if (mysqli_num_rows($result) != 0) {
-            echo '<a href="work"> <<АДМІНКА </a>';
-            echo '<label for="numberToInfo" class="no-print" style=font-size:25px;font-weight:bold;padding:10px;">Незавершені задачі:</label>';
+            echo '<a href="work" class="no-print" > <<АДМІНКА </a>';
+            echo '<label for="numberToInfo" class="no-print" style=font-size:120%;font-weight:bold;padding:10px;">Незавершені задачі:</label>';
             echo '<div id="numberToInfo" class="no-print">';
 
             foreach ($result as $row) {
@@ -53,10 +53,7 @@
 
         echo '<div id="info" />';
     }
-    //else{
-    //    echo '<div id="info" />';
-    //    echo '<script>printInfo("'. $_GET['n'] .'")</script>';
-    //}
+
 
     ?>
 

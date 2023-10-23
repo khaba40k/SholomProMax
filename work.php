@@ -89,128 +89,137 @@
     </div>
 
     <script>
-            //Кнопка Створити заявку
-        //$("#create_Z").on("click", function () { newZ('def'); });
 
-        function newZ ($page = 'def') {
+    function newZ($page = 'def') {
 
-            $.ajax({
-                url: 'blok/zakazi.php',
-                method: 'GET',
-                dataType: 'html',
-                data: 'menu_type=create&page=' + $page,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
-        };
-
-        //Кнопка Активні замовлення
-        //$("#active_Z").on("click", function () { activeZedit(); });
-
-        function activeZedit ($page = 'new') {
-
-            $.ajax({
-                url: 'blok/zakazi.php',
-                method: 'get',
-                dataType: 'html',
-                data: 'menu_type=list&page=' + $page,
-                success: function (response) {
-                    $('#workfield').html(response);
-                }
-            });
-        };
-
-        //Кнопка ЦІНИ
-        $("#formPrice").on("click", priceEdit);
-
-        function priceEdit() {
-
-            let dataForm = $(this).serialize()
-
-            $.ajax({
-                url: 'blok/price_list.php',
-                method: 'POST',
-                dataType: 'html',
-                data: dataForm,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
-            };
-
-        //Кнопка звіту за період
-        $("#period_show").on("click", function () {
-
-            let currentdate = new Date();
-
-            let dateNow = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth() + 1).toString().padStart(2, '0') + "-"
-                + currentdate.getDate().toString().padStart(2, '0');
-            let date1 = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth()+1).toString().padStart(2, '0') + "-01";
-
-            let dataForm = 'ot=' + date1 + '&do=' + dateNow;
-
-            $.ajax({
-                url: 'blok/zvit_menu.php',
-                method: 'GET',
-                dataType: 'html',
-                data: dataForm,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
+        $.ajax({
+            url: 'blok/zakazi.php',
+            method: 'GET',
+            dataType: 'html',
+            data: 'menu_type=create&page=' + $page,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
         });
-            //Кнопка внесення витрат на товар, списання, продаж
-        $("#expenses").on("click", function () { newPurchase('jurnal'); });
+    };
 
-        function newPurchase($page = "jurnal") {
+    //Кнопка Активні замовлення
+    //$("#active_Z").on("click", function () { activeZedit(); });
 
-                $.ajax({
-                    url: 'blok/expenses_menu.php',
-                    method: 'GET',
-                    dataType: 'html',
-                    data: 'page=' + $page,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
-        }
+    function activeZedit($page = 'new') {
 
-        //Кнопка показу залишків
+        $.ajax({
+            url: 'blok/zakazi.php',
+            method: 'get',
+            dataType: 'html',
+            data: 'menu_type=list&page=' + $page,
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+    };
 
-        $("#zal_show").on("click", function () {
+    //Кнопка ЦІНИ
+    $("#formPrice").on("click", priceEdit);
 
-             $.ajax({
-                url: 'blok/table_count.php',
-                dataType: 'html',
-                success: function (response) {
-                    $('#workfield').html(response);
-                }
-            });
+    function priceEdit() {
 
+        let dataForm = $(this).serialize()
+
+        $.ajax({
+            url: 'blok/price_list.php',
+            method: 'POST',
+            dataType: 'html',
+            data: dataForm,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
+        });
+    };
+
+    //Кнопка звіту за період
+    $("#period_show").on("click", function () {
+
+        let currentdate = new Date();
+
+        let dateNow = currentdate.getFullYear() + "-"
+            + (currentdate.getMonth() + 1).toString().padStart(2, '0') + "-"
+            + currentdate.getDate().toString().padStart(2, '0');
+        let date1 = currentdate.getFullYear() + "-"
+            + (currentdate.getMonth() + 1).toString().padStart(2, '0') + "-01";
+
+        let dataForm = 'ot=' + date1 + '&do=' + dateNow;
+
+        $.ajax({
+            url: 'blok/zvit_menu.php',
+            method: 'GET',
+            dataType: 'html',
+            data: dataForm,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
+        });
+    });
+    //Кнопка внесення витрат на товар, списання, продаж
+    $("#expenses").on("click", function () { newPurchase('jurnal'); });
+
+    function newPurchase($page = "jurnal") {
+
+        $.ajax({
+            url: 'blok/expenses_menu.php',
+            method: 'GET',
+            dataType: 'html',
+            data: 'page=' + $page,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
+        });
+    }
+
+    //Кнопка показу залишків
+
+    $("#zal_show").on("click", function () {
+
+        $.ajax({
+            url: 'blok/table_count.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#workfield').html(response);
+            }
         });
 
-        function Search($request) {
-            $('#request').val($request);
+    });
 
-            if ($request.trim() == '') return false;
+    function Search($request) {
+        $('#request').val($request);
 
-            $.ajax({
-                url: 'blok/active_z.php',
-                method:'get',
-                dataType: 'html',
-                data: 'search=' + $request,
-                success: function (response) {
-                    $('#workfield').html(response);
-                }
-            });
+        if ($request.trim() == '') return false;
 
+        $.ajax({
+            url: 'blok/active_z.php',
+            method: 'get',
+            dataType: 'html',
+            data: 'search=' + $request,
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+
+    }
+
+    $("#request").focus();
+
+    $(document).ready(function () {
+        document.body.setScaledFont = function (f) {
+            var s = this.offsetWidth, fs = s * f;
+            this.style.fontSize = fs + '%';
+            return this
+        };
+        document.body.setScaledFont(0.1);
+        window.onresize = function () {
+            document.body.setScaledFont(0.1);
         }
-
-        $("#request").focus();
-
+    });
     </script>
 
     <?php

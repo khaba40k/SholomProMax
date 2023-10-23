@@ -19,12 +19,9 @@
 
     require "blok/header.php";
 
-    echo '<label />В РОЗРОБЦІ<br />';
-    echo '<a href="/work" style="font-size:25px;">Перейти в адмінку</a><br /><br />';
-
     $div = new HTEL('div .=firstpage');
 
-    $div(new HTEL('label/Про нас...'));
+    $div(new HTEL('label/Опис послуг та про нас...'));
 
     $div([
         new HTEL('button !=createDef/Оформити переобладнання шолому'),

@@ -1,6 +1,6 @@
 <header class="no-print">
     <div class="wrap-logo">
-        <a href="#logo" class="logo">Логотип сайта</a>
+        <a href="../work.php" class="logo">Логотип сайта</a>
     </div>
     <nav>
         <a class="active" href="../index">Головна</a>

@@ -34,6 +34,10 @@ if (!isset($_GET['search']) || $_GET['search'] == ''){
 
 $result = mysqli_query($link, $query);
 
+session_start();
+
+//var_dump($_SESSION);
+
 foreach ($result as $row) {
 
     $variant = 'def';
@@ -84,7 +88,8 @@ foreach ($result as $row) {
             $_GET['type'],
             $variant,
             $ID,
-            $style
+            $style,
+            new HTEL('p/[0]', $row['redaktor'])
         ]
     );
 
@@ -102,11 +107,19 @@ foreach ($result as $row) {
         $div(new HTEL('label/[4]'));
     }
 
-    $div([
-        new HTEL('button *=button .=but_prt onclick=printInfo([7],0,`[5]`,`[6]`)'),
-        new HTEL('button *=button .=but_cng onclick=changeInfo([7],`[6]`)'),
-        new HTEL('button *=button .=but_del onclick=removeInfo([7])')
-    ]);
+    if ($_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]){
+        $div([
+            new HTEL('button *=button .=but_prt onclick=printInfo([7],0,`[5]`,`[6]`)'),
+            new HTEL('button *=button .=but_cng onclick=changeInfo([7],`[6]`)'),
+            new HTEL('button *=button .=but_del onclick=removeInfo([7],[0])')
+        ]);
+    }else{
+        $div([
+            new HTEL('button *=button .=but_prt+dis '),
+            new HTEL('button *=button .=but_cng+dis '),
+            new HTEL('button *=button .=but_del+dis ')
+        ]);
+    }
 
     echo $div;
 }
@@ -143,8 +156,10 @@ $link->close();
      });
      }
 
-     function removeInfo($in) {
-         if (confirm('Підтвердіть видалення даних по шолому...')) {
+    function removeInfo($in, $num) {
+         if ($num == null) $num = '';
+
+         if (confirm('Підтвердіть видалення даних по шолому '  + $num)) {
              $.ajax({
                  url: 'blok/remowe_info.php',
                  method: 'GET',

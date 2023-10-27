@@ -7,11 +7,6 @@
 
 $termin_ID = 21;
 
-if (!isset($_GET['ID'])) {
-    echo 'ID no exist!!!';
-    exit;
-}
-
 $typeZ = $_GET['typeZ'] ?? 'def';//def / sold
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
@@ -23,8 +18,6 @@ if (!isset($_GET['sol_num'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 #region Видалення старих даних
-$cell_num = $typeZ == 'def' ? 'sholom_num' : 'sold_number';
-
 if ($_GET['is_rewrite'] == 1) {
 
     $query = 'DELETE FROM `service_out` WHERE ID=' . $_GET['ID'];
@@ -34,6 +27,12 @@ if ($_GET['is_rewrite'] == 1) {
 #endregion
 
 session_start();
+
+$creator = $_SESSION['logged'] ?? $_GET['phone_out'];
+
+if (isset($_GET['creator'])){
+    $creator = $_GET['creator'];
+}
 
 //Отримання масиву послуг
 
@@ -59,34 +58,41 @@ $_service_id[] = $termin_ID;
 
 $err = '';
 
+if (!isset($_GET['date_in']))
+    $_GET['date_in'] = date('Y-m-d');
+
+if (!isset($_GET['date_max']))
+    $_GET['date_max'] = strftime("%Y-%m-%d", strtotime($_GET['date_in'] . " +3 day"));
+
 if (!isset($_GET['date_out']))
     $_GET['date_out'] = null;
+
 if (!isset($_GET['ttn_out']))
     $_GET['ttn_out'] = null;
 
-$num_cell = $typeZ=='def' ? 'sholom_num': 'sold_number';
+$num_cell = ($typeZ=='def' || $typeZ == 'def0') ? 'sholom_num': 'sold_number';
 
-$ifNull = ['ttn_in', 'ttn_out', 'date_out', 'comm', 'worker'];
+$ifNull = ['ttn_in', 'ttn_out', 'date_out', 'comm', 'worker', 'mess'];
 
 foreach($ifNull as $var){
     if (!isset($_GET[$var]) || empty(trim($_GET[$var])))
-        $_GET[$var] = null;
+        $_GET[$var] = '';
 }
 
 #region Отримання наступного номера заявки/скидання на 0
 
-if((!empty($_GET['ttn_in']) || $typeZ == 'sold') && ($_GET['sol_num'] === 0)){
-    $query = 'SELECT `' . $cell_num . '` FROM `client_info` order by `' . $cell_num . '` DESC LIMIT 1';
+if((!empty($_GET['ttn_in']) || ($typeZ != 'def' && $typeZ != 'def0')) && ($_GET['sol_num'] === 0)){
+    $query = 'SELECT `' . $num_cell . '` FROM `client_info` order by `' . $num_cell . '` DESC LIMIT 1';
 
     $result = mysqli_query($link, $query);
 
     if (mysqli_num_rows($result) == 1) {
         foreach ($result as $row) {
-            $_GET['sol_num'] = $row[$cell_num] + 1;
+            $_GET['sol_num'] = $row[$num_cell] + 1;
         }
     }
 
-}else if (empty($_GET['ttn_in']) && $typeZ == 'def'){
+}else if (empty($_GET['ttn_in']) && ($typeZ == 'def' || $typeZ == 'def0')){
     $_GET['sol_num'] = 0;
 }
 
@@ -110,9 +116,9 @@ VALUES ("
     . outVal($_GET['rek_out'])
     . outVal($_GET['ttn_in'])
     . outVal($_GET['ttn_out'])
-    . outVal($_GET['mess']. ' ' .$_GET['comm'])
+    . outVal($_GET['mess']. ' ' . trim($_GET['comm']))
     . outVal($_GET['worker'])
-    . outVal($_SESSION['logged'], true) . ")
+    . outVal($creator, true) . ")
     ON DUPLICATE KEY UPDATE "
     . $num_cell . "=" . outVal($_GET['sol_num']) .
     "date_in=" . outVal($_GET['date_in']) .
@@ -123,9 +129,9 @@ VALUES ("
     "reqv=" . outVal($_GET['rek_out']) .
     "TTN_IN=" . outVal($_GET['ttn_in']) .
     "TTN_OUT=" . outVal($_GET['ttn_out']) .
-    "comm=" . outVal($_GET['mess'] . ' ' . $_GET['comm']) .
+    "comm=" . outVal($_GET['mess'] . ' ' . trim($_GET['comm'])) .
     "worker=" . outVal($_GET['worker']) .
-    "redaktor=" . outVal($_SESSION['logged'], true);
+    "redaktor=" . outVal($creator, true);
 
 if ($link->query($query) !== TRUE) {
     $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
@@ -135,7 +141,7 @@ if (!isset($_GET['cost_' . $termin_ID]))
     $_GET['cost_' . $termin_ID] = 0;
 
 if ($err == ''){
-     if ($typeZ == 'def'){
+     if ($typeZ == 'def' || $typeZ == 'def0'){
           foreach ($_service_id as $i) {
                $_color_id = GetColor($i);
 
@@ -159,16 +165,15 @@ if ($err == ''){
 
               if ($_color_id != '-') { //Вибір на ІД зроблено
 
-                  $query = "INSERT INTO `service_out` (ID, service_ID, type_ID, color, count, costs, redaktor)
+                  $query = "INSERT INTO `service_out` (ID, service_ID, type_ID, color, count, costs)
                    VALUES (" .
                       outVal($_GET['ID']) .
                       outVal($serv_id) .
                       outVal($type) .
                       outVal($_color_id) .
                       outVal($count) .
-                      outVal($price) .
-                      outVal($_SESSION['logged'], true)
-                      . ")";
+                      outVal($price, true) .
+                      ")";
 
                   if ($link->query($query) !== TRUE) {
                       $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
@@ -186,16 +191,15 @@ if ($err == ''){
                 $count = isset($_GET['count_' . $ii]) ? $_GET['count_' . $ii] : 1;
                 $price = $_GET['price_' . $ii];
 
-                $query = "INSERT INTO `service_out` (ID, service_ID, type_ID, color, count, costs, redaktor)
+                $query = "INSERT INTO `service_out` (ID, service_ID, type_ID, color, count, costs)
                    VALUES (" .
                         outVal($_GET['ID']) .
                         outVal($serv_id) .
                         outVal($type) .
                         outVal($color) .
                         outVal($count) .
-                        outVal(CostOut($price)) .
-                        outVal($_SESSION['logged'], true)
-                    . ")";
+                        outVal(CostOut($price), true) .
+                     ")";
 
                 if ($link->query($query) !== TRUE) {
                     $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
@@ -205,7 +209,7 @@ if ($err == ''){
         }
 
         if ($_GET['cost_' . $termin_ID] > 0){
-            $query = "INSERT INTO `service_out` (ID, service_ID, type_ID, color, count, costs, redaktor)
+            $query = "INSERT INTO `service_out` (ID, service_ID, type_ID, color, count, costs)
                    VALUES (" .
             outVal($_GET['ID']) .
             outVal($termin_ID) .
@@ -213,8 +217,7 @@ if ($err == ''){
             outVal('') .
             outVal(1) .
             outVal(CostOut($_GET['cost_' . $termin_ID])) .
-            outVal($_SESSION['logged'], true)
-                . ")";
+                 ")";
 
             if ($link->query($query) !== TRUE) {
                 $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
@@ -226,7 +229,7 @@ if ($err == ''){
 $link->close();
 
 if ($err == ''){
-    phpAlert("Запис успішно створено.", 'work?page=newZ' . $typeZ);
+    phpAlert("Запис успішно створено.", 'work');
 }
 else{
     phpAlert($err);

@@ -228,12 +228,6 @@ if (isset($_GET['newRow'])) {
 
                     ?>
 
-                //$.get('blok/expenses.php', 'row_id=' + row.substring(2) +
-                //    '&price_for=' + serv_id +
-                //    '&type=1', function (result) {
-                //        td_cost.innerHTML = result;
-                //});
-
             }
             else if (row.substring(0, 5) == 'type_') {//Якщо змінено назву типу
 
@@ -259,11 +253,6 @@ if (isset($_GET['newRow'])) {
 
                 ?>
 
-                //$.get('blok/expenses.php', 'row_id=' + row_type[1] +
-                //    '&price_for=' + row_type[2] +
-                //    '&type=' + type, function (result) {
-                //        td_cost.innerHTML = result;
-                //});
             }
         });
 

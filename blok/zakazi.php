@@ -82,7 +82,9 @@ switch ($_MENU){
         break;
 }
 
-echo $div(new HTEL('div  !=zakaz_workplace'));
+$div(new HTEL('div  !=zakaz_workplace'));
+
+echo $div;
 
 function _style($countBut = 2, $any = ''):string{
     $out = 'style="';

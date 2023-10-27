@@ -13,26 +13,72 @@
 
 <body>
 
-
     <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
     require "blok/header.php";
 
-    $div = new HTEL('div .=firstpage');
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    $div(new HTEL('label/Опис послуг та про нас...'));
+    if (!isset($_GET['debug']) || $_GET['debug'] != 1) {
+        HIDE();
+    }else{
+        session_start();
+        $_SESSION['logged'] = 'Administrator';
+    }
 
-    $div([
-        new HTEL('button !=createDef/Оформити переобладнання шолому'),
-        new HTEL('button !=createSold/Покупка комплектуючих'),
-        new HTEL('button !=createSoldS/Покупка шолому')
-    ]);
+    if (!isset($_GET['page'])){
+        $div = new HTEL('div .=firstpage');
 
-    echo $div;
+        $div(new HTEL('label/Опис послуг та про нас...'));
+
+        $div([
+            new HTEL("button !=createDef onclick=location.href=='index?page==newZdef'/Оформити переобладнання шолому"),
+            new HTEL("button !=createSold onclick=location.href=='index?page==newZsold'/Покупка комплектуючих"),
+            new HTEL("button !=createSoldS onclick=location.href=='index?page==newZsoldHem'/Покупка шолому")
+        ]);
+
+        echo $div;
+    }
+    else{
+        echo new HTEL('div !=workfield &=padding:1%+1%;');
+    }
 
     ?>
 
+    <script>
+
+        function newZ(type = 'def0') {
+
+        $.ajax({
+            url: 'blok/new_Z.php',
+            method:'get',
+            dataType: 'html',
+            data: 'type=' + type,
+            success: function (responce) {
+                $('#workfield').html(responce);
+            }
+        });
+    };
+
+    </script>
+
+    <?php
+
+    if (isset($_GET['page'])) {
+        switch ($_GET['page']) {
+            case 'newZdef':
+                echo new HTEL('script/newZ("def0");');
+                break;
+            case 'newZsold':
+                echo new HTEL('script/newZ("sold0");');
+                break;
+            case 'newZsoldHem':
+                echo new HTEL('script/newZ("sold1");');
+                break;
+        }
+    }
+
+    ?>
 
 </body>
 

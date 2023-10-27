@@ -1,11 +1,11 @@
-<Project Sdk="Devsense.Php.Sdk">
+﻿<Project Sdk="Devsense.Php.Sdk">
   <PropertyGroup Label="Globals">
     <ProjectGuid>8c2c055a-0d20-450e-86ad-7265002faba3</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
     <EnvName>Custom</EnvName>
     <RuntimeVersion>8.0</RuntimeVersion>
-    <CustomServerUrl>http://sholompromax.com</CustomServerUrl>
+    <CustomServerUrl>http://sholompromax.com/</CustomServerUrl>
     <SaveServerSettingsInUserFile>false</SaveServerSettingsInUserFile>
     <CustomXdebugPort>9000</CustomXdebugPort>
     <DebugMappingMethod>Automatic</DebugMappingMethod>
@@ -16,5 +16,12 @@
     <IdeKey>687FD2AA</IdeKey>
     <RootNamespace>SPM</RootNamespace>
     <WebRoot>sholompromax.com</WebRoot>
+    <PHPDevHostName>sholompromax.com</PHPDevHostName>
+    <PHPDevAutoPort>true</PHPDevAutoPort>
+    <PHPDevRouting />
   </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="blok\error_log" />
+    <Content Remove="error_log" />
+  </ItemGroup>
 </Project>

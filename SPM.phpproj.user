@@ -2,8 +2,8 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NameOfLastUsedPHPPublishProfile>ftp_spm</NameOfLastUsedPHPPublishProfile>
-    <RuntimePath />
     <StartAction>StartUrl</StartAction>
-    <StartUrlValue>http://sholompromax.com/</StartUrlValue>
+    <StartUrlValue>http://sholompromax.com/index?debug=1</StartUrlValue>
+    <RuntimePath />
   </PropertyGroup>
 </Project>

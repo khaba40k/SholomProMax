@@ -79,6 +79,7 @@ class ZDATA {
     public $TTN_OUT = '';
     public $COMM = '';
     public $WORKER = '';
+    public $REDAKTOR = '';
     public $KOMPLECT = array();
 
     function __construct($IN = null)
@@ -125,7 +126,8 @@ class ZDATA {
             $this->COMM = $in['comm'];
         if (isset($in['worker']))
             $this->WORKER = $in['worker'];
-
+        if (isset($in['redaktor']))
+            $this->REDAKTOR = $in['redaktor'];
         //var_dump($in);
 
         if (isset($in['serv'])) {
@@ -419,15 +421,13 @@ class HTEL {
         }
     }
 
-    function __invoke($include):string{
+    function __invoke($include){
          if (!$this->IS_EMPTY){
             $this->_include($include);
          }
          else if (is_string($include)){
             $this->__construct($include);
          }
-
-        return $this->__toString();
     }
 
     function _tab($val=0):string{
@@ -440,8 +440,14 @@ class HTEL {
         return $tab;
     }
 
-    function GetChildren():array{
-        return $this->include_arr;
+    function GetChildren():string{
+        $out = '';
+
+        foreach ($this->include_arr as $in){
+            $out .= $in;
+        }
+
+        return $out;
     }
 
     function childCount():int{

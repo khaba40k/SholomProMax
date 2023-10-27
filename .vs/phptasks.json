@@ -4,8 +4,7 @@
       "action": "publish",
       "event": "filewatcher",
       "parameters": {
-        "profilename": "ftp_spm",
-        "filemask": "*.*"
+        "profilename": "ftp_spm"
       },
       "disabled": false
     }

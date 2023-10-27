@@ -36,7 +36,17 @@
                 header('Location: admin');
             }
             else {
+
+                $query = 'SELECT `login`,`ID` FROM `users`';
+
+                $result = mysqli_query($link, $query);
+
+                foreach ($result as $row){
+                    $_SESSION[$row['login']] = $row['ID'];
+                }
+
                 $link->close();
+
                 $_SESSION['logged'] = $_POST['log'];
             }
 
@@ -61,18 +71,61 @@
     $_GET['header'] = 'admin';
     require "blok/header.php";
 
+    $wrapper = new HTEL('div .=wrapper');
+    $aside = new HTEL('aside .=no-print');
+    $form = new HTEL('form !=feedBack method=post onsubmit=return+false');
+    $form(new HTEL('label/РЕДАГУВАННЯ'));
+
+    //    if ($_SESSION[$_SESSION['logged']] <= 1)
+
+    $div = new HTEL('div !=fb1', [
+        new HTEL("button !=create_Z onclick=location.href=='work?page==newZdef'/НОВЕ ЗАМОВЛЕННЯ"),
+        new HTEL("button !=active_Z onclick=location.href=='work'/ЗАМОВЛЕННЯ[0]", ($activ_count > 0 ? ' (' . $activ_count . ')' : '')),
+        new HTEL("button !=expenses onclick=location.href=='work?page==expens'/ВИТРАТИ")
+    ]);
+
+    if ($_SESSION[$_SESSION['logged']] <= 1)
+    $div([
+        new HTEL("button !=formPrice/ЦІНИ")
+    ]);
+
+    $form($div);
+
+    $form(new HTEL('label/ЗВІТИ'));
+
+    $div = new HTEL('div !=fb2');
+
+    if ($_SESSION[$_SESSION['logged']] <= 1)
+    $div([
+        new HTEL("button !=zal_show /ЗАЛИШКИ"),
+        new HTEL("button !=period_show /РУХ ЗА ПЕРІОД...")
+    ]);
+
+    $div(new HTEL("button !=toInfo onclick=location.href=='info'/Друк для робітника"));
+
+    $form($div);
+
+    $aside($form);
+
+    $wrapper([
+        $aside,
+        new HTEL('main !=workfield')
+    ]);
+
+    echo $wrapper;
+
     ?>
 
-    <div class="wrapper">
+    <!--<div class="wrapper">
         <aside class="no-print">
             <form id="feedBack" method="post" onsubmit="return false">
 
                 <label>РЕДАГУВАННЯ</label>
                 <div id="fb1">
                     <button id="create_Z" onclick="location.href='work?page=newZdef'">НОВЕ ЗАМОВЛЕННЯ</button>
-                    <button id="active_Z" onclick="location.href='work'">ЗАМОВЛЕННЯ<?php echo $activ_count > 0 ? ' ('.$activ_count . ')': '' ?>
+                    <button id="active_Z" onclick="location.href='work'">ЗАМОВЛЕННЯ<php echo $activ_count > 0 ? ' ('.$activ_count . ')': '' ?>
                     </button>
-                    <button id="expenses" onclick="location.href='work?page=jurnal'">ВИТРАТИ</button>
+                    <button id="expenses" onclick="location.href='work?page=expens'">ВИТРАТИ</button>
                     <button id="formPrice">ЦІНИ</button>
                 </div>
 
@@ -86,7 +139,7 @@
         </aside>
 
         <main id="workfield"></main>
-    </div>
+    </div>-->
 
     <script>
 
@@ -161,7 +214,7 @@
         });
     });
     //Кнопка внесення витрат на товар, списання, продаж
-    $("#expenses").on("click", function () { newPurchase('jurnal'); });
+    //$("#expenses").on("click", function () { newPurchase('jurnal'); });
 
     function newPurchase($page = "jurnal") {
 
@@ -230,6 +283,9 @@
                 break;
             case 'newZsold':
                 echo new HTEL('script/newZ("sold");');
+                break;
+            case 'expens':
+                echo new HTEL('script/newPurchase("expens");');
                 break;
             case 'jurnal':
                 echo new HTEL('script/newPurchase("jurnal");');

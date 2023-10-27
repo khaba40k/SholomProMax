@@ -1,5 +1,6 @@
-﻿:root{
-    --bckgrndclr: rgba(128, 128, 0, 0.60);
+﻿:root {
+    /*--bckgrndclr: rgba(128, 128, 0, 0.90);*/
+    --bckgrndclr: rgba(255, 255, 255, 0.50);
 }
 
 input:read-only{
@@ -50,14 +51,16 @@ div.firstpage {
 
     div.firstpage > label {
         margin-bottom: 20px;
+        font-size: 110%;
     }
 
     div.firstpage > button {
-        width: 50%;
-        margin-left: 25%;
-        margin-right:25%;
+        width: 70%;
+        margin-left: 15%;
+        margin-right:15%;
         margin-top: 15px;
         padding: 15px 0;
+        font-size: 130%;
     }
 
 form#search {
@@ -323,21 +326,19 @@ div#color_variant {
     display: grid;
     grid-template-columns: 49% 49%;
     grid-column-gap: 2px;
-    font-size: 90%;
+    grid-row-gap: 5px;
 }
 
 .opt_color {
     display: flex;
-    align-items: center;
     position: relative;
-    background: linear-gradient(to right, yellow, var(--bckgrndclr));
+    background: linear-gradient(to right, olive, var(--bckgrndclr));
     border-radius: 10px;
     margin: 5px 5px;
-    padding: 5px 10px;
-    color: blue;
+    padding: 1% 2%;
+    color: yellow;
     width: 100%;
-    height: 30px;
-    font-size: 70%;
+    height: 100%;
 }
 
     .opt_color:hover {
@@ -363,47 +364,61 @@ div#color_variant {
     }
 
 .left_z_menu {
-    position: absolute;
+    position: relative;
     align-items: center;
     display: flex;
-    width: 53%;
-    height:100%;
+    width: 45%;
+    height: 100%;
+    display: inline-block;
 }
 
-.left_z_menu * {
-    display: inline-flex;
-}
-
-    .left_z_menu:first-child {
-        width:60%;
+    .left_z_menu > * {
+        display: inline-flex;
     }
 
-    .convers {
-        position: absolute;
-        display:inline-block;
+    .left_z_menu > label {
+        position: relative;
+        width:100%;
+        height: 55%;
+        padding: 1% 0;
+        margin: 0;
     }
 
-label.convers {
-    right: 20%;
-    width: 20%;
-    text-align:right;
+div.convers {
+    height: 40%;
+    width: 90%;
+    margin-left: 10%;
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 5px;
+    align-items:center;
 }
 
-input.convers {
-    right: 13%;
-    width: 7%;
-    height: 80%;
-}
+    div.convers * {
+        display: inline-block;
+    }
+
+    div.convers label {
+        width: 70%;
+        color: black;
+        font-style: italic;
+        font-size: 70%;
+    }
+
+    div.convers input {
+        width: 20%;
+        margin-left: 5%;
+    }
 
 .right_menu {
     display: flex;
     position: absolute;
     right: 1%;
     height: 85%;
-    width: 43%;
+    width: 51%;
     justify-content: right;
     align-items: center;
-    padding-right: 10px;
+    padding-right: 5px;
     color: black;
 }
 
@@ -412,20 +427,19 @@ input.convers {
     }
 
     .right_menu > input, .right_menu > select {
-        margin-left: 5px;
+        margin-left: 1%;
     }
 
 .right_menu > input[type=checkbox] {
-    width: 20px;
+    width: 20%;
 }
 
 .right_menu > input[type=number] {
-    width: 65px;
+    width: 25%;
     text-align: right;
     border-radius: 5px;
-    background: olive;
+    background-color: olivedrab;
     color: white;
-    font-weight: bold;
 }
 
 .chb_yesno {
@@ -517,7 +531,7 @@ input.convers {
     width: 100%;
     background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
     border-radius: 10px;
-    padding: 5px;
+    padding: 1%;
     margin-left: 5px;
     margin-bottom: 5px;
     align-items: center;
@@ -525,6 +539,15 @@ input.convers {
 
     .activeZ * {
         font-size: 75%;
+    }
+
+    .activeZ p {
+        position: absolute;
+        font-size: 70%;
+        left: 5%;
+        top: 1%;
+        text-transform: uppercase;
+        color: rgb(34, 0, 255, 0.2);
     }
 
 #zakaz_workplace{
@@ -547,6 +570,10 @@ input.convers {
     width: 32px;
     height: 32px;
     border: none;
+}
+
+.dis.but_cng, .dis.but_del, .dis.but_prt{
+    opacity: 0.3;
 }
 
 .but_cng {
@@ -593,6 +620,12 @@ input.convers {
             width: 70px;
             text-align: right;
         }
+
+select#creator{
+    margin: 2px 3px;
+    border-radius: 3px;
+    background:none;
+}
 
 .zvitMenu, .expensesMenu {
     display: inline-block;
@@ -789,7 +822,6 @@ input.delrow {
     #grid_color {
         grid-template-columns: 100%;
         grid-column-gap: 0;
-        font-size: 120%;
     }
 
 }
@@ -829,19 +861,14 @@ input.delrow {
     #workfield {
         margin-top: 10px;
         padding: 0;
-        font-size: 50%;
     }
 
-        #workfield > * {
-            font-size: 50%;
-        }
-
-        #workfield td {
-            font-size: 50%;
+        #workfield tr * {
+            font-size: 75%;
         }
 
         #workfield th {
-            font-size: 60%;
+            font-size: 85%;
         }
 
         #zakaz_workplace {
@@ -869,6 +896,22 @@ input.delrow {
     }
     aside button {
         font-size: 50%;
+    }
+
+    #workfield tr * {
+        font-size: 60%;
+    }
+
+    #workfield th {
+        font-size: 65%;
+    }
+
+    #workfield tr option {
+        font-size: 120%;
+    }
+
+    .opt_color * {
+        font-size: 95%;
     }
 }
 
@@ -904,7 +947,7 @@ input.delrow {
         }
 
             #workfield > *, #zvitResult, .printInfo {
-                width: 95%;
+                width: 93%;
                 margin-left: 5%;
             }
 
@@ -925,7 +968,7 @@ input.delrow {
         }
 
         #zvitResult > * {
-            width: 100%;
+            width: 98%;
         }
 
         div {
@@ -935,7 +978,7 @@ input.delrow {
         }
 
         table {
-            width: 100%;
+            width: 98%;
             margin: 0;
             padding: 0;
         }

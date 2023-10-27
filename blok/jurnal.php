@@ -74,7 +74,13 @@ if (mysqli_num_rows($result) != 0) {
 $serv_out = array();
 $serv_info = array();
 
+session_start();
+
 $query = 'SELECT * FROM `service_in` order by `date_in` DESC';
+
+if ($_SESSION[$_SESSION['logged']] > 1){
+    $query = 'SELECT * FROM `service_in` WHERE `redaktor` = "'.$_SESSION['logged'].'" order by `date_in` DESC';
+}
 
 $result = mysqli_query($link, $query);
 
@@ -129,7 +135,9 @@ foreach ($serv_info as $date=>$in_date) { //
     }
 }
 
-echo $table($tbody);
+$table($tbody);
+
+echo $table;
 
 ?>
 

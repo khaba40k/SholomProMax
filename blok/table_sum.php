@@ -113,7 +113,7 @@ foreach ($arr_serv_name as $i=>$n) {
     }
 }
 
-//Отримання номерів шоломів/sold за період
+//Отримання ID за період
 
 $arr_ids = array();
 

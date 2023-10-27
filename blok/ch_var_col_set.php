@@ -81,7 +81,8 @@ $link->close();
 
 if (isset($_GET['set_select'])){
     $t = $_GET['set_type'] != '' ? $_GET['set_type'] : 1;
-    echo rightFor($_GET['set_select'], $t);
+    $right = new HTEL('div', rightFor($_GET['set_select'], $t));
+    echo '₴' . $right->GetChildren();
     exit;
 }
 
@@ -141,26 +142,33 @@ function print_serv($serv_ID, $serv_name, $_types): HTEL
     $status_in = SelectStatus(19, $serv_ID);
 
     if ($GLOBALS['_service_has_color'][$serv_ID] == 1){
-        $left([
-            new HTEL('label for=convers_[0] .=convers/своє'),
-            new HTEL('input *=checkbox !=convers_[0] ?=convers_[0] .=convers #=[0] [1]',
-            [1=> $status_in])
-        ]);
+
+        $left(new HTEL('div .=convers',[
+
+                new HTEL('label for=convers_[0] /мої компл.  (установка)'),
+                new HTEL(
+                    'input *=checkbox !=convers_[0] ?=convers_[0] .=convers #=[0] [1]',
+                    [1 => $status_in]
+                )
+
+        ]));
     }
 
     if ($status_in != ''){
         $cur_type = 0;
     }
 
+    $right = new HTEL('div !=right_menu_'.$serv_ID.' .=right_menu/₴', rightFor($serv_ID, $cur_type));
+
     $div([
         $left,
-        rightFor($serv_ID, $cur_type)
+        $right
     ]);
 
     return $div;
 }
 
-function rightFor($serv_id, $serv_type = 1):HTEL{
+function rightFor($serv_id, $serv_type = 1):array{
     $_colors = $GLOBALS['_COLORS'];
     $_has_col = $GLOBALS['_service_has_color'][$serv_id];
     $colorIN = $_has_col ? $_GET['sposob'] : "";
@@ -189,8 +197,6 @@ function rightFor($serv_id, $serv_type = 1):HTEL{
             }
         }
     }
-
-    $div = new HTEL('div !=right_menu_[0] .=right_menu/₴', $serv_id);
 
     $right = new HTEL();
 
@@ -236,12 +242,12 @@ function rightFor($serv_id, $serv_type = 1):HTEL{
         }
     }
 
-    $div([
-        $coastInp,
-        $right
-    ]);
+    //$div([
+    //    $coastInp,
+    //    $right
+    //]);
 
-    return $div;
+    return [$coastInp, $right];
 }
 
 function SelectStatus($id, $type, $colid = null, $out = 'checked'):string{

@@ -29,12 +29,11 @@
     if (!isset($_GET['page'])){
         $div = new HTEL('div .=firstpage');
 
-        $div(new HTEL('label/Опис послуг та про нас...'));
+        $div(new HTEL('div .=opis/[0]', file_get_contents('about.php')));
 
         $div([
-            new HTEL("button !=createDef onclick=location.href=='index?page==newZdef'/Оформити переобладнання шолому"),
-            new HTEL("button !=createSold onclick=location.href=='index?page==newZsold'/Покупка комплектуючих"),
-            new HTEL("button !=createSoldS onclick=location.href=='index?page==newZsoldHem'/Покупка шолому")
+            new HTEL("button !=createDef onclick=location.href=='index?page==newZdef'/Замовити переобладнання шолому"),
+            new HTEL("button !=createSold onclick=location.href=='index?page==newZsold'/Покупка шолому/комплектуючих")
         ]);
 
         echo $div;
@@ -71,9 +70,6 @@
                 break;
             case 'newZsold':
                 echo new HTEL('script/newZ("sold0");');
-                break;
-            case 'newZsoldHem':
-                echo new HTEL('script/newZ("sold1");');
                 break;
         }
     }

@@ -25,11 +25,6 @@
 
 $TYPE_Z = $_GET['type'] ?? 'def';
 
-//if ($TYPE_Z != 'def') {
-//    echo 'ТИМЧАСОВО НЕ ПРАЦЮЄ!!!';
-//    exit;
-//}
-
 require "conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
@@ -196,12 +191,12 @@ if($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
 
     if($TYPE_Z != 'def0'){
         $div[] = new HTEL('div', [
-            new HTEL('label for=datin/Дата формування заявки'),
+            new HTEL('label for=datin/Створено'),
             new HTEL('input !=datin *=date ?=date_in #=[3] [r]')
         ]);
 
         $div[] = new HTEL('div', [
-            new HTEL('label for=datmax/Термін відправки'),
+            new HTEL('label for=datmax/Термін'),
             new HTEL('input  !=datmax *=date ?=date_max #=[4] [r]')
         ]);
     }
@@ -213,19 +208,19 @@ if($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
 
     if ($IS_CHANGE == 1) {
         $div[] = new HTEL('div', [
-            new HTEL('label for=num/Номер замовлення'),
+            new HTEL('label for=num/Номер замовл.'),
             new HTEL('input !=num *=number min=1 ?=sol_num #=[2] [r]')
         ]);
     }
 
     if ($TYPE_Z == 'sold'){
         $div[] = new HTEL('div', [
-            new HTEL('label for=datin/Дата формування заявки'),
+            new HTEL('label for=datin/Створено'),
             new HTEL('input !=datin *=date ?=date_in #=[3] [r]')
         ]);
 
         $div[] = new HTEL('div', [
-            new HTEL('label for=datmax/Термін відправки'),
+            new HTEL('label for=datmax/Термін'),
             new HTEL('input !=datmax *=date ?=date_max #=[4] [r]')
         ]);
     }
@@ -237,7 +232,7 @@ if($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
 if (!is_null($Z_DATA->DATE_OUT)) {
 
     $field1(new HTEL('div', [
-        new HTEL('label for=datout/Дата відправки'),
+        new HTEL('label for=datout/Відправлено'),
         new HTEL('input !=datout *=date ?=date_out #=[5]')
     ]));
 }
@@ -264,7 +259,7 @@ $field1($div);
 if ($TYPE_Z == 'def'){
     $field1(new HTEL('div', [
         new HTEL('label for=ttnin/ТТН (вхідна)'),
-        new HTEL('input !=ttnin ?=ttn_in #=[9] [0]', [(!empty($Z_DATA->DATE_OUT) ? 'readonly':'')])
+        new HTEL('input !=ttnin ?=ttn_in #=[9] $=якщо+відомо [0]', [(!empty($Z_DATA->DATE_OUT) ? 'readonly':'')])
     ]));
 }
 
@@ -277,7 +272,7 @@ if ($IS_CHANGE == 1 && $Z_DATA->TTN_OUT != ''){
 
 if ($TYPE_Z == 'def' || $TYPE_Z == 'sold')
 $field1(new HTEL('div', [
-    new HTEL('label for=mess/Мессенджер'),
+    new HTEL('label for=mess/Зв`язок'),
     new HTEL('select !=mess ?=mess', [
         new HTEL('option #/-'),
         new HTEL('option #=[0] [1]/[0]', [$mes[0], selectStatus(strpos($Z_DATA->COMM, $mes[0]) === 0)]),
@@ -352,7 +347,7 @@ else {
         $field2(new HTEL('script/insertTable(`&type=[0]`);', $TYPE_Z));
     }
     else{
-        $field2(new HTEL('script/insertTable(`[0]`);', $Z_DATA->GET_KOMPLECT()));
+        $field2(new HTEL('script/insertTable(`[0]&type=[1]`);', [$Z_DATA->GET_KOMPLECT(), $TYPE_Z]));
     }
 }
 

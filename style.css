@@ -160,6 +160,14 @@ header a {
         background-color: #FBC02D;
     }
 
+    .opis{
+        padding: 2% 2%;
+        background-color: black;
+        border-radius: 25px;
+        font-size: 90%;
+        color: white;
+    }
+
 nav {
     display: flex;
     align-items: center;

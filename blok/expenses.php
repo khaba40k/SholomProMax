@@ -11,7 +11,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 if (!isset($_GET['for'])) $_GET['for'] = 'in';  //in - витрати списання / out - покупка
 
-$attr = $_GET['for'] == 'in' ?  16: 28;
+//1 замовлення (абонент)
+//2 замовлення (вручну)
+//4 покупка (абонент)
+//8 покупка (вручну)
+//16 витрати
+
+$attr = $_GET['for'] == 'in' ?  16: 8;
+
+if (isset($_GET['type'])){
+    $attr = $_GET['type'] == 'sold' ? 8 : 4;
+}
 
 #region Отримання масиву послуг
 $_service_id = array();

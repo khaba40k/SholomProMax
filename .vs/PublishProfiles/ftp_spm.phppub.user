@@ -8,6 +8,12 @@
     <File Include=".htaccess">
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
+    <File Include="about - Копировать.php">
+      <publishTime>10/27/2023 16:01:57</publishTime>
+    </File>
+    <File Include="about.php">
+      <publishTime>10/27/2023 16:04:06</publishTime>
+    </File>
     <File Include="admin.php">
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
@@ -15,7 +21,7 @@
       <publishTime>10/27/2023 02:38:01</publishTime>
     </File>
     <File Include="blok/ch_var_col_set.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/close_z.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
@@ -27,34 +33,34 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/expenses.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 15:01:02</publishTime>
     </File>
     <File Include="blok/expenses_menu.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/header.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/jurnal.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/logout.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/new_Z.php">
-      <publishTime>10/27/2023 02:54:45</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/price_list.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/print_to_work.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/record_new_in.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="blok/record_new_z.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/record_price.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -66,28 +72,31 @@
       <publishTime>10/22/2023 12:41:33</publishTime>
     </File>
     <File Include="blok/table_count.php">
-      <publishTime>10/27/2023 03:39:56</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/table_sum.php">
-      <publishTime>10/27/2023 03:39:56</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/test.php">
-      <publishTime>10/27/2023 03:39:56</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/zakazi.php">
-      <publishTime>10/27/2023 03:39:56</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="blok/zvit_menu.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>10/27/2023 02:52:47</publishTime>
+      <publishTime>10/27/2023 14:41:54</publishTime>
+    </File>
+    <File Include="contacts.php">
+      <publishTime>10/27/2023 16:02:35</publishTime>
     </File>
     <File Include="error_log">
       <publishTime>10/25/2023 01:38:01</publishTime>
     </File>
     <File Include="img/fon.png">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="img/img_chn.png">
       <publishTime>10/21/2023 20:14:21</publishTime>
@@ -99,10 +108,10 @@
       <publishTime>10/21/2023 20:14:21</publishTime>
     </File>
     <File Include="index - Копировать.php">
-      <publishTime>10/22/2023 11:59:39</publishTime>
+      <publishTime>10/27/2023 14:45:29</publishTime>
     </File>
     <File Include="index.php">
-      <publishTime>10/27/2023 00:00:48</publishTime>
+      <publishTime>10/27/2023 15:58:34</publishTime>
     </File>
     <File Include="info.php">
       <publishTime>10/23/2023 17:42:46</publishTime>
@@ -129,13 +138,19 @@
       <publishTime>10/25/2023 01:27:25</publishTime>
     </File>
     <File Include="style.css">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 16:05:13</publishTime>
+    </File>
+    <File Include="test - Копировать.php">
+      <publishTime>10/27/2023 15:42:20</publishTime>
+    </File>
+    <File Include="test.php">
+      <publishTime>10/27/2023 16:05:13</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="work.php">
-      <publishTime>10/27/2023 03:39:55</publishTime>
+      <publishTime>10/27/2023 15:25:55</publishTime>
     </File>
   </ItemGroup>
 </Project>

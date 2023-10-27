@@ -60,13 +60,31 @@
     require "blok/conn_local.php";
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL';
+    //$query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL';
+
+    //$result = mysqli_query($link, $query);
+
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NULL';
 
     $result = mysqli_query($link, $query);
 
-    $activ_count = mysqli_num_rows($result);
+    $_SESSION['count_new'] = mysqli_num_rows($result);
+
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NOT NULL';
+
+    $result = mysqli_query($link, $query);
+
+    $_SESSION['count_inwork'] = mysqli_num_rows($result);
+
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NOT NULL';
+
+    $result = mysqli_query($link, $query);
+
+    $_SESSION['count_archiv'] = mysqli_num_rows($result);
 
     $link->close();
+
+    $activ_count = $_SESSION['count_new'] + $_SESSION['count_inwork'];
 
     $_GET['header'] = 'admin';
     require "blok/header.php";

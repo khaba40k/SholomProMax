@@ -51,15 +51,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $div = new HTEL('div .=zakaz_menu');
 
+session_start();
+
 switch ($_MENU){
     case 'list':
         $div([
-            new HTEL("button *=button !=activ_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ЗАРЕЄСТРОВАНІ",
-            [$_GET['page'] == 'new' ? ' clicked_but':'', _style(3, 'color:red;'), 'new']),
-            new HTEL("button *=button !=inwork_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/В РОБОТІ",
-            [$_GET['page'] == 'inwork' ? ' clicked_but' : '', _style(3, 'color:yellow;'), 'inwork']),
-            new HTEL("button *=button !=archiv_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ВИКОНАНІ (АРХІВ)",
-            [$_GET['page'] == 'archiv' ? ' clicked_but' : '', _style(3, 'color:green;'), 'archiv'])
+            new HTEL("button *=button !=activ_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/НОВІ[3]",
+            [$_GET['page'] == 'new' ? ' clicked_but':'', _style(3, 'color:red;'), 'new', ($_SESSION['count_new'] > 0 ? ' (' . $_SESSION['count_new'] . ')':'')]),
+            new HTEL("button *=button !=inwork_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/В РОБОТІ[3]",
+            [$_GET['page'] == 'inwork' ? ' clicked_but' : '', _style(3, 'color:yellow;'), 'inwork', ($_SESSION['count_inwork'] > 0 ? ' (' . $_SESSION['count_inwork'] . ')':'')]),
+            new HTEL("button *=button !=archiv_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ВИКОНАНІ[3]",
+            [$_GET['page'] == 'archiv' ? ' clicked_but' : '', _style(3, 'color:green;'), 'archiv', ($_SESSION['count_archiv'] > 0 ? ' (' . $_SESSION['count_archiv'] . ')':'')])
         ]);
 
         echo new HTEL('script/list_Z(`[0]`);', $_GET['page']);

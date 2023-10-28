@@ -344,10 +344,10 @@ else {
     ]);
 
     if ($IS_CHANGE == 0) {
-        $field2(new HTEL('script/insertTable(`&type=[0]`);', $TYPE_Z));
+        $field2(new HTEL('script/insertTable(`&typeZ=[0]`);', $TYPE_Z));
     }
     else{
-        $field2(new HTEL('script/insertTable(`[0]&type=[1]`);', [$Z_DATA->GET_KOMPLECT(), $TYPE_Z]));
+        $field2(new HTEL('script/insertTable(`[0]&typeZ=[1]`);', [$Z_DATA->GET_KOMPLECT(), $TYPE_Z]));
     }
 }
 

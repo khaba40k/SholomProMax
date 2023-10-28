@@ -43,7 +43,7 @@ class MyColor
     {
         $uniq = false;
 
-        $find = ($type == 1) ? ("[" . $servId . "]") : ("[" . $servId ."." .$type. "]");
+        $find = ($type == 1) ? ("/" . $servId . "/") : ("/" . $servId ."." .$type. "/");
 
         foreach ($arr as $c) {
             if (strpos($c->PARAM, $find) > -1) {
@@ -55,13 +55,13 @@ class MyColor
         if ($uniq) {
             return strpos($this->PARAM, $find) > -1;
         } else {
-            return strpos($this->PARAM, "[oth]") > -1;
+            return strpos($this->PARAM, "/oth/") > -1;
         }
 
     }
 
     function Universal():bool{
-        return strpos($this->PARAM, "[oth]") > -1;
+        return strpos($this->PARAM, "/oth/") > -1;
     }
 }
 

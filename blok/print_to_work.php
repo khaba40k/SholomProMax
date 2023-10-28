@@ -31,7 +31,7 @@ if (mysqli_num_rows($result) != 0) {
 $_service_name = array();
 $arr_types = array();
 
-$query = 'SELECT * FROM `service_ids` where `order` > 0 OR `atr` < 0 ORDER BY `order` ASC';
+$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
 
 $result = mysqli_query($link, $query);
 
@@ -104,7 +104,8 @@ if (mysqli_num_rows($result) == 1) {
 
 //Введення комплектуючих
 
-$query = 'SELECT * FROM `service_out` where `ID` = "' . $_GET['ID'] . '" ORDER BY `costs` ASC';
+//$query = 'SELECT * FROM `service_out` where `ID` = "' . $_GET['ID'] . '" ORDER BY `costs` ASC';
+$query = 'SELECT * FROM service_out JOIN service_ids ON service_ids.ID=service_out.service_ID WHERE service_out.ID="' . $_GET['ID'] . '" ORDER BY `order` ASC';
 
 $result = mysqli_query($link, $query);
 
@@ -119,12 +120,12 @@ if (mysqli_num_rows($result) > 0) {
         $sum += CostOut($row['costs']);
 
         $col = isset($_COLORS[$row['color']]) ? $_COLORS[$row['color']]->NAME : '';
-       
+
         if ($col != '')
             $col = " | " . $col;
-       
+
         $price = $hideForWorker ? '' : " | " . CostOut($row['costs']) . " грн.";
-       
+
         $tbody(
             setRow(
                 $_service_name[$row['service_ID']] . $arr_types[$row['service_ID']][$row['type_ID']],

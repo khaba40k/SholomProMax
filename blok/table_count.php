@@ -129,7 +129,7 @@ foreach ($arr_serv_name as $id => $ni) {
 
             foreach ($_COLORS as $c) {
                 $cnt = isset($arr_cnt[$id][$t][$c->ID]) ? $arr_cnt[$id][$t][$c->ID] : 0;
-                $tr(new HTEL('td &=text-align:center;background-color:[1];/[0]', [MyVal($cnt), $cnt < 0 ? '#E3242B':'auto']));
+                $tr(new HTEL('td &=text-align:center;background-color:[1];/[0]', [MyVal($cnt), ($cnt < 3 && $cnt != 0) ? '#E3242B':'auto']));
             }
 
             $sum_arr = sumArray($arr_cnt[$id][$t]);

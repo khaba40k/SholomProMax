@@ -19,8 +19,8 @@ if (!isset($_GET['for'])) $_GET['for'] = 'in';  //in - витрати списа
 
 $attr = $_GET['for'] == 'in' ?  16: 8;
 
-if (isset($_GET['type'])){
-    $attr = $_GET['type'] == 'sold' ? 8 : 4;
+if (isset($_GET['typeZ'])){
+    $attr = $_GET['typeZ'] == 'sold' ? 8 : 4;
 }
 
 #region Отримання масиву послуг

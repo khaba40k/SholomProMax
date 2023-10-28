@@ -1,20 +1,23 @@
 <header class="no-print">
     <div class="wrap-logo">
-        <a href="../work.php" class="logo">Логотип сайта</a>
+        <a href="../work" class="logo">ШоломProMax</a>
     </div>
     <nav>
-        <a class="active" href="../index">Головна</a>
-        
+       
         <?php
 
         $log = '';
 
         if (isset($_SESSION['logged'])){
             $log = $_SESSION['logged'];
+
+            if ($log == 'Administrator'){
+                echo '<a href="../test">ТЕСТ</a>';
+            }
         }
 
         if (isset($_GET['header']) && $_GET['header'] == 'admin') {
-            //new HTEL('input !=search onchange $=пошук')
+
             echo '<form id="search" onSubmit="return SearchStart();">';
             echo '<input  id="request" placeholder="пошук" onClick="this.setSelectionRange(0, this.value.length)" />';
             echo '<button id="searcbut" type="submit" value="click">>></button></form>';
@@ -23,7 +26,6 @@
         }
         else{
             echo '<a href="../contacts">Контакти</a>';
-            echo '<a href="../about">Про нас</a>';
         }
         ?>
 

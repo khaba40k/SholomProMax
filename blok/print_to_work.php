@@ -93,6 +93,9 @@ if (mysqli_num_rows($result) == 1) {
 
         $ttn = !is_null($row['TTN_OUT']) ? $row['TTN_OUT'] : '';
         if ($row['comm'] != null) $tbody(setRow('Коментар', $row['comm'], 2));
+        if ($row['discount'] != null)
+            $tbody(setRow('Врахована знижка', $row['discount'].'%', 2));
+
         $worker = $row['worker'];
         if ($hideForWorker) $tbody(setRow('Відповідальний', $row['redaktor'], 2));
 
@@ -104,8 +107,7 @@ if (mysqli_num_rows($result) == 1) {
 
 //Введення комплектуючих
 
-//$query = 'SELECT * FROM `service_out` where `ID` = "' . $_GET['ID'] . '" ORDER BY `costs` ASC';
-$query = 'SELECT * FROM service_out JOIN service_ids ON service_ids.ID=service_out.service_ID WHERE service_out.ID="' . $_GET['ID'] . '" ORDER BY `order` ASC';
+$query = 'SELECT service_out.service_ID,service_out.type_ID,service_out.count,service_out.color,service_out.costs FROM service_out JOIN service_ids ON service_ids.ID=service_out.service_ID WHERE service_out.ID="' . $_GET['ID'] . '" ORDER BY `order` ASC';
 
 $result = mysqli_query($link, $query);
 

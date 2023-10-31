@@ -159,7 +159,7 @@ $mes = array('Телеграм', 'Вотсап', 'Інстаграм', 'Вайб
 $comm = $Z_DATA->COMM != null ? trim(str_replace($mes, '', $Z_DATA->COMM)):'';
 
 $FORM = new HTEL(
-    'form onsubmit=return+false !=form_create method=post .=create_z',
+    'form onsubmit=return+false !=form_create[12] method=post .=create_z',
     [
         $header_form,//0
         $Z_DATA->SHOLOM_NUM,
@@ -172,10 +172,10 @@ $FORM = new HTEL(
         $Z_DATA->REQ_OUT,//8
         $Z_DATA->TTN_IN,
         $Z_DATA->TTN_OUT,
-        trim($comm)//11
+        trim($comm),//11
+        ($TYPE_Z == 'def0' || $TYPE_Z == 'sold0') ? '_0':''
     ]
 );
-//new HTEL('')
 
 $field1 = new HTEL('fieldset !=fs1');
 
@@ -245,12 +245,12 @@ $div[] = new HTEL('div', [
 ]);
 
 $div[] = new HTEL('div', [
-    new HTEL('label for=client/ПІП'),
+    new HTEL('label for=client/Ім`я'),
     new HTEL('input !=client ?=pip #=[7] [r]')
 ]);
 
 $div[] = new HTEL('div', [
-    new HTEL('label for=reqv/Реквізити'),
+    new HTEL('label for=reqv/Реквізити НП'),
     new HTEL('input !=reqv ?=rek_out #=[8] [r]')
 ]);
 
@@ -266,7 +266,20 @@ if ($TYPE_Z == 'def'){
 if ($IS_CHANGE == 1 && $Z_DATA->TTN_OUT != ''){
     $field1(new HTEL('div', [
         new HTEL('label for=ttnout/ТТН (вихідна)'),
-        new HTEL('input !ttnout ?=ttn_out #=[10]')
+        new HTEL('input !=ttnout ?=ttn_out #=[10]')
+    ]));
+}
+
+if (!is_null($Z_DATA->DISCOUNT)){
+    $field1(new HTEL('div', [
+        new HTEL('label for=discount/Врахована знижка'),
+        new HTEL('input &=color:red; #=[0]% [ro]', $Z_DATA->DISCOUNT)
+    ]));
+}
+else{
+    $field1(new HTEL('div', [
+        new HTEL('label for=discount/ДИСКОНТ'),
+        new HTEL('input !=discount ?=discount minlength=4 maxlength=4 &=color:red; $=код+на+знижку #')
     ]));
 }
 
@@ -355,7 +368,9 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'sold'){
     session_start();
     $div = new HTEL('div .=doneApply', ['worker', $Z_DATA->WORKER]);
 
-    $query = 'SELECT `login` FROM `users` WHERE `login` <> "Administrator" AND `ID` > ' . $_SESSION[$_SESSION['logged']];
+    $idaccess = $_SESSION[$_SESSION['logged']] ?? 0;
+
+    $query = 'SELECT `login` FROM `users` WHERE `login` <> "Administrator" AND `ID` > ' . $idaccess;
 
     $result = mysqli_query($link, $query);
 
@@ -427,7 +442,7 @@ function selectStatus($bool = false):string{
             });
         };
 
-       //ВНЕСЕННЯ ДАНИХ ПО ЗАЯВКАМ
+       //ВНЕСЕННЯ ДАНИХ ПО ЗАЯВКАМ /вручну
        $("#form_create").submit(function () {
 
            if (!NUMBER_VALID) {
@@ -448,6 +463,23 @@ function selectStatus($bool = false):string{
                    }
                });
        });
+
+        //ВНЕСЕННЯ ДАНИХ ПО ЗАЯВКАМ /абон
+    $("#form_create_0").submit(function () {
+
+        let dataForm = $("#form_create_0").serialize();
+        let _sendGet = '<?php echo '&is_rewrite=0&typeZ=' . $TYPE_Z . '&ID=' . $Z_DATA->ID; ?>';
+
+        $.ajax({
+            url: 'blok/accept_dialog.php',
+            method: 'GET',
+            dataType: 'html',
+            data: dataForm + _sendGet,
+            success: function (data) {
+                $('#dialog').html(data);
+            }
+        });
+    });
 
     });
 

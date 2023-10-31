@@ -12,6 +12,6 @@
     <WebPublishMethod>FTP</WebPublishMethod>
     <PublishScope>ProjectHierarchy</PublishScope>
     <LogLevel>Normal</LogLevel>
-    <IgnoreMask>conn_local.php;*.config;*.phpproj;*.user;*.sln;error_log</IgnoreMask>
+    <IgnoreMask>conn_local.php;*.config;*.phpproj;*.user;*.sln;error_log;*.bat;*.txt;logs</IgnoreMask>
   </PropertyGroup>
 </Project>

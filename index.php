@@ -41,6 +41,7 @@
     }
     else{
         echo new HTEL('div !=workfield &=padding:1%+1%;');
+        echo new HTEL('div !=dialog');
     }
 
     ?>

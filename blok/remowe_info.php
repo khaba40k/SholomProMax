@@ -10,5 +10,13 @@ $query = 'DELETE FROM `client_info` WHERE `ID`=' . $_GET['ID'];
 
 $result = mysqli_query($link, $query);
 
+#region Дисконт відновити
+if (!is_null($discont_perc)) {
+    $query = 'UPDATE `discount_list` SET `from_ID` = NULL WHERE `from_ID` = ' . $_GET['ID'];
+    mysqli_query($link, $query);
+}
+#endregion
+
+
 phpAlert('Запис успішно видалено.', 'work');
 ?>

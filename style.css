@@ -266,6 +266,63 @@ main {
     float: right;
 }
 
+.dialog_w {
+    position: fixed;
+    margin: 0 10%;
+    padding: 1%;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: cadetblue;
+    color: black;
+    border: 5px solid blue;
+    border-radius: 20px;
+    border-top: 50px solid blue;
+    padding-bottom: 50px;
+}
+
+    .dialog_w label#top_dialog_lbl {
+        position: absolute;
+        height: 35px;
+        top: -45px;
+        left:10px;
+        color:yellow;
+        font-size: 33px;
+    }
+
+    #but_close {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        top: -45px;
+        right: 10px;
+        padding: 0;
+        color: red;
+        font-weight: bold;
+    }
+
+.bott_buts {
+    display: inline-flex;
+    position: absolute;
+    height: 35px;
+    bottom: 10px;
+    right: 10px;
+    padding: 0 5px;
+    color: blue;
+    font-weight: bold;
+}
+
+#but_apply {
+    position: absolute;
+    height: 35px;
+    bottom: 10px;
+    right: 10px;
+    padding: 0 5px;
+    color: blue;
+    font-weight: bold;
+}
+
 fieldset {
     border-radius: 10px;
 }
@@ -541,9 +598,81 @@ div#color_variant {
     background: #febaba;
 }
 
-#infoForm{
-    padding: 0 5%;
+.shop_cell {
+    position: relative;
+    display: flex;
+    float:left;
+    width: 256px;
+    height: 224px;
+    background-color: olivedrab;
+    margin: 2px;
+    border: 5px solid darkolivegreen;
+    border-radius: 10px;
+    padding: 10px;
+    background-image: url(../img/logo.png);
+    background-size: 128px 128px;
+    background-position: bottom left;
+    background-repeat: no-repeat;
 }
+
+    .shop_cell > * {
+        display: flex;
+    }
+
+.shop_bott{
+    
+}
+
+.shop_counter{
+    position: absolute;
+    display: block;
+    right:10px;
+    width: 20%;
+    height: 70%;
+    bottom: 10px;
+}
+
+    .shop_counter > *{
+        text-align: center;
+        width: 100%;
+        height: 33%;
+        font-size: 110%;
+    }
+
+.count_inp{
+    background: none;
+    border:none;
+}
+
+#tbl_disc td{
+    text-align: center;
+}
+
+#generator {
+    display: flex;
+    margin-top: 30px;
+    border: 5px solid yellow;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content:center;
+    align-items:center;
+}
+
+    #generator *{
+        display:inline-flex;
+        min-height: 40px;
+        min-width: 25%;
+        margin-left: 10px;
+        text-align: center;
+    }
+
+    #generator > input{
+        font-size: 130%;
+    }
+
+    #infoForm {
+        padding: 0 5%;
+    }
 
 #infoForm td {
     padding: 2px 4px;

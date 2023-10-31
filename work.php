@@ -32,7 +32,7 @@
             $result = mysqli_query($link, $query);
 
             if (mysqli_num_rows($result) == 0) {
-                $_SESSION['msg'] = "Пароль не підійшов!";
+                $_SESSION['msg'] = "Пароль або логін не підійшов!";
                 $link->close();
                 header('Location: admin');
             }
@@ -61,10 +61,7 @@
     require "blok/conn_local.php";
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    //$query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL';
-
-    //$result = mysqli_query($link, $query);
-
+    #region Підрахунок заявок
     $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NULL';
 
     $result = mysqli_query($link, $query);
@@ -84,6 +81,7 @@
     $_SESSION['count_archiv'] = mysqli_num_rows($result);
 
     $link->close();
+    #endregion
 
     $activ_count = $_SESSION['count_new'] + $_SESSION['count_inwork'];
 
@@ -105,7 +103,8 @@
 
     if ($_SESSION[$_SESSION['logged']] <= 1)
     $div([
-        new HTEL("button !=formPrice/ЦІНИ")
+        new HTEL("button !=formPrice/ЦІНИ"),
+        new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки")
     ]);
 
     $form($div);
@@ -135,31 +134,6 @@
 
     ?>
 
-    <!--<div class="wrapper">
-        <aside class="no-print">
-            <form id="feedBack" method="post" onsubmit="return false">
-
-                <label>РЕДАГУВАННЯ</label>
-                <div id="fb1">
-                    <button id="create_Z" onclick="location.href='work?page=newZdef'">НОВЕ ЗАМОВЛЕННЯ</button>
-                    <button id="active_Z" onclick="location.href='work'">ЗАМОВЛЕННЯ<php echo $activ_count > 0 ? ' ('.$activ_count . ')': '' ?>
-                    </button>
-                    <button id="expenses" onclick="location.href='work?page=expens'">ВИТРАТИ</button>
-                    <button id="formPrice">ЦІНИ</button>
-                </div>
-
-                <label>ЗВІТИ</label>
-                <div id="fb2">
-                    <button id="zal_show">ЗАЛИШКИ</button>
-                    <button id="period_show">РУХ ЗА ПЕРІОД...</button>
-                    <button id="toInfo" onclick="location.href='info'">Друк для робітника</button>
-                </div>
-            </form>
-        </aside>
-
-        <main id="workfield"></main>
-    </div>-->
-
     <script>
 
     function newZ($page = 'def') {
@@ -176,7 +150,6 @@
     };
 
     //Кнопка Активні замовлення
-    //$("#active_Z").on("click", function () { activeZedit(); });
 
     function activeZedit($page = 'new') {
 
@@ -196,15 +169,24 @@
 
     function priceEdit() {
 
-        let dataForm = $(this).serialize()
-
         $.ajax({
             url: 'blok/price_list.php',
-            method: 'POST',
             dataType: 'html',
-            data: dataForm,
-            success: function (data) {
-                $('#workfield').html(data);
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+    };
+
+    //Кнопка Знижки
+
+    function discountEdit() {
+
+        $.ajax({
+            url: 'blok/discount_list.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#workfield').html(response);
             }
         });
     };
@@ -314,6 +296,9 @@
                 break;
             case 'archiv':
                 echo new HTEL('script/activeZedit("archiv");');
+                break;
+            case 'discount_list':
+                echo new HTEL('script/discountEdit();');
                 break;
             default:
                 echo new HTEL('script/activeZedit();');

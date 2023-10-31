@@ -70,6 +70,33 @@ if (!isset($_GET['date_out']))
 if (!isset($_GET['ttn_out']))
     $_GET['ttn_out'] = null;
 
+#region Нарахування знижки
+$discount_code = $_GET['discount'] ?? null;
+$discont_perc = null;
+$perc_dsc = 1;
+
+if (!is_null($discount_code)){
+
+    $query = 'SELECT * FROM `discount_list` WHERE `from_ID` = ' . $_GET['ID'];
+
+    $result = mysqli_query($link, $query);
+
+    if (mysqli_num_rows($result) == 0) {//Знижки ще не було
+        $query = 'SELECT * FROM `discount_list` WHERE `code` = "' . $discount_code . '" AND `from_ID` IS NULL LIMIT 1';
+
+        $result = mysqli_query($link, $query);
+
+        if (mysqli_num_rows($result) == 1) {
+            foreach ($result as $row) {
+                $discont_perc = $row['percent'];
+                $perc_dsc = (100 - $discont_perc) / 100;
+            }
+        }
+    }
+}
+
+#endregion
+
 $num_cell = ($typeZ=='def' || $typeZ == 'def0') ? 'sholom_num': 'sold_number';
 
 $ifNull = ['ttn_in', 'ttn_out', 'date_out', 'comm', 'worker', 'mess'];
@@ -104,7 +131,7 @@ if (empty($_GET['ttn_out']) && !empty($_GET['date_out'])) {
 
 #endregion
 
-$query = "INSERT INTO `client_info` (ID, " . $num_cell . ", date_in, date_max, date_out, phone, client_name, reqv, TTN_IN, TTN_OUT, comm, worker, redaktor)
+$query = "INSERT INTO `client_info` (ID, " . $num_cell . ", date_in, date_max, date_out, phone, client_name, reqv, TTN_IN, TTN_OUT, comm, discount, worker, redaktor)
 VALUES ("
     . outVal($_GET['ID'])
     . outVal($_GET['sol_num'])
@@ -117,6 +144,7 @@ VALUES ("
     . outVal($_GET['ttn_in'])
     . outVal($_GET['ttn_out'])
     . outVal($_GET['mess']. ' ' . trim($_GET['comm']))
+    . outVal($discont_perc)
     . outVal($_GET['worker'])
     . outVal($creator, true) . ")
     ON DUPLICATE KEY UPDATE "
@@ -130,6 +158,7 @@ VALUES ("
     "TTN_IN=" . outVal($_GET['ttn_in']) .
     "TTN_OUT=" . outVal($_GET['ttn_out']) .
     "comm=" . outVal($_GET['mess'] . ' ' . trim($_GET['comm'])) .
+    "discount=" . outVal($discont_perc) .
     "worker=" . outVal($_GET['worker']) .
     "redaktor=" . outVal($creator, true);
 
@@ -172,7 +201,7 @@ if ($err == ''){
                       outVal($type) .
                       outVal($_color_id) .
                       outVal($count) .
-                      outVal($price, true) .
+                      outVal($price * $perc_dsc, true) .
                       ")";
 
                   if ($link->query($query) !== TRUE) {
@@ -198,7 +227,7 @@ if ($err == ''){
                         outVal($type) .
                         outVal($color) .
                         outVal($count) .
-                        outVal(CostOut($price), true) .
+                        outVal(CostOut($price * $perc_dsc), true) .
                      ")";
 
                 if ($link->query($query) !== TRUE) {
@@ -216,7 +245,7 @@ if ($err == ''){
             outVal(1) .
             outVal('') .
             outVal(1) .
-            outVal(CostOut($_GET['cost_' . $termin_ID])) .
+            outVal(CostOut($_GET['cost_' . $termin_ID]) * $perc_dsc) .
                  ")";
 
             if ($link->query($query) !== TRUE) {
@@ -226,10 +255,20 @@ if ($err == ''){
     }
 }
 
+$ans = 'Запис успішно створено.';
+
+#region Дисконт як використаний
+if (!is_null($discont_perc)){
+    $query = 'UPDATE `discount_list` SET `from_ID` = ' . $_GET['ID'] . ' WHERE `code` = "' . $discount_code . '"';
+    mysqli_query($link, $query);
+    $ans .= ' Врахована знижка [ ' . $discont_perc . ' % ]';
+}
+#endregion
+
 $link->close();
 
 if ($err == ''){
-    phpAlert("Запис успішно створено.", 'work');
+    phpAlert($ans, 'work');
 }
 else{
     phpAlert($err);

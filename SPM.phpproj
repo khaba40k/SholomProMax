@@ -23,5 +23,12 @@
   <ItemGroup>
     <Content Remove="blok\error_log" />
     <Content Remove="error_log" />
+    <Content Remove="upload_spm.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="upload_spm.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="logs\" />
   </ItemGroup>
 </Project>

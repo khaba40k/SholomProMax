@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) != 0) {
     $arr_done_id= array();
 
     $query = 'SELECT `ID` FROM `client_info`
-              where (`date_out` IS NOT NULL AND `TTN_IN` IS NOT NULL) OR `TTN_IN` IS NOT NULL';
+              where `TTN_IN` IS NOT NULL OR `TTN_OUT` IS NOT NULL';
 
     $result = mysqli_query($link, $query);
 

@@ -11,7 +11,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 if (!isset($_GET['for'])) $_GET['for'] = 'in';  //in - витрати списання / out - покупка
 
-$attr = $_GET['for'] == 'in' ?  16: 28;
+//1 замовлення (абонент)
+//2 замовлення (вручну)
+//4 покупка (абонент)
+//8 покупка (вручну)
+//16 витрати
+
+$attr = $_GET['for'] == 'in' ?  16: 8;
+
+if (isset($_GET['typeZ'])){
+    $attr = $_GET['typeZ'] == 'sold' ? 8 : 4;//sold0=4
+}
 
 #region Отримання масиву послуг
 $_service_id = array();
@@ -228,12 +238,6 @@ if (isset($_GET['newRow'])) {
 
                     ?>
 
-                //$.get('blok/expenses.php', 'row_id=' + row.substring(2) +
-                //    '&price_for=' + serv_id +
-                //    '&type=1', function (result) {
-                //        td_cost.innerHTML = result;
-                //});
-
             }
             else if (row.substring(0, 5) == 'type_') {//Якщо змінено назву типу
 
@@ -259,11 +263,6 @@ if (isset($_GET['newRow'])) {
 
                 ?>
 
-                //$.get('blok/expenses.php', 'row_id=' + row_type[1] +
-                //    '&price_for=' + row_type[2] +
-                //    '&type=' + type, function (result) {
-                //        td_cost.innerHTML = result;
-                //});
             }
         });
 

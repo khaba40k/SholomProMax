@@ -5,12 +5,6 @@
         $(this).toggleClass('clicked_but');
     });
 
-    //$('#activ_z_but').on('click', function () { list_Z('new'); });
-    //$('#inwork_z_but').on('click', function () { list_Z('inwork'); });
-    //$('#archiv_z_but').on('click', function () { list_Z('archiv'); });
-    //$("#create_z_but").on("click", newZ);
-    //$("#sold_z_but").on("click", newZsold);
-
     function newZ() {
 
         $.ajax({
@@ -50,26 +44,26 @@
 </script>
 
 <?php
-$_MENU = $_GET['menu_type'] ?? 'list';
 
-//var_dump($_GET);
-//exit;
+$_MENU = $_GET['menu_type'] ?? 'list';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $div = new HTEL('div .=zakaz_menu');
 
+session_start();
+
 switch ($_MENU){
     case 'list':
-        $style = _style(3);
         $div([
-            new HTEL("button *=button !=activ_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ЗАРЕЄСТРОВАНІ",
-            [$_GET['page'] == 'new' ? ' clicked_but':'', $style, 'new']),
-            new HTEL("button *=button !=inwork_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/В РОБОТІ",
-            [$_GET['page'] == 'inwork' ? ' clicked_but' : '', $style, 'inwork']),
-            new HTEL("button *=button !=archiv_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ВИКОНАНІ (АРХІВ)",
-            [$_GET['page'] == 'archiv' ? ' clicked_but' : '', $style, 'archiv'])
+            new HTEL("button *=button !=activ_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/НОВІ[3]",
+            [$_GET['page'] == 'new' ? ' clicked_but':'', _style(3, 'color:red;'), 'new', ($_SESSION['count_new'] > 0 ? ' (' . $_SESSION['count_new'] . ')':'')]),
+            new HTEL("button *=button !=inwork_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/В РОБОТІ[3]",
+            [$_GET['page'] == 'inwork' ? ' clicked_but' : '', _style(3, 'color:yellow;'), 'inwork', ($_SESSION['count_inwork'] > 0 ? ' (' . $_SESSION['count_inwork'] . ')':'')]),
+            new HTEL("button *=button !=archiv_z_but .=zakazi_but[0] #=click onclick=location.href=='work?page==[2]' [1]/ВИКОНАНІ[3]",
+            [$_GET['page'] == 'archiv' ? ' clicked_but' : '', _style(3, 'color:green;'), 'archiv', ($_SESSION['count_archiv'] > 0 ? ' (' . $_SESSION['count_archiv'] . ')':'')])
         ]);
+
         echo new HTEL('script/list_Z(`[0]`);', $_GET['page']);
         break;
     case 'create':
@@ -90,18 +84,21 @@ switch ($_MENU){
         break;
 }
 
-echo $div(new HTEL('div  !=zakaz_workplace'));
+$div(new HTEL('div  !=zakaz_workplace'));
 
-function _style($countBut = 2):string{
+echo $div;
+
+function _style($countBut = 2, $any = ''):string{
     $out = 'style="';
     //40% - 8%
 
     $width = intdiv(80, $countBut);
     $marg_left = intdiv($width, 5);
 
+    $out .= 'font-size:80%;';
     $out .= 'width:' . $width . '%;';
     $out .= 'margin-left:' . $marg_left . '%;';
-
+    $out .= $any;
     return $out . '"';
 }
 

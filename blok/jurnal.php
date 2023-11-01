@@ -74,7 +74,13 @@ if (mysqli_num_rows($result) != 0) {
 $serv_out = array();
 $serv_info = array();
 
+session_start();
+
 $query = 'SELECT * FROM `service_in` order by `date_in` DESC';
+
+if ($_SESSION[$_SESSION['logged']] > 1){
+    $query = 'SELECT * FROM `service_in` WHERE `redaktor` = "'.$_SESSION['logged'].'" order by `date_in` DESC';
+}
 
 $result = mysqli_query($link, $query);
 
@@ -112,10 +118,10 @@ foreach ($serv_info as $date=>$in_date) { //
             $tbody(new HTEL('tr &=border-left:2px+solid;border-right:2px+solid;[2]', [ 2=>$bord_top,
                 new HTEL('td &=text-align:left;/[0] [1]', [$arr_serv_name[$arr['id']], $arr_types[$arr['id']][$arr['type']]]),
                 new HTEL('td/[0]', $color),
-                new HTEL('td/[0] шт.', $arr['count']),
+                new HTEL('td &=width:10%; /[0] шт.', $arr['count']),
                 new HTEL('td &=text-align:right;/[0]', CostOut($arr['cost'])),
                 new HTEL('td/[0]', $arr['comm']),
-                new HTEL('td .=del_cell', new HTEL('input .=delrow ?=[0]_[1]_[2]_[3] #=X [ro]', [$date,$arr['id'],$arr['type'],$arr['cost']]))
+                new HTEL('td .=del_cell+no-print', new HTEL('input .=delrow ?=[0]_[1]_[2]_[3] #=X [ro]', [$date,$arr['id'],$arr['type'],$arr['cost']]))
             ]));
             $costall += $arr['cost'];
         }
@@ -129,15 +135,20 @@ foreach ($serv_info as $date=>$in_date) { //
     }
 }
 
-echo $table($tbody);
+$table($tbody);
+
+echo $table;
 
 ?>
 
 <script>
 
     $('.delrow').on('click', function () {
-        $name = $(this).attr('name');
-        if (!confirm('Підтвердіть видалення ' + $name)) return false;
+        var $name = $(this).attr('name');
+        var spl = $name.split('_');
+        var sum = spl[spl.length - 1];
+
+        if (!confirm('Підтвердіть видалення запису на суму ' + sum + ' грн.')) return false;
 
         $.get('blok/jurnal.php', 'del=' + $name, function (result) {
             alert('Запис [' + result + '] видалено.');

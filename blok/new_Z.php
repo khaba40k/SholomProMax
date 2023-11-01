@@ -23,15 +23,12 @@
 
 <?php
 
-$TYPE_Z = isset($_GET['type']) ? $_GET['type'] : 'def';
-
-//if ($TYPE_Z != 'def') {
-//    echo 'ТИМЧАСОВО НЕ ПРАЦЮЄ!!!';
-//    exit;
-//}
+$TYPE_Z = $_GET['type'] ?? 'def';
 
 require "conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
+//HIDE();
 
 #region Отримання списку кольорів
 $_COLORS = array();
@@ -57,7 +54,7 @@ $Z_DATA->DATE_MAX = strftime("%Y-%m-%d", strtotime($Z_DATA->DATE_IN ." +3 day"))
 
 $IS_CHANGE = isset($_GET['ID']) ? 1: 0;
 
-$cell_num = $TYPE_Z == 'def' ? 'sholom_num' : 'sold_number';
+$cell_num = ($TYPE_Z == 'def' || $TYPE_Z == 'def0') ? 'sholom_num' : 'sold_number';
 
 if ($IS_CHANGE == 1){//РЕДАГУВАННЯ
     $header_form = 'РЕДАГУВАННЯ ЗАМОВЛЕННЯ';
@@ -116,7 +113,7 @@ if ($IS_CHANGE == 1){//РЕДАГУВАННЯ
     #endregion
 
 }else{//НОВИЙ
-    if ($TYPE_Z == 'def') {
+    if ($TYPE_Z == 'def' || $TYPE_Z == 'def0') {
         $Z_DATA->SHOLOM_NUM = 0;
     } else {
         $Z_DATA->SOLD_NUM = 0;
@@ -138,21 +135,23 @@ if ($IS_CHANGE == 1){//РЕДАГУВАННЯ
 }
 
 #region Масив існуючих номерів
-$numbers_in_base = array();
+if ($TYPE_Z == 'def' || $TYPE_Z == 'sold')
+{
+    $numbers_in_base = array();
 
-$query = 'SELECT `' . $cell_num . '` FROM `client_info` WHERE `'.$cell_num.'`<>' . ($TYPE_Z == 'def' ? $Z_DATA->SHOLOM_NUM : $Z_DATA->SOLD_NUM);
+    $query = 'SELECT `' . $cell_num . '` FROM `client_info` WHERE `' . $cell_num . '`<>' . ($TYPE_Z == 'def' ? $Z_DATA->SHOLOM_NUM : $Z_DATA->SOLD_NUM);
 
-$result = mysqli_query($link, $query);
+    $result = mysqli_query($link, $query);
 
-if (mysqli_num_rows($result) > 0) {
-    foreach ($result as $row) {
-        if ($row[$cell_num] != null)
-            $numbers_in_base[] = $row[$cell_num];
+    if (mysqli_num_rows($result) > 0) {
+        foreach ($result as $row) {
+            if ($row[$cell_num] != null)
+                $numbers_in_base[] = $row[$cell_num];
+        }
     }
+
+    echo new HTEL('script/InvalidNumbers([0]);', json_encode($numbers_in_base));
 }
-
-echo new HTEL('script/InvalidNumbers([0]);', json_encode($numbers_in_base));
-
 #endregion
 
 $mes = array('Телеграм', 'Вотсап', 'Інстаграм', 'Вайбер', 'Телефон', 'Наручно', 'Сигнал', 'ТікТок');
@@ -160,7 +159,7 @@ $mes = array('Телеграм', 'Вотсап', 'Інстаграм', 'Вайб
 $comm = $Z_DATA->COMM != null ? trim(str_replace($mes, '', $Z_DATA->COMM)):'';
 
 $FORM = new HTEL(
-    'form onsubmit=return+false !=form_create method=post .=create_z',
+    'form onsubmit=return+false !=form_create[12] method=post .=create_z',
     [
         $header_form,//0
         $Z_DATA->SHOLOM_NUM,
@@ -173,14 +172,14 @@ $FORM = new HTEL(
         $Z_DATA->REQ_OUT,//8
         $Z_DATA->TTN_IN,
         $Z_DATA->TTN_OUT,
-        $comm//11
+        trim($comm),//11
+        ($TYPE_Z == 'def0' || $TYPE_Z == 'sold0') ? '_0':''
     ]
 );
-//new HTEL('')
 
 $field1 = new HTEL('fieldset !=fs1');
 
-if($TYPE_Z == 'def'){
+if($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
     $div = array();
 
     if($IS_CHANGE == 1 && !empty($Z_DATA->TTN_IN)){
@@ -190,15 +189,17 @@ if($TYPE_Z == 'def'){
         ]);
     }
 
-    $div[] = new HTEL('div', [
-        new HTEL('label for=datin/Дата формування заявки'),
-        new HTEL('input !=datin *=date ?=date_in #=[3] [r]')
-    ]);
+    if($TYPE_Z != 'def0'){
+        $div[] = new HTEL('div', [
+            new HTEL('label for=datin/Створено'),
+            new HTEL('input !=datin *=date ?=date_in #=[3] [r]')
+        ]);
 
-    $div[] = new HTEL('div', [
-        new HTEL('label for=datmax/Термін відправки'),
-        new HTEL('input  !=datmax *=date ?=date_max #=[4] [r]')
-    ]);
+        $div[] = new HTEL('div', [
+            new HTEL('label for=datmax/Термін'),
+            new HTEL('input  !=datmax *=date ?=date_max #=[4] [r]')
+        ]);
+    }
 
     $field1(new HTEL('legend/[0]:'));
     $field1($div);
@@ -207,20 +208,22 @@ if($TYPE_Z == 'def'){
 
     if ($IS_CHANGE == 1) {
         $div[] = new HTEL('div', [
-            new HTEL('label for=num/Номер замовлення'),
+            new HTEL('label for=num/Номер замовл.'),
             new HTEL('input !=num *=number min=1 ?=sol_num #=[2] [r]')
         ]);
     }
 
-    $div[] = new HTEL('div', [
-        new HTEL('label for=datin/Дата формування заявки'),
-        new HTEL('input !=datin *=date ?=date_in #=[3] [r]')
-    ]);
+    if ($TYPE_Z == 'sold'){
+        $div[] = new HTEL('div', [
+            new HTEL('label for=datin/Створено'),
+            new HTEL('input !=datin *=date ?=date_in #=[3] [r]')
+        ]);
 
-    $div[] = new HTEL('div', [
-        new HTEL('label for=datmax/Термін відправки'),
-        new HTEL('input !=datmax *=date ?=date_max #=[4] [r]')
-    ]);
+        $div[] = new HTEL('div', [
+            new HTEL('label for=datmax/Термін'),
+            new HTEL('input !=datmax *=date ?=date_max #=[4] [r]')
+        ]);
+    }
 
     $field1(new HTEL('legend/[0]:'));
     $field1($div);
@@ -229,7 +232,7 @@ if($TYPE_Z == 'def'){
 if (!is_null($Z_DATA->DATE_OUT)) {
 
     $field1(new HTEL('div', [
-        new HTEL('label for=datout/Дата відправки'),
+        new HTEL('label for=datout/Відправлено'),
         new HTEL('input !=datout *=date ?=date_out #=[5]')
     ]));
 }
@@ -242,12 +245,12 @@ $div[] = new HTEL('div', [
 ]);
 
 $div[] = new HTEL('div', [
-    new HTEL('label for=client/ПІП'),
+    new HTEL('label for=client/Ім`я'),
     new HTEL('input !=client ?=pip #=[7] [r]')
 ]);
 
 $div[] = new HTEL('div', [
-    new HTEL('label for=reqv/Реквізити'),
+    new HTEL('label for=reqv/Реквізити НП'),
     new HTEL('input !=reqv ?=rek_out #=[8] [r]')
 ]);
 
@@ -256,19 +259,33 @@ $field1($div);
 if ($TYPE_Z == 'def'){
     $field1(new HTEL('div', [
         new HTEL('label for=ttnin/ТТН (вхідна)'),
-        new HTEL('input !=ttnin ?=ttn_in #=[9] [0]', [(!empty($Z_DATA->DATE_OUT) ? 'readonly':'')])
+        new HTEL('input !=ttnin ?=ttn_in #=[9] $=якщо+відомо [0]', [(!empty($Z_DATA->DATE_OUT) ? 'readonly':'')])
     ]));
 }
 
 if ($IS_CHANGE == 1 && $Z_DATA->TTN_OUT != ''){
     $field1(new HTEL('div', [
         new HTEL('label for=ttnout/ТТН (вихідна)'),
-        new HTEL('input !ttnout ?=ttn_out #=[10]')
+        new HTEL('input !=ttnout ?=ttn_out #=[10]')
     ]));
 }
 
+if (!is_null($Z_DATA->DISCOUNT)){
+    $field1(new HTEL('div', [
+        new HTEL('label for=discount/Врахована знижка'),
+        new HTEL('input &=color:red; #=[0]% [ro]', $Z_DATA->DISCOUNT)
+    ]));
+}
+else{
+    $field1(new HTEL('div', [
+        new HTEL('label for=discount/ДИСКОНТ'),
+        new HTEL('input !=discount ?=discount minlength=4 maxlength=4 &=color:red; $=код+на+знижку #')
+    ]));
+}
+
+if ($TYPE_Z == 'def' || $TYPE_Z == 'sold')
 $field1(new HTEL('div', [
-    new HTEL('label for=mess/Мессенджер'),
+    new HTEL('label for=mess/Зв`язок'),
     new HTEL('select !=mess ?=mess', [
         new HTEL('option #/-'),
         new HTEL('option #=[0] [1]/[0]', [$mes[0], selectStatus(strpos($Z_DATA->COMM, $mes[0]) === 0)]),
@@ -282,14 +299,14 @@ $field1(new HTEL('div', [
     ])
 ]));
 
-$field1(new HTEL('div', [
-    new HTEL('label for=com/Коментар'),
-    new HTEL('input !=com ?=comm #=[11]')
+$field1(new HTEL('div &=display:flex;height:150px;', [
+    new HTEL('label &=display:inline-flex;height:auto; for=com/Коментар'),
+    new HTEL('textarea &=display:inline-flex;height:90%;resize:none; !=com ?=comm /[11]')
 ]));
 
 //Заповнення графи терміново
 
-$query = 'SELECT * FROM `price_list` WHERE `service_id` = 21 LIMIT 1';
+$query = 'SELECT `cost` FROM `price_list` WHERE `service_id` = 21 LIMIT 1';
 
 $result = mysqli_query($link, $query);
 
@@ -300,13 +317,13 @@ foreach ($result as $row) {
 $statusTerm = $Z_DATA->GET_KOMPLECT(21) != '' ? 'checked':'';
 
 $field1(new HTEL('div', [
-    new HTEL('label for=term/Терміново (+[0] грн.)', CostOut($term_cost)),
+    new HTEL('label for=term/Терміново (+[0]грн.)', CostOut($term_cost)),
     new HTEL('input *=checkbox !=term ?=cost_21 #=[0] [1]', [$term_cost, $statusTerm])
 ]));
 
 $field2 = new HTEL('fieldset !=fs2');
 
-if ($TYPE_Z == 'def'){
+if ($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
     $div = new HTEL('div !=color_variant');
 
     $label = new HTEL('label for=c_v/Колір на вибір...');
@@ -333,27 +350,52 @@ if ($TYPE_Z == 'def'){
         new HTEL('div !=grid_color')
     ]);
 }
-else if ($TYPE_Z == 'sold'){
+else {
     $field2([
         new HTEL('legend/КОМПЛЕКТУЮЧІ / ПОСЛУГИ:'),
         new HTEL('div !=table_work')
     ]);
 
     if ($IS_CHANGE == 0) {
-        $field2(new HTEL('script/insertTable();'));
+        $field2(new HTEL('script/insertTable(`&typeZ=[0]`);', $TYPE_Z));
     }
     else{
-        $field2(new HTEL('script/insertTable(`[0]`);', $Z_DATA->GET_KOMPLECT()));
+        $field2(new HTEL('script/insertTable(`[0]&typeZ=[1]`);', [$Z_DATA->GET_KOMPLECT(), $TYPE_Z]));
     }
 }
 
-$div = new HTEL('div .=doneApply', ['worker',$Z_DATA->WORKER]);
+if ($TYPE_Z == 'def' || $TYPE_Z == 'sold'){
+    session_start();
+    $div = new HTEL('div .=doneApply', ['worker', $Z_DATA->WORKER]);
 
-$div([
-    new HTEL('label  for=[0]/Працівник: '),
-    new HTEL('input !=[0] ?=[0] &=width:20%; $=якщо+відомо #=[1]'),
-    new HTEL('button !=butSubm *=submit #=click /ЗБЕРЕГТИ')
-]);
+    $idaccess = $_SESSION[$_SESSION['logged']] ?? 0;
+
+    $query = 'SELECT `login` FROM `users` WHERE `login` <> "Administrator" AND `ID` > ' . $idaccess;
+
+    $result = mysqli_query($link, $query);
+
+    if (mysqli_num_rows($result) > 0){
+        $select = new HTEL('select !=creator ?=creator', new HTEL('option #=[0]/-', $_SESSION['logged']));
+
+        foreach ($result as $row) {
+            $sel = $row['login'] == $Z_DATA->REDAKTOR ? 'selected' : '';
+            $select(new HTEL('option #=[0] [1]/[0]', [$row['login'], $sel]));
+        }
+
+        $div(new HTEL('label for=creator/Переглядає [0], доступ -> ', $_SESSION['logged']));
+        $div($select);
+    }
+
+    $div([
+        new HTEL('label  for=[0]/Працівник: '),
+        new HTEL('input !=[0] ?=[0] &=width:20%; $=якщо+відомо #=[1]'),
+        new HTEL('button !=butSubm *=submit #=click /ЗБЕРЕГТИ')
+    ]);
+}else{
+    $div = new HTEL('div .=doneApply',[
+        new HTEL('button !=butSubm *=submit #=click /ОФОРМИТИ')
+    ]);
+}
 
 $FORM([
     $field1,
@@ -400,7 +442,7 @@ function selectStatus($bool = false):string{
             });
         };
 
-       //ВНЕСЕННЯ ДАНИХ ПО ЗАЯВКАМ
+       //ВНЕСЕННЯ ДАНИХ ПО ЗАЯВКАМ /вручну
        $("#form_create").submit(function () {
 
            if (!NUMBER_VALID) {
@@ -421,6 +463,23 @@ function selectStatus($bool = false):string{
                    }
                });
        });
+
+        //ВНЕСЕННЯ ДАНИХ ПО ЗАЯВКАМ /абон
+    $("#form_create_0").submit(function () {
+
+        let dataForm = $("#form_create_0").serialize();
+        let _sendGet = '<?php echo '&is_rewrite=0&typeZ=' . $TYPE_Z . '&ID=' . $Z_DATA->ID; ?>';
+
+        $.ajax({
+            url: 'blok/accept_dialog.php',
+            method: 'GET',
+            dataType: 'html',
+            data: dataForm + _sendGet,
+            success: function (data) {
+                $('#dialog').html(data);
+            }
+        });
+    });
 
     });
 

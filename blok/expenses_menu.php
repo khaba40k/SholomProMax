@@ -33,7 +33,6 @@
         $('.expenses_ch').not(this).removeClass('clicked_but')
         $(this).toggleClass('clicked_but');
 
-
     });
 </script>
 
@@ -47,19 +46,19 @@ echo new HTEL('div .=expensesMenu+no-print', new HTEL(
     'form !=expensesMenu onsubmit=return+false',
     [
         $but_text,
-        new HTEL('button !=jurnal .=expenses_ch+clicked_but onClick=showJurnal();/[0]'),
-        new HTEL('button !=add .=expenses_ch onClick=showForm();/[1]')
-    ]
+            new HTEL('button !=add .=expenses_ch+clicked_but onClick=showForm();/[1]'),
+            new HTEL('button !=jurnal .=expenses_ch onClick=showJurnal();/[0]')
+        ]
 )
 );
 
 echo new HTEL('div !=zvitResult');
 
-if (isset($_GET['page']) && $_GET['page'] != 'jurnal'){
-     echo new HTEL('script/showForm();');
+if (isset($_GET['page']) && $_GET['page'] == 'jurnal'){
+     echo new HTEL('script/showJurnal();');
 }
 else{
-     echo new HTEL('script/showJurnal();');
+     echo new HTEL('script/showForm();');
 }
 
 ?>

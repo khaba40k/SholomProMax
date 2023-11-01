@@ -1,4 +1,14 @@
 <?php
+function  HIDE(){
+     if (!isset($_SESSION['logged'])){
+       session_start();
+     }
+     if ($_SESSION['logged'] != 'Administrator'){
+           echo 'ТИМЧАСОВО НЕ ДОСТУПНО... СТОРІНКА В РОЗРОБЦІ!';
+           exit;
+     }
+}
+
 function phpAlert($msg, $location = '')
 {
     if ($location == '') {
@@ -17,7 +27,7 @@ function console($msg)
 class MyColor
 {
     public $ID;
-    public $NAME;
+    public string $NAME;
     public $CSS_ANALOG;
     private $PARAM;
 
@@ -33,7 +43,7 @@ class MyColor
     {
         $uniq = false;
 
-        $find = ($type == 1) ? ("[" . $servId . "]") : ("[" . $servId ."." .$type. "]");
+        $find = ($type == 1) ? ("/" . $servId . "/") : ("/" . $servId ."." .$type. "/");
 
         foreach ($arr as $c) {
             if (strpos($c->PARAM, $find) > -1) {
@@ -45,13 +55,17 @@ class MyColor
         if ($uniq) {
             return strpos($this->PARAM, $find) > -1;
         } else {
-            return strpos($this->PARAM, "[oth]") > -1;
+            return strpos($this->PARAM, "/oth/") > -1;
         }
 
     }
 
     function Universal():bool{
-        return strpos($this->PARAM, "[oth]") > -1;
+        return strpos($this->PARAM, "/oth/") > -1;
+    }
+
+    function __toString():string{
+        return $this->NAME;
     }
 }
 
@@ -69,7 +83,9 @@ class ZDATA {
     public $TTN_OUT = '';
     public $COMM = '';
     public $WORKER = '';
+    public $REDAKTOR = '';
     public $KOMPLECT = array();
+    public $DISCOUNT = null;
 
     function __construct($IN = null)
     {
@@ -113,10 +129,12 @@ class ZDATA {
             $this->TTN_OUT = $in['TTN_OUT'];
         if (isset($in['comm']))
             $this->COMM = $in['comm'];
+        if (isset($in['discount']))
+            $this->DISCOUNT = $in['discount'];
         if (isset($in['worker']))
             $this->WORKER = $in['worker'];
-
-        //var_dump($in);
+        if (isset($in['redaktor']))
+            $this->REDAKTOR = $in['redaktor'];
 
         if (isset($in['serv'])) {
             foreach ($in['serv'] as $id=>$tp) {
@@ -371,6 +389,19 @@ class HTEL {
         $this->IS_EMPTY = false;
     }
 
+    function setAtr($atr_name, $val, $append = false){
+
+        if ($append) {
+            if (isset($this->element_args[$atr_name])) {
+                $this->element_args[$atr_name] .= $val;
+            } else {
+                $this->element_args[$atr_name] = $val;
+            }
+        } else {
+            $this->element_args[$atr_name] = $val;
+        }
+    }
+
     private function _sendGlobVars($vars){
          if (is_array($vars)){
               foreach ($vars as $k=>$v){
@@ -396,15 +427,13 @@ class HTEL {
         }
     }
 
-    function __invoke($include):string{
+    function __invoke($include){
          if (!$this->IS_EMPTY){
             $this->_include($include);
          }
          else if (is_string($include)){
             $this->__construct($include);
          }
-
-        return $this->__toString();
     }
 
     function _tab($val=0):string{
@@ -417,8 +446,14 @@ class HTEL {
         return $tab;
     }
 
-    function GetChildren():array{
-        return $this->include_arr;
+    function GetChildren():string{
+        $out = '';
+
+        foreach ($this->include_arr as $in){
+            $out .= $in;
+        }
+
+        return $out;
     }
 
     function childCount():int{
@@ -496,6 +531,39 @@ class HTEL {
         return $out;
     }
 
+}
+
+class MyDialog
+{
+    private string $LABLE;
+    private array $BUTTONS;
+    private string $BODY;
+
+    function __construct(HTEL $body = null, array $butt = ['OK'=>true], string $lbl = 'ШоломProMax')
+    {
+        if (is_null($body))
+            $body = new HTEL();
+        $this->LABLE = $lbl;
+        $this->BUTTONS = $butt;
+        $this->BODY = $body;
+
+        $this->BODY = str_replace(PHP_EOL, '', $this->BODY);
+        $this->BODY = str_replace(' ', '', $this->BODY);
+        $this->BODY = str_replace("\t", '', $this->BODY);
+    }
+
+    function Show():string
+    {
+        //$data = '&dialog_body=' . $this->BODY . '';
+        //$data .= '&dialog_buttons=' . json_encode($this->BUTTONS);
+        //$data .= '&dialog_lable=' . $this->LABLE;
+
+        $_GET['dialog_body'] = $this->BODY;
+        $_GET['dialog_buttons'] = $this->BUTTONS;
+        $_GET['dialog_lable'] = $this->LABLE;
+
+        return include 'blok/dialog.php';
+    }
 }
 
 ?>

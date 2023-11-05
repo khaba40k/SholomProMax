@@ -84,36 +84,49 @@ foreach ($_service_name as $id => $name) {
 
     foreach ($_service_type[$id] as $t=>$type) {
 
-        $temp1 = new HTEL('div !=[0]_[1]_cell .=shop_cell', [$id, $t, $counter]);
-        //$temp1(new HTEL('div .=shop_img ', '/img/' . $id . '.' . $t));
-        //&=background-image:url(..[0].png);
-        $temp1_2 = new HTEL('div .=shop_bott');
+        foreach($_COLORS as $c){
 
-        $name_type = $type != '' ? $name . ' ('  . $type . ')':$name;
+            if ($c->AppleTo($_COLORS, $id, $t)){
+                $temp1 = new HTEL('div !=[0]_[1]_[3]_cell .=shop_cell &=border-bottom:50px+solid+[4];', [$id, $t, $counter, $c->ID, $c->CSS_ANALOG]);
+                //$temp1(new HTEL('div .=shop_img ', '/img/' . $id . '.' . $t));
+                //&=background-image:url(..[0].png);
 
-        $temp1_2(new HTEL('lable/[0]', $name_type));
+                $temp1_2 = new HTEL('div .=shop_bott');
 
-        $temp1_2(new HTEL('input *=number !=s_[2] ?=s_[2] #=[0] min=0 &=display:none; [ro]'));
-        $temp1_2(new HTEL('input *=number ?=type_[2] #=[1] min=0 &=display:none; [ro]'));
+                $name_type = $type != '' ? $name . ' (' . $type . ')' : $name;
 
-        $temp1_2(new HTEL('input *=number !=cost_[2] #=[0] min=0 &=display:none; [ro]', $arr_cst[$id][$t]));
-        $temp1_2(new HTEL('input *=number ?=price_[2] #=0 min=0 &=display:none; [ro]'));
+                $temp1_2(new HTEL('lable/[0]', $name_type));
 
-        $temp1_3 = new HTEL('div .=shop_counter');
-        $temp1_3(new HTEL('button !=[0]_[1]_up .=but_up/+'));
-        $temp1_3(new HTEL('input *=number !=[0]_[1] ?=count_[2] .=count_inp #=0 min=0 [ro]'));
-        $temp1_3(new HTEL('button !=[0]_[1]_dw .=but_dw/-'));
+                $temp1_2(new HTEL('input *=number !=s_[2] ?=s_[2] #=[0] min=0 &=display:none; [ro]'));
+                $temp1_2(new HTEL('input *=number ?=type_[2] #=[1] min=0 &=display:none; [ro]'));
+                $temp1_2(new HTEL('input *=number ?=color_[2] #=[3] &=display:none; [ro]'));
+                $temp1_2(new HTEL('input *=number .=I2 !=[0]_[1]_[3]_price ?=price_[2] #=0 min=0 &=display:block; [ro]'));
 
-        $temp1([$temp1_2, $temp1_3]);
+                $temp1_3 = new HTEL('div .=shop_counter');
+                $temp1_3(new HTEL('button *=button #=click !=[0]_[1]_[3]_up .=but_up/+'));
+                $temp1_3(new HTEL('input *=number !=[0]_[1]_[3] ?=count_[2] .=count_inp #=0 min=0 [ro]'));
+                $temp1_3(new HTEL('button *=button #=click !=[0]_[1]_[3]_dw .=but_dw/-'));
 
-        $div($temp1);
+                $temp1([
+                    $temp1_2,
+                    $temp1_3,
+                    new HTEL('label .=L1/[0]', $c->NAME),
+                    new HTEL('input .=I1 *=number !=[0]_[1]_[3]_cost #=[4] [ro]',[ 4=> CostOut($arr_cst[$id][$t])])
+                ]);
 
-        $counter++;
+                $div($temp1);
+
+                $counter++;
+            }
+        }
     }
-
 }
 
 echo $div;
+
+echo new HTEL('a !=go_bottom href=javascript:+document.body.scrollIntoView(false);/До оформленя...');
+
+//<a href="javascript: document.body.scrollIntoView(false);">Scroll to bottom</a>
 
 ?>
 
@@ -123,16 +136,24 @@ echo $div;
 
         var id = $(this).attr('id').split('_');
 
-        var curinp = $('#' + id[0] + '_' + id[1]).val();
+        let ident = '#' + id[0] + '_' + id[1] + '_' + id[2];
 
-        $('#' + id[0] + '_' + id[1]).val(0);
+        var curinp = $(ident).val();
+
+        var cost = $(ident + '_cost').val();
+
+        $(ident).val(0);
 
         curinp++;
 
-        $('#' + id[0] + '_' + id[1]).val(curinp);
+        $(ident).val(curinp);
 
-        if (curinp > 0) {
-            $('#'+ id[0] + '_' + id[1] + '_cell').attr('style', 'background-color: yellow;');
+        var newVal = cost * curinp;
+
+        $(ident + '_price').val(newVal);
+
+        if (curinp == 1) {
+            $(ident + '_cell').toggleClass('shop_selected');
         } 
 
     });
@@ -140,21 +161,23 @@ echo $div;
     $('.but_dw').on('click', function () {
 
         var id = $(this).attr('id').split('_');
-
-        var curinp = $('#' + id[0] + '_' + id[1]).val();
-
-        //$('#' + id[0] + '_' + id[1]).val(0);
+        let ident = '#' + id[0] + '_' + id[1] + '_' + id[2];
+        var curinp = $(ident).val();
+        var cost = $(ident + '_cost').val();
 
         curinp--;
 
+        if (curinp >= 0)
+        $(ident + '_price').val(cost * curinp);
+
         if (curinp > 0) {
-            $('#' + id[0] + '_' + id[1]).val(curinp);
+            $(ident).val(curinp);
         }
         else {
-            $('#' + id[0] + '_' + id[1]).val(0);
-            $('#' + id[0] + '_' + id[1] + '_cell').attr('style', 'background-color: olivedrab;');
+            $(ident).val(0);
+            $(ident + '_cell').removeClass('shop_selected');
         }
-
     });
 
 </script>
+

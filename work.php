@@ -20,10 +20,11 @@
 
     session_start();
 
+    require "blok/conn_local.php";
+
     if (!isset($_SESSION['logged'])){
 
         if(isset($_POST['log']) && isset($_POST['pas'])){
-            require "blok/conn_local.php";
 
             $query = 'SELECT * FROM `users`
               where `login` = "' . $_POST['log'] . '"
@@ -31,7 +32,10 @@
 
             $result = mysqli_query($link, $query);
 
-            if (mysqli_num_rows($result) == 0) {
+            if (mysqli_num_rows($result) == 0 ||
+                $_POST['log'] != trim($_POST['log']) ||
+                $_POST['pas'] != trim($_POST['pas'])) {
+
                 $_SESSION['msg'] = "Пароль або логін не підійшов!";
                 $link->close();
                 header('Location: admin');
@@ -46,8 +50,6 @@
                     $_SESSION[$row['login']] = $row['ID'];
                 }
 
-                $link->close();
-
                 $_SESSION['logged'] = $_POST['log'];
             }
 
@@ -58,7 +60,6 @@
         }
     }
 
-    require "blok/conn_local.php";
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
     #region Підрахунок заявок
@@ -101,7 +102,7 @@
         new HTEL("button !=expenses onclick=location.href=='work?page==expens'/ВИТРАТИ")
     ]);
 
-    if ($_SESSION[$_SESSION['logged']] <= 1)
+    if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
     $div([
         new HTEL("button !=formPrice/ЦІНИ"),
         new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки")
@@ -113,7 +114,7 @@
 
     $div = new HTEL('div !=fb2');
 
-    if ($_SESSION[$_SESSION['logged']] <= 1)
+    if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
     $div([
         new HTEL("button !=zal_show /ЗАЛИШКИ"),
         new HTEL("button !=period_show /РУХ ЗА ПЕРІОД...")
@@ -254,8 +255,8 @@
             method: 'get',
             dataType: 'html',
             data: 'search=' + $request,
-            success: function (response) {
-                $('#workfield').html(response);
+            success: function (data) {
+                $('#workfield').html(data);
             }
         });
 

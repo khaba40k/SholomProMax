@@ -3,7 +3,7 @@
   <PropertyGroup>
     <NameOfLastUsedPHPPublishProfile>ftp_spm</NameOfLastUsedPHPPublishProfile>
     <StartAction>StartUrl</StartAction>
-    <StartUrlValue>http://sholompromax.com/test</StartUrlValue>
+    <StartUrlValue>http://sholompromax.com/index?debug=1</StartUrlValue>
     <RuntimePath />
   </PropertyGroup>
 </Project>

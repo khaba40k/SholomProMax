@@ -1,92 +1,30 @@
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Maks" in /home2/sholompr/public_html/blok/active_z.php on line 110
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/active_z.php:0
-[28-Oct-2023 17:44:32 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/blok/new_Z.php on line 358
-[28-Oct-2023 17:44:32 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:32 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/new_Z.php:0
-[28-Oct-2023 17:44:32 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_num_rows(): Argument #1 ($result) must be of type mysqli_result, bool given in /home2/sholompr/public_html/blok/new_Z.php:362
-Stack trace:
-#0 /home2/sholompr/public_html/blok/new_Z.php(362): mysqli_num_rows()
-#1 {main}
-  thrown in /home2/sholompr/public_html/blok/new_Z.php on line 362
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/record_new_z.php on line 21
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "ID" in /home2/sholompr/public_html/blok/record_new_z.php on line 136
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "phone_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 141
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "pip" in /home2/sholompr/public_html/blok/record_new_z.php on line 142
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "rek_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 143
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "phone_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 155
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "pip" in /home2/sholompr/public_html/blok/record_new_z.php on line 156
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "rek_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 157
+[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
+[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[02-Nov-2023 02:27:42 UTC] PHP Warning:  Undefined variable $discont_perc in /home2/sholompr/public_html/blok/remowe_info.php on line 14
+[02-Nov-2023 02:27:42 UTC] PHP Stack trace:
+[02-Nov-2023 02:27:42 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/remowe_info.php:0
+[02-Nov-2023 02:37:05 UTC] PHP Warning:  Undefined variable $discont_perc in /home2/sholompr/public_html/blok/remowe_info.php on line 14
+[02-Nov-2023 02:37:05 UTC] PHP Stack trace:
+[02-Nov-2023 02:37:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/remowe_info.php:0

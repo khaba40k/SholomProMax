@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "action": "cmd",
-      "event": "clean",
-      "parameters": {
-        "cmd": "upload_spm.bat"
-      },
-      "disabled": false
-    },
-    {
       "action": "publish",
       "event": "filewatcher",
       "parameters": {

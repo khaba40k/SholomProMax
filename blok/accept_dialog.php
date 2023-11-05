@@ -1,4 +1,7 @@
 <?php
+
+//var_dump($_GET);
+//exit;
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 require "conn_local.php";
 
@@ -49,9 +52,12 @@ if (mysqli_num_rows($result) != 0) {
 $link->close();
 
 $in = '';
+$ind = array();
+$typ = array();
 $emp = array();
 $tmp = array();
 $cnt = array();
+$counter = 0;
 //&cost_21=300&s_1=6&type_1=1&color_1=2&count_1=1&price_1=2000.00&is_rewrite=0&typeZ=sold0&ID=69
 
 $sum = 0;
@@ -84,45 +90,56 @@ if ($_GET['typeZ'] == 'def0'){
     foreach ($_GET as $k => $v) {
         $in .= '&' . $k . '=' . $v;
         if (substr($k, 0, 4) == 'cost') {
-            $id = substr($k, 5);
+            $ind[$counter] = substr($k, 5);
+            $typ[$counter] = $_GET['type_' . $ind[$counter]];
 
-            $tmp[$id] = $v;
-            $emp[$id] = $_GET['color_' . $id] ?? null;
-            $cnt[$id] = !is_null($emp[$id]) ? 1:'';
+            $tmp[$counter] = $v;
+            $emp[$counter] = $_GET['color_' . $ind[$counter]] ?? null;
+            $cnt[$counter] = !is_null($emp[$counter]) ? 1:'';
             $sum += $v;
+            $counter++;
         }
     }
 }else{
     if (isset($_GET['cost_21'])) {
-        $tmp[21] = $_GET['cost_21'];
+        $ind[$counter] = 21;
+        $tmp[$counter] = $_GET['cost_21'];
         $sum += $_GET['cost_21'];
+        $counter++;
     }
 
-    for ($i=1; $i < 20; $i++){
-        $id = $_GET['s_' . $i] ?? null;
+    for ($i=1; $i < 50; $i++){
+        $count = $_GET['count_' . $i] ?? 0;
 
-        if ($id !== null){
-            $tmp[$id] = $_GET['price_'.$i];
-            $emp[$id] = $_GET['color_' . $i] ?? null;
-            $cnt[$id] = !is_null($emp[$id]) ? ($_GET['count_'.$i] ?? 0) : '';
-            $_GET['type_' . $id] = $_GET['type_' . $i] ?? 1;
-            $sum += $tmp[$id];
+        if ($count > 0){
+            $ind[$counter] = $_GET['s_' . $i] ?? null;
+            $typ[$counter] = $_GET['type_' . $i] ?? 1;
+
+            $tmp[$counter] = $_GET['price_'.$i];
+            $emp[$counter] = $_GET['color_' . $i] ?? null;
+            $cnt[$counter] = !is_null($emp[$counter]) ? $count : '';
+            $sum += $tmp[$counter];
+            $counter++;
         }
+    }
+
+    foreach ($_GET as $k => $v) {
+        $in .= '&' . $k . '=' . $v;
     }
 }
 
 $out = new HTEL('tbody');
 
-foreach($tmp as $k=>$v){
-    $col = isset($emp[$k]) ? (' (' . $_COLORS[$emp[$k]] . ')') : '';
-    $type = $_GET['type_' . $k] ?? 1;
+foreach($ind as $c=>$v){
+    $col = isset($emp[$c]) ? (' (' . $_COLORS[$emp[$c]] . ')') : '';
+    $type = $typ[$c];
 
     $out(new HTEL('tr', [
-        $_service_name[$k],
-        $_service_type[$k][$type],
+        $_service_name[$v],
+        $_service_type[$v][$type],
         $col,
-        $cnt[$k],
-        CostOut($v),
+        $cnt[$c],
+        CostOut($tmp[$c]),
         new HTEL('td &=padding:2px;/[0] [1] [2]'),
         new HTEL('td &=text-align:center;padding:2px;/[3]'),
         new HTEL('td &=text-align:right;padding:2px;/[4]')

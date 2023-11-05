@@ -176,9 +176,14 @@ class ZDATA {
 }
 
 function dateToNorm($in, $short = false):string{
-    if (is_null($in))
+    if (is_null($in)) {
         return '';
+    } 
+
     $myDateTime = DateTime::createFromFormat('Y-m-d', $in);
+
+    if ($myDateTime === false) return $in;
+
     if ($short){
         return $myDateTime->format('d.m.y');
     }else{

@@ -1,7 +1,6 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-
 require "conn_local.php";
 
 $arr_cnt = array();
@@ -125,7 +124,7 @@ foreach ($arr_serv_name as $id => $ni) {
     foreach ($arr_types[$id] as $t => $nt) {
         if (isset($arr_cnt[$id][$t])) {
             $tr = new HTEL('tr');
-            $tr(new HTEL('td &=text-align:left;/[0] [1]', [$ni, $nt]));
+            $tr(new HTEL('td !=[2]_[3] .=info_cnt_cell &=text-align:left;/[0] [1]', [$ni, $nt, $id, $t]));
 
             foreach ($_COLORS as $c) {
                 $cnt = isset($arr_cnt[$id][$t][$c->ID]) ? $arr_cnt[$id][$t][$c->ID] : 0;
@@ -148,6 +147,8 @@ $table($tbody);
 
 echo $table;
 
+echo new HTEL('div !=detal_info .=no-print &=margin-top:50px;');
+
 #endregion
 
 function MyVal($val):string{
@@ -159,3 +160,21 @@ function MyVal($val):string{
 }
 
 ?>
+
+<script>
+    $('.info_cnt_cell').on('click', function () {
+        var id_type = $(this).attr('id').split('_');
+        var name = $(this).text();
+
+        $.ajax({
+            url: 'blok/count_info.php',
+            method: 'get',
+            dataType: 'html',
+            data: 'ID=' + id_type[0] + '&TYPE=' + id_type[1] + '&NAME=' + name,
+            success: function (data) {
+                $('#detal_info').html(data);
+            }
+
+        });
+    });
+</script>

@@ -19,12 +19,23 @@
     require "blok/header.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+    require("blok/conn_local.php");
 
     if (!isset($_GET['debug']) || $_GET['debug'] != 1) {
         HIDE();
     }else{
         session_start();
         $_SESSION['logged'] = 'Administrator';
+
+        $query = 'SELECT `login`,`ID` FROM `users`';
+
+        $result = mysqli_query($link, $query);
+
+        foreach ($result as $row) {
+            $_SESSION[$row['login']] = $row['ID'];
+        }
+
+        $link->close();
     }
 
     if (!isset($_GET['page'])){

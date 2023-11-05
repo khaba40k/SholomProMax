@@ -121,6 +121,10 @@ foreach ($result as $row) {
         ]);
     }
 
+    if ($row['discount'] != null){
+        $div(new HTEL('label .=percent/-[0]%', $row['discount']));
+    }
+
     echo $div;
 }
 

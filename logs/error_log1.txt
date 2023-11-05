@@ -1,6 +1,4 @@
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/work.php on line 106
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
-[28-Oct-2023 17:44:30 UTC] PHP Warning:  Undefined array key "Administrator" in /home2/sholompr/public_html/work.php on line 117
-[28-Oct-2023 17:44:30 UTC] PHP Stack trace:
-[28-Oct-2023 17:44:30 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[02-Nov-2023 02:11:04 UTC] PHP Warning:  Undefined array key "logged" in /home2/sholompr/public_html/class/universal.php on line 6
+[02-Nov-2023 02:11:04 UTC] PHP Stack trace:
+[02-Nov-2023 02:11:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/index.php:0
+[02-Nov-2023 02:11:04 UTC] PHP   2. HIDE() /home2/sholompr/public_html/index.php:24

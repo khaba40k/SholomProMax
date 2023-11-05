@@ -29,6 +29,7 @@
     <ApplicationDefinition Include="upload_spm.bat" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="img\kompl\" />
     <Folder Include="logs\" />
   </ItemGroup>
 </Project>

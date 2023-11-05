@@ -220,6 +220,16 @@ button:hover {
     cursor: pointer;
 }
 
+.info_cnt_cell:hover {
+    cursor: pointer;
+}
+
+#detal_info{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
 .wrapper {
     display: inline-block;
     width: 100%;
@@ -598,29 +608,78 @@ div#color_variant {
     background: #febaba;
 }
 
+#shop_div{
+    width: 100%;
+    display: block;
+    background-color: red;
+}
+
 .shop_cell {
     position: relative;
-    display: flex;
-    float:left;
-    width: 256px;
-    height: 224px;
-    background-color: olivedrab;
-    margin: 2px;
-    border: 5px solid darkolivegreen;
+    display: inline-block;
+    float: left;
+    width: 18%;
+    min-width: 192px;
+    background-color: white;
+    margin: 1%;
+    border: 2px solid darkolivegreen;
     border-radius: 10px;
-    padding: 10px;
+    padding: 1%;
     background-image: url(../img/logo.png);
     background-size: 128px 128px;
     background-position: bottom left;
     background-repeat: no-repeat;
 }
 
-    .shop_cell > * {
+    .shop_cell input, .shop_bott label {
         display: flex;
+        background:none;
+        border:none;
     }
 
+    .shop_cell > label.L1 {
+        position: absolute;
+        padding: 5px;
+        bottom: -40px;
+        color: white;
+        font-weight:bold;
+    }
+
+    .shop_cell > input.I1 {
+        position: absolute;
+        padding: 1px;
+        bottom: -48px;
+        color: yellow;
+        font-style: italic;
+        font-size: 130%;
+        right: 2px;
+        width: 60%;
+        height: 46px;
+        text-align: right;
+    }
+
+.shop_bott > input.I2 {
+    position: absolute;
+    padding: 1px;
+    top: 3%;
+    color: blue;
+    font-weight: bold;
+    font-size: 100%;
+    right: 2px;
+    width: 40%;
+    text-align: right;
+}
+
+.shop_bott > input.I2:after {
+    content: ' грн.';
+}
+
+.shop_selected {
+    background-color: yellow;
+}
+
 .shop_bott{
-    
+    min-height: 128px;
 }
 
 .shop_counter{
@@ -639,9 +698,20 @@ div#color_variant {
         font-size: 110%;
     }
 
-.count_inp{
+#go_bottom{
+    position: fixed;
+    left: 1%;
+    bottom: 1%;
+    font-size: 200%;
+    color: darkolivegreen;
+    border: 3px solid blue;
+    background-color: yellow;
+    padding: 4px;
+}
+
+.count_inp {
     background: none;
-    border:none;
+    border: none;
 }
 
 #tbl_disc td{
@@ -715,11 +785,24 @@ div#color_variant {
 
 .activeZ * {
     text-align: center;
-    /*font-size: inherit;*/
     font-weight: bold;
     color: black;
     position: relative;
     margin: 2px 5px;
+}
+
+label.percent {
+    position: absolute;
+    left: -50px;
+    top: -5px;
+    background: none;
+    font-size: 130%;
+    color: rgb(0,0,255, 0.3);
+    font-weight: bold;
+    border: 4px solid rgb(0,0,255, 0.3);
+    padding: 3px 18px;
+    -webkit-transform: rotate(-15deg);
+    z-index: 0;
 }
 
 .but_cng, .but_del, .but_prt {
@@ -1052,6 +1135,7 @@ input.delrow {
     body * {
         font-size: 14px;
     }
+
     aside button {
         font-size: 50%;
     }
@@ -1071,8 +1155,12 @@ input.delrow {
     .opt_color * {
         font-size: 95%;
     }
-}
 
+    .shop_cell {
+        min-width: 0;
+        width: 48%;
+    }
+}
 @media print {
 
         aside {

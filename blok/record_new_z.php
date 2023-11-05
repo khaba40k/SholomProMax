@@ -18,7 +18,7 @@ if (!isset($_GET['sol_num'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 #region Видалення старих даних
-if ($_GET['is_rewrite'] == 1) {
+if (isset($_GET['is_rewrite']) && $_GET['is_rewrite'] == 1) {
 
     $query = 'DELETE FROM `service_out` WHERE ID=' . $_GET['ID'];
     mysqli_query($link, $query);
@@ -72,10 +72,10 @@ if (!isset($_GET['ttn_out']))
 
 #region Нарахування знижки
 $discount_code = $_GET['discount'] ?? null;
-$discont_perc = null;
+$discont_perc = str_replace('%', '', $_GET['discount']);
 $perc_dsc = 1;
 
-if (!is_null($discount_code)){
+if (!is_null($discount_code) && strlen($discount_code) == 5){
 
     $query = 'SELECT * FROM `discount_list` WHERE `from_ID` = ' . $_GET['ID'];
 
@@ -212,8 +212,8 @@ if ($err == ''){
           }
      }
      else{
-        for ($ii = 0; $ii < 30; $ii++) {
-            if (isset($_GET['s_' . $ii])) {
+        for ($ii = 1; $ii < 50; $ii++) {
+            if (isset($_GET['count_' . $ii]) && $_GET['count_' . $ii] > 0) {
                 $serv_id = $_GET['s_' . $ii];
                 $type = isset($_GET['type_' . $ii]) ? $_GET['type_' . $ii] : 1;
                 $color = isset($_GET['color_' . $ii]) ? $_GET['color_' . $ii] : null;
@@ -258,7 +258,7 @@ if ($err == ''){
 $ans = 'Запис успішно створено.';
 
 #region Дисконт як використаний
-if (!is_null($discont_perc)){
+if (!is_null($discount_code) && strlen($discount_code) == 5){
     $query = 'UPDATE `discount_list` SET `from_ID` = ' . $_GET['ID'] . ' WHERE `code` = "' . $discount_code . '"';
     mysqli_query($link, $query);
     $ans .= ' Врахована знижка [ ' . $discont_perc . ' % ]';
@@ -290,7 +290,7 @@ function GetColor($serv_id):string{
 
 function outVal($val, $last = false): string
 {
-    $out = $val;
+    $out = str_replace("'","''",$val);
 
     if (!is_numeric($val)){
         if (empty($val)) {

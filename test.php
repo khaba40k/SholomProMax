@@ -20,13 +20,12 @@
     //    exit;
 
     //require("blok/conn_local.php");
-    
+
     require "blok/header.php";
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
     require $_SERVER['DOCUMENT_ROOT'] . "/blok/shop.php";
-
     ?>
 
 </body>

@@ -18,7 +18,18 @@
                         $('#table_work').html(data);
                     }
               });
-        }
+    }
+
+    function shopList() {
+
+        $.ajax({
+            url: 'blok/shop.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#table_work').html(response);
+            }
+        });
+    }
 </script>
 
 <?php
@@ -154,6 +165,8 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'sold')
 }
 #endregion
 
+
+
 $mes = array('Телеграм', 'Вотсап', 'Інстаграм', 'Вайбер', 'Телефон', 'Наручно', 'Сигнал', 'ТікТок');
 
 $comm = $Z_DATA->COMM != null ? trim(str_replace($mes, '', $Z_DATA->COMM)):'';
@@ -273,13 +286,13 @@ if ($IS_CHANGE == 1 && $Z_DATA->TTN_OUT != ''){
 if (!is_null($Z_DATA->DISCOUNT)){
     $field1(new HTEL('div', [
         new HTEL('label for=discount/Врахована знижка'),
-        new HTEL('input &=color:red; #=[0]% [ro]', $Z_DATA->DISCOUNT)
+        new HTEL('input ?=discount &=color:red; #=[0]% [ro]', $Z_DATA->DISCOUNT)
     ]));
 }
 else{
     $field1(new HTEL('div', [
         new HTEL('label for=discount/ДИСКОНТ'),
-        new HTEL('input !=discount ?=discount minlength=4 maxlength=4 &=color:red; $=код+на+знижку #')
+        new HTEL('input !=discount ?=discount minlength=5 maxlength=5 &=color:red; $=код+на+знижку #')
     ]));
 }
 
@@ -357,7 +370,12 @@ else {
     ]);
 
     if ($IS_CHANGE == 0) {
-        $field2(new HTEL('script/insertTable(`&typeZ=[0]`);', $TYPE_Z));
+        if ($TYPE_Z != 'sold0') {
+            $field2(new HTEL('script/insertTable(`&typeZ=[0]`);', $TYPE_Z));
+        }
+        else {
+            $field2(new HTEL('script/shopList();'));
+        }
     }
     else{
         $field2(new HTEL('script/insertTable(`[0]&typeZ=[1]`);', [$Z_DATA->GET_KOMPLECT(), $TYPE_Z]));

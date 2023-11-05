@@ -24,10 +24,10 @@
       <publishTime>11/04/2023 01:20:11</publishTime>
     </File>
     <File Include="blok/active_z.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/ch_var_col_set.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/close_z.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
@@ -36,13 +36,13 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/count_info.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/dialog.php">
       <publishTime>10/29/2023 18:55:22</publishTime>
     </File>
     <File Include="blok/discount_list.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/error_log">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -51,64 +51,64 @@
       <publishTime>10/31/2023 00:47:43</publishTime>
     </File>
     <File Include="blok/expenses.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/expenses_menu.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/header.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/jurnal.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/logout.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/new_Z.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/price_list.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/print_to_work.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/record_new_in.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="blok/record_new_z.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/record_price.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/remowe_info.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/search.php">
       <publishTime>10/22/2023 12:41:33</publishTime>
     </File>
     <File Include="blok/shop.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/table_count.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/table_sum.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="blok/test.php">
       <publishTime>10/28/2023 07:36:33</publishTime>
     </File>
     <File Include="blok/zakazi.php">
-      <publishTime>11/05/2023 08:07:54</publishTime>
+      <publishTime>11/05/2023 17:12:01</publishTime>
     </File>
     <File Include="blok/zvit_menu.php">
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:12:00</publishTime>
     </File>
     <File Include="contacts.php">
       <publishTime>10/27/2023 16:02:35</publishTime>
@@ -117,10 +117,10 @@
       <publishTime>10/25/2023 01:38:01</publishTime>
     </File>
     <File Include="img/favicon.ico">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:11:56</publishTime>
     </File>
     <File Include="img/fon.png">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:11:56</publishTime>
     </File>
     <File Include="img/img_chn.png">
       <publishTime>10/21/2023 20:14:21</publishTime>
@@ -131,8 +131,107 @@
     <File Include="img/img_prt.png">
       <publishTime>10/21/2023 20:14:21</publishTime>
     </File>
+    <File Include="img/kompl/0.1.2.png">
+      <publishTime>11/05/2023 17:11:56</publishTime>
+    </File>
+    <File Include="img/kompl/0.1.3.png">
+      <publishTime>11/05/2023 17:11:56</publishTime>
+    </File>
+    <File Include="img/kompl/0.1.4.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/1.1.1.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/1.1.2.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/1.1.3.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/1.1.4.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/2.1.0.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/2.1.1.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/2.1.2.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/20.1.0.png">
+      <publishTime>11/05/2023 17:11:57</publishTime>
+    </File>
+    <File Include="img/kompl/20.1.1.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/3.1.0.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/3.1.1.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/3.1.2.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/4.1.0.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/4.1.1.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/4.1.2.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/5.1.0.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/5.1.1.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/5.1.2.png">
+      <publishTime>11/05/2023 17:11:58</publishTime>
+    </File>
+    <File Include="img/kompl/6.1.0.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/6.1.1.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/6.1.2.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/6.1.4.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/7.1.0.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/7.1.1.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/7.1.2.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/7.2.0.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/7.2.1.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/8.1.1.png">
+      <publishTime>11/05/2023 17:11:59</publishTime>
+    </File>
+    <File Include="img/kompl/8.1.2.png">
+      <publishTime>11/05/2023 17:12:00</publishTime>
+    </File>
+    <File Include="img/kompl/9.1.2.png">
+      <publishTime>11/05/2023 17:12:00</publishTime>
+    </File>
     <File Include="img/logo.png">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 17:11:56</publishTime>
     </File>
     <File Include="index - Копировать.php">
       <publishTime>10/27/2023 14:45:29</publishTime>
@@ -177,7 +276,7 @@
       <publishTime>10/25/2023 01:27:25</publishTime>
     </File>
     <File Include="style.css">
-      <publishTime>11/05/2023 08:07:53</publishTime>
+      <publishTime>11/05/2023 16:50:40</publishTime>
     </File>
     <File Include="test - Копировать.php">
       <publishTime>10/27/2023 15:42:20</publishTime>

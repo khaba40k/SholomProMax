@@ -290,6 +290,7 @@ main {
     border-radius: 20px;
     border-top: 50px solid blue;
     padding-bottom: 50px;
+    z-index: 999;
 }
 
     .dialog_w label#top_dialog_lbl {
@@ -625,10 +626,16 @@ div#color_variant {
     border: 2px solid darkolivegreen;
     border-radius: 10px;
     padding: 1%;
-    background-image: url(../img/logo.png);
-    background-size: 128px 128px;
-    background-position: bottom left;
-    background-repeat: no-repeat;
+}
+
+.shop_img{
+    position:absolute;
+    width: 40%;
+    height: auto;
+    left: 1%;
+    bottom:1%;
+    z-index:0;
+    background: none;
 }
 
     .shop_cell input, .shop_bott label {
@@ -637,13 +644,30 @@ div#color_variant {
         border:none;
     }
 
-    .shop_cell > label.L1 {
-        position: absolute;
-        padding: 5px;
-        bottom: -40px;
-        color: white;
-        font-weight:bold;
-    }
+     .shop_bott > label{
+         position: absolute;
+         z-index:1;
+         left: -20px;
+         top: -20px;
+         padding:  4px 6px;
+         padding-left: 15px;
+         font-weight: bold;
+         color:  rgb(0, 0, 255, 0.9);
+         border: 3px solid blue;
+         border-radius: 4px;
+         border-bottom-right-radius: 0;
+         border-top-left-radius: 30px;
+         background-color: rgb(255, 255, 0, 0.9);
+         max-width: 80%;
+     }
+
+        .shop_cell > label.L1 {
+            position: absolute;
+            padding: 5px;
+            bottom: -40px;
+            color: white;
+            font-weight: bold;
+        }
 
     .shop_cell > input.I1 {
         position: absolute;
@@ -802,6 +826,20 @@ label.percent {
     border: 4px solid rgb(0,0,255, 0.3);
     padding: 3px 18px;
     -webkit-transform: rotate(-15deg);
+    z-index: 0;
+}
+
+label.term {
+    position: absolute;
+    left: 50%;
+    top: -5px;
+    background: none;
+    font-size: 150%;
+    color: rgb(255,0,0, 0.5);
+    font-weight: bold;
+    border: 10px double rgb(255,0,0, 0.5);
+    padding: 3px 18px;
+    -webkit-transform: rotate(20deg);
     z-index: 0;
 }
 

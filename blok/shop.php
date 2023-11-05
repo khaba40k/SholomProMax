@@ -74,6 +74,34 @@ foreach ($result as $row) {
 }
 #endregion
 
+#region ВИБІРКА ЗАЛИШКІВ
+$arr_cnt = array();
+
+$query = 'SELECT service_ID, type_ID, color, count FROM `service_in` WHERE color IS NOT NULL';
+
+$result = mysqli_query($link, $query);
+
+foreach ($result as $row) {
+    if (!isset($arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']])) {
+        $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] = 0;
+    }
+
+    $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] += $row['count'];
+}
+
+$query = 'SELECT service_ID, type_ID, color, count FROM `service_out` WHERE color IS NOT NULL';
+
+$result = mysqli_query($link, $query);
+
+foreach ($result as $row) {
+    if (!isset($arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']])) {
+        $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] = 0;
+    }
+
+    $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] -= $row['count'];
+}
+#endregion
+
 $link->close();
 
 $div = new HTEL('div !=shop_div');
@@ -86,16 +114,15 @@ foreach ($_service_name as $id => $name) {
 
         foreach($_COLORS as $c){
 
-            if ($c->AppleTo($_COLORS, $id, $t)){
-                $temp1 = new HTEL('div !=[0]_[1]_[3]_cell .=shop_cell &=border-bottom:50px+solid+[4];', [$id, $t, $counter, $c->ID, $c->CSS_ANALOG]);
-                //$temp1(new HTEL('div .=shop_img ', '/img/' . $id . '.' . $t));
-                //&=background-image:url(..[0].png);
+            if ($c->AppleTo($_COLORS, $id, $t) && $arr_cnt[$id][$t][$c->ID] > 0){
+                $temp1 = new HTEL('div !=[0]_[1]_[3]_cell .=shop_cell &=border-bottom:50px+solid+[4];',
+                [$id, $t, $counter, $c->ID, $c->CSS_ANALOG, $arr_cnt[$id][$t][$c->ID]]);
 
                 $temp1_2 = new HTEL('div .=shop_bott');
 
                 $name_type = $type != '' ? $name . ' (' . $type . ')' : $name;
 
-                $temp1_2(new HTEL('lable/[0]', $name_type));
+                $temp1_2(new HTEL('label/[0]', $name_type));
 
                 $temp1_2(new HTEL('input *=number !=s_[2] ?=s_[2] #=[0] min=0 &=display:none; [ro]'));
                 $temp1_2(new HTEL('input *=number ?=type_[2] #=[1] min=0 &=display:none; [ro]'));
@@ -103,12 +130,14 @@ foreach ($_service_name as $id => $name) {
                 $temp1_2(new HTEL('input *=number .=I2 !=[0]_[1]_[3]_price ?=price_[2] #=0 min=0 &=display:block; [ro]'));
 
                 $temp1_3 = new HTEL('div .=shop_counter');
-                $temp1_3(new HTEL('button *=button #=click !=[0]_[1]_[3]_up .=but_up/+'));
-                $temp1_3(new HTEL('input *=number !=[0]_[1]_[3] ?=count_[2] .=count_inp #=0 min=0 [ro]'));
+                $temp1_3(new HTEL('button *=button #=click !=[0]_[1]_[3]_up .=but_up #=[5]/+'));
+                $temp1_3(new HTEL('input *=number !=[0]_[1]_[3] ?=count_[2] .=count_inp #=0 min=0 max=[5] [ro]'));
                 $temp1_3(new HTEL('button *=button #=click !=[0]_[1]_[3]_dw .=but_dw/-'));
 
                 $temp1([
                     $temp1_2,
+                    new HTEL("img .=shop_img src=[0] onerror=this.src=='[1]'",
+                        ['/img/kompl/' . $id . '.' . $t . '.' . $c->ID . '.png', '/img/logo.png']),
                     $temp1_3,
                     new HTEL('label .=L1/[0]', $c->NAME),
                     new HTEL('input .=I1 *=number !=[0]_[1]_[3]_cost #=[4] [ro]',[ 4=> CostOut($arr_cst[$id][$t])])
@@ -126,8 +155,6 @@ echo $div;
 
 echo new HTEL('a !=go_bottom href=javascript:+document.body.scrollIntoView(false);/До оформленя...');
 
-//<a href="javascript: document.body.scrollIntoView(false);">Scroll to bottom</a>
-
 ?>
 
 <script>
@@ -139,6 +166,8 @@ echo new HTEL('a !=go_bottom href=javascript:+document.body.scrollIntoView(false
         let ident = '#' + id[0] + '_' + id[1] + '_' + id[2];
 
         var curinp = $(ident).val();
+
+        if (curinp >= $(this).val()) return;
 
         var cost = $(ident + '_cost').val();
 

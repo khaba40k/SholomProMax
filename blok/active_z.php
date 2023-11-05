@@ -78,7 +78,7 @@ foreach ($result as $row) {
     }
 
     $div = new HTEL(
-        'div .=activeZ &=[8]',
+        'div !=[7] .=activeZ &=[8]',
         [
             $num,
             $row['client_name'],
@@ -121,8 +121,16 @@ foreach ($result as $row) {
         ]);
     }
 
-    if ($row['discount'] != null){
+    if ($row['discount'] !== null){
         $div(new HTEL('label .=percent/-[0]%', $row['discount']));
+    }
+
+    if ($row['date_out'] === null){
+        $query = 'SELECT * FROM `service_out` where `ID` = ' . $ID . ' AND `service_ID` = 21 LIMIT 1';
+
+        if (mysqli_num_rows(mysqli_query($link, $query)) == 1) {
+            $div(new HTEL('label .=term/T'));
+        }
     }
 
     echo $div;

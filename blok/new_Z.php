@@ -475,7 +475,7 @@ function selectStatus($bool = false):string{
                url: 'blok/record_new_z.php',
                method: 'GET',
                dataType: 'html',
-               data: dataForm + _sendGet,
+               data: dataForm + _sendGet + '&TO_PRINT=1',
                    success: function (data) {
                        $('#workfield').html(data);
                    }

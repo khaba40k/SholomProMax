@@ -779,15 +779,21 @@ div#color_variant {
 .activeZ {
     position: relative;
     display: grid;
-    grid-template-columns: 5% 30% 20% 15% 10% 10% 10%;
+    grid-template-columns: 10% 28% 17% 15% 10% 10% 10%;
     width: 100%;
     background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
     border-radius: 10px;
     padding: 1%;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    margin-left: 2px;
+    margin-bottom: 4px;
     align-items: center;
 }
+
+    .activeZ:hover {
+        margin-left: 10px;
+        margin-bottom: 10px;
+        box-shadow: -8px 5px 5px rgb(0,0,0, 0.5);
+    }
 
     .activeZ * {
         font-size: 75%;
@@ -832,16 +838,44 @@ label.percent {
 label.term {
     position: absolute;
     left: 50%;
-    top: -5px;
+    top: -10px;
     background: none;
     font-size: 150%;
     color: rgb(255,0,0, 0.5);
     font-weight: bold;
     border: 10px double rgb(255,0,0, 0.5);
     padding: 3px 18px;
-    -webkit-transform: rotate(20deg);
+    -webkit-transform: rotate(10deg);
     z-index: 0;
 }
+
+label.costs {
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
+    background: none;
+    color: rgb(0,0,0, 0.5);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 70%;
+    z-index: 999;
+    padding: 0;
+    margin: 0;
+}
+
+table.kompl {
+    border: none;
+    border-collapse: separate;
+    border-spacing: 4px 0;
+    font-size: 100%;
+    font-style: italic;
+}
+
+    table.kompl td {
+        padding: 0 2px;
+        border: none;
+        border-top: 3px solid darkolivegreen;
+    }
 
 .but_cng, .but_del, .but_prt {
     background-size: 100% 100%;

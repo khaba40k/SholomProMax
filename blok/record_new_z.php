@@ -268,7 +268,17 @@ if (!is_null($discount_code) && strlen($discount_code) == 5){
 $link->close();
 
 if ($err == ''){
-    phpAlert($ans, 'work');
+    $to_print = $_GET['TO_PRINT'] ?? 0;
+
+    if ($to_print == 0){
+        phpAlert($ans, 'index');
+    }
+    else if ($_GET['ttn_in'] != '' && $_GET['date_out'] == null){
+        phpAlert($ans, 'info?i=' . $_GET['ID']);
+    }
+    else{
+        phpAlert($ans, 'work');
+    }
 }
 else{
     phpAlert($err);

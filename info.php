@@ -31,16 +31,18 @@
 
     <?php
 
-    if (!isset($_GET['n'])){
-        require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-        require_once("blok/conn_local.php");
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+    require_once("blok/conn_local.php");
+
+    session_start();
+
+    if (!isset($_GET['i']) || !is_numeric($_GET['i']) || $_GET['i'] < 0){
 
         $query = 'SELECT `ID`,`phone`,`sholom_num` FROM `client_info` where `date_out` IS NULL AND `sholom_num` <> 0 ORDER BY `date_max` ASC';
 
         $result = mysqli_query($link, $query);
 
         if (mysqli_num_rows($result) != 0) {
-            session_start();
 
             if (isset($_SESSION['logged'])) {
                 echo '<a href="work" class="no-print" > <<АДМІНКА </a>';
@@ -57,7 +59,21 @@
 
         echo '<div id="info" />';
     }
+    else{
 
+        if (isset($_SESSION['logged'])) {
+            $_GET['header'] = 'admin';
+        }
+
+        require_once 'blok/header.php';
+
+        if (isset($_GET['header']) && $_GET['header'] == 'admin'){
+            echo '<a href="work" class="no-print" > <<АДМІНКА </a>';
+        }
+
+        echo '<div id="info" />';
+        echo new HTEL('script/printInfo([0]);', $_GET['i']);
+    }
 
     ?>
 

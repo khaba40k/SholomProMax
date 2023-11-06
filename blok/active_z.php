@@ -77,12 +77,20 @@ foreach ($result as $row) {
             break;
     }
 
+    $pip = explode(' ', $row['client_name']);
+
+    $pip_out = $pip[0];
+
+    for ($i = 1; $i < count($pip); $i++){
+        $pip_out .= ' ' . mb_substr($pip[$i], 0, 1) . '.';
+    }
+
     $div = new HTEL(
         'div !=[7] .=activeZ &=[8]',
         [
             $num,
-            $row['client_name'],
-            $row['phone'],
+            $pip_out,
+            mb_substr(str_replace(' ' , '', $row['phone']), -10),
             dateToNorm($row['date_max'], true),
             dateToNorm($row['date_out'], true),
             $_GET['type'],
@@ -125,13 +133,44 @@ foreach ($result as $row) {
         $div(new HTEL('label .=percent/-[0]%', $row['discount']));
     }
 
+    //$sum = 0;
+
     if ($row['date_out'] === null){
         $query = 'SELECT * FROM `service_out` where `ID` = ' . $ID . ' AND `service_ID` = 21 LIMIT 1';
 
         if (mysqli_num_rows(mysqli_query($link, $query)) == 1) {
             $div(new HTEL('label .=term/T'));
+            //$sum = $row['costs'];
         }
     }
+
+    //$query = 'SELECT costs, NAME, service_ID FROM service_out JOIN service_ids ON service_out.service_ID=service_ids.ID  where service_out.ID = ' . $ID . ' AND service_ID <> 21';
+
+    //$res = mysqli_query($link, $query);
+
+    //$tr = new HTEL('tr');
+
+    //$arr_kompl_no_duble = array();
+
+    //foreach ($res as $row){
+    //    $sum += $row['costs'];
+    //    $arr_kompl_no_duble[$row['service_ID']] = $row['NAME'];
+    //}
+
+    //foreach ($arr_kompl_no_duble as $in_kompl){
+    //    $kompl_words = explode(' ', $in_kompl);
+    //    $out_frase = '';
+
+    //    foreach ($kompl_words as $word){
+    //        $out_frase .= mb_substr($word, 0, 5) . ' ';
+    //    }
+
+    //    $tr(new HTEL('td nowrap/[0]', trim($out_frase)));
+    //}
+
+    //$div(new HTEL('label .=costs/[0]', CostOut($sum)));
+
+    //$div(new HTEL('table .=kompl', new HTEL('tbody', $tr)));
 
     echo $div;
 }

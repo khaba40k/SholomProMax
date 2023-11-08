@@ -25,7 +25,14 @@
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    require $_SERVER['DOCUMENT_ROOT'] . "/blok/shop.php";
+    use LisDev\Delivery\NovaPoshtaApi2;
+
+    $np = new NovaPoshtaApi2('90bb2c77ec2e2fba67348f82547f2f0a', 'ua', true, 'file_get_content');
+
+    $cities = $np->getCities();
+
+    var_dump($cities);
+
     ?>
 
 </body>

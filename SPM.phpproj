@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\kompl\" />
+    <Folder Include="img\s_seti\" />
     <Folder Include="logs\" />
   </ItemGroup>
 </Project>

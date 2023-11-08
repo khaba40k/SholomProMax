@@ -77,7 +77,7 @@ foreach ($result as $row) {
             break;
     }
 
-    $pip = explode(' ', $row['client_name']);
+    $pip = explode(' ', trim($row['client_name']));
 
     $pip_out = $pip[0];
 

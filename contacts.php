@@ -16,8 +16,26 @@
 </span>
 <p>ШоломProMax в інших соціальних мережах:</p>
 <span>
-⚫Тік Ток: www.tiktok.com/@sholompromax<br />
+<a class="tiktok" href="https://tiktok.com/@sholompromax" />
+<a class="insta" href="https://instagram.com/sholompromax" />
+<a class="email" href="mailto:sholompromax@gmail.com" />
+<a class="fbook" href="https://facebook.com/profile.php?id=100093650869055" />
+
+<!--⚫Тік Ток: www.tiktok.com/@sholompromax<br />
 🔴Instagram: https://www.instagram.com/sholompromax/<br />
 🟡Електронна пошта: sholompromax@gmail.com<br />
-🔵Facebook: https://www.facebook.com/profile.php?id=100093650869055<br />
+🔵Facebook: https://www.facebook.com/profile.php?id=100093650869055<br />-->
 </span>
+
+<style>
+
+a {
+width: 256px;
+height: 256px;
+}
+
+a.tiktok{
+background-image:url(/img/s_seti/tiktok.png);
+}
+
+</style>

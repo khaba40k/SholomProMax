@@ -85,6 +85,7 @@ class ZDATA {
     public $WORKER = '';
     public $REDAKTOR = '';
     public $KOMPLECT = array();
+    public $CALLBACK = 0;
     public $DISCOUNT = null;
 
     function __construct($IN = null)
@@ -129,6 +130,8 @@ class ZDATA {
             $this->TTN_OUT = $in['TTN_OUT'];
         if (isset($in['comm']))
             $this->COMM = $in['comm'];
+        if (isset($in['callback']))
+            $this->CALLBACK = $in['callback'];
         if (isset($in['discount']))
             $this->DISCOUNT = $in['discount'];
         if (isset($in['worker']))
@@ -178,7 +181,7 @@ class ZDATA {
 function dateToNorm($in, $short = false):string{
     if (is_null($in)) {
         return '';
-    } 
+    }
 
     $myDateTime = DateTime::createFromFormat('Y-m-d', $in);
 
@@ -357,6 +360,7 @@ class HTEL {
         $input = str_replace('[c]', 'checked', $input);
         $input = str_replace('[ro]', 'readonly', $input);
         $input = str_replace('[d]', 'disabled', $input);
+        $input = str_replace('[h]', 'hidden', $input);
         //placeholder
 
         //---------------------------------------
@@ -569,6 +573,17 @@ class MyDialog
 
         return include 'blok/dialog.php';
     }
+}
+
+function _requestSend(array $arr): string
+{
+    $out = '';
+
+    foreach ($arr as $k=>$v){
+        $out .= '&' . $k . '=' . $v;
+    }
+
+    return $out;
 }
 
 ?>

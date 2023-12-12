@@ -89,7 +89,8 @@ foreach ($result as $row) {
     $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] += $row['count'];
 }
 
-$query = 'SELECT service_ID, type_ID, color, count FROM `service_out` WHERE color IS NOT NULL';
+$query = 'SELECT service_ID, type_ID, color, count FROM `service_out`
+WHERE color IS NOT NULL';
 
 $result = mysqli_query($link, $query);
 
@@ -167,11 +168,11 @@ echo new HTEL('a !=go_bottom href=javascript:+document.body.scrollIntoView(false
 
         var curinp = $(ident).val();
 
-        if (curinp >= $(this).val()) return;
+        if (curinp == $(this).val()) return;
 
         var cost = $(ident + '_cost').val();
 
-        $(ident).val(0);
+        //$(ident).val(0);
 
         curinp++;
 

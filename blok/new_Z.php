@@ -165,8 +165,6 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'sold')
 }
 #endregion
 
-
-
 $mes = array('Телеграм', 'Вотсап', 'Інстаграм', 'Вайбер', 'Телефон', 'Наручно', 'Сигнал', 'ТікТок');
 
 $comm = $Z_DATA->COMM != null ? trim(str_replace($mes, '', $Z_DATA->COMM)):'';
@@ -262,10 +260,15 @@ $div[] = new HTEL('div', [
     new HTEL('input !=client ?=pip #=[7] [r]')
 ]);
 
-$div[] = new HTEL('div', [
-    new HTEL('label for=reqv/Реквізити НП'),
-    new HTEL('input !=reqv ?=rek_out #=[8] [r]')
-]);
+$div[] = new HTEL('div .=NP_SELECTOR', [
+        new HTEL('label for=np_select_v/Реквізити НП'),
+        new HTEL('div', [
+            new HTEL('input *=text !=np_input list=list_np ?=rek_out $=населений+пункт [r] #=[8]'),
+            new HTEL('select !=np_sel_cit'),
+            new HTEL('select !=np_sel_vid'),
+            new HTEL('datalist !=list_np')
+        ])
+    ]);
 
 $field1($div);
 
@@ -319,20 +322,31 @@ $field1(new HTEL('div &=display:flex;height:150px;', [
 
 //Заповнення графи терміново
 
-$query = 'SELECT `cost` FROM `price_list` WHERE `service_id` = 21 LIMIT 1';
+if ($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
+    $query = 'SELECT `cost` FROM `price_list` WHERE `service_id` = 21 LIMIT 1';
 
-$result = mysqli_query($link, $query);
+    $result = mysqli_query($link, $query);
 
-foreach ($result as $row) {
-    $term_cost = $Z_DATA->GET_KOMPLECT(21) != '' ? $Z_DATA->GET_KOMPLECT(21) : $row['cost'];
+    foreach ($result as $row) {
+        $term_cost = $Z_DATA->GET_KOMPLECT(21) != '' ? $Z_DATA->GET_KOMPLECT(21) : $row['cost'];
+    }
+
+    $statusTerm = $Z_DATA->GET_KOMPLECT(21) != '' ? 'checked' : '';
+
+    $field1(new HTEL('div', [
+        new HTEL('label for=term/Терміново (+[0]грн.)', CostOut($term_cost)),
+        new HTEL('input *=checkbox !=term ?=cost_21 #=[0] [1]', [$term_cost, $statusTerm])
+    ]));
 }
 
-$statusTerm = $Z_DATA->GET_KOMPLECT(21) != '' ? 'checked':'';
+//Заповнення графи перетелефонуйте
 
-$field1(new HTEL('div', [
-    new HTEL('label for=term/Терміново (+[0]грн.)', CostOut($term_cost)),
-    new HTEL('input *=checkbox !=term ?=cost_21 #=[0] [1]', [$term_cost, $statusTerm])
-]));
+if ($IS_CHANGE != 1){
+    $field1(new HTEL('div', [
+        new HTEL('label for=callback/Зателефонуйте мені'),
+        new HTEL('input *=checkbox !=callback ?=callback #=1 [0]', $Z_DATA->CALLBACK == 1 ? 'checked' : '')
+    ]));
+}
 
 $field2 = new HTEL('fieldset !=fs2');
 
@@ -382,6 +396,8 @@ else {
     }
 }
 
+$idaccess = -1;
+
 if ($TYPE_Z == 'def' || $TYPE_Z == 'sold'){
     session_start();
     $div = new HTEL('div .=doneApply', ['worker', $Z_DATA->WORKER]);
@@ -407,11 +423,11 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'sold'){
     $div([
         new HTEL('label  for=[0]/Працівник: '),
         new HTEL('input !=[0] ?=[0] &=width:20%; $=якщо+відомо #=[1]'),
-        new HTEL('button !=butSubm *=submit #=click /ЗБЕРЕГТИ')
+        new HTEL('button !=butSubm .=subm *=submit #=click /ЗБЕРЕГТИ')
     ]);
 }else{
     $div = new HTEL('div .=doneApply',[
-        new HTEL('button !=butSubm *=submit #=click /ОФОРМИТИ')
+        new HTEL('button !=butSubm .=subm *=submit #=click /ОФОРМИТИ')
     ]);
 }
 
@@ -433,6 +449,149 @@ function selectStatus($bool = false):string{
 
 <script>
     $("document").ready(function () {
+    //NOVA POSHTA
+
+    var NP_INP = document.getElementById('np_input');
+    var LIST = document.getElementById('list_np');
+    var SEL_C = document.getElementById('np_sel_cit');
+    var SEL_V = document.getElementById('np_sel_vid');
+
+    var WriteDone = true;
+
+    NP_INP.addEventListener('input',
+        function () {
+            WriteDone = false;
+            window.setTimeout(function () { WriteDone = true; }, 300);
+            initInput($(this).val());
+        });
+
+    inputHundler(NP_INP.value);
+
+    function initInput($val) {
+        if (WriteDone) {
+            inputHundler($val);
+        }
+        else {
+            window.setTimeout(function () { initInput($val); }, 200);
+        }
+    };
+
+    SEL_C.addEventListener('change', function () {
+        setViddily($(this).val());
+    });
+
+    SEL_V.addEventListener('change', function () {
+        NP_INP.value = $('#np_sel_cit option:selected').html() + ', № ' + $(this).val();
+    });
+
+    function inputHundler(val) {
+
+        if (!WriteDone) return false;
+
+        $.ajax({
+            url: 'blok/get_NP_op.php',
+            method: 'GET',
+            dataType: 'html',
+            data: 'find=' + val,
+            success: function (data) {
+                LIST.innerHTML = data;
+                window.setTimeout(changeHundler, 200);
+            }
+        });
+    };
+
+    function changeHundler() {
+        $('#np_sel_cit').html('');
+        $('#np_sel_vid').html('');
+
+        var indexLen = 0;
+        var lastLen = 0;
+        var setVidVal = null;
+
+        $('#list_np option').each(function (i, a) {
+            indexLen = SearchSmart(a.innerText, NP_INP.value);
+
+            if (indexLen > 0) {
+
+                if (lastLen < indexLen) {
+                    $('#np_sel_cit').append('<option value="' + a.attributes[0].value + '" selected>' + a.innerText + '</option>');
+
+                    setVidVal = a.attributes[0].value;
+                }
+                else {
+                    $('#np_sel_cit').append('<option value="' + a.attributes[0].value + '">' + a.innerText + '</option>');
+                }
+
+                lastLen = indexLen;
+            }
+        });
+
+        if (setVidVal !== null)
+            setViddily(setVidVal, getNum(NP_INP.value));
+    }
+
+    function getNum(str) {
+        var split = str.split(' ');
+        var OUT = 0;
+
+        for (var ii = split.length - 1; ii >= 0; ii--) {
+            OUT = getNumFromStr(split[ii]);
+            if (OUT != '') break;
+        }
+
+        return OUT;
+    }
+
+    function getNumFromStr(str) {
+        var out = '';
+
+        for (var i = str.length - 1; i >= 0; i--) {
+            if ($.isNumeric(str.charAt(i))) {
+                out = str.charAt(i).toString() + out.toString();
+            }
+            else if (out != '') {
+                break;
+            }
+        }
+
+        return out;
+    }
+
+    function setViddily(ref, prior = 0) {
+        $.ajax({
+            url: 'blok/get_NP_op.php',
+            method: 'GET',
+            dataType: 'html',
+            data: 'ref=' + ref + '&number=' + prior,
+            success: function (data) {
+                $('#np_sel_vid').html(data);
+            }
+        });
+    }
+
+    function SearchSmart(instr, find) {
+        find = find.toLowerCase();
+        instr = instr.toLowerCase();
+        var OUT = 0;
+
+        var arr = find.split(')');
+
+        if (instr.indexOf(arr[0]) > -1) {
+            OUT = arr[0].length;
+        }
+
+        if (OUT == 0) {
+            arr = find.split(' ');
+            arr.forEach(function callback(currentValue) {
+                if (currentValue.length > 4 && currentValue.indexOf('.') == -1 &&
+                    instr.indexOf(currentValue) == 0) {
+                    if (OUT < currentValue.length) OUT = currentValue.length;
+                }
+            });
+        }
+
+        return OUT;
+    }
 
     //Функція при перемиканні верхнього поля кольорів
        $("#color_variant").change(cb_color_ch).change();
@@ -453,7 +612,7 @@ function selectStatus($bool = false):string{
             url: 'blok/ch_var_col_set.php',
             method: 'GET',
             dataType: 'html',
-                data: 'sposob='+radio_value+'<?php echo $Z_DATA->GET_KOMPLECT() . '&is_rewrite=' . $IS_CHANGE . '&ID=' . $Z_DATA->ID;  ?>',
+                data: 'sposob='+radio_value+'<?php echo $Z_DATA->GET_KOMPLECT() . '&is_rewrite=' . $IS_CHANGE . '&ID=' . $Z_DATA->ID . '&IS_ADMIN=' . $idaccess;  ?>',
                 success: function (data) {
                 $('#grid_color').html(data);
             }

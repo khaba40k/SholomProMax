@@ -178,7 +178,7 @@ foreach ($arr_serv_name as $i=>$n) {
 
                 switch ($ii) {
                     case 0:
-                        $tr(new HTEL('td &=text-align:left;/[0] [1]', [$cell[$ii], $tn]));
+                        $tr(new HTEL('td !=[2]_[3] .=sum_info &=text-align:left;/[0] [1]', [$cell[$ii], $tn, $i, $t]));
                         break;
                     case 1:
                     case 3:
@@ -234,3 +234,24 @@ echo $table;
 $link->close();
 
 ?>
+
+
+<script>
+
+    $('.sum_info').on('click', function () {
+
+        var id_type = $(this).attr('id').split('_');
+
+        $.ajax({
+        url: 'blok/sum_info.php',
+        method: 'GET',
+            dataType: 'html',
+            data: 'id=' + id_type[0] + '&type=' + id_type[1],
+        success: function (data) {
+            $('#workfield').html(data);
+        }
+    });
+
+    });
+
+</script>

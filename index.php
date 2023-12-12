@@ -6,6 +6,9 @@
     <title>SholomProMax</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="шоломпромакс, промакс, про макс, шолом, переобладнання, комплектуючі, шраут, навушники, кавер, мультикам, рейки, шлем, каска" />
+    <meta name="description" content="Переобладнання, продаж військових шоломів. Швидко та якісно." />
+
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
@@ -20,23 +23,6 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
     require("blok/conn_local.php");
-
-    if (!isset($_GET['debug']) || $_GET['debug'] != 1) {
-        HIDE();
-    }else{
-        session_start();
-        $_SESSION['logged'] = 'Administrator';
-
-        $query = 'SELECT `login`,`ID` FROM `users`';
-
-        $result = mysqli_query($link, $query);
-
-        foreach ($result as $row) {
-            $_SESSION[$row['login']] = $row['ID'];
-        }
-
-        $link->close();
-    }
 
     if (!isset($_GET['page'])){
         $div = new HTEL('div .=firstpage');

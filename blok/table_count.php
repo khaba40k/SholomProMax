@@ -123,12 +123,12 @@ $tbody($tr);
 foreach ($arr_serv_name as $id => $ni) {
     foreach ($arr_types[$id] as $t => $nt) {
         if (isset($arr_cnt[$id][$t])) {
-            $tr = new HTEL('tr');
-            $tr(new HTEL('td !=[2]_[3] .=info_cnt_cell &=text-align:left;/[0] [1]', [$ni, $nt, $id, $t]));
+            $tr = new HTEL('tr', [$ni, $nt, $id, $t]);
+            $tr(new HTEL('td !=[2]_[3] .=info_cnt_cell &=text-align:left;/[0] [1]'));
 
             foreach ($_COLORS as $c) {
                 $cnt = isset($arr_cnt[$id][$t][$c->ID]) ? $arr_cnt[$id][$t][$c->ID] : 0;
-                $tr(new HTEL('td &=text-align:center;background-color:[1];/[0]', [MyVal($cnt), ($cnt < 3 && $cnt != 0) ? '#E3242B':'auto']));
+                $tr(new HTEL('td !=[2]_[3]_[4] .=info_cnt_cell_color &=text-align:center;background-color:[1];/[0]', [MyVal($cnt), ($cnt < 3 && $cnt != 0) ? '#E3242B':'auto', 4=>$c->ID]));
             }
 
             $sum_arr = sumArray($arr_cnt[$id][$t]);
@@ -171,6 +171,22 @@ function MyVal($val):string{
             method: 'get',
             dataType: 'html',
             data: 'ID=' + id_type[0] + '&TYPE=' + id_type[1] + '&NAME=' + name,
+            success: function (data) {
+                $('#detal_info').html(data);
+            }
+
+        });
+    });
+
+    $('.info_cnt_cell_color').on('click', function () {
+        var id_type_color = $(this).attr('id').split('_');
+        var name = $('#' + id_type_color[0] + '_' + id_type_color[1]).text();
+
+        $.ajax({
+            url: 'blok/count_info.php',
+            method: 'get',
+            dataType: 'html',
+            data: 'ID=' + id_type_color[0] + '&TYPE=' + id_type_color[1] + '&NAME=' + name + '&COLOR=' + id_type_color[2],
             success: function (data) {
                 $('#detal_info').html(data);
             }

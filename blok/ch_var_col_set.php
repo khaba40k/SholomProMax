@@ -1,7 +1,5 @@
 <?php
 
-//var_dump($_GET);exit;
-
 require "conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
@@ -77,6 +75,36 @@ if (mysqli_num_rows($result) != 0) {
 
 #endregion
 
+#region ВИБІРКА ЗАЛИШКІВ
+$arr_cnt = array();
+
+$query = 'SELECT service_ID, type_ID, color, count FROM `service_in` WHERE color IS NOT NULL';
+
+$result = mysqli_query($link, $query);
+
+foreach ($result as $row) {
+    if (!isset($arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']])) {
+        $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] = 0;
+    }
+
+    $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] += $row['count'];
+}
+
+$query = 'SELECT service_ID, type_ID, color, count FROM `service_out`
+JOIN client_info ON service_out.ID=client_info.ID
+WHERE color IS NOT NULL AND (TTN_IN IS NOT NULL OR sold_number IS NOT NULL)';
+
+$result = mysqli_query($link, $query);
+
+foreach ($result as $row) {
+    if (!isset($arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']])) {
+        $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] = 0;
+    }
+
+    $arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']] -= $row['count'];
+}
+#endregion
+
 $link->close();
 
 if (isset($_GET['set_select'])){
@@ -89,7 +117,7 @@ if (isset($_GET['set_select'])){
 #region Логіка
 foreach ($_service_name as $i=>$n) {
 
-    $typesForId = isset($_service_type[$i]) ? $_service_type[$i] : null;
+    $typesForId = $_service_type[$i] ?? null;
 
     echo print_serv(
         $i,
@@ -103,6 +131,8 @@ foreach ($_service_name as $i=>$n) {
 
 function print_serv($serv_ID, $serv_name, $_types): HTEL
 {
+    $OUT_VALID = 0;
+
     $div = new HTEL('div .=opt_color', [$serv_ID, 2=>$serv_name]);
 
     $div->LEVEL = 2;
@@ -179,13 +209,17 @@ function rightFor($serv_id, $serv_type = 1):array{
     $GLOBALS['_COASTS'][$serv_id][$serv_type] :
     $GLOBALS['_COASTS'][$ustanovka][1];
 
+    $count = $GLOBALS['arr_cnt'][$serv_id][$serv_type];
+
     if (isset($_GET['cost_' . $serv_id . '_' . $serv_type])){
         $cost = $_GET['cost_' . $serv_id . '_' . $serv_type];
     } else if (isset($_GET['cost_' . $ustanovka . '_' . $serv_id])){
         $cost = $_GET['cost_' . $ustanovka . '_' . $serv_id];
     }
 
-    $coastInp = new HTEL('input *=number step=0.01 min=0 ?=cost_[0] #=[1]', [$serv_id, $cost]);
+    $AnyCreator = $_GET['IS_ADMIN'] < 0 ? 'readonly': '';
+
+    $coastInp = new HTEL('input *=number step=0.01 min=0 ?=cost_[0] #=[1] [2]', [$serv_id, $cost, $AnyCreator]);
 
     $curCol = null;
 
@@ -202,9 +236,8 @@ function rightFor($serv_id, $serv_type = 1):array{
 
     if ($serv_type > 0){
         if ($_has_col) {
-
-            if (!is_null($curCol) && $curCol->AppleTo($_colors, $serv_id, $serv_type)) { //колір підходить
-                $right = new HTEL('input *=checkbox !=color_[0] ?=cb[0] #=[1] [2]',
+            if (!is_null($curCol) && $curCol->AppleTo($_colors, $serv_id, $serv_type) && $count[$curCol->ID] > 0) { //колір підходить
+                    $right = new HTEL('input *=checkbox !=color_[0] ?=cb[0] #=[1] [2]',
                 [1 => $curCol->ID, SelectStatus($serv_id, $serv_type, $curCol->ID)]);
             } else { //не підходить
 
@@ -214,7 +247,9 @@ function rightFor($serv_id, $serv_type = 1):array{
 
                 foreach ($_colors as $c) {
                     if ($c->AppleTo($_colors, $serv_id, $serv_type)) {
-                        $right(new HTEL('option #=[0] [1]/+[2]', [$c->ID, SelectStatus($serv_id, $serv_type, $c->ID, 'selected'), $c->NAME]));
+                        if ($_GET['is_rewrite'] == 1 || $count[$c->ID] > 0) {
+                            $right(new HTEL('option #=[0] [1]/+[2]', [$c->ID, SelectStatus($serv_id, $serv_type, $c->ID, 'selected'), $c->NAME]));
+                        }
                     }
                 }
             }
@@ -241,11 +276,6 @@ function rightFor($serv_id, $serv_type = 1):array{
             ]);
         }
     }
-
-    //$div([
-    //    $coastInp,
-    //    $right
-    //]);
 
     return [$coastInp, $right];
 }
@@ -301,7 +331,8 @@ function SelectTypeStatus($id, $type) :string{
             url: 'blok/ch_var_col_set.php',
             method: 'GET',
             dataType: 'html',
-            data: '&set_select=' + id + '&set_type=' + type <?php echo " + '&sposob=" . $_GET['sposob'] . "'" ?>,
+            data: '&set_select=' + id + '&set_type=' + type 
+        <?php echo " + '&sposob=" . $_GET['sposob'] . "' + '&IS_ADMIN=" . $_GET['IS_ADMIN'] . "'" ?>,
             success: function (data) {
                 $('#right_menu_' + id).html(data);
             }

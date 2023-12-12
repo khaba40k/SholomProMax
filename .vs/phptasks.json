@@ -4,6 +4,16 @@
       "action": "publish",
       "event": "filewatcher",
       "parameters": {
+        "profilename": "ftp_spm",
+        "filemask": "*.*"
+      },
+      "disabled": true
+    },
+    {
+      "action": "publish",
+      "event": "savewatcher",
+      "parameters": {
+        "filemask": "*.*",
         "profilename": "ftp_spm"
       },
       "disabled": false

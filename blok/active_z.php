@@ -2,7 +2,10 @@
 require("conn_local.php");
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-if (!isset($_GET['search']) || $_GET['search'] == ''){
+$_GET['type'] = $_GET['type'] ?? 'archiv';
+
+if (!isset($_GET['search']) || trim($_GET['search']) == ''){
+
     switch ($_GET['type']) {
         case 'new':
             $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND `TTN_IN` IS NULL AND `sholom_num` = 0 ORDER BY `date_max` ASC';
@@ -11,7 +14,19 @@ if (!isset($_GET['search']) || $_GET['search'] == ''){
             $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL) ORDER BY `date_max` ASC';
             break;
         default:
-            $query = 'SELECT * FROM `client_info` where `date_out` IS NOT NULL ORDER BY `date_out` DESC';
+            $get_per = $_GET['period'] ?? date('m.Y');
+
+            $done_period = _getPeriod($get_per); //12.2023
+
+            echo new HTEL('div .=period_done', [
+                new HTEL("button !=per_plus onclick=location.href=='work?page==archiv&period==[0]'/<", _perNext($get_per)),
+                new HTEL('input *=text !=period_txt #=[0] [ro]', _ukrPeriod($get_per)),
+                new HTEL("button !=per_minus onclick=location.href=='work?page==archiv&period==[0]'/>", _perPrev($get_per))
+            ]);
+
+            $query = 'SELECT * FROM client_info where
+            date_out >= '. $done_period[0] . ' AND date_out < '. $done_period[1] . '
+            ORDER BY `date_out` DESC';
             break;
     }
 
@@ -32,150 +47,261 @@ if (!isset($_GET['search']) || $_GET['search'] == ''){
     OR `reqv` LIKE ' . $srch;
 }
 
+function _getPeriod($in = null): array //in = ~ 10.2023 or null
+{
+    $out = array();
+
+    if (!is_null($in)) {
+        $spl = explode('.', $in);
+
+        $month = $spl[0];
+        $year = $spl[1];
+
+        $out[0] = '"' . $year . '-' . $month . '-1"';
+
+        if ($month < 12) {
+            $month++;
+        } else {
+            $month = 1;
+            $year++;
+        }
+
+        $out[1] = '"' . $year . '-' . $month . '-1"';
+    } else {
+        $now = date("Y-m-1");
+
+        $out[0] = '"' . $now . '"';
+
+        $month = date('m');
+
+        $year = date('Y');
+
+        if ($month < 12) {
+            $month++;
+        } else {
+            $month = 1;
+            $year++;
+        }
+
+        $out[1] = '"' . $year . '-' . $month . '-1"';
+    }
+
+    return $out;
+}
+
+function _perNext($in):string{
+    $spl = explode('.', $in);
+
+    $month = $spl[0];
+    $year = $spl[1];
+
+    if ($month < 12) {
+        $month++;
+    } else {
+        $month = 1;
+        $year++;
+    }
+
+    return $month . '.' . $year;
+}
+
+function _perPrev($in): string
+{
+    $spl = explode('.', $in);
+
+    $month = $spl[0];
+    $year = $spl[1];
+
+    if ($month > 1) {
+        $month--;
+    } else {
+        $month = 12;
+        $year--;
+    }
+
+    return $month . '.' . $year;
+}
+
+function _ukrPeriod($in):string{
+    $mounts = [
+        1 => 'січень',
+        'лютий',
+        'березень',
+        'квітень',
+        'травень',
+        'червень',
+        'липень',
+        'серпень',
+        'вересень',
+        'жовтень',
+        'листопад',
+        'грудень'
+    ];
+
+    $spl = explode('.', $in);
+
+    $month = $mounts[$spl[0]];
+    $year = $spl[1];
+
+    return $month . ' ' . $year;
+}
+
 $result = mysqli_query($link, $query);
 
 session_start();
 
-//var_dump($_SESSION);
+$counter = mysqli_num_rows($result);
 
-foreach ($result as $row) {
+if ($_GET['type'] == 'archiv' && $counter > 0){
+    echo 'ЗАПИСІВ: [ ' . $counter . ' ]<br>';
+}
 
-    $variant = 'def';
-    $num = $row['sholom_num'];
-    $ID = $row['ID'];
+if ($counter > 0){
+    foreach ($result as $row) {
+        $counter++;
 
-    if (!is_null($row['sold_number'])){
-        $num = $row['sold_number'];
-        $variant = 'sold';
-    }
+        $variant = 'def';
+        $num = $row['sholom_num'];
+        $ID = $row['ID'];
 
-    if ($num == 0)
-        $num = '';
-
-    if (isset($_GET['search']) && $_GET['search'] != ''){
-        if (is_null($row['date_out']) && (!is_null($row['TTN_IN']) || $row['sold_number'] !== null)){
-            $_GET['type'] = 'inwork';
-        }else if(is_null($row['date_out']) && is_null($row['TTN_IN'])){
-            $_GET['type'] = 'new';
+        if (!is_null($row['sold_number'])) {
+            $num = $row['sold_number'];
+            $variant = 'sold';
         }
-        else{
-            $_GET['type'] = 'archiv';
+
+        if ($num == 0)
+            $num = '';
+
+        if (isset($_GET['search']) && $_GET['search'] != '') {
+            if (is_null($row['date_out']) && (!is_null($row['TTN_IN']) || $row['sold_number'] !== null)) {
+                $_GET['type'] = 'inwork';
+            } else if (is_null($row['date_out']) && is_null($row['TTN_IN'])) {
+                $_GET['type'] = 'new';
+            } else {
+                $_GET['type'] = 'archiv';
+            }
         }
-    }
 
-    $style = 'border-left: 25px solid ';
+        $style = 'border-left: 25px solid ';
 
-    switch($_GET['type']){
-        case  'new':
-            $style .= 'red;';
-            break;
-        case 'inwork':
-            $style .= 'yellow;';
-            break;
-        default:
-            $style .= 'green;';
-            break;
-    }
+        switch ($_GET['type']) {
+            case 'new':
+                $style .= 'red;';
+                break;
+            case 'inwork':
+                $style .= 'yellow;';
+                break;
+            default:
+                $style .= 'green;';
+                break;
+        }
 
-    $pip = explode(' ', trim($row['client_name']));
+        $pip = explode(' ', trim($row['client_name']));
 
-    $pip_out = $pip[0];
+        $pip_out = $pip[0];
 
-    for ($i = 1; $i < count($pip); $i++){
-        $pip_out .= ' ' . mb_substr($pip[$i], 0, 1) . '.';
-    }
+        for ($i = 1; $i < count($pip); $i++) {
+            $pip_out .= ' ' . mb_substr($pip[$i], 0, 1) . '.';
+        }
 
-    $div = new HTEL(
-        'div !=[7] .=activeZ &=[8]',
-        [
-            $num,
-            $pip_out,
-            mb_substr(str_replace(' ' , '', $row['phone']), -10),
-            dateToNorm($row['date_max'], true),
-            dateToNorm($row['date_out'], true),
-            $_GET['type'],
-            $variant,
-            $ID,
-            $style,
-            new HTEL('p/[0]', $row['redaktor'])
-        ]
-    );
+        $div = new HTEL(
+            'div !=[7] .=activeZ &=[8]',
+            [
+                $num,
+                $pip_out,
+                getCorrectPhone($row['phone']),
+                dateToNorm($row['date_max'], true),
+                dateToNorm($row['date_out'], true),
+                $_GET['type'],
+                $variant,
+                $ID,
+                $style,
+                new HTEL('p/[0]', $row['redaktor'])
+            ]
+        );
 
-    $vid = $variant == 'def' ? "#" : "$";
+        $vid = $variant == 'def' ? "#" : "$";
 
-    $div([
-        new HTEL('label/[1] [0]', [1=>$vid]),
-        new HTEL('label/[1]'),
-        new HTEL('label/[2]')
-    ]);
-
-    if ($_GET['type'] != 'archiv') {
-        $div(new HTEL('label/[3]'));
-    } else {
-        $div(new HTEL('label/[4]'));
-    }
-
-    if ($_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]){
         $div([
-            new HTEL('button *=button .=but_prt onclick=printInfo([7],0,`[5]`,`[6]`)'),
-            new HTEL('button *=button .=but_cng onclick=changeInfo([7],`[6]`)'),
-            new HTEL('button *=button .=but_del onclick=removeInfo([7],[0])')
+            new HTEL('label/[1] [0]', [1 => $vid]),
+            new HTEL('label/[1]')
         ]);
-    }else{
-        $div([
-            new HTEL('button *=button .=but_prt+dis '),
-            new HTEL('button *=button .=but_cng+dis '),
-            new HTEL('button *=button .=but_del+dis ')
-        ]);
-    }
 
-    if ($row['discount'] !== null){
-        $div(new HTEL('label .=percent/-[0]%', $row['discount']));
-    }
-
-    //$sum = 0;
-
-    if ($row['date_out'] === null){
-        $query = 'SELECT * FROM `service_out` where `ID` = ' . $ID . ' AND `service_ID` = 21 LIMIT 1';
-
-        if (mysqli_num_rows(mysqli_query($link, $query)) == 1) {
-            $div(new HTEL('label .=term/T'));
-            //$sum = $row['costs'];
+        if ($row['callback'] == 1 && $row['date_out'] === null) {
+            $div(
+                new HTEL(
+                    'a @=tel:[0] &=color:yellow;border:2px+solid+blue;border-radius:3px;text-decoration:unset;background-color:red;/[2]',
+                    getCorrectPhone($row['phone'], true)
+                )
+            );
+        } else {
+            $div(
+                new HTEL('a @=tel:[0] &=color:black;text-decoration:unset;/[2]', getCorrectPhone($row['phone'], true))
+            );
         }
+
+        if ($_GET['type'] != 'archiv') {
+            $div(new HTEL('label/[3]'));
+        } else {
+            $div(new HTEL('label/[4]'));
+        }
+
+        if ((!isset($_SESSION[$row['redaktor']]) && $_SESSION[$_SESSION['logged']] <= 1) || $_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]) {
+            $div([
+                new HTEL('button *=button .=but_prt onclick=printInfo([7],0,`[5]`,`[6]`)'),
+                new HTEL('button *=button .=but_cng onclick=changeInfo([7],`[6]`)'),
+                new HTEL('button *=button .=but_del onclick=removeInfo([7],[0])')
+            ]);
+        } else {
+            $div([
+                new HTEL('button *=button .=but_prt+dis '),
+                new HTEL('button *=button .=but_cng+dis '),
+                new HTEL('button *=button .=but_del+dis ')
+            ]);
+        }
+
+        if ($row['discount'] !== null) {
+            $div(new HTEL('label .=percent/-[0]%', $row['discount']));
+        }
+
+        if ($row['date_out'] === null) {
+            $query = 'SELECT * FROM `service_out` where `ID` = ' . $ID . ' AND `service_ID` = 21 LIMIT 1';
+
+            if (mysqli_num_rows(mysqli_query($link, $query)) == 1) {
+                $div(new HTEL('label .=term/T'));
+            }
+        }
+
+        echo $div;
     }
-
-    //$query = 'SELECT costs, NAME, service_ID FROM service_out JOIN service_ids ON service_out.service_ID=service_ids.ID  where service_out.ID = ' . $ID . ' AND service_ID <> 21';
-
-    //$res = mysqli_query($link, $query);
-
-    //$tr = new HTEL('tr');
-
-    //$arr_kompl_no_duble = array();
-
-    //foreach ($res as $row){
-    //    $sum += $row['costs'];
-    //    $arr_kompl_no_duble[$row['service_ID']] = $row['NAME'];
-    //}
-
-    //foreach ($arr_kompl_no_duble as $in_kompl){
-    //    $kompl_words = explode(' ', $in_kompl);
-    //    $out_frase = '';
-
-    //    foreach ($kompl_words as $word){
-    //        $out_frase .= mb_substr($word, 0, 5) . ' ';
-    //    }
-
-    //    $tr(new HTEL('td nowrap/[0]', trim($out_frase)));
-    //}
-
-    //$div(new HTEL('label .=costs/[0]', CostOut($sum)));
-
-    //$div(new HTEL('table .=kompl', new HTEL('tbody', $tr)));
-
-    echo $div;
+}
+else {
+    echo 'ЗАПИСІВ НЕ ЗНАЙДЕНО !';
 }
 
 $link->close();
+
+function getCorrectPhone(string $in, $kodKr = false):string{
+    $out = '';
+
+    $split = str_split($in);
+
+    foreach($split as $s){
+        if (is_numeric($s)){
+            $out .= $s;
+        }
+    }
+
+    if (strlen($out) < 10)
+        return '?';
+
+    $out = mb_substr($out, -10);
+
+    if ($kodKr)
+        $out = '+38' . $out;
+
+    return $out;
+}
 
 ?>
 
@@ -221,6 +347,7 @@ $link->close();
                  }
              });
          };
-     };
+    };
+
 </script>
 

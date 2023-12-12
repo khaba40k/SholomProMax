@@ -106,6 +106,10 @@ foreach($ifNull as $var){
         $_GET[$var] = '';
 }
 
+if (!isset($_GET['callback'])){
+    $_GET['callback'] = 0;
+}
+
 #region Отримання наступного номера заявки/скидання на 0
 
 if((!empty($_GET['ttn_in']) || ($typeZ != 'def' && $typeZ != 'def0')) && ($_GET['sol_num'] === 0)){
@@ -131,7 +135,7 @@ if (empty($_GET['ttn_out']) && !empty($_GET['date_out'])) {
 
 #endregion
 
-$query = "INSERT INTO `client_info` (ID, " . $num_cell . ", date_in, date_max, date_out, phone, client_name, reqv, TTN_IN, TTN_OUT, comm, discount, worker, redaktor)
+$query = "INSERT INTO `client_info` (ID, " . $num_cell . ", date_in, date_max, date_out, phone, client_name, reqv, TTN_IN, TTN_OUT, comm, discount, callback, worker, redaktor)
 VALUES ("
     . outVal($_GET['ID'])
     . outVal($_GET['sol_num'])
@@ -145,6 +149,7 @@ VALUES ("
     . outVal($_GET['ttn_out'])
     . outVal($_GET['mess']. ' ' . trim($_GET['comm']))
     . outVal($discont_perc)
+    . outVal($_GET['callback'])
     . outVal($_GET['worker'])
     . outVal($creator, true) . ")
     ON DUPLICATE KEY UPDATE "
@@ -159,6 +164,7 @@ VALUES ("
     "TTN_OUT=" . outVal($_GET['ttn_out']) .
     "comm=" . outVal($_GET['mess'] . ' ' . trim($_GET['comm'])) .
     "discount=" . outVal($discont_perc) .
+    "callback=" . outVal($_GET['callback']) .
     "worker=" . outVal($_GET['worker']) .
     "redaktor=" . outVal($creator, true);
 

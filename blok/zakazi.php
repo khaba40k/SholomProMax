@@ -29,12 +29,16 @@
         });
     };
 
-    function list_Z($status = 'new') {
+    function list_Z($status = 'new', period = '') {
+        var datesend = 'type=' + $status;
+
+        if (period != '') datesend += '&period=' + period;
+         
           $.ajax({
                 url: 'blok/active_z.php',
                 method: 'GET',
               dataType: 'html',
-              data: 'type=' + $status,
+              data: datesend,
                 success: function (data) {
                     $('#zakaz_workplace').html(data);
                 }
@@ -64,7 +68,7 @@ switch ($_MENU){
             [$_GET['page'] == 'archiv' ? ' clicked_but' : '', _style(3, 'color:green;'), 'archiv', ($_SESSION['count_archiv'] > 0 ? ' (' . $_SESSION['count_archiv'] . ')':'')])
         ]);
 
-        echo new HTEL('script/list_Z(`[0]`);', $_GET['page']);
+        echo new HTEL('script/list_Z(`[0]`, `[1]`);', [$_GET['page'], $_GET['period'] ?? '']);
         break;
     case 'create':
         $style = _style(2);

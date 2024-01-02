@@ -30,7 +30,7 @@ foreach ($result as $row){
     }
 
     $OUT_ARR[$row['date']][$counter]['name'] = $row['name'] . ($row['type'] !== null ? ' (' . $row['type'] . ')' : '');
-    $OUT_ARR[$row['date']][$counter]['color'] = $row['color'] ?? null;
+    $OUT_ARR[$row['date']][$counter]['color'] = $row['color'] ?? '- без кольору -';
     $OUT_ARR[$row['date']][$counter]['count'] = $row['count'];
     $OUT_ARR[$row['date']][$counter]['costs'] = $row['costs'] * -1;
     $OUT_ARR[$row['date']][$counter]['comm'] = $row['comm'] ?? '';
@@ -53,7 +53,7 @@ foreach ($result as $row) {
 
     $OUT_ARR[$row['date']][] = [
     'name'=> $row['name'] . ($row['type'] !== null ? ' (' . $row['type'] . ')' : ''),
-    'color'=> $row['color'],
+    'color'=> $row['color'] ?? '- без кольору -',
     'count'=> $row['count'] * -1,
     'costs'=> $row['costs'],
     'comm'=> '№ ' . $row['sholom_num'] ?? '' . $row['sold_number'] ?? '',
@@ -80,10 +80,10 @@ foreach ($OUT_ARR as $date=>$arr){
 
     foreach ($arr as $v){
         $tr = new HTEL('tr',[
+            new HTEL('td/[0]', $v['comm']),
             new HTEL('td/[0]', $v['color']),
             new HTEL('td/[0]', $v['count']),
             new HTEL('td/[0]', CostOut($v['costs'])),
-            new HTEL('td/[0]', $v['comm']),
             new HTEL('td/[0]', $v['redaktor'])
         ]);
 

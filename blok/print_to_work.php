@@ -3,7 +3,7 @@ require_once("conn_local.php");
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $hideForWorker = $_GET['hideForWorker'] != 0;
-$type_Z = isset($_GET['type']) ? $_GET['type'] : 'new' ;
+$type_Z = isset($_GET['type']) ? $_GET['type'] : 'new';
 $worker = '';
 
 if (!isset($_GET['variant'])){

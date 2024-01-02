@@ -1,3 +1,20 @@
+<script>
+
+    function goToPrint(id, type) {
+        $.ajax({
+        url: 'blok/print_to_work.php',
+        method: 'GET',
+        dataType: 'html',
+        data: 'ID=' + id + '&hideForWorker=0&type=archiv&variant=' + type,
+        success: function (data) {
+            $('#workfield').html(data);
+        }
+    });
+    }
+
+</script>
+
+
 <?php
 
 //["sum_fact"]=> string(7) "8082.50" ["kompl_0"]=> string(2) "19" ["cost_0"]=> string(3) "150" ["kompl_1"]=> string(2) "19" ["cost_1"]=> string(3) "250" ["kompl_2"]=> string(1) "8" ["cost_2"]=> string(5) "337.5" ["kompl_3"]=> string(2) "19" ["cost_3"]=> string(3) "350" ["kompl_4"]=> string(2) "15" ["cost_4"]=> string(6) "1247.5" ["kompl_5"]=> string(1) "7" ["cost_5"]=> string(6) "5747.5"
@@ -61,7 +78,8 @@ foreach ($korrect as $id => $kk) {
 $link->close();
 
 if ($err == ''){
-    phpAlert("Замовлення успішно виконано.", 'work?page=archiv');
+    phpAlert("Замовлення успішно виконано.");
+    echo new HTEL('script/goToPrint(`[0]`, `[1]`);', [$_GET['ID'], $_GET['type']]);
 }else{
     phpAlert($err);
 }

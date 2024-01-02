@@ -196,6 +196,10 @@ if ($counter > 0){
                 break;
         }
 
+        $style .= 'background:' . ($variant == 'def' ?
+        "linear-gradient(to left, yellow, rgba(255, 255, 255, 0.50));" : 
+        "linear-gradient(to left, lightgray, rgba(255, 255, 255, 0.50));");
+
         $pip = explode(' ', trim($row['client_name']));
 
         $pip_out = $pip[0];
@@ -220,10 +224,8 @@ if ($counter > 0){
             ]
         );
 
-        $vid = $variant == 'def' ? "#" : "$";
-
         $div([
-            new HTEL('label/[1] [0]', [1 => $vid]),
+            new HTEL('label/[0]'),
             new HTEL('label/[1]')
         ]);
 

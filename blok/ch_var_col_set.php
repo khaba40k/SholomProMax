@@ -40,6 +40,7 @@ if (mysqli_num_rows($result) != 0) {
 $_service_id = array();
 $_service_name = array();
 $_service_has_color = array();
+$_dep_map = array();
 
 $query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
 
@@ -49,6 +50,10 @@ if (mysqli_num_rows($result) != 0) {
     foreach ($result as $row) {
          if(inclAttr($attr, $row['atr'])){
                  $_service_name[$row['ID']] = $row['NAME'];
+
+                 if ($row['dep'] !== null){
+                     $_dep_map[$row['ID']] = explode('/', $row['dep']);
+                 }
 
                  if ($row['color'] == '1') {
                      $_service_has_color[$row['ID']] = true;
@@ -114,6 +119,8 @@ if (isset($_GET['set_select'])){
     exit;
 }
 
+echo new HTEL('script/var DEP_MAP = [0];', json_encode($_dep_map));
+
 #region Логіка
 foreach ($_service_name as $i=>$n) {
 
@@ -131,8 +138,6 @@ foreach ($_service_name as $i=>$n) {
 
 function print_serv($serv_ID, $serv_name, $_types): HTEL
 {
-    $OUT_VALID = 0;
-
     $div = new HTEL('div .=opt_color', [$serv_ID, 2=>$serv_name]);
 
     $div->LEVEL = 2;
@@ -241,7 +246,7 @@ function rightFor($serv_id, $serv_type = 1):array{
                 [1 => $curCol->ID, SelectStatus($serv_id, $serv_type, $curCol->ID)]);
             } else { //не підходить
 
-                $right = new HTEL('select !=color_[0] ?=color_[0]', $serv_id);
+                $right = new HTEL('select !=color_[0] ?=color_[0] .=colorselector', $serv_id);
 
                 $right(new HTEL('option #=- [0]/x', SelectStatus($serv_id, null, 'selected')));
 
@@ -305,6 +310,10 @@ function SelectTypeStatus($id, $type) :string{
 ?>
 
 <script>
+    $('.convers, .colorselector').on('click', function () {
+        console.log($(this).attr('name') + ' => [' + $(this).val() + ']');
+    });
+
     $('.type_variant').change(function () {
 
         var serv_type = $(this).val();
@@ -338,4 +347,6 @@ function SelectTypeStatus($id, $type) :string{
             }
         });
     };
+
+    
 </script>

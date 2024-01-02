@@ -358,7 +358,7 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
 
     $div($label);
 
-    if ($IS_CHANGE == 0) {
+    if ($IS_CHANGE == 0 && ($TYPE_Z == 'def' || $TYPE_Z == 'sold')) {
         for ($i = 0; $i < count($_COLORS); $i++) {
             if ($_COLORS[$i]->Universal()) {
                 $label = new HTEL(
@@ -675,7 +675,9 @@ function selectStatus($bool = false):string{
               INPUT_NUM.classList.remove("invalid"); 
               NUMBER_VALID = true;
           }
-        }
+    }
+
+    
 </script>
 
 <?php $link->close();?>

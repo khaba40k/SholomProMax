@@ -5,7 +5,7 @@
   <PropertyGroup>
     <EnvName>Custom</EnvName>
     <RuntimeVersion>8.0</RuntimeVersion>
-    <CustomServerUrl>http://sholompromax.com/</CustomServerUrl>
+    <CustomServerUrl>https://sholompromax.com/</CustomServerUrl>
     <SaveServerSettingsInUserFile>false</SaveServerSettingsInUserFile>
     <CustomXdebugPort>9000</CustomXdebugPort>
     <DebugMappingMethod>Automatic</DebugMappingMethod>
@@ -19,6 +19,8 @@
     <PHPDevHostName>sholompromax.com</PHPDevHostName>
     <PHPDevAutoPort>true</PHPDevAutoPort>
     <PHPDevRouting />
+    <PublishEvent>AfterSave</PublishEvent>
+    <PublishBeforeDebugProfile>ftp_spm</PublishBeforeDebugProfile>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="blok\error_log" />

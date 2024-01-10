@@ -16,70 +16,17 @@
 
     <?php
     //require("blok/conn_local.php");
-
+    
     require "blok/header.php";
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    //$in = 'м. Миколаївка (Донецька обл., Слов’янська міська рада), № 1';
+    $num = new HTEL('input !=tel *=tel ?=tel $=номер');
+    $inp = new HTEL('input !=mes *=text ?=mes');
+    $but = new HTEL('button !=subm *=submit/send');
+    $lab = new HTEL('lable !=ans');
 
-    //echo new HTEL('div .=NP_SELECTOR', [
-    //    new HTEL('div', [
-    //        new HTEL('input *=text !=np_input list=list_np ?=rek_out $=населений+пункт [r] #=[0]', $in),
-    //        new HTEL('select !=np_sel_cit'),
-    //        new HTEL('select !=np_sel_vid'),
-    //        new HTEL('datalist !=list_np')
-    //    ])
-    //]);
-
-    $per = _getPeriod();
-
-    echo $per[0] . '<br>';
-    echo $per[1];
-
-    function _getPeriod($in = null): array //in = ~ 10.2023 or null
-    {
-        $out = array();
-
-        if (!is_null($in)) {
-            $spl = explode('.', $in);
-
-            $month = $spl[0];
-            $year = $spl[1];
-
-            $out[0] = '"' . $year . '-' . $month . '-1"';
-
-            if ($month < 12) {
-                $month++;
-            } else {
-                $month = 1;
-                $year++;
-            }
-
-            $out[1] = '"' . $year . '-' . $month . '-1"';
-        } else {
-            $now = date("Y-m-1");
-
-            $out[0] = '"' . $now . '"';
-
-            $month = date('m');
-
-            $year = date('Y');
-
-            if ($month < 12) {
-                $month++;
-            } else {
-                $month = 1;
-                $year++;
-            }
-
-            $out[1] = '"' . $year . '-' . $month . '-1"';
-        }
-
-        return $out;
-    }
-
-
+    echo $num . '<br>' . $inp . '<br>' . $but . '<br><br>' . $lab;
     ?>
 
 </body>
@@ -88,156 +35,22 @@
 
 <script>
 
-    //$(document).ready(function () {
+    $('#subm').on('click', function () {
+        number = $('#tel').val();
+        text = $('#mes').val();
 
-    //    //NOVA POSHTA
-
-    //var NP_INP = document.getElementById('np_input');
-    //var LIST = document.getElementById('list_np');
-    //var SEL_C = document.getElementById('np_sel_cit');
-    //var SEL_V = document.getElementById('np_sel_vid');
-
-    //var WriteDone = true;
-
-    //NP_INP.addEventListener('input',
-    //    function () {
-    //        WriteDone = false;
-    //        window.setTimeout(function () { WriteDone = true; }, 300);
-    //        initInput($(this).val());
-    //    });
-
-    //inputHundler(NP_INP.value);
-
-    //function initInput($val) {
-    //    if (WriteDone) {
-    //        inputHundler($val);
-    //    }
-    //    else {
-    //        window.setTimeout(function () { initInput($val); }, 200);
-    //    }
-    //};
-
-    //SEL_C.addEventListener('change', function () {
-    //    setViddily($(this).val());
-    //});
-
-    //SEL_V.addEventListener('change', function () {
-    //    NP_INP.value = $('#np_sel_cit option:selected').html() + ', № ' + $(this).val();
-    //});
-
-    //function inputHundler(val) {
-
-    //    if (!WriteDone) return false;
-
-    //    $.ajax({
-    //        url: 'blok/get_NP_op.php',
-    //        method: 'GET',
-    //        dataType: 'html',
-    //        data: 'find=' + val,
-    //        success: function (data) {
-    //            LIST.innerHTML = data;
-    //            window.setTimeout(changeHundler, 200);
-    //        }
-    //    });
-    //};
-
-    //function changeHundler() {
-    //    $('#np_sel_cit').html('');
-    //    $('#np_sel_vid').html('');
-
-    //    var indexLen = 0;
-    //    var lastLen = 0;
-    //    var setVidVal = null;
-
-    //    $('#list_np option').each(function (i, a) {
-    //        indexLen = SearchSmart(a.innerText, NP_INP.value);
-
-    //        if (indexLen > 0) {
-
-    //            if (lastLen < indexLen) {
-    //                $('#np_sel_cit').append('<option value="' + a.attributes[0].value + '" selected>' + a.innerText + '</option>');
-
-    //                setVidVal = a.attributes[0].value;
-    //            }
-    //            else {
-    //                $('#np_sel_cit').append('<option value="' + a.attributes[0].value + '">' + a.innerText + '</option>');
-    //            }
-
-    //            lastLen = indexLen;
-    //        }
-    //    });
-
-    //    if (setVidVal !== null)
-    //        setViddily(setVidVal, getNum(NP_INP.value));
-    //}
-
-    //function getNum(str) {
-    //    var split = str.split(' ');
-    //    var OUT = 0;
-
-    //    for (var ii = split.length - 1; ii >= 0; ii--) {
-    //        OUT = getNumFromStr(split[ii]);
-    //        if (OUT != '') break;
-    //    }
-
-    //    return OUT;
-    //}
-
-    //    function getNumFromStr(str) {
-    //        var out = '';
-
-    //        for (var i = str.length - 1; i >= 0; i--) {
-    //            if ($.isNumeric(str.charAt(i))) {
-    //                out = str.charAt(i).toString() + out.toString();
-    //            }
-    //            else if (out != '') {
-    //                break;
-    //            }
-    //        }
-
-    //        return out;
-    //    }
-
-    //function setViddily(ref, prior = 0) {
-    //    $.ajax({
-    //        url: 'blok/get_NP_op.php',
-    //        method: 'GET',
-    //        dataType: 'html',
-    //        data: 'ref=' + ref + '&number=' + prior,
-    //        success: function (data) {
-    //            $('#np_sel_vid').html(data);
-    //        }
-    //    });
-    //}
-
-    //function SearchSmart(instr, find) {
-    //    find = find.toLowerCase();
-    //    instr = instr.toLowerCase();
-    //    var OUT = 0;
-
-    //    var arr = find.split(')');
-
-    //    if (instr.indexOf(arr[0]) > -1) {
-    //        OUT = arr[0].length;
-    //    }
-
-    //    if (OUT == 0) {
-    //        arr = find.split(' ');
-    //        arr.forEach(function callback(currentValue) {
-    //            if (currentValue.length > 4 && currentValue.indexOf('.') == -1 &&
-    //                instr.indexOf(currentValue) == 0) {
-    //                if (OUT < currentValue.length) OUT = currentValue.length;
-    //            }
-    //        });
-    //    }
-
-    //    return OUT;
-    //}
-
-    //});
-
+        $.ajax({
+        url: 'blok/sms_send.php',
+        method: 'GET',
+        dataType: 'html',
+        data: 'tel=' + number + '&mes=' + text,
+        success: function (data) {
+            $('#ans').html(data);
+        }
+    });
+    });
+   
 </script>
-
 
 <!--getAreas() array (size=4)
           'Ref' => string '71508129-9b87-11de-822f-000c2965ae0e' (length=36)

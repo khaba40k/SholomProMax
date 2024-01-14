@@ -6,7 +6,8 @@
     <publishUrl>ftp.sholompromax.com:21</publishUrl>
     <UserName>andrii@sholompromax.com</UserName>
     <_SavePWD>True</_SavePWD>
-    <FtpSitePath />
+    <FtpSitePath>
+    </FtpSitePath>
     <FtpPassiveMode>True</FtpPassiveMode>
     <FtpSecurity>None</FtpSecurity>
     <WebPublishMethod>FTP</WebPublishMethod>

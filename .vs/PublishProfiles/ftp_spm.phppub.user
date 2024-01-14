@@ -57,13 +57,16 @@
       <publishTime>10/31/2023 00:47:43</publishTime>
     </File>
     <File Include="blok/expenses.php">
-      <publishTime>10/31/2023 00:51:12</publishTime>
+      <publishTime>01/11/2024 16:26:00</publishTime>
     </File>
     <File Include="blok/expenses_menu.php">
       <publishTime>10/25/2023 17:58:11</publishTime>
     </File>
     <File Include="blok/get_cities_op.php">
       <publishTime>11/10/2023 18:15:30</publishTime>
+    </File>
+    <File Include="blok/get_client_list_query.php">
+      <publishTime>01/14/2024 14:24:55</publishTime>
     </File>
     <File Include="blok/get_NP_op.php">
       <publishTime>11/22/2023 19:10:04</publishTime>
@@ -78,7 +81,7 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/new_Z.php">
-      <publishTime>12/12/2023 13:51:39</publishTime>
+      <publishTime>01/11/2024 12:23:13</publishTime>
     </File>
     <File Include="blok/price_list.php">
       <publishTime>10/21/2023 20:14:18</publishTime>
@@ -104,8 +107,11 @@
     <File Include="blok/shop.php">
       <publishTime>12/20/2023 12:44:45</publishTime>
     </File>
+    <File Include="blok/sms_menu.php">
+      <publishTime>01/14/2024 14:32:44</publishTime>
+    </File>
     <File Include="blok/sms_send.php">
-      <publishTime>01/10/2024 16:06:50</publishTime>
+      <publishTime>01/10/2024 17:03:59</publishTime>
     </File>
     <File Include="blok/sum_info.php">
       <publishTime>12/12/2023 13:05:24</publishTime>
@@ -126,7 +132,7 @@
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>12/06/2023 11:49:47</publishTime>
+      <publishTime>01/11/2024 19:10:40</publishTime>
     </File>
     <File Include="composer.json">
       <publishTime>11/08/2023 16:16:56</publishTime>
@@ -348,13 +354,13 @@
       <publishTime>11/08/2023 16:13:07</publishTime>
     </File>
     <File Include="style.css">
-      <publishTime>12/06/2023 12:54:08</publishTime>
+      <publishTime>01/14/2024 14:14:39</publishTime>
     </File>
     <File Include="test - Копировать.php">
       <publishTime>10/27/2023 15:42:20</publishTime>
     </File>
     <File Include="test.php">
-      <publishTime>01/10/2024 15:09:23</publishTime>
+      <publishTime>01/11/2024 11:39:06</publishTime>
     </File>
     <File Include="tests/NovaPoshtaApi2Test.php">
       <publishTime>11/08/2023 16:13:08</publishTime>

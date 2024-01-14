@@ -1,11 +1,17 @@
-<?php
+﻿<?php
 
-$NUMBER = $_GET['tel'];
-$TEXT = $_GET['mes'];
+$TEXT = trim($_GET['mes']);
+
+if (empty($TEXT)){
+    echo 'Повідомлення пусте!';
+    exit;
+}
+
+$NUMBER = explode(',', $_GET['tel']);
 
 //echo SEND_ONE_SMS($NUMBER, $TEXT);
 
-echo SEND_MORE_SMS([$NUMBER], $TEXT);
+echo SEND_MORE_SMS($NUMBER, $TEXT);
 
 function SEND_ONE_SMS($number, $mes)
 {
@@ -24,14 +30,21 @@ function SEND_ONE_SMS($number, $mes)
     $headers[] = 'Authorization: bearer ' . GET_MARKER();
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    curl_exec($ch);
+    $response = json_decode(curl_exec($ch));
 
     if (curl_errno($ch)) {
-        return 'Error:' . curl_error($ch);
+        return 'ПОМИЛКА:' . curl_error($ch);
     }
+
     curl_close($ch);
 
-    return 'OK';
+    $ans = 'СТАТУС:';
+
+    foreach ($response as $a){
+        $ans .= "<br>" . explode('-',$a->id)[2] . ' => ' . answerInfo($a->status);
+    }
+
+    return $ans;
 }
 
 function SEND_MORE_SMS(array $NUMBERS, $mes){
@@ -47,6 +60,8 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
             $AB .= "{\"id\": " . $counter++ . ",\"phoneNumber\": ".$p."},";
         }
     }
+
+    if ($counter == 0) return 'НОМЕР НЕ КОРЕКТНИЙ!';
 
     $AB =  substr($AB, 0, strlen($AB) - 1);
 
@@ -64,14 +79,21 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
     $headers[] = 'Authorization: bearer ' . GET_MARKER();
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    curl_exec($ch);
+    $response = json_decode(curl_exec($ch));
 
     if (curl_errno($ch)) {
-        return 'Error:' . curl_error($ch);
+        return 'ПОМИЛКА:' . curl_error($ch);
     }
+
     curl_close($ch);
 
-    return 'OK';
+    $ans = 'СТАТУС:';
+
+    foreach ($response as $a){
+        $ans .= "<br>" . explode('-', $a->id)[2] . ' => ' . answerInfo($a->status);
+    }
+
+    return $ans;
 }
 
 function GET_MARKER():string{
@@ -120,5 +142,19 @@ function getCorrectPhone(string $in, $kodKr = true){
         $out = '380' . $out;
 
     return $out;
+}
+
+function answerInfo($word):string{
+    $ARR = [
+         'UNACCEPTED'=>'Платформа не прийняла повідомлення',
+         'ACCEPTED'=>'Повідомлення прийнято платформою',
+         'UNDELIVERABLE'=>'Доставка на вказаний номер неможлива',
+         'PENDING'=>'Повідомлення було доставлено в мережу одержувача, але не одержувачу. Ймовірно, - вимкнено телефон.',
+         'DELIVERED'=>'Доставлено одержувачу',
+         'EXPIRED'=>'Термін дії повідомлення минув',
+         'REJECTED'=>'Повідомлення було відхилено мережею одержувача'
+    ];
+
+    return $ARR[$word] ?? 'НЕВІДОМО';
 }
 ?>

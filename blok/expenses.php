@@ -479,7 +479,7 @@ function emptyRow($cur_row_id = 1, $serv_id = null, $serv_type = 1):HTEL{
     if ($_GET['for'] == 'in'){
         $td[5] = new HTEL('td'); //comm
 
-        $td[5](new HTEL('input !=comm_s_[0] ?=comm_[0] *=text'));
+        $td[5](new HTEL('input !=comm_s_[0] ?=comm_[0] *=text &=[1]', [1=>'font-size:130%;']));
     }
 
     $out($td);

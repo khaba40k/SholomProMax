@@ -1,4 +1,27 @@
-[02-Nov-2023 02:11:04 UTC] PHP Warning:  Undefined array key "logged" in /home2/sholompr/public_html/class/universal.php on line 6
-[02-Nov-2023 02:11:04 UTC] PHP Stack trace:
-[02-Nov-2023 02:11:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/index.php:0
-[02-Nov-2023 02:11:04 UTC] PHP   2. HIDE() /home2/sholompr/public_html/index.php:24
+[14-Jan-2024 10:18:08 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:18:08 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:08 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:18:11 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:18:11 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:11 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:28:21 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:28:21 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:21 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:30:27 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:30:27 UTC] PHP Stack trace:
+[14-Jan-2024 10:30:27 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:31:24 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:31:24 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:24 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:31:25 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:31:25 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:25 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0
+[14-Jan-2024 10:31:28 UTC] PHP Warning:  Undefined array key "ds;gzjfmsds;fds" in /home2/sholompr/public_html/work.php on line 24
+[14-Jan-2024 10:31:28 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:28 UTC] PHP   1. {main}() /home2/sholompr/public_html/work.php:0

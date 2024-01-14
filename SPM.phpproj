@@ -19,8 +19,6 @@
     <PHPDevHostName>sholompromax.com</PHPDevHostName>
     <PHPDevAutoPort>true</PHPDevAutoPort>
     <PHPDevRouting />
-    <PublishEvent>AfterSave</PublishEvent>
-    <PublishBeforeDebugProfile>ftp_spm</PublishBeforeDebugProfile>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="blok\error_log" />

@@ -256,12 +256,12 @@ $div[] = new HTEL('div', [
 ]);
 
 $div[] = new HTEL('div', [
-    new HTEL('label for=client/Ім`я'),
+    new HTEL('label for=client/Прізвище, ім`я'),
     new HTEL('input !=client ?=pip #=[7] [r]')
 ]);
 
 $div[] = new HTEL('div .=NP_SELECTOR', [
-        new HTEL('label for=np_select_v/Реквізити НП'),
+        new HTEL("label for=np_select_v/Реквізити \nзворотньої доставки"),
         new HTEL('div', [
             new HTEL('input *=text !=np_input list=list_np ?=rek_out $=населений+пункт [r] #=[8]'),
             new HTEL('select !=np_sel_cit'),

@@ -490,6 +490,9 @@ class HTEL {
             case 'input':
                 $out .= $closer[3] . $TEXT;
                 break;
+            case 'textarea':
+                $out .= $closer[3] . $TEXT . $closer[2] . $this->element_type . $closer[1] . PHP_EOL;
+                break;
             default:
                 $out .= $closer[1];
                    if ($TEXT != ''){

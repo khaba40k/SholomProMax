@@ -1,30 +1,454 @@
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/record_new_z.php on line 21
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "ID" in /home2/sholompr/public_html/blok/record_new_z.php on line 136
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "phone_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 141
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "pip" in /home2/sholompr/public_html/blok/record_new_z.php on line 142
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "rek_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 143
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "phone_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 155
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "pip" in /home2/sholompr/public_html/blok/record_new_z.php on line 156
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:25:09 UTC] PHP Warning:  Undefined array key "rek_out" in /home2/sholompr/public_html/blok/record_new_z.php on line 157
-[02-Nov-2023 02:25:09 UTC] PHP Stack trace:
-[02-Nov-2023 02:25:09 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
-[02-Nov-2023 02:27:42 UTC] PHP Warning:  Undefined variable $discont_perc in /home2/sholompr/public_html/blok/remowe_info.php on line 14
-[02-Nov-2023 02:27:42 UTC] PHP Stack trace:
-[02-Nov-2023 02:27:42 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/remowe_info.php:0
-[02-Nov-2023 02:37:05 UTC] PHP Warning:  Undefined variable $discont_perc in /home2/sholompr/public_html/blok/remowe_info.php on line 14
-[02-Nov-2023 02:37:05 UTC] PHP Stack trace:
-[02-Nov-2023 02:37:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/remowe_info.php:0
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Undefined array key 16 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Undefined array key 15 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 0, $serv_name = 'Кавер', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 0, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 1, $serv_name = 'Противага', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 1, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:02 UTC] PHP Warning:  Undefined array key 1 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:04:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:04:02 UTC] PHP   2. print_serv($serv_ID = 24, $serv_name = 'Кріплення для ПНБ Wilcox L4 G24', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:04:02 UTC] PHP   3. rightFor($serv_id = 24, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:04:41 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:04:41 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:41 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:04:41 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:182
+[14-Jan-2024 10:04:41 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:04:41 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:41 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:04:41 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:199
+[14-Jan-2024 10:04:41 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:04:41 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:41 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:04:41 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:216
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:04:43 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 204
+[14-Jan-2024 10:04:43 UTC] PHP Stack trace:
+[14-Jan-2024 10:04:43 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:04:43 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_query(): Argument #1 ($mysql) must be of type mysqli, null given in /home2/sholompr/public_html/blok/get_client_list_query.php:204
+Stack trace:
+#0 /home2/sholompr/public_html/blok/get_client_list_query.php(204): mysqli_query()
+#1 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 204
+[14-Jan-2024 10:05:11 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:05:11 UTC] PHP Stack trace:
+[14-Jan-2024 10:05:11 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:05:11 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:182
+[14-Jan-2024 10:05:11 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:05:11 UTC] PHP Stack trace:
+[14-Jan-2024 10:05:11 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:05:11 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:199
+[14-Jan-2024 10:05:11 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:05:11 UTC] PHP Stack trace:
+[14-Jan-2024 10:05:11 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:05:11 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:216
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:05:12 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:05:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:05:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:05:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:216
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:06:02 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 208
+[14-Jan-2024 10:06:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:02 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:02 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:06:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:02 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:06:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:02 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:02 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 272
+[14-Jan-2024 10:06:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:02 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:02 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 274
+[14-Jan-2024 10:06:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:02 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:02 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:06:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:02 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '0') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '0', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 208
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 272
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:04 UTC] PHP Warning:  Undefined array key "is_rewrite" in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 274
+[14-Jan-2024 10:06:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:06:04 UTC] PHP   2. rightFor($serv_id = '', $serv_type = '1') /home2/sholompr/public_html/blok/ch_var_col_set.php:117
+[14-Jan-2024 10:06:32 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:06:32 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:32 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:06:32 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:182
+[14-Jan-2024 10:06:32 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:06:32 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:32 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:06:32 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:200
+[14-Jan-2024 10:06:32 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:06:32 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:32 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:06:32 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:06:33 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:06:33 UTC] PHP Stack trace:
+[14-Jan-2024 10:06:33 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:06:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:01 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:07:01 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:01 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:01 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:182
+[14-Jan-2024 10:07:01 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:07:01 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:01 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:01 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:200
+[14-Jan-2024 10:07:01 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:01 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:01 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:04 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:05 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:15 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:15 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:15 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:17 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:07:17 UTC] PHP Stack trace:
+[14-Jan-2024 10:07:17 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:07:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:217
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 217
+[14-Jan-2024 10:08:19 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:08:19 UTC] PHP Stack trace:
+[14-Jan-2024 10:08:19 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:08:19 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:182
+[14-Jan-2024 10:08:19 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:08:19 UTC] PHP Stack trace:
+[14-Jan-2024 10:08:19 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:08:19 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:199
+[14-Jan-2024 10:08:19 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:08:19 UTC] PHP Stack trace:
+[14-Jan-2024 10:08:19 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:08:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:216
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:08:20 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:08:20 UTC] PHP Stack trace:
+[14-Jan-2024 10:08:20 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:08:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:216
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 216
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_16" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_15" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_17" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_2" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_3" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_20" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_4" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_5" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "type_0" in /home2/sholompr/public_html/blok/accept_dialog.php on line 94
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:05 UTC] PHP Warning:  Undefined array key "" in /home2/sholompr/public_html/blok/accept_dialog.php on line 139
+[14-Jan-2024 10:10:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/accept_dialog.php:0
+[14-Jan-2024 10:10:18 UTC] PHP Warning:  Undefined array key "cost_1" in /home2/sholompr/public_html/blok/record_new_z.php on line 183
+[14-Jan-2024 10:10:18 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:18 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[14-Jan-2024 10:10:18 UTC] PHP Warning:  Undefined array key "cost_8" in /home2/sholompr/public_html/blok/record_new_z.php on line 183
+[14-Jan-2024 10:10:18 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:18 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[14-Jan-2024 10:10:18 UTC] PHP Warning:  Undefined array key "cost_7" in /home2/sholompr/public_html/blok/record_new_z.php on line 183
+[14-Jan-2024 10:10:18 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:18 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[14-Jan-2024 10:10:18 UTC] PHP Warning:  Undefined array key "cost_6" in /home2/sholompr/public_html/blok/record_new_z.php on line 183
+[14-Jan-2024 10:10:18 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:18 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[14-Jan-2024 10:10:18 UTC] PHP Warning:  Undefined array key "cost_9" in /home2/sholompr/public_html/blok/record_new_z.php on line 183
+[14-Jan-2024 10:10:18 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:18 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[14-Jan-2024 10:10:18 UTC] PHP Warning:  Undefined array key "cost_24" in /home2/sholompr/public_html/blok/record_new_z.php on line 183
+[14-Jan-2024 10:10:18 UTC] PHP Stack trace:
+[14-Jan-2024 10:10:18 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/record_new_z.php:0
+[14-Jan-2024 10:13:05 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:13:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:13:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:13:05 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:182
+[14-Jan-2024 10:13:05 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:13:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:13:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:13:05 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:198
+[14-Jan-2024 10:13:05 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 215
+[14-Jan-2024 10:13:05 UTC] PHP Stack trace:
+[14-Jan-2024 10:13:05 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:13:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:215
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 215
+[14-Jan-2024 10:13:06 UTC] PHP Warning:  Undefined variable $link in /home2/sholompr/public_html/blok/get_client_list_query.php on line 215
+[14-Jan-2024 10:13:06 UTC] PHP Stack trace:
+[14-Jan-2024 10:13:06 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:13:06 UTC] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home2/sholompr/public_html/blok/get_client_list_query.php:215
+Stack trace:
+#0 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 215
+[14-Jan-2024 10:15:04 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:15:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:15:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:15:04 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:184
+[14-Jan-2024 10:15:04 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:15:04 UTC] PHP Stack trace:
+[14-Jan-2024 10:15:04 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:15:04 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:200
+[14-Jan-2024 10:16:16 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:16:16 UTC] PHP Stack trace:
+[14-Jan-2024 10:16:16 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:16:16 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:184
+[14-Jan-2024 10:16:16 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:16:16 UTC] PHP Stack trace:
+[14-Jan-2024 10:16:16 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:16:16 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:199
+[14-Jan-2024 10:18:14 UTC] PHP Warning:  Undefined array key 16 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:18:14 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:14 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:18:14 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:18:14 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:18:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:18:14 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:14 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:18:14 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:18:14 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:18:14 UTC] PHP Warning:  Undefined array key 15 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:18:14 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:14 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:18:14 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:18:14 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:18:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:18:14 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:14 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:18:14 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:18:14 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:18:47 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:18:47 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:47 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:18:47 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:184
+[14-Jan-2024 10:18:47 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:18:47 UTC] PHP Stack trace:
+[14-Jan-2024 10:18:47 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:18:47 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:199
+[14-Jan-2024 10:26:02 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 117
+[14-Jan-2024 10:26:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:26:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:26:02 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:184
+[14-Jan-2024 10:26:02 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:26:02 UTC] PHP Stack trace:
+[14-Jan-2024 10:26:02 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:26:02 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:201
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Undefined array key 16 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:28:22 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:28:22 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:28:22 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:28:22 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Undefined array key 15 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:28:22 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:28:22 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:28:22 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:28:22 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:28:22 UTC] PHP   2. print_serv($serv_ID = 0, $serv_name = 'Кавер', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:28:22 UTC] PHP   3. rightFor($serv_id = 0, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:28:22 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:28:22 UTC] PHP Stack trace:
+[14-Jan-2024 10:28:22 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:28:22 UTC] PHP   2. print_serv($serv_ID = 1, $serv_name = 'Противага', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:28:22 UTC] PHP   3. rightFor($serv_id = 1, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Undefined array key 16 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:31:12 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:31:12 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:31:12 UTC] PHP   2. print_serv($serv_ID = 16, $serv_name = 'Обрізка', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:31:12 UTC] PHP   3. rightFor($serv_id = 16, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Undefined array key 15 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:31:12 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:31:12 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 217
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:31:12 UTC] PHP   2. print_serv($serv_ID = 15, $serv_name = 'Реставрація', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:31:12 UTC] PHP   3. rightFor($serv_id = 15, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:31:12 UTC] PHP   2. print_serv($serv_ID = 0, $serv_name = 'Кавер', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:31:12 UTC] PHP   3. rightFor($serv_id = 0, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:12 UTC] PHP Warning:  Undefined array key 0 in /home2/sholompr/public_html/blok/ch_var_col_set.php on line 255
+[14-Jan-2024 10:31:12 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:12 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/ch_var_col_set.php:0
+[14-Jan-2024 10:31:12 UTC] PHP   2. print_serv($serv_ID = 1, $serv_name = 'Противага', $_types = NULL) /home2/sholompr/public_html/blok/ch_var_col_set.php:130
+[14-Jan-2024 10:31:12 UTC] PHP   3. rightFor($serv_id = 1, $serv_type = 1) /home2/sholompr/public_html/blok/ch_var_col_set.php:196
+[14-Jan-2024 10:31:53 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 121
+[14-Jan-2024 10:31:53 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:53 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:31:53 UTC] PHP   2. QUERY_MASTER->GET_NEGATIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:188
+[14-Jan-2024 10:31:53 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /home2/sholompr/public_html/blok/get_client_list_query.php on line 41
+[14-Jan-2024 10:31:53 UTC] PHP Stack trace:
+[14-Jan-2024 10:31:53 UTC] PHP   1. {main}() /home2/sholompr/public_html/blok/get_client_list_query.php:0
+[14-Jan-2024 10:31:53 UTC] PHP   2. QUERY_MASTER->GET_POSITIVE() /home2/sholompr/public_html/blok/get_client_list_query.php:205
+[14-Jan-2024 10:31:54 UTC] PHP Fatal error:  Uncaught TypeError: mysqli_num_rows(): Argument #1 ($result) must be of type mysqli_result, bool given in /home2/sholompr/public_html/blok/get_client_list_query.php:213
+Stack trace:
+#0 /home2/sholompr/public_html/blok/get_client_list_query.php(213): mysqli_num_rows()
+#1 {main}
+  thrown in /home2/sholompr/public_html/blok/get_client_list_query.php on line 213

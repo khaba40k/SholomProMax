@@ -16,17 +16,26 @@
 
     <?php
     //require("blok/conn_local.php");
-    
+
     require "blok/header.php";
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    $num = new HTEL('input !=tel *=tel ?=tel $=номер');
-    $inp = new HTEL('input !=mes *=text ?=mes');
-    $but = new HTEL('button !=subm *=submit/send');
-    $lab = new HTEL('lable !=ans');
+    #region СМС
 
-    echo $num . '<br>' . $inp . '<br>' . $but . '<br><br>' . $lab;
+    //$style = 'width:30%;height:40px;';
+
+    //$num = new HTEL('input !=tel *=tel ?=tel $=номери &=[0]', $style);
+    //$inp = new HTEL('input !=mes *=text ?=mes $=смс &=[0]', $style);
+    //$but = new HTEL('button !=subm *=submit/send');
+    //$lab = new HTEL('lable !=ans');
+
+    //echo $num . '<br>' . $inp . '<br>' . $but . '<br><br>' . $lab;
+
+	#endregion
+
+    include "blok/sms_menu.php";
+
     ?>
 
 </body>

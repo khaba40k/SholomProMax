@@ -1,15 +1,26 @@
-﻿<?php
+<?php
 
-$TEXT = trim($_GET['mes']);
+$TEXT = trim($_POST['mes']);
+$input_tel = json_decode($_POST['tel']);
 
 if (empty($TEXT)){
     echo 'Повідомлення пусте!';
     exit;
 }
 
-$NUMBER = explode(',', $_GET['tel']);
+if (count($input_tel) == 0) {
+    echo 'Номерів не вказано!';
+    exit;
+}
+
+$NUMBER = array();
 
 //echo SEND_ONE_SMS($NUMBER, $TEXT);
+foreach ($input_tel as $t){
+    $NUMBER[] = $t->value;
+}
+
+//$NUMBER[] = '+380631546860';
 
 echo SEND_MORE_SMS($NUMBER, $TEXT);
 
@@ -22,7 +33,7 @@ function SEND_ONE_SMS($number, $mes)
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, "{ \"content\": \"" . $mes .
     "\", \"type\": \"SMS\", \"receiver\": [ { \"id\": 0, \"phoneNumber\": " . $number .
-    " } ], \"sender\": { \"id\": \"SholomPro\" }, \"characteristic\": [ { \"name\": \"DISTRIBUTION.ID\", \"value\": 5434146 }, { \"name\": \"VALIDITY.PERIOD\", \"value\": \"000000000100000R\" } ] }");
+    " } ], \"sender\": { \"id\": \"HelmetUA\" }, \"characteristic\": [ { \"name\": \"DISTRIBUTION.ID\", \"value\": 5486092 }, { \"name\": \"VALIDITY.PERIOD\", \"value\": \"000001000000000R\" } ] }");
 
     $headers = array();
     $headers[] = 'Content-Type: application/json';
@@ -70,8 +81,8 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS,
     "{\"content\": \"". $mes ."\",\"type\": \"SMS\",\"receiver\": [". $AB .
-    "],\"sender\": {\"id\": \"SholomPro\"},\"characteristic\": [{\"name\": \"DISTRIBUTION.ID\",\"value\": 5434146},
-    {\"name\": \"VALIDITY.PERIOD\",\"value\": \"000000000100000R\"}]}");
+    "],\"sender\": {\"id\": \"HelmetUA\"},\"characteristic\": [{\"name\": \"DISTRIBUTION.ID\",\"value\": 5486092},
+    {\"name\": \"VALIDITY.PERIOD\",\"value\": \"000001000000000R\"}]}");
 
     $headers = array();
     $headers[] = 'Accept: */*';
@@ -85,15 +96,30 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
         return 'ПОМИЛКА:' . curl_error($ch);
     }
 
+    //var_dump($response);
+    //echo '<br><br>';
+
     curl_close($ch);
 
     $ans = 'СТАТУС:';
 
+    $arr_ans = array();
+
     foreach ($response as $a){
+        $arr_ans[] = $a->id;
+
         $ans .= "<br>" . explode('-', $a->id)[2] . ' => ' . answerInfo($a->status);
     }
 
+    RecOnBase($arr_ans, $mes);
+
     return $ans;
+}
+
+function RecOnBase(array $arr, string $mes){
+
+    //ЗАПИС В БАЗУ ДАНИХ
+
 }
 
 function GET_MARKER():string{

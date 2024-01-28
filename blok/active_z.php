@@ -248,7 +248,7 @@ if ($counter > 0){
             $div(new HTEL('label/[4]'));
         }
 
-        if ((!isset($_SESSION[$row['redaktor']]) && $_SESSION[$_SESSION['logged']] <= 1) || $_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]) {
+        if ((!isset($_SESSION[$row['redaktor']]) && $_SESSION[$_SESSION['logged']] <= 2) || $_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]) {
             $div([
                 new HTEL('button *=button .=but_prt onclick=printInfo([7],0,`[5]`,`[6]`)'),
                 new HTEL('button *=button .=but_cng onclick=changeInfo([7],`[6]`)'),

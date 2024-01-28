@@ -248,7 +248,7 @@ if (mysqli_num_rows($result) != 0) {
         if (!empty($phone_number)){
             $tr = new HTEL('tr .=client_row #=[0]', $counter);
 
-            $tr(new HTEL('td', new HTEL('input *=checkbox ?=sendTo_[0] [c]')));
+            $tr(new HTEL('td', new HTEL('input *=checkbox ?=[0] #=[1] [c]', [1=> $phone_number])));
 
             if (($row['sholom_num'] ?? $row['sold_number']) == 0) {
                 $tr(new HTEL('td/-'));
@@ -256,7 +256,7 @@ if (mysqli_num_rows($result) != 0) {
                 $tr(new HTEL('td/№ [0]', $row['sholom_num'] ?? $row['sold_number']));
             }
 
-            $tr(new HTEL('td/[0]', $phone_number));
+            $tr(new HTEL('td/[0]',  $phone_number));
             $tr(new HTEL('td/[0]', $row['client_name']));
 
             $tbody($tr);

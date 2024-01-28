@@ -38,11 +38,11 @@ $filers(NewFilter());
 
 $message = new HTEL('fieldset !=message &=padding:1%;', [
     new HTEL('legend/Повідомлення'),
-    new HTEL('textarea $=ТЕКСТ+ПОВІДОМЛЕННЯ &=width:100%;min-height:100px;resize:vertical;'),
+    new HTEL('textarea !=mes_text $=ТЕКСТ+ПОВІДОМЛЕННЯ &=width:100%;min-height:100px;resize:vertical;'),
     new HTEL('button !=start_button/НАДІСЛАТИ')
 ]);
 
-$client_list = new HTEL('fieldset &=padding:1%;', [new HTEL('legend/ОТРИМУВАЧІ'), new HTEL('div !=clientlist')]);
+$client_list = new HTEL('fieldset &=padding:1%;', [new HTEL('legend/ОТРИМУВАЧІ'), new HTEL('form !=clientlist')]);
 
 function NewFilter($id = 0): HTEL
 {
@@ -170,4 +170,17 @@ echo $client_list;
              $('#clientlist').append(result);
          });
     }
+
+    $('#start_button').on('click', function () {
+
+        var data = JSON.stringify( $('#clientlist').serializeArray());
+        var text = $('#mes_text').val();
+
+        $.post('blok/sms_send.php', {mes: text, tel: data}, function (result) {
+            $('#clientlist').empty();
+            $('#clientlist').append(result);
+        });
+
+    });
+
 </script>

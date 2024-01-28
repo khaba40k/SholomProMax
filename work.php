@@ -110,7 +110,8 @@
     if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
     $div([
         new HTEL("button !=formPrice/ЦІНИ"),
-        new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки")
+        new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки"),
+        new HTEL("button !=formSMS/РОЗСИЛКА СМС")
     ]);
 
     $form($div);
@@ -249,6 +250,20 @@
         });
 
     });
+
+        $('#formSMS').on('click', function () {
+
+            console.log('+++');
+
+            $.ajax({
+                url: 'blok/sms_menu.php',
+                dataType: 'html',
+                success: function (response) {
+                    $('#workfield').html(response);
+                }
+            });
+
+        });
 
     function Search($request) {
         $('#request').val($request);

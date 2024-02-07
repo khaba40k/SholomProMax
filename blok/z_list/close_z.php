@@ -2,7 +2,7 @@
 
     function goToPrint(id, type) {
         $.ajax({
-        url: 'blok/print_to_work.php',
+        url: 'blok/z_list/print_to_work.php',
         method: 'GET',
         dataType: 'html',
         data: 'ID=' + id + '&hideForWorker=0&type=archiv&variant=' + type,

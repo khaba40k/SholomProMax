@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $arr_cnt = array();
 
@@ -167,7 +167,7 @@ function MyVal($val):string{
         var name = $(this).text();
 
         $.ajax({
-            url: 'blok/count_info.php',
+            url: 'blok/zvit/count_info.php',
             method: 'get',
             dataType: 'html',
             data: 'ID=' + id_type[0] + '&TYPE=' + id_type[1] + '&NAME=' + name,
@@ -183,7 +183,7 @@ function MyVal($val):string{
         var name = $('#' + id_type_color[0] + '_' + id_type_color[1]).text();
 
         $.ajax({
-            url: 'blok/count_info.php',
+            url: 'blok/zvit/count_info.php',
             method: 'get',
             dataType: 'html',
             data: 'ID=' + id_type_color[0] + '&TYPE=' + id_type_color[1] + '&NAME=' + name + '&COLOR=' + id_type_color[2],

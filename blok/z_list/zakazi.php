@@ -8,7 +8,7 @@
     function newZ() {
 
         $.ajax({
-            url: 'blok/new_Z.php',
+            url: 'blok/z_create/new_Z.php',
             dataType: 'html',
             success: function (responce) {
                 $('#zakaz_workplace').html(responce);
@@ -19,7 +19,7 @@
     function newZsold() {
 
         $.ajax({
-            url: 'blok/new_Z.php',
+            url: 'blok/z_create/new_Z.php',
             method: 'GET',
             dataType: 'html',
             data: 'type=sold',
@@ -35,7 +35,7 @@
         if (period != '') datesend += '&period=' + period;
          
           $.ajax({
-                url: 'blok/active_z.php',
+                url: 'blok/z_list/active_z.php',
                 method: 'GET',
               dataType: 'html',
               data: datesend,

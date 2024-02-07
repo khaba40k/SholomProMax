@@ -1,6 +1,18 @@
 <?php
-require("conn_local.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
+//отримання списку адміністраторів/редакторів
+
+$query = 'SELECT login FROM users';
+
+$result = mysqli_query($link, $query);
+
+$users = array();
+
+foreach($result as $row){
+    $users[] = $row['login'];
+}
 
 $_GET['type'] = $_GET['type'] ?? 'archiv';
 
@@ -8,7 +20,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == ''){
 
     switch ($_GET['type']) {
         case 'new':
-            $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND `TTN_IN` IS NULL AND `sholom_num` = 0 ORDER BY `date_max` ASC';
+            $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND `TTN_IN` IS NULL AND `sholom_num` = 0 ORDER BY `date_max` DESC';
             break;
         case 'inwork':
             $query = 'SELECT * FROM `client_info` where `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL) ORDER BY `date_max` ASC';
@@ -197,7 +209,7 @@ if ($counter > 0){
         }
 
         $style .= 'background:' . ($variant == 'def' ?
-        "linear-gradient(to left, yellow, rgba(255, 255, 255, 0.50));" : 
+        "linear-gradient(to left, yellow, rgba(255, 255, 255, 0.50));" :
         "linear-gradient(to left, lightgray, rgba(255, 255, 255, 0.50));");
 
         $pip = explode(' ', trim($row['client_name']));
@@ -209,7 +221,7 @@ if ($counter > 0){
         }
 
         $div = new HTEL(
-            'div !=[7] .=activeZ &=[8]',
+            'div !=[7] .=activeZ+[9] &=[8]',
             [
                 $num,
                 $pip_out,
@@ -220,6 +232,7 @@ if ($counter > 0){
                 $variant,
                 $ID,
                 $style,
+                classFromCreator($row['redaktor']),
                 new HTEL('p/[0]', $row['redaktor'])
             ]
         );
@@ -232,13 +245,12 @@ if ($counter > 0){
         if ($row['callback'] == 1 && $row['date_out'] === null) {
             $div(
                 new HTEL(
-                    'a @=tel:[0] &=color:yellow;border:2px+solid+blue;border-radius:3px;text-decoration:unset;background-color:red;/[2]',
-                    getCorrectPhone($row['phone'], true)
+                    'label &=color:yellow;border:2px+solid+blue;border-radius:3px;text-decoration:unset;background-color:red;/[2]'
                 )
             );
         } else {
             $div(
-                new HTEL('a @=tel:[0] &=color:black;text-decoration:unset;/[2]', getCorrectPhone($row['phone'], true))
+                new HTEL('label/[2]')
             );
         }
 
@@ -248,19 +260,23 @@ if ($counter > 0){
             $div(new HTEL('label/[4]'));
         }
 
+        $div_buttons = new HTEL('div .=buttons');
+
         if ((!isset($_SESSION[$row['redaktor']]) && $_SESSION[$_SESSION['logged']] <= 2) || $_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]) {
-            $div([
+            $div_buttons([
                 new HTEL('button *=button .=but_prt onclick=printInfo([7],0,`[5]`,`[6]`)'),
                 new HTEL('button *=button .=but_cng onclick=changeInfo([7],`[6]`)'),
                 new HTEL('button *=button .=but_del onclick=removeInfo([7],[0])')
             ]);
         } else {
-            $div([
+            $div_buttons([
                 new HTEL('button *=button .=but_prt+dis '),
                 new HTEL('button *=button .=but_cng+dis '),
                 new HTEL('button *=button .=but_del+dis ')
             ]);
         }
+
+        $div($div_buttons);
 
         if ($row['discount'] !== null) {
             $div(new HTEL('label .=percent/-[0]%', $row['discount']));
@@ -283,6 +299,16 @@ else {
 
 $link->close();
 
+
+function classFromCreator($creator):string{
+    $us = $GLOBALS['users'];
+
+    if (!in_array($creator, $us)){
+        return 'customcreator';
+    }
+
+    return '';
+}
 function getCorrectPhone(string $in, $kodKr = false):string{
     $out = '';
 
@@ -310,7 +336,7 @@ function getCorrectPhone(string $in, $kodKr = false):string{
 <script>
     function printInfo($in, $hide = 0, $type = 'activ', $var = 'def') {
             $.ajax({
-                url: 'blok/print_to_work.php',
+                url: 'blok/z_list/print_to_work.php',
                 method: 'GET',
                 dataType: 'html',
                 data: 'ID=' + $in + '&hideForWorker=' + $hide + '&type=' + $type + '&variant=' + $var,
@@ -325,7 +351,7 @@ function getCorrectPhone(string $in, $kodKr = false):string{
      function changeInfo($in, $var = 'def') {
 
      $.ajax({
-         url: 'blok/new_Z.php',
+         url: 'blok/z_create/new_Z.php',
          method: 'GET',
          dataType: 'html',
          data: 'ID=' + $in+ '&type=' + $var,
@@ -340,7 +366,7 @@ function getCorrectPhone(string $in, $kodKr = false):string{
 
          if (confirm('Підтвердіть видалення даних по шолому '  + $num)) {
              $.ajax({
-                 url: 'blok/remowe_info.php',
+                 url: 'blok/z_list/remowe_info.php',
                  method: 'GET',
                  dataType: 'html',
                  data: 'ID=' + $in,
@@ -350,6 +376,12 @@ function getCorrectPhone(string $in, $kodKr = false):string{
              });
          };
     };
+
+    $('.activeZ').hover(function () {
+        var $this = $(this).find('.buttons');
+        $('.buttons').not($this).removeClass('show_podmenu');
+        $this.toggleClass("show_podmenu");
+    });
 
 </script>
 

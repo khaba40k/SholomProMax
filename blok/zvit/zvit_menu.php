@@ -33,7 +33,7 @@ echo new HTEL('div !=zvitResult');
 
     function showTable() {
                 $.ajax({
-                url: 'blok/table_sum.php',
+                url: 'blok/zvit/table_sum.php',
                 method: 'GET',
                 dataType: 'html',
                 data: $("#zvitMenu").serialize(),
@@ -44,6 +44,9 @@ echo new HTEL('div !=zvitResult');
     }
 
     $('.perChng').on('click', function () {
+
+        $('#zvitResult').empty();
+        $('#zvitResult').append('ЗАЧЕКАЙТЕ...');
 
         $('.perChng').not(this).removeClass('clicked_but')
         $(this).toggleClass('clicked_but');

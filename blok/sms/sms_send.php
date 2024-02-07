@@ -1,24 +1,25 @@
 <?php
 
 $TEXT = trim($_POST['mes']);
-$input_tel = json_decode($_POST['tel']);
-
-if (empty($TEXT)){
-    echo 'Повідомлення пусте!';
-    exit;
-}
-
-if (count($input_tel) == 0) {
-    echo 'Номерів не вказано!';
-    exit;
-}
 
 $NUMBER = array();
 
-//echo SEND_ONE_SMS($NUMBER, $TEXT);
-foreach ($input_tel as $t){
-    $NUMBER[] = $t->value;
+if (isset($_POST['tellist'])){
+    $input_tel = json_decode($_POST['tellist']);
+
+    if (count($input_tel) == 0) {
+        echo 'Номерів не вказано!';
+        exit;
+    }
+
+    foreach ($input_tel as $t) {
+        $NUMBER[] = $t->value;
+    }
+}else{
+    $NUMBER[] = $_POST['tel'] ?? '';
 }
+
+//echo SEND_ONE_SMS($NUMBER, $TEXT);
 
 //$NUMBER[] = '+380631546860';
 
@@ -26,6 +27,12 @@ echo SEND_MORE_SMS($NUMBER, $TEXT);
 
 function SEND_ONE_SMS($number, $mes)
 {
+    $marker = GET_MARKER();
+
+    if (substr($marker, 0, 5) == 'Error') {
+        return $marker;
+    }
+
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, 'https://a2p.vodafone.ua/communication-event/api/communicationManagement/v2/communicationMessage/send');
@@ -38,7 +45,7 @@ function SEND_ONE_SMS($number, $mes)
     $headers = array();
     $headers[] = 'Content-Type: application/json';
     $headers[] = 'Accept: */*';
-    $headers[] = 'Authorization: bearer ' . GET_MARKER();
+    $headers[] = 'Authorization: bearer ' . $marker;
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = json_decode(curl_exec($ch));
@@ -59,6 +66,13 @@ function SEND_ONE_SMS($number, $mes)
 }
 
 function SEND_MORE_SMS(array $NUMBERS, $mes){
+
+    $marker = GET_MARKER();
+
+    if (substr($marker, 0, 5) == 'Error') {
+        return $marker;
+    }
+
     $ch = curl_init();
 
     $AB = "";
@@ -87,7 +101,7 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
     $headers = array();
     $headers[] = 'Accept: */*';
     $headers[] = 'Content-Type: application/json';
-    $headers[] = 'Authorization: bearer ' . GET_MARKER();
+    $headers[] = 'Authorization: bearer ' . $marker;
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = json_decode(curl_exec($ch));
@@ -141,11 +155,47 @@ function GET_MARKER():string{
 
     $response = curl_exec($ch);
 
+    if (curl_errno($ch)) {
+        return 'Error:' . curl_error($ch);
+    }
+
     curl_close($ch);
 
     $ans = json_decode($response);
 
-    return $ans->access_token;
+    var_dump($response);
+
+    if (!is_null($ans->access_token)){
+        return $ans->access_token;
+    }else{
+        return RefreshMarker($ans->refresh_token);
+    }
+}
+
+function RefreshMarker($refr_tok):string{
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://a2p.vodafone.ua/uaa/oauth/token');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=" . $refr_tok);
+
+    $headers = array();
+    $headers[] = 'Authorization: Basic aW50ZXJuYWw6aW50ZXJuYWw=';
+    $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        return 'Error:' . curl_error($ch);
+    }
+
+    curl_close($ch);
+
+    $ans = json_decode($result);
+
+    return $ans->access_token ?? 'Error: Помилка при відправленні, зверніться до оператора! (Перевірте стан рахунку)';
 }
 
 function getCorrectPhone(string $in, $kodKr = true){

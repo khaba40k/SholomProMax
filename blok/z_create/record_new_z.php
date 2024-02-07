@@ -9,7 +9,7 @@ $termin_ID = 21;
 
 $typeZ = $_GET['typeZ'] ?? 'def';//def / sold
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 if (!isset($_GET['sol_num'])) {
     $_GET['sol_num'] = 0;

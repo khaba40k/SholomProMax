@@ -26,8 +26,8 @@
         $_SESSION['Administrator'] = 0;
     }
     #endregion
-
-    require "blok/conn_local.php";
+    
+    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
     if (!isset($_SESSION['logged'])){
 
@@ -146,7 +146,7 @@
     function newZ($page = 'def') {
 
         $.ajax({
-            url: 'blok/zakazi.php',
+            url: 'blok/z_list/zakazi.php',
             method: 'GET',
             dataType: 'html',
             data: 'menu_type=create&page=' + $page,
@@ -161,7 +161,7 @@
     function activeZedit($page = 'new', send = '') {
 
         $.ajax({
-            url: 'blok/zakazi.php',
+            url: 'blok/z_list/zakazi.php',
             method: 'get',
             dataType: 'html',
             data: 'menu_type=list&page=' + $page + send,
@@ -212,7 +212,7 @@
         let dataForm = 'ot=' + date1 + '&do=' + dateNow;
 
         $.ajax({
-            url: 'blok/zvit_menu.php',
+            url: 'blok/zvit/zvit_menu.php',
             method: 'GET',
             dataType: 'html',
             data: dataForm,
@@ -227,7 +227,7 @@
     function newPurchase($page = "jurnal") {
 
         $.ajax({
-            url: 'blok/expenses_menu.php',
+            url: 'blok/exp/expenses_menu.php',
             method: 'GET',
             dataType: 'html',
             data: 'page=' + $page,
@@ -242,7 +242,7 @@
     $("#zal_show").on("click", function () {
 
         $.ajax({
-            url: 'blok/table_count.php',
+            url: 'blok/zvit/table_count.php',
             dataType: 'html',
             success: function (response) {
                 $('#workfield').html(response);
@@ -253,10 +253,8 @@
 
         $('#formSMS').on('click', function () {
 
-            console.log('+++');
-
             $.ajax({
-                url: 'blok/sms_menu.php',
+                url: 'blok/sms/sms_board.php',
                 dataType: 'html',
                 success: function (response) {
                     $('#workfield').html(response);
@@ -271,7 +269,7 @@
         if ($request.trim() == '') return false;
 
         $.ajax({
-            url: 'blok/active_z.php',
+            url: 'blok/z_list/active_z.php',
             method: 'get',
             dataType: 'html',
             data: 'search=' + $request,

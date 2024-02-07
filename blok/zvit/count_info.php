@@ -7,7 +7,7 @@ if ($ID < 0)
     exit;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $OUT_ARR = array();
 $OUT_VALID = 0;

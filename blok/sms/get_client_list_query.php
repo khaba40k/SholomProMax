@@ -183,7 +183,7 @@ class QUERY_MASTER
 
 }
 
-require("conn_local.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $n = new QUERY_MASTER($_POST);
 

@@ -7,7 +7,7 @@ if (isset($_GET['new_f'])) {
     exit;
 }
 
-require("conn_local.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $KOMPL_LIST = array();
 
@@ -105,7 +105,7 @@ echo $client_list;
             LASTID++;
 
             $.get(
-                'blok/sms_menu.php',
+                'blok/sms/sms_menu.php',
                 'new_f=' + LASTID,
                 function (result) {
                     $('#filters').append(result);
@@ -122,7 +122,7 @@ echo $client_list;
 
     function SET_ANS(_id, _val) {
         $.get(
-          'blok/sms_menu.php',
+          'blok/sms/sms_menu.php',
           'new_f_ans=' + _val,
             function (result) {
                 $('#ans_' + _id).empty();
@@ -147,7 +147,7 @@ echo $client_list;
 
     $('#clear_filter').on('click', function () {
         $.get(
-        'blok/sms_menu.php',
+        'blok/sms/sms_menu.php',
         'new_f=' + 0,
         function (result) {
 
@@ -165,7 +165,7 @@ echo $client_list;
     function AppendFilters() {
         var data = $('#filters').serializeArray();
 
-         $.post('blok/get_client_list_query.php', data, function (result) {
+         $.post('blok/sms/get_client_list_query.php', data, function (result) {
              $('#clientlist').empty();
              $('#clientlist').append(result);
          });
@@ -176,7 +176,7 @@ echo $client_list;
         var data = JSON.stringify( $('#clientlist').serializeArray());
         var text = $('#mes_text').val();
 
-        $.post('blok/sms_send.php', {mes: text, tel: data}, function (result) {
+        $.post('blok/sms/sms_send.php', {mes: text, tellist: data}, function (result) {
             $('#clientlist').empty();
             $('#clientlist').append(result);
         });

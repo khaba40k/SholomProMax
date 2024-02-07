@@ -1,6 +1,6 @@
 <?php
 
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //Вхідні дані
@@ -337,7 +337,7 @@ function SelectTypeStatus($id, $type) :string{
 
     function setRight(id, type) {
         $.ajax({
-            url: 'blok/ch_var_col_set.php',
+            url: 'blok/z_create/ch_var_col_set.php',
             method: 'GET',
             dataType: 'html',
             data: '&set_select=' + id + '&set_type=' + type 

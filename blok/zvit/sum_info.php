@@ -6,7 +6,7 @@ $TYPE = $_GET['type'] ?? 1;
 if ($ID === null) exit;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $OUT_ARR = array();
 

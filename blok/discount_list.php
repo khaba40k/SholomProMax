@@ -5,7 +5,7 @@ session_start();
 if ($_SESSION[$_SESSION['logged']] > 1)
     exit;
 
-require("conn_local.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 if (isset($_GET['disc_cnt'])) {
     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';

@@ -832,11 +832,26 @@ button.subm{
     padding: 0 20px;
 }
 
-.activeZ {
+/*.activeZ {
     position: relative;
     display: grid;
     grid-template-columns: 10% 28% 17% 15% 10% 10% 10%;
     width: 100%;
+    background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
+    border-radius: 10px;
+    padding: 1%;
+    margin-left: 2px;
+    margin-bottom: 4px;
+    align-items: center;
+}*/
+
+.activeZ {
+    position: relative;
+    display: grid;
+    grid-template-columns: 10% 40% 25% 25%;
+    row-gap: 10px;
+    width: 100%;
+    min-height: 20px;
     background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
     border-radius: 10px;
     padding: 1%;
@@ -849,6 +864,34 @@ button.subm{
         margin-left: 10px;
         margin-bottom: 10px;
         box-shadow: -8px 5px 5px rgb(0,0,0, 0.5);
+    }
+
+    .activeZ div[class=buttons] {
+        display: none;
+        justify-content: end;
+        align-items: center;
+        border-top: 3px solid olive;
+        grid-column: span 7/8;
+    }
+
+.customcreator {
+    border: 7px dotted blue;
+}
+
+.customcreator > label{
+    color: blue;
+}
+
+.show_podmenu {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-top: 3px solid olive;
+    grid-column: span 7/8;
+}
+
+    .activeZ button {
+        margin-left: 5%;
     }
 
     .activeZ * {
@@ -1206,7 +1249,36 @@ input.delrow {
     color: white;
 }
 
-div.line_filter{
+.sms_content{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.sms_content > button{
+    width: 40%;
+    margin: 0 4%;
+}
+
+#sms_content{
+    padding: 0 2%;
+}
+
+.fs_byhand_sms{
+    padding: 20px;
+}
+
+.fs_byhand_sms > * {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.fs_byhand_sms > textarea {
+    min-height: 100px;
+    resize: vertical;
+    width: 100%;
+}
+
+div.line_filter {
     display: inline-flex;
     /*width: 100%;*/
     padding: 5px;
@@ -1254,8 +1326,22 @@ div.filter_ans * {
     text-align: center;
 }
 
-@media screen and (max-width: 1300px) {
-    body * {
+.period_jurnal{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .period_jurnal > *{
+        min-width: 50px;
+    }
+
+    .period_jurnal > label{
+        margin: 0 20px;
+    }
+
+    @media screen and (max-width: 1300px) {
+        body * {
         font-size: 18px;
     }
 

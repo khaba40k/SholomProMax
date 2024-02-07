@@ -15,8 +15,6 @@
 <body>
 
     <?php
-    //require("blok/conn_local.php");
-
     require "blok/header.php";
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
@@ -34,7 +32,7 @@
 
 	#endregion
 
-    include "blok/sms_menu.php";
+    include "blok/sms/sms_board.php";
 
     ?>
 
@@ -49,7 +47,7 @@
         text = $('#mes').val();
 
         $.ajax({
-        url: 'blok/sms_send.php',
+        url: 'blok/sms/sms_send.php',
         method: 'GET',
         dataType: 'html',
         data: 'tel=' + number + '&mes=' + text,

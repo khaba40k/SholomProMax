@@ -1,26 +1,20 @@
 <script>
     function showJurnal() {
-        $out = true;
 
                 $.ajax({
-                url: 'blok/jurnal.php',
+                url: 'blok/exp/jurnal_period.php',
                 dataType: 'html',
                     success: function (response) {
-                        if (response != null) {
-                                $('#zvitResult').html(response);
-                        }
-                        else {
-                                $out = false;
-                        }
+                        $('#zvitResult').html(response);
                 }
                 });
 
-        return $out;
+        return true;
     }
 
     function showForm() {
                 $.ajax({
-                url: 'blok/expenses.php',
+                url: 'blok/exp/expenses.php',
                 dataType: 'html',
                 success: function(response) {
                     $('#zvitResult').html(response);

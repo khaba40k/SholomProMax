@@ -6,7 +6,7 @@
 //Вхідні дані
 //["count_16_1"]=> string(1) "1" ["cost_16_1"]=> string(1) "0" ["color_6_2"]=> string(1) "1" ["count_6_2"]=> string(1) "1" ["cost_6_2"]=> string(1) "0"
 
-require("conn_local.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //1 замовлення (абонент)

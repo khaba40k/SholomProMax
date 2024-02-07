@@ -76,7 +76,19 @@ $serv_info = array();
 
 session_start();
 
-$query = 'SELECT * FROM `service_in` order by `date_in` DESC';
+$mnth = $_GET['month'];
+$year = $_GET['year'];
+
+$min_date = $year . '-' . $mnth . '-1';
+
+if ($mnth < 12){
+    $max_date = $year . '-' . ($mnth + 1) . '-01';
+}else{
+    $max_date = ($year + 1) . '-01-01';
+}
+
+$query = 'SELECT * FROM `service_in` WHERE `date_in` >= "'. $min_date .'" AND `date_in` < "' . $max_date . '"
+ORDER by `date_in` DESC';
 
 if ($_SESSION[$_SESSION['logged']] > 1){
     $query = 'SELECT * FROM `service_in` WHERE `redaktor` = "'.$_SESSION['logged'].'" order by `date_in` DESC';
@@ -150,7 +162,7 @@ echo $table;
 
         if (!confirm('Підтвердіть видалення запису на суму ' + sum + ' грн.')) return false;
 
-        $.get('blok/jurnal.php', 'del=' + $name, function (result) {
+        $.get('blok/exp/jurnal.php', 'del=' + $name, function (result) {
             alert('Запис [' + result + '] видалено.');
             document.location = 'work?page=jurnal';
         });

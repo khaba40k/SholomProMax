@@ -1,5 +1,5 @@
 <?php
-require_once("conn_local.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $query = 'DELETE FROM `service_out` WHERE `ID`=' . $_GET['ID'];

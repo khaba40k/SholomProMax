@@ -6,7 +6,7 @@
 //Вхідні дані
 //["count_16_1"]=> string(1) "1" ["cost_16_1"]=> string(1) "0" ["color_6_2"]=> string(1) "1" ["count_6_2"]=> string(1) "1" ["cost_6_2"]=> string(1) "0"
 
-require("conn_local.php");
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 if (!isset($_GET['for'])) $_GET['for'] = 'in';  //in - витрати списання / out - покупка
@@ -159,7 +159,7 @@ if (isset($_GET['newRow'])) {
             let dataForm = $('#tbl_expenses select').serialize() + "&" + $('#tbl_expenses :input').serialize();
 
             $.ajax({
-                url: 'blok/record_new_in.php',
+                url: 'blok/exp/record_new_in.php',
                 method: 'GET',
                 dataType: 'html',
                 data: dataForm + '&lastind=' + $lastId,
@@ -185,7 +185,7 @@ if (isset($_GET['newRow'])) {
 
         $row_count++;
 
-        $.get('blok/expenses.php', 'newRow=' + $lastId + '&for=' + $for, function(result)
+        $.get('blok/exp/expenses.php', 'newRow=' + $lastId + '&for=' + $for, function(result)
         {
             row.innerHTML = result;
         });
@@ -215,21 +215,21 @@ if (isset($_GET['newRow'])) {
 
                 console.log(row + ' - ' + serv_id);
 
-                $.get('blok/expenses.php', 'row_id=' + row.substring(2) + '&typeFor=' + serv_id, function (result) {
+                $.get('blok/exp/expenses.php', 'row_id=' + row.substring(2) + '&typeFor=' + serv_id, function (result) {
                     td_type.innerHTML = result;
                 });
 
-                $.get('blok/expenses.php', 'row_id=' + row.substring(2) + '&count=' + serv_id, function (result) {
+                $.get('blok/exp/expenses.php', 'row_id=' + row.substring(2) + '&count=' + serv_id, function (result) {
                     td_count.innerHTML = result;
                 });
 
-                $.get('blok/expenses.php', 'row_id=' + row.substring(2) + '&color_for=' + serv_id + '&type=1', function (result) {
+                $.get('blok/exp/expenses.php', 'row_id=' + row.substring(2) + '&color_for=' + serv_id + '&type=1', function (result) {
                     td_color.innerHTML = result;
                 });
 
                     <?php
                     if ($_GET['for'] == 'out') {
-                        echo "$.get('blok/expenses.php', 'row_id=' + row.substring(2) +
+                        echo "$.get('blok/exp/expenses.php', 'row_id=' + row.substring(2) +
                              '&price_for=' + serv_id +
                              '&type=1', function (result) {
                               td_cost.innerHTML = result;
@@ -246,7 +246,7 @@ if (isset($_GET['newRow'])) {
                 var td_cost = document.getElementById('pricecell_s_' + row_type[1]);
                 var type = $(this).val();
 
-                $.get('blok/expenses.php', 'row_id=' + row_type[1] +
+                $.get('blok/exp/expenses.php', 'row_id=' + row_type[1] +
                     '&color_for=' + row_type[2] +
                     '&type=' + type, function (result) {
                         td_color.innerHTML = result;
@@ -254,7 +254,7 @@ if (isset($_GET['newRow'])) {
 
                     <?php
                     if ($_GET['for'] == 'out') {
-                        echo "$.get('blok/expenses.php', 'row_id=' + row_type[1] +
+                        echo "$.get('blok/exp/expenses.php', 'row_id=' + row_type[1] +
                                '&price_for=' + row_type[2] +
                                '&type=' + type, function (result) {
                                    td_cost.innerHTML = result;
@@ -307,7 +307,7 @@ if (isset($_GET['newRow'])) {
             } else if ($(this).attr('id') == 'count_s_' + idrow) {
                          <?php
                     if ($_GET['for'] == 'out') {
-                        echo "$.get('blok/expenses.php', 'row_id=' + idrow +
+                        echo "$.get('blok/exp/expenses.php', 'row_id=' + idrow +
                             '&price_for=' + $(id_cell).val() +
                             '&type=' + type + '&price_count=' + count, function (result) {
                                     document.getElementById('pricecell_s_' + idrow).innerHTML = result;

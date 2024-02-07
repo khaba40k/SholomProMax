@@ -1,5 +1,5 @@
 <?php
-require_once("conn_local.php");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $hideForWorker = $_GET['hideForWorker'] != 0;
@@ -201,7 +201,7 @@ function setRow($name, $val = '', $csp = 1, $toPrint = true):HTEL{
           dataForm = $('#infoForm :input').serialize();
 
           $.ajax({
-              url: 'blok/close_z.php',
+              url: 'blok/z_list/close_z.php',
               method: 'GET',
               dataType: 'html',
               data: dataForm + '&ID=' + $id + '&type='+ $type,

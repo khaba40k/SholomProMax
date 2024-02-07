@@ -10,7 +10,7 @@
     function insertTable($in = '') {
 
               $.ajax({
-                    url: 'blok/expenses.php',
+                    url: 'blok/exp/expenses.php',
                     method: 'GET',
                   dataType: 'html',
                   data: 'for=out' + $in,
@@ -23,7 +23,7 @@
     function shopList() {
 
         $.ajax({
-            url: 'blok/shop.php',
+            url: 'blok/z_create/shop.php',
             dataType: 'html',
             success: function (response) {
                 $('#table_work').html(response);
@@ -36,7 +36,7 @@
 
 $TYPE_Z = $_GET['type'] ?? 'def';
 
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //HIDE();
@@ -489,7 +489,7 @@ function selectStatus($bool = false):string{
         if (!WriteDone) return false;
 
         $.ajax({
-            url: 'blok/get_NP_op.php',
+            url: 'blok/z_create/get_NP_op.php',
             method: 'GET',
             dataType: 'html',
             data: 'find=' + val,
@@ -559,7 +559,7 @@ function selectStatus($bool = false):string{
 
     function setViddily(ref, prior = 0) {
         $.ajax({
-            url: 'blok/get_NP_op.php',
+            url: 'blok/z_create/get_NP_op.php',
             method: 'GET',
             dataType: 'html',
             data: 'ref=' + ref + '&number=' + prior,
@@ -609,7 +609,7 @@ function selectStatus($bool = false):string{
            });
 
             $.ajax({
-            url: 'blok/ch_var_col_set.php',
+            url: 'blok/z_create/ch_var_col_set.php',
             method: 'GET',
             dataType: 'html',
                 data: 'sposob='+radio_value+'<?php echo $Z_DATA->GET_KOMPLECT() . '&is_rewrite=' . $IS_CHANGE . '&ID=' . $Z_DATA->ID . '&IS_ADMIN=' . $idaccess;  ?>',
@@ -631,7 +631,7 @@ function selectStatus($bool = false):string{
            let _sendGet = '<?php echo '&is_rewrite=' . $IS_CHANGE . '&typeZ=' . $TYPE_Z . '&ID=' . $Z_DATA->ID; ?>';
 
            $.ajax({
-               url: 'blok/record_new_z.php',
+               url: 'blok/z_create/record_new_z.php',
                method: 'GET',
                dataType: 'html',
                data: dataForm + _sendGet + '&TO_PRINT=1',

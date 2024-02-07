@@ -3,7 +3,7 @@
 //var_dump($_GET);
 //exit;
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 #region Отримання списку кольорів
 $_COLORS = array();
@@ -173,7 +173,7 @@ echo $dialog_window;
 
     function rec($get) {
         $.ajax({
-        url: 'blok/record_new_z.php',
+        url: 'blok/z_create/record_new_z.php',
         method: 'GET',
         dataType: 'html',
         data: $get,

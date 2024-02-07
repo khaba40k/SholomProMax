@@ -1,7 +1,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require "conn_local.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $table = new HTEL('table .=tbl_sum');
 
@@ -80,22 +80,22 @@ foreach ($arr_serv_name as $i=>$n) {
 
             while ($row = $result->fetch_assoc()) {
 
-                if (!is_null($row['comm'])) { //вибірка по коментарям (сума, списання)
-                    $com = trim($row['comm']);
+                //if (!is_null($row['comm'])) { //вибірка по коментарям (сума, списання)
+                //    $com = trim($row['comm']);
 
-                    isset($arr_com_in[$i][$t][$com]['cost']) ?
-                        $arr_com_in[$i][$t][$com]['cost'] += $row["costs"] :
-                        $arr_com_in[$i][$t][$com]['cost'] = $row["costs"];
+                //    isset($arr_com_in[$i][$t][$com]['cost']) ?
+                //        $arr_com_in[$i][$t][$com]['cost'] += $row["costs"] :
+                //        $arr_com_in[$i][$t][$com]['cost'] = $row["costs"];
 
-                    if ($row['count'] >= 0) {
-                        isset($arr_com_in[$i][$t][$com]['count']) ? $arr_com_in[$i][$t][$com]['count'] += $row['count'] :
-                            $arr_com_in[$i][$t][$com]['count'] = $row['count'];
-                    }
-                    else{
-                        isset($arr_com_in[$i][$t][$com]['sps']) ? $arr_com_in[$i][$t][$com]['sps'] += $row['count'] :
-                            $arr_com_in[$i][$t][$com]['sps'] = $row['count'];
-                    }
-                }
+                //    if ($row['count'] >= 0) {
+                //        isset($arr_com_in[$i][$t][$com]['count']) ? $arr_com_in[$i][$t][$com]['count'] += $row['count'] :
+                //            $arr_com_in[$i][$t][$com]['count'] = $row['count'];
+                //    }
+                //    else{
+                //        isset($arr_com_in[$i][$t][$com]['sps']) ? $arr_com_in[$i][$t][$com]['sps'] += $row['count'] :
+                //            $arr_com_in[$i][$t][$com]['sps'] = $row['count'];
+                //    }
+                //}
 
                 if ($row["count"] > 0) {
                     $sum_cost += $row["costs"];
@@ -171,7 +171,10 @@ foreach ($arr_serv_name as $i=>$n) {
         $cell[5] = $arr_sum_out[$i][$t] != 0 ? CostOut($arr_sum_out[$i][$t]) : '-';
         $cell[6] = $sum_row != 0 ? CostOut($sum_row) : '-';
 
-        if ($arr_sum_in[$i][$t] + $arr_sum_out[$i][$t] > 0 || $arr_cnt_in[$i][$t] + $arr_cnt_out[$i][$t] > 0 || $arr_sps_in[$i][$t] != 0) {
+        if ($arr_sum_in[$i][$t] + $arr_sum_out[$i][$t] > 0 || 
+        $arr_cnt_in[$i][$t] + $arr_cnt_out[$i][$t] > 0 || 
+        $arr_sps_in[$i][$t] != 0) {
+
             $tr = new HTEL('tr &=border-style:inherit;');
 
             for ($ii = 0; $ii < count($cell); $ii++) {
@@ -196,19 +199,19 @@ foreach ($arr_serv_name as $i=>$n) {
 
             $tbody($tr);
 
-            if (isset($arr_com_in[$i][$t])){
+            //if (isset($arr_com_in[$i][$t])){
 
-                foreach ($arr_com_in[$i][$t] as $com=>$arr){
-                    $tr = new HTEL('tr .=row_comm');
-                    $tr(new HTEL("td/[0]", $com));
-                    $tr(new HTEL("td &=text-align:center;/[0]", isset($arr['count']) ? $arr['count'] : ''));
-                    $tr(new HTEL("td/[0]",
-                            $arr['cost'] >  0 ? CostOut($arr['cost']) : '-'));
-                    $tr(new HTEL("td &=text-align:center;/[0]", isset($arr['sps']) ? abs($arr['sps']) : '-'));
-                    $tr(new HTEL("td colspan=3"));
-                    $tbody($tr);
-                }
-            }
+            //    foreach ($arr_com_in[$i][$t] as $com=>$arr){
+            //        $tr = new HTEL('tr .=row_comm');
+            //        $tr(new HTEL("td/[0]", $com));
+            //        $tr(new HTEL("td &=text-align:center;/[0]", isset($arr['count']) ? $arr['count'] : ''));
+            //        $tr(new HTEL("td/[0]",
+            //                $arr['cost'] >  0 ? CostOut($arr['cost']) : '-'));
+            //        $tr(new HTEL("td &=text-align:center;/[0]", isset($arr['sps']) ? abs($arr['sps']) : '-'));
+            //        $tr(new HTEL("td colspan=3"));
+            //        $tbody($tr);
+            //    }
+            //}
         }
     }
 }
@@ -243,7 +246,7 @@ $link->close();
         var id_type = $(this).attr('id').split('_');
 
         $.ajax({
-        url: 'blok/sum_info.php',
+        url: 'blok/zvit/sum_info.php',
         method: 'GET',
             dataType: 'html',
             data: 'id=' + id_type[0] + '&type=' + id_type[1],

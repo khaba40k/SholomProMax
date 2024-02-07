@@ -17,7 +17,7 @@
 
     function printInfo($in, $hide = 1) {
         $.ajax({
-            url: 'blok/print_to_work.php',
+            url: 'blok/z_list/print_to_work.php',
             method: 'GET',
             dataType: 'html',
             data: 'ID=' + $in + '&hideForWorker=' + $hide,
@@ -32,7 +32,7 @@
     <?php
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-    require_once("blok/conn_local.php");
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
     session_start();
 

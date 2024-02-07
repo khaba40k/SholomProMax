@@ -46,7 +46,13 @@ echo new HTEL('div !=zvitResult');
     $('.perChng').on('click', function () {
 
         $('#zvitResult').empty();
-        $('#zvitResult').append('ЗАЧЕКАЙТЕ...');
+        $('#zvitResult').append(
+            '<div style="display:inline-flex;justify-content:center;align-items:center;' +
+            'background-color: blue;border-radius: 25px;padding:10px 0;">' +
+            '<img src="../img/load.gif" style="width:64px;">' +
+            '<label style="height:100%;margin:0 10px;color:yellow;font-weight: bold; font-size: 150%;">ЗАЧЕКАЙТЕ</label>' +
+            '<img src="../img/load.gif" style="width:64px;">' +
+            '<div>');
 
         $('.perChng').not(this).removeClass('clicked_but')
         $(this).toggleClass('clicked_but');

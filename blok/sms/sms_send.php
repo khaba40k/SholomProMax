@@ -163,7 +163,7 @@ function GET_MARKER():string{
 
     $ans = json_decode($response);
 
-    var_dump($response);
+    //var_dump($response);
 
     if (!is_null($ans->access_token)){
         return $ans->access_token;

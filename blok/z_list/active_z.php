@@ -152,7 +152,7 @@ function _ukrPeriod($in):string{
 
     $spl = explode('.', $in);
 
-    $month = $mounts[$spl[0]];
+    $month = $mounts[$spl[0] * 1];
     $year = $spl[1];
 
     return $month . ' ' . $year;
@@ -167,6 +167,8 @@ $counter = mysqli_num_rows($result);
 if ($_GET['type'] == 'archiv' && $counter > 0){
     echo 'ЗАПИСІВ: [ ' . $counter . ' ]<br>';
 }
+
+$date_max_last = date('Y-m-d');
 
 if ($counter > 0){
     foreach ($result as $row) {
@@ -218,6 +220,12 @@ if ($counter > 0){
 
         for ($i = 1; $i < count($pip); $i++) {
             $pip_out .= ' ' . mb_substr($pip[$i], 0, 1) . '.';
+        }
+
+        if ($_GET['type'] == 'new' && $date_max_last !== null && $row['date_max'] < $date_max_last){
+            $date_max_last = null;
+            echo new HTEL('div &=display:flex;justify-content:center;align-items:center;height:50px;background:linear-gradient(to+bottom,white,red);border-top-left-radius:40px;border-top-right-radius:40px;margin-top:30px;margin-bottom:10px;',
+            new HTEL('label &=color:white;font-size:150%;font-weight:bold;/ТЕРМІН ВИЙШОВ'));
         }
 
         $div = new HTEL(

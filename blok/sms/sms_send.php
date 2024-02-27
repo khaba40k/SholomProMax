@@ -29,8 +29,8 @@ function SEND_ONE_SMS($number, $mes)
 {
     $marker = GET_MARKER();
 
-    if (substr($marker, 0, 5) == 'Error') {
-        return $marker;
+    if ($marker === null) {
+        return 'Маркер недоступний!';
     }
 
     $ch = curl_init();
@@ -69,8 +69,8 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
 
     $marker = GET_MARKER();
 
-    if (substr($marker, 0, 5) == 'Error') {
-        return $marker;
+    if ($marker === null) {
+        return 'Маркер недоступний!';
     }
 
     $ch = curl_init();
@@ -136,41 +136,58 @@ function RecOnBase(array $arr, string $mes){
 
 }
 
-function GET_MARKER():string{
-    $url = 'https://a2p.vodafone.ua/uaa/oauth/token?grant_type=password';
+function GET_MARKER()
+{
+    $ch = curl_init();
 
-    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_URL, 'https://a2p.vodafone.ua/uaa/oauth/token');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=password&username=380985992689&password=Sho000lom_");
 
-    $data = [
-        'username' => '380953410218',
-        'password' => 'RgRhh7L%Ff'
-    ];
+    $headers = array();
+    $headers[] = 'Authorization: Basic aW50ZXJuYWw6aW50ZXJuYWw=';
+    $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'authorization: Basic aW50ZXJuYWw6aW50ZXJuYWw='
-    ]);
-
-    $response = curl_exec($ch);
-
-    if (curl_errno($ch)) {
-        return 'Error:' . curl_error($ch);
-    }
+    $result = curl_exec($ch);
 
     curl_close($ch);
 
-    $ans = json_decode($response);
+    $ans = json_decode($result);
 
-    //var_dump($response);
-
-    if (!is_null($ans->access_token)){
-        return $ans->access_token;
-    }else{
-        return RefreshMarker($ans->refresh_token);
-    }
+    //return $ans;
+    return $ans->access_token;
 }
+
+//function GET_MARKER():string{
+//    $url = 'https://a2p.vodafone.ua/uaa/oauth/token?grant_type=password';
+
+//    $ch = curl_init($url);
+
+//    $data = [
+//        'username' => '380953410218',
+//        'password' => 'RgRhh7L%Ff'
+//    ];
+
+//    //%52%67%52%68%68%37%4C%25%46%66
+//    //RgRhh7L%Ff
+
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//    curl_setopt($ch, CURLOPT_POST, true);
+//    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+//    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+//        'authorization: Basic aW50ZXJuYWw6aW50ZXJuYWw='
+//    ]);
+
+//    $response = curl_exec($ch);
+
+//    curl_close($ch);
+
+//    $ans = json_decode($response);
+
+//    return $ans->access_token;
+//}
 
 function RefreshMarker($refr_tok):string{
     $ch = curl_init();

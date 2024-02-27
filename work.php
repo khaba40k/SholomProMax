@@ -26,7 +26,7 @@
         $_SESSION['Administrator'] = 0;
     }
     #endregion
-    
+
     require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
     if (!isset($_SESSION['logged'])){
@@ -69,6 +69,8 @@
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
+    //HIDE();
+
     #region Підрахунок заявок
     $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NULL';
 
@@ -97,40 +99,115 @@
     require "blok/header.php";
 
     $wrapper = new HTEL('div .=wrapper');
-    $aside = new HTEL('aside .=no-print');
-    $form = new HTEL('form !=feedBack method=post onsubmit=return+false');
-    $form(new HTEL('label/РЕДАГУВАННЯ'));
+    //$aside = new HTEL('aside .=no-print');
 
-    $div = new HTEL('div !=fb1', [
-        new HTEL("button !=create_Z onclick=location.href=='work?page==newZdef'/НОВЕ ЗАМОВЛЕННЯ"),
-        new HTEL("button !=active_Z onclick=location.href=='work'/ЗАМОВЛЕННЯ[0]", ($activ_count > 0 ? ' (' . $activ_count . ')' : '')),
-        new HTEL("button !=expenses onclick=location.href=='work?page==expens'/ВИТРАТИ")
-    ]);
+    $aside = new HTEL('aside .=menu-cont+no-print', new HTEL('h2 .=menu-capt/МЕНЮ'));
 
-    if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
-    $div([
-        new HTEL("button !=formPrice/ЦІНИ"),
-        new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки"),
-        new HTEL("button !=formSMS/РОЗСИЛКА СМС")
-    ]);
+    $ul = new HTEL('ul');
 
-    $form($div);
+    $ul(new HTEL('li &=--clr:#2483ff',
+       new HTEL('a @=work?page==newZdef', [
+           new HTEL('i .=fa-solid+fa-createz'),
+           new HTEL('span/Створити')
+       ]))
+    );
 
-    $form(new HTEL('label/ЗВІТИ'));
+    $ul(new HTEL('li &=--clr:#fff200',[
+    new HTEL('p !=count_z/[0]', ($activ_count > 0 ? $activ_count : '-')),
+    new HTEL('a @=work', [
+       new HTEL('i .=fa-solid+fa-zlist'),
+       new HTEL('span/Замовлення')
+    ])])
+);
 
-    $div = new HTEL('div !=fb2');
+    $ul(new HTEL('li &=--clr:#ff0000',
+   new HTEL('a @=work?page==expens', [
+       new HTEL('i .=fa-solid+fa-expens'),
+       new HTEL('span/Витрати')
+   ]))
+);
 
-    if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
-    $div([
-        new HTEL("button !=zal_show /ЗАЛИШКИ"),
-        new HTEL("button !=period_show /РУХ ЗА ПЕРІОД...")
-    ]);
+    if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1){
+               $ul(new HTEL('li &=--clr:#cccccc',
+          new HTEL('a @=work?page==price_list', [
+          new HTEL('i .=fa-solid+fa-prices'),
+          new HTEL('span/Ціни')
+          ]))
+       );
 
-    $div(new HTEL("button !=toInfo onclick=location.href=='info'/Друк для робітника"));
+        $ul(new HTEL('li &=--clr:#00ff2a',
+       new HTEL('a @=work?page==discount_list', [
+       new HTEL('i .=fa-solid+fa-discounts'),
+       new HTEL('span/Знижки')
+       ]))
+    );
 
-    $form($div);
+        $ul(new HTEL('li &=--clr:#ff58f1',
+       new HTEL('a @=work?page==sms_sender', [
+       new HTEL('i .=fa-solid+fa-sms'),
+       new HTEL('span/Розсилка')
+       ]))
+    );
 
-    $aside($form);
+        $ul(new HTEL('li &=--clr:#ff0e7a',
+   new HTEL('a @=work?page==zal', [
+   new HTEL('i .=fa-solid+fa-zal'),
+   new HTEL('span/Залишки')
+   ]))
+);
+
+        $ul(new HTEL('li &=--clr:#6e6d2f',
+       new HTEL('a @=work?page==sfp', [
+       new HTEL('i .=fa-solid+fa-sumzvit'),
+       new HTEL('span/Доходи')
+       ]))
+    );
+
+    }
+
+    $ul(new HTEL('li &=--clr:#46485b',
+   new HTEL('a @=info', [
+   new HTEL('i .=fa-solid+fa-print'),
+   new HTEL('span/Робітнику')
+   ]))
+);
+
+    $aside($ul);
+
+
+    //$form = new HTEL('form !=feedBack method=post onsubmit=return+false');
+    //$form(new HTEL('label/РЕДАГУВАННЯ'));
+
+    //$div = new HTEL('div !=fb1', [
+    //    new HTEL("button !=create_Z onclick=location.href=='work?page==newZdef'/НОВЕ ЗАМОВЛЕННЯ"),
+    //    new HTEL("button !=active_Z onclick=location.href=='work'/ЗАМОВЛЕННЯ[0]", ($activ_count > 0 ? ' (' . $activ_count . ')' : '')),
+    //    new HTEL("button !=expenses onclick=location.href=='work?page==expens'/ВИТРАТИ")
+    //]);
+
+    //if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
+    //$div([
+    //    new HTEL("button !=formPrice/ЦІНИ"),
+    //    new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки"),
+    //    new HTEL("button !=formSMS/РОЗСИЛКА СМС")
+    //]);
+
+    //$form($div);
+
+    //$form(new HTEL('label/ЗВІТИ'));
+
+    //$div = new HTEL('div !=fb2');
+
+    //if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
+    //$div([
+    //    new HTEL("button !=zal_show /ЗАЛИШКИ"),
+    //    new HTEL("button !=period_show /РУХ ЗА ПЕРІОД...")
+    //]);
+
+    //$div(new HTEL("button !=toInfo onclick=location.href=='info'/Друк для робітника"));
+
+    //$form($div);
+
+    //$aside($form);
 
     $wrapper([
         $aside,
@@ -138,6 +215,8 @@
     ]);
 
     echo $wrapper;
+
+    require "blok/footer.php";
 
     ?>
 
@@ -172,7 +251,7 @@
     };
 
     //Кнопка ЦІНИ
-    $("#formPrice").on("click", priceEdit);
+    //$("#formPrice").on("click", priceEdit);
 
     function priceEdit() {
 
@@ -199,7 +278,7 @@
     };
 
     //Кнопка звіту за період
-    $("#period_show").on("click", function () {
+    function SumFromPeriod() {
 
         let currentdate = new Date();
 
@@ -220,7 +299,7 @@
                 $('#workfield').html(data);
             }
         });
-    });
+    };
     //Кнопка внесення витрат на товар, списання, продаж
     //$("#expenses").on("click", function () { newPurchase('jurnal'); });
 
@@ -239,7 +318,7 @@
 
     //Кнопка показу залишків
 
-    $("#zal_show").on("click", function () {
+     function ZALForm() {
 
         $.ajax({
             url: 'blok/zvit/table_count.php',
@@ -249,9 +328,9 @@
             }
         });
 
-    });
+    };
 
-        $('#formSMS').on('click', function () {
+        function SMSSend() {
 
             $.ajax({
                 url: 'blok/sms/sms_board.php',
@@ -261,7 +340,7 @@
                 }
             });
 
-        });
+        };
 
     function Search($request) {
         $('#request').val($request);
@@ -318,6 +397,18 @@
                 break;
             case 'discount_list':
                 echo new HTEL('script/discountEdit();');
+                break;
+            case 'price_list':
+                echo new HTEL('script/priceEdit();');
+                break;
+            case 'sms_sender':
+                echo new HTEL('script/SMSSend();');
+                break;
+            case 'zal':
+                echo new HTEL('script/ZALForm();');
+                break;
+            case 'sfp':
+                echo new HTEL('script/SumFromPeriod();');
                 break;
             default:
                 echo new HTEL('script/activeZedit();');

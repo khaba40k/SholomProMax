@@ -28,6 +28,8 @@ foreach ($buttons as $txt=>$val){
 $dialog_window($butt_div);
 
 echo $dialog_window;
+
+echo 'ÂÈÄÍÎ!!!';
 ?>
 
 <script>

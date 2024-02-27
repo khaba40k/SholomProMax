@@ -41,6 +41,7 @@
         echo new HTEL('div !=dialog');
     }
 
+    require "blok/footer.php";
     ?>
 
     <script>

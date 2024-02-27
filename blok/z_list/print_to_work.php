@@ -158,12 +158,27 @@ if (!$hideForWorker && $type_Z == 'inwork' && $sum !== null){//Підтверд�
 
     $div = new HTEL('div .=no-print+doneApply');
 
-    $div(new HTEL('label for=worker/Працівник:'));
-    $div(new HTEL('input !=worker *=text ?=worker #=[0] [r]', $worker));
-    $div(new HTEL('label for=ttn_done/Вихідна ТТН:'));
-    $div(new HTEL('input !=ttn_done *=tel ?=ttn_done #=[0] [r]',$ttn));
-    $div(new HTEL('label for=sum_fact/Сума (факт):'));
-    $div(new HTEL('input !=sum_fact *=number step=0.01 min=0 ?=sum_fact #=[0] [r]', CostOut($sum)));
+    $div(new HTEL('div' ,[
+    new HTEL('label for=worker/Працівник:'),
+    new HTEL('input !=worker *=text ?=worker #=[0] [r]', $worker)
+    ]));
+
+    $div(new HTEL('div' ,[
+    new HTEL('label for=ttn_done/Вихідна ТТН:'),
+    new HTEL('input !=ttn_done *=tel ?=ttn_done #=[0] [r]',$ttn)
+    ]));
+
+    $div(new HTEL('div' ,[
+    new HTEL('label for=sum_fact/Сума (факт):'),
+    new HTEL('input !=sum_fact *=number step=0.01 min=0 ?=sum_fact #=[0] [r]', CostOut($sum))
+    ]));
+
+    //$div(new HTEL('label for=worker/Працівник:'));
+    //$div(new HTEL('input !=worker *=text ?=worker #=[0] [r]', $worker));
+    //$div(new HTEL('label for=ttn_done/Вихідна ТТН:'));
+    //$div(new HTEL('input !=ttn_done *=tel ?=ttn_done #=[0] [r]',$ttn));
+    //$div(new HTEL('label for=sum_fact/Сума (факт):'));
+    //$div(new HTEL('input !=sum_fact *=number step=0.01 min=0 ?=sum_fact #=[0] [r]', CostOut($sum)));
     $div(new HTEL('button !=but_done *=submit/>Виконано'));
     $form($div);
 }

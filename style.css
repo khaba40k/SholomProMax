@@ -1,6 +1,10 @@
 ﻿:root {
     /*--bckgrndclr: rgba(128, 128, 0, 0.90);*/
     --bckgrndclr: rgba(255, 255, 255, 0.50);
+    --bg: #242424;
+    --clr: #fff;
+    --wh-menu-it: 80px;
+    --menu-font-size: 50%;
 }
 
 input:read-only{
@@ -37,6 +41,7 @@ body {
     background-image: url(../img/fon.png);
     background-repeat: repeat;
     background-size: 20%;
+    min-height: 100%;
 }
 
 div.firstpage {
@@ -253,31 +258,187 @@ td.info_cnt_cell_color:hover {
 }
 
 .wrapper {
-    display: inline-block;
     width: 100%;
     padding: 10px 10px;
 }
 
 aside {
+    position: relative;
+    display: inline-block;
+    border-top: outset 45px green;
+    border-radius: 25px 0 25px 0;
+    background-color: var(--bg);
+    padding-left: 25px;
+    padding-top: 25px;
+    margin-top: 10px;
+    margin-left: 2%;
     float: left;
-    background: linear-gradient(to top left, var(--bckgrndclr), #a5baff);
-    width: 20%;
-    padding: 10px 10px;
-    border-radius:  10px;
 }
 
-    aside button {
-        width: 100%;
-        font-size: 70%;
+.menu-capt {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 0 15px;
+    color: var(--clr);
+}
+
+.menu-cont ul {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+    .menu-cont ul > * {
+        margin-bottom: 25px;
+        margin-right: 25px;
     }
 
-    aside label {
+aside ul li {
+    position: relative;
+    list-style: none;
+    width: var(--wh-menu-it);
+    height: var(--wh-menu-it);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+    aside ul li::before {
+        content: '';
+        position: absolute;
+        inset: 30px;
+        box-shadow: 0 0 0 10px var(--clr), 0 0 0 20px var(--bg), 0 0 0 22px var(--clr);
+        transition: 0.5s;
+    }
+
+    aside ul li:hover::before {
+        inset: 15px;
+    }
+
+    aside ul li::after {
+        content: '';
+        position: absolute;
+        inset: 0px;
+        background: var(--bg);
+        transform: rotate(45deg);
+        transition: 0.5s;
+    }
+
+    aside ul li:hover::after {
+        inset: 0px;
+        transform: rotate(0deg);
+    }
+
+    aside ul li a {
+        position: relative;
+        text-decoration: none;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        aside ul li a i {
+            font-size: 2em;
+            transition: 0.5s;
+            color: var(--clr);
+            opacity: 1;
+        }
+
+    aside ul li p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: -7px;
+        top: -10px;
+        font-size: 0.7em;
+        color: var(--clr);
+        opacity: 1;
+        background-color: red;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        z-index: 11;
         font-weight: bold;
     }
 
+    aside ul li:hover p {
+        background: none;
+    }
+
+    aside ul li:hover a i {
+        color: var(--clr);
+        transform: translateY(-40%);
+    }
+
+    aside ul li a span {
+        font-size: var(--menu-font-size);
+        position: absolute;
+        font-family: sans-serif;
+        color: var(--clr);
+        opacity: 0;
+        transition: 0.5s;
+        transform: scale(0) translateY(200%);
+    }
+
+    aside ul li:hover a span {
+        opacity: 1;
+        transform: scale(1) translateY(150%);
+    }
+
+    aside ul li:hover a i,
+    aside ul li a span {
+        filter: drop-shadow(0 0 20px var(--clr)) drop-shadow(0 0 40px var(--clr)) drop-shadow(0 0 60px var(--clr));
+    }
+
+.fa-solid {
+    width: calc(var(--wh-menu-it) / 2);
+    height: calc(var(--wh-menu-it) / 2);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.fa-createz {
+    background-image: url(/img/createz.png);
+}
+
+.fa-zlist {
+    background-image: url(/img/zlist.png);
+}
+
+.fa-expens {
+    background-image: url(/img/expens.png);
+}
+
+.fa-prices {
+    background-image: url(/img/prices.png);
+}
+
+.fa-discounts {
+    background-image: url(/img/discounts.png);
+}
+
+.fa-sms {
+    background-image: url(/img/sms.png);
+}
+
+.fa-zal {
+    background-image: url(/img/zal.png);
+}
+
+.fa-sumzvit {
+    background-image: url(/img/sumzvit.png);
+}
+
+.fa-print {
+    background-image: url(/img/print.png);
+}
+
 main {
-    float: right;
-    width: 80%;
+    overflow: auto;
 }
 
     main > form, main > table {
@@ -632,6 +793,7 @@ div#color_variant {
     margin: 0;
     border: none;
     background: none;
+    font-size: inherit;
 }
 
 .price_name_cell {
@@ -832,19 +994,6 @@ button.subm{
     padding: 0 20px;
 }
 
-/*.activeZ {
-    position: relative;
-    display: grid;
-    grid-template-columns: 10% 28% 17% 15% 10% 10% 10%;
-    width: 100%;
-    background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
-    border-radius: 10px;
-    padding: 1%;
-    margin-left: 2px;
-    margin-bottom: 4px;
-    align-items: center;
-}*/
-
 .activeZ {
     position: relative;
     display: grid;
@@ -1035,24 +1184,28 @@ table.kompl {
 .doneApply {
     display: flex;
     width: 100%;
+    padding: 5px 5px;
+    background: linear-gradient(to bottom, olive, var(--bckgrndclr));
+    border-radius: 5px;
     justify-content: right;
     align-items: center;
-    padding: 5px 10px;
-    background: linear-gradient(to bottom, olive, var(--bckgrndclr)); 
-    border-radius: 5px;
 }
 
-    .doneApply * {
-        font-size: 70%;
+    .doneApply > div {
+        display: inline-grid;
+        grid-template-rows: auto auto;
+        padding: 0 5px;
     }
 
-    .doneApply > input {
-        width: 90px;
-        margin: 2px 10px;
+        .doneApply * {
+            font-size: 80%;
+        }
+
+    .doneApply div > input {
+        width:100%;
     }
 
-        .doneApply > input[type=number] {
-            width: 70px;
+        .doneApply div > input[type=number] {
             text-align: right;
         }
 
@@ -1280,7 +1433,6 @@ input.delrow {
 
 div.line_filter {
     display: inline-flex;
-    /*width: 100%;*/
     padding: 5px;
 }
 
@@ -1354,18 +1506,33 @@ div.filter_ans * {
 
 @media screen and (max-width: 1000px) {
 
+    :root {
+        --wh-menu-it: 60px;
+        --menu-font-size: 70%;
+    }
+
+    aside{
+        width: 96%;
+        border: none;
+        padding: 15px;
+        margin-top: 2px;
+    }
+
+    .menu-cont ul > * {
+        margin-bottom: 0;
+    }
+        .menu-capt{
+        visibility: hidden;
+    }
+
+    .menu-cont ul {
+        /*grid-template-columns: auto;*/
+        grid-template-columns: repeat(auto-fill, calc( var(--wh-menu-it) + 18px));
+    }
+
     body * {
         font-size: 16px;
     }
-
-    aside {
-        display: flex;
-        width: 100%;
-    }
-
-        aside > form {
-            width: 100%;
-        }
 
     #feedBack > div * {
         display: inline-block;
@@ -1421,10 +1588,10 @@ div.filter_ans * {
         font-size: 14px;
     }
 
-    aside button {
+/*    aside button {
         font-size: 50%;
     }
-
+*/
     #workfield tr * {
         font-size: 60%;
     }
@@ -1448,46 +1615,32 @@ div.filter_ans * {
 }
 @media print {
 
-        aside {
-            width: 0;
-            margin: 0;
-        }
+    body *{
+        font-size: 16px;
+    }
 
-        main {
+    aside {
+        display: none !important;
+    }
+
+    .wrapper{
+        padding: 0;
+        margin: 0;
+    }
+
+    #workfield, #infoForm {
+        width: 90%;
+        margin-left: 10%;
+    }
+
+        #workfield > * {
             width: 100%;
-            padding: 0;
-            margin: 0;
-        }
-
-            main > * {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-        form {
-            width: 100%;
             margin: 0;
             padding: 0;
         }
 
-        #zvitResult, #workfield, #infoForm {
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-
-            #workfield > *, #zvitResult, .printInfo {
-                width: 93%;
-                margin-left: 5%;
-            }
-
-        body, body *, .tbl_sum * {
+        table * {
             background: none;
-        }
-
-        .tbl_sum {
-            margin: 0;
         }
 
         button, .no-print, .no-print * {
@@ -1498,19 +1651,13 @@ div.filter_ans * {
             display: table-caption;
         }
 
-        #zvitResult > * {
-            width: 98%;
-        }
-
-        div {
+        table {
             width: 100%;
             margin: 0;
             padding: 0;
         }
 
-        table {
-            width: 98%;
-            margin: 0;
-            padding: 0;
-        }
+            table * {
+                padding: 1px;
+            }
     }

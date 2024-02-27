@@ -15,26 +15,271 @@
 <body>
 
     <?php
+
     require "blok/header.php";
 
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    #region СМС
+    $cont = new HTEL('aside .=menu-cont+no-print', new HTEL('h2 .=menu-capt/МЕНЮ'));
 
-    //$style = 'width:30%;height:40px;';
+    $ul = new HTEL('ul');
 
-    //$num = new HTEL('input !=tel *=tel ?=tel $=номери &=[0]', $style);
-    //$inp = new HTEL('input !=mes *=text ?=mes $=смс &=[0]', $style);
-    //$but = new HTEL('button !=subm *=submit/send');
-    //$lab = new HTEL('lable !=ans');
+    $ul(new HTEL('li &=--clr:#2483ff',
+       new HTEL('a @=work?page==newZdef', [
+           new HTEL('i .=fa-solid+fa-createz'),
+           new HTEL('span/Створити')
+       ]))
+    );
 
-    //echo $num . '<br>' . $inp . '<br>' . $but . '<br><br>' . $lab;
+    $ul(new HTEL('li &=--clr:#fff200',[
+    new HTEL('p !=count_z/89'),
+    new HTEL('a @=#work', [
+       new HTEL('i .=fa-solid+fa-zlist'),
+       new HTEL('span/Замовлення')
+    ])])
+);
 
-	#endregion
+    $ul(new HTEL('li &=--clr:#ff0000',
+   new HTEL('a @=work?page==expens', [
+       new HTEL('i .=fa-solid+fa-expens'),
+       new HTEL('span/Витрати')
+   ]))
+);
+    //prices
 
-    include "blok/sms/sms_board.php";
+    $ul(new HTEL('li &=--clr:#cccccc',
+   new HTEL('a @=#', [
+   new HTEL('i .=fa-solid+fa-prices'),
+   new HTEL('span/Ціни')
+   ]))
+);
+    //discounts
+
+    $ul(new HTEL('li &=--clr:#00ff2a',
+   new HTEL('a @=work?page==discount_list', [
+   new HTEL('i .=fa-solid+fa-discounts'),
+   new HTEL('span/Знижки')
+   ]))
+);
+
+    $ul(new HTEL('li &=--clr:#ff58f1',
+   new HTEL('a @=#', [
+   new HTEL('i .=fa-solid+fa-sms'),
+   new HTEL('span/Розсилка')
+   ]))
+);
+
+    $ul(new HTEL('li &=--clr:#ff0e7a',
+   new HTEL('a @=#', [
+   new HTEL('i .=fa-solid+fa-zal'),
+   new HTEL('span/Залишки')
+   ]))
+);
+
+    $ul(new HTEL('li &=--clr:#6e6d2f',
+   new HTEL('a @=#', [
+   new HTEL('i .=fa-solid+fa-sumzvit'),
+   new HTEL('span/Доходи')
+   ]))
+);
+
+    $ul(new HTEL('li &=--clr:#46485b',
+   new HTEL('a @=info', [
+   new HTEL('i .=fa-solid+fa-print'),
+   new HTEL('span/Робітнику')
+   ]))
+);
+
+    $cont($ul);
+
+    echo $cont;
 
     ?>
+
+<style>
+
+:root{
+   --bg: #222;
+   --clr: #fff;
+}
+
+ul li{
+position: relative;
+list-style: none;
+width: 80px;
+height: 80px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+transition: 0.5s;
+}
+
+ul li::before{
+    content:'';
+position: absolute;
+inset: 30px;
+box-shadow: 0 0 0 10px var(--clr),
+0 0 0 20px var(--bg),
+0 0 0 22px var(--clr);
+transition: 0.5s;
+}
+
+ul li:hover::before{
+inset: 15px;
+}
+
+ul li::after{
+content: '';
+position: absolute;
+inset: 0px;
+background: var(--bg);
+transform: rotate(45deg);
+transition: 0.5s;
+}
+
+ul li:hover::after{
+inset: 0px;
+transform: rotate(0deg);
+}
+
+ul li a {
+position: relative;
+text-decoration:none;
+z-index: 10;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+ul li a i{
+font-size: 2em;
+transition: 0.5s;
+color: var(--clr);
+opacity: 1;
+}
+
+ul li p{
+display: flex;
+justify-content:center;
+align-items: center;
+position:absolute;
+right: -7px;
+top: -10px;
+font-size: 0.7em;
+color: var(--clr);
+opacity: 1;
+background-color: red;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+z-index: 11;
+font-weight: bold;
+}
+
+ul li:hover p{
+   background: none;
+}
+
+ul li:hover a i{
+    color: var(--clr);
+    transform: translateY(-40%);
+}
+
+ul li a span{
+font-size: 0.7em;
+position: absolute;
+font-family: sans-serif;
+    color: var(--clr);
+    opacity: 0;
+    transition: 0.5s;
+    transform: scale(0) translateY(200%);
+}
+
+ul li:hover a span{
+opacity: 1;
+transform: scale(1) translateY(150%);
+}
+
+ul li:hover a i,
+ul li a span{
+filter: drop-shadow(0 0 20px var(--clr)) drop-shadow(0 0 40px var(--clr)) drop-shadow(0 0 60px var(--clr));
+}
+
+.fa-solid{
+    width:40px;
+    height:40px;
+    background-repeat: no-repeat;
+    background-size:contain;
+}
+
+.fa-createz{
+    background-image: url(/img/createz.png);
+}
+
+.fa-zlist{
+    background-image: url(/img/zlist.png);
+}
+
+.fa-expens{
+    background-image: url(/img/expens.png);
+}
+
+.fa-prices{
+    background-image: url(/img/prices.png);
+}
+
+.fa-discounts{
+    background-image: url(/img/discounts.png);
+}
+
+.fa-sms{
+    background-image: url(/img/sms.png);
+}
+
+.fa-zal{
+    background-image: url(/img/zal.png);
+}
+
+.fa-sumzvit{
+    background-image: url(/img/sumzvit.png);
+}
+
+.fa-print{
+    background-image: url(/img/print.png);
+}
+
+.menu-cont{
+    position: relative;
+    border-top: outset 45px green;
+    border-radius: 25px 0 25px 0;
+    background-color: var(--bg);
+    padding-left: 25px;
+    padding-top: 25px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.menu-capt{
+      position: absolute;
+      top: -40px;
+      left: 0;
+      padding: 0 15px;
+      color: var(--clr);
+}
+
+    .menu-cont ul{
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+    }
+
+   .menu-cont ul > *{
+        margin-bottom: 25px;
+        margin-right: 25px;
+   }
+
+</style>
 
 </body>
 
@@ -42,114 +287,4 @@
 
 <script>
 
-    $('#subm').on('click', function () {
-        number = $('#tel').val();
-        text = $('#mes').val();
-
-        $.ajax({
-        url: 'blok/sms/sms_send.php',
-        method: 'GET',
-        dataType: 'html',
-        data: 'tel=' + number + '&mes=' + text,
-        success: function (data) {
-            $('#ans').html(data);
-        }
-    });
-    });
-   
 </script>
-
-<!--getAreas() array (size=4)
-          'Ref' => string '71508129-9b87-11de-822f-000c2965ae0e' (length=36)
-          'AreasCenter' => string 'db5c88de-391c-11dd-90d9-001a92567626' (length=36)
-          'DescriptionRu' => string 'Винницкая' (length=18)
-          'Description' => string 'Вінницька' (length=18)-->
-
-<!-- getCities() 16 => 
-        array (size=20)
-          'Description' => string 'Агрономічне' (length=22)
-          'DescriptionRu' => string 'Агрономичное' (length=24)
-          'Ref' => string 'ebc0eda9-93ec-11e3-b441-0050568002cf' (length=36)
-          'Delivery1' => string '1' (length=1)
-          'Delivery2' => string '1' (length=1)
-          'Delivery3' => string '1' (length=1)
-          'Delivery4' => string '1' (length=1)
-          'Delivery5' => string '1' (length=1)
-          'Delivery6' => string '1' (length=1)
-          'Delivery7' => string '1' (length=1)
-          'Area' => string '71508129-9b87-11de-822f-000c2965ae0e' (length=36)
-          'SettlementType' => string '563ced13-f210-11e3-8c4a-0050568002cf' (length=36)
-          'IsBranch' => string '0' (length=1)
-          'PreventEntryNewStreetsUser' => string '0' (length=1)
-          'CityID' => string '890' (length=3)
-          'SettlementTypeDescription' => string 'село' (length=8)
-          'SettlementTypeDescriptionRu' => string 'село' (length=8)
-          'SpecialCashCheck' => int 1
-          'AreaDescription' => string 'Вінницька' (length=18)
-          'AreaDescriptionRu' => string 'Винницкая ' (length=19)-->
-
-<!-- getWarehouses() 0 =>
-        array (size=53)
-          'SiteKey' => string '10300' (length=5)
-          'Description' => string 'Відділення №1: Миколаївське шосе, 5-й км' (length=71)
-          'DescriptionRu' => string 'Отделение №1: Николаевское шоссе, 5-й км' (length=71)
-          'ShortAddress' => string 'Херсон, Миколаївське шосе, 5-й км' (length=58)
-          'ShortAddressRu' => string 'Херсон, Николаевское шоссе, 5-й км' (length=60)
-          'Phone' => string '380800500609' (length=12)
-          'TypeOfWarehouse' => string '9a68df70-0267-42a8-bb5c-37f427e36ee4' (length=36)
-          'Ref' => string '0d545ed6-e1c2-11e3-8c4a-0050568002cf' (length=36)
-          'Number' => string '1' (length=1)
-          'CityRef' => string 'db5c88cc-391c-11dd-90d9-001a92567626' (length=36)
-          'CityDescription' => string 'Херсон' (length=12)
-          'CityDescriptionRu' => string 'Херсон' (length=12)
-          'SettlementRef' => string 'e71f8b5f-4b33-11e4-ab6d-005056801329' (length=36)
-          'SettlementDescription' => string 'Херсон' (length=12)
-          'SettlementAreaDescription' => string 'Херсонська область' (length=35)
-          'SettlementRegionsDescription' => string '' (length=0)
-          'SettlementTypeDescription' => string 'місто' (length=10)
-          'SettlementTypeDescriptionRu' => string 'город' (length=10)
-          'Longitude' => string '32.578317610200000' (length=18)
-          'Latitude' => string '46.676342077200000' (length=18)
-          'PostFinance' => string '1' (length=1)
-          'BicycleParking' => string '0' (length=1)
-          'PaymentAccess' => string '0' (length=1)
-          'POSTerminal' => string '1' (length=1)
-          'InternationalShipping' => string '1' (length=1)
-          'SelfServiceWorkplacesCount' => string '1' (length=1)
-          'TotalMaxWeightAllowed' => string '0' (length=1)
-          'PlaceMaxWeightAllowed' => string '1100' (length=4)
-          'SendingLimitationsOnDimensions' =>
-            array (size=3)
-              ...
-          'ReceivingLimitationsOnDimensions' =>
-            array (size=3)
-              ...
-          'Reception' =>
-            array (size=7)
-              ...
-          'Delivery' =>
-            array (size=7)
-              ...
-          'Schedule' =>
-            array (size=7)
-              ...
-          'DistrictCode' => string 'В1' (length=3)
-          'WarehouseStatus' => string 'Working' (length=7)
-          'WarehouseStatusDate' => string '2023-03-20 00:00:00' (length=19)
-          'WarehouseIllusha' => string '0' (length=1)
-          'CategoryOfWarehouse' => string 'Branch' (length=6)
-          'Direct' => string '' (length=0)
-          'RegionCity' => string 'ХЕРСОН' (length=12)
-          'WarehouseForAgent' => string '0' (length=1)
-          'GeneratorEnabled' => string '0' (length=1)
-          'MaxDeclaredCost' => string '0' (length=1)
-          'WorkInMobileAwis' => string '0' (length=1)
-          'DenyToSelect' => string '0' (length=1)
-          'CanGetMoneyTransfer' => string '1' (length=1)
-          'HasMirror' => string '0' (length=1)
-          'HasFittingRoom' => string '0' (length=1)
-          'OnlyReceivingParcel' => string '0' (length=1)
-          'PostMachineType' => string '' (length=0)
-          'PostalCodeUA' => string '73034' (length=5)
-          'WarehouseIndex' => string '53/1' (length=4)
-          'BeaconCode' => string '' (length=0)-->

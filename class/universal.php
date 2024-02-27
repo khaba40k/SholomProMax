@@ -225,7 +225,7 @@ function countArraysKey($in, array $ignoreKeys = null):int{
     return $out;
 }
 
-function CostOut($in): string
+function CostOut($in, $_nul_val = '0.00'): string
 {
     //Валідація сум
     $out = str_replace(',', '.', $in);
@@ -238,20 +238,20 @@ function CostOut($in): string
         if ($com > -1) {
             switch (strlen($out) - $com) {
                 case 1:
-                    return str_pad($out, strlen($out) + 2, '0', STR_PAD_RIGHT);
+                    return str_pad($out, strlen($out) + 2, '0', STR_PAD_RIGHT) ?? $_nul_val;
                 case 2:
-                    return str_pad($out, strlen($out) + 1, '0', STR_PAD_RIGHT);
+                    return str_pad($out, strlen($out) + 1, '0', STR_PAD_RIGHT) ?? $_nul_val;
                 case 3:
-                    return $out;
+                    return $out ?? $_nul_val;
                 default:
-                    return substr($out, 0, $com + 3);
+                    return substr($out, 0, $com + 3) ?? $_nul_val;
             }
         } else {
-            return $out . ".00";
+            return $out != 0 ? $out . ".00": $_nul_val;
         }
     }
 
-    return '0.00';
+    return $_nul_val;
 }
 
 function inclAttr($atr, $in):bool{

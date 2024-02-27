@@ -156,7 +156,7 @@ if (isset($_GET['newRow'])) {
 
         if (out) {//Валідація успішна, запис
 
-            let dataForm = $('#tbl_expenses select').serialize() + "&" + $('#tbl_expenses :input').serialize();
+            let dataForm = $('#tbl_expenses *').serialize();
 
             $.ajax({
                 url: 'blok/exp/record_new_in.php',

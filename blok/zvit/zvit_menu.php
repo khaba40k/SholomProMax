@@ -99,6 +99,8 @@ echo new HTEL('div !=zvitResult');
 
     function ChangePeriod(_ot, _do) {
 
+        console.log(_ot + ' -> ' + _do);
+
           $("#ot").attr("value", _ot);
           $("#do").attr("value", _do);
 

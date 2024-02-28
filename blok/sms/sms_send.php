@@ -4,6 +4,8 @@ $TEXT = trim($_POST['mes']);
 
 $NUMBER = array();
 
+$RECEIVER_CUSTOM = $_POST['rec'] ?? null;
+
 if (isset($_POST['tellist'])){
     $input_tel = json_decode($_POST['tellist']);
 
@@ -110,9 +112,6 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
         return 'ПОМИЛКА:' . curl_error($ch);
     }
 
-    //var_dump($response);
-    //echo '<br><br>';
-
     curl_close($ch);
 
     $ans = 'СТАТУС:';
@@ -120,7 +119,7 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
     $arr_ans = array();
 
     foreach ($response as $a){
-        $arr_ans[] = $a->id;
+        $arr_ans[$a->id] = $a->status;
 
         $ans .= "<br>" . explode('-', $a->id)[2] . ' => ' . answerInfo($a->status);
     }
@@ -130,10 +129,40 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
     return $ans;
 }
 
-function RecOnBase(array $arr, string $mes){
+function RecOnBase($arr, string $mes){
 
     //ЗАПИС В БАЗУ ДАНИХ
 
+    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+
+    session_start();
+
+    $id_mes = 0;
+
+    $query = 'select max(id) from `message_text`';
+
+    $result = mysqli_query($link, $query);
+
+    foreach ($result as $row){
+        $id_mes = $row['max(id)'] === null ? 0 : $row['max(id)'] + 1;
+    }
+
+    $sender = $_SESSION['logged'] ?? '?';
+
+    $query = 'insert into message_text (id, text, sender)
+    VALUES ('.$id_mes.',"'.$mes.'","'.$sender.'")';
+    mysqli_query($link, $query);
+
+    foreach($arr as $id=>$st){
+        $phone = explode('-', $id)[2];
+
+        $rec = $GLOBALS['RECEIVER_CUSTOM'] !== null ? "\"" . $GLOBALS['RECEIVER_CUSTOM'] . "\"": 'NULL';
+
+         mysqli_query($link, 'insert into message_info (id, tel, mes_id, receiver, status) '.
+        'VALUES ("'.$id.'", "'.$phone.'", '.$id_mes.', '.$rec.', "'.$st.'")');
+    }
+
+    $link->close();
 }
 
 function GET_MARKER()
@@ -159,35 +188,6 @@ function GET_MARKER()
     //return $ans;
     return $ans->access_token;
 }
-
-//function GET_MARKER():string{
-//    $url = 'https://a2p.vodafone.ua/uaa/oauth/token?grant_type=password';
-
-//    $ch = curl_init($url);
-
-//    $data = [
-//        'username' => '380953410218',
-//        'password' => 'RgRhh7L%Ff'
-//    ];
-
-//    //%52%67%52%68%68%37%4C%25%46%66
-//    //RgRhh7L%Ff
-
-//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//    curl_setopt($ch, CURLOPT_POST, true);
-//    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-//    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-//        'authorization: Basic aW50ZXJuYWw6aW50ZXJuYWw='
-//    ]);
-
-//    $response = curl_exec($ch);
-
-//    curl_close($ch);
-
-//    $ans = json_decode($response);
-
-//    return $ans->access_token;
-//}
 
 function RefreshMarker($refr_tok):string{
     $ch = curl_init();
@@ -248,6 +248,6 @@ function answerInfo($word):string{
          'REJECTED'=>'Повідомлення було відхилено мережею одержувача'
     ];
 
-    return $ARR[$word] ?? 'НЕВІДОМО';
+    return $ARR[$word] ?? $word;
 }
 ?>

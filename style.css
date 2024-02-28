@@ -1147,7 +1147,31 @@ table.kompl {
         border-top: 3px solid darkolivegreen;
     }
 
-.but_cng, .but_del, .but_prt {
+.dis{
+    opacity: 0.3;
+}
+
+.but_sms {
+    background: url(/img/sms_z.png);
+}
+
+.but_send_sms {
+    background: url(/img/send_sms.png);
+}
+
+.but_cng {
+    background-image: url(../img/write_z.png);
+}
+
+.but_del {
+    background-image: url(../img/del_z.png);
+}
+
+.but_prt {
+    background-image: url(../img/printdone_z.png);
+}
+
+.buttons > button {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 32px;
@@ -1156,20 +1180,13 @@ table.kompl {
     z-index: 999;
 }
 
-.dis.but_cng, .dis.but_del, .dis.but_prt{
-    opacity: 0.3;
-}
-
-.but_cng {
-    background-image: url(../img/img_chn.png);
-}
-
-.but_del {
-    background-image: url(../img/img_del.png);
-}
-
-.but_prt {
-    background-image: url(../img/img_prt.png);
+#qsms {
+    display: inline-block;
+    width: 50%;
+    font-size: 100%;
+    resize: vertical;
+    min-height: 150px;
+    text-align: left;
 }
 
 .printInfo {
@@ -1408,8 +1425,8 @@ input.delrow {
 }
 
 .sms_content > button{
-    width: 40%;
-    margin: 0 4%;
+    width: 28%;
+    margin: 0 2%;
 }
 
 #sms_content{

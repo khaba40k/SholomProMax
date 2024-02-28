@@ -174,41 +174,6 @@
 
     $aside($ul);
 
-
-    //$form = new HTEL('form !=feedBack method=post onsubmit=return+false');
-    //$form(new HTEL('label/РЕДАГУВАННЯ'));
-
-    //$div = new HTEL('div !=fb1', [
-    //    new HTEL("button !=create_Z onclick=location.href=='work?page==newZdef'/НОВЕ ЗАМОВЛЕННЯ"),
-    //    new HTEL("button !=active_Z onclick=location.href=='work'/ЗАМОВЛЕННЯ[0]", ($activ_count > 0 ? ' (' . $activ_count . ')' : '')),
-    //    new HTEL("button !=expenses onclick=location.href=='work?page==expens'/ВИТРАТИ")
-    //]);
-
-    //if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
-    //$div([
-    //    new HTEL("button !=formPrice/ЦІНИ"),
-    //    new HTEL("button !=formDiscount onclick=location.href=='work?page==discount_list'/Знижки"),
-    //    new HTEL("button !=formSMS/РОЗСИЛКА СМС")
-    //]);
-
-    //$form($div);
-
-    //$form(new HTEL('label/ЗВІТИ'));
-
-    //$div = new HTEL('div !=fb2');
-
-    //if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1)
-    //$div([
-    //    new HTEL("button !=zal_show /ЗАЛИШКИ"),
-    //    new HTEL("button !=period_show /РУХ ЗА ПЕРІОД...")
-    //]);
-
-    //$div(new HTEL("button !=toInfo onclick=location.href=='info'/Друк для робітника"));
-
-    //$form($div);
-
-    //$aside($form);
-
     $wrapper([
         $aside,
         new HTEL('main !=workfield')

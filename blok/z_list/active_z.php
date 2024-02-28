@@ -228,12 +228,14 @@ if ($counter > 0){
             new HTEL('label &=color:white;font-size:150%;font-weight:bold;/ТЕРМІН ВИЙШОВ'));
         }
 
+        $phone_number = getCorrectPhone($row['phone']);
+
         $div = new HTEL(
             'div !=[7] .=activeZ+[9] &=[8]',
             [
                 $num,
                 $pip_out,
-                getCorrectPhone($row['phone']),
+                $phone_number,
                 dateToNorm($row['date_max'], true),
                 dateToNorm($row['date_out'], true),
                 $_GET['type'],
@@ -247,18 +249,18 @@ if ($counter > 0){
 
         $div([
             new HTEL('label/[0]'),
-            new HTEL('label/[1]')
+            new HTEL('label .=receiver/[1]')
         ]);
 
         if ($row['callback'] == 1 && $row['date_out'] === null) {
             $div(
                 new HTEL(
-                    'label &=color:yellow;border:2px+solid+blue;border-radius:3px;text-decoration:unset;background-color:red;/[2]'
+                    'label .=mobtel &=color:yellow;border:2px+solid+blue;border-radius:3px;text-decoration:unset;background-color:red;/[2]'
                 )
             );
         } else {
             $div(
-                new HTEL('label/[2]')
+                new HTEL('label .=mobtel/[2]')
             );
         }
 
@@ -269,6 +271,10 @@ if ($counter > 0){
         }
 
         $div_buttons = new HTEL('div .=buttons');
+
+        if (strlen($phone_number) >=10 && is_numeric($phone_number) && $_SESSION[$_SESSION['logged']] <= 1){
+            $div_buttons(new HTEL('button *=button .=but_sms'));
+        }
 
         if ((!isset($_SESSION[$row['redaktor']]) && $_SESSION[$_SESSION['logged']] <= 2) || $_SESSION[$_SESSION['logged']] <= $_SESSION[$row['redaktor']]) {
             $div_buttons([
@@ -391,5 +397,39 @@ function getCorrectPhone(string $in, $kodKr = false):string{
         $this.toggleClass("show_podmenu");
     });
 
+    //ВІДПРАВКА ОСОБИСТИХ СМС
+
+    $('.activeZ').on('click', '.but_sms', function (e) {
+        $(document).find("textarea#qsms").remove();
+        $(document).find("span.span_ans").remove();
+        $('.but_send_sms').toggleClass('but_sms');
+        $('.but_send_sms').removeClass('but_send_sms');
+
+        $(this).removeClass('but_sms');
+        $(this).toggleClass('but_send_sms');
+
+        $(this).parent().prepend('<textarea id="qsms" name="qsms" placeholder="текст повідомлення..."></textarea>');
+    });
+
+    $('.activeZ').on('click', '.but_send_sms', function (e) {
+        var _tel = $(this).parent().parent().find("label.mobtel").text().trim();
+        var _rec = $(this).parent().parent().find("label.receiver").text().trim();
+        var _mes = $(this).parent().find("textarea#qsms").val().trim();
+
+        $(this).removeClass('but_send_sms');
+        $(this).toggleClass('but_sms');
+
+        $(document).find("textarea#qsms").remove();
+
+        if (_tel.length < 10 || _mes.length < 1) {
+            $(this).parent().prepend('<span class="span_ans" style="color:red;">Повідомлення НЕ НАДІСЛАНО!</span>');
+            return;
+        }
+
+        $.post('blok/sms/sms_send.php', {mes: _mes, tel: _tel, rec: _rec}, function (result) {
+            alert(result);
+        });
+
+    });
 </script>
 

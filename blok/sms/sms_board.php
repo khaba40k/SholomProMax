@@ -4,7 +4,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 $board = new HTEL('div', [
     new HTEL('div .=sms_content', [
         new HTEL('button !=byfilters .=clicked_but+sms_board_but/ЗА ФІЛЬТРАМИ'),
-        new HTEL('button !=byhand .=sms_board_but/ВРУЧНУ')
+        new HTEL('button !=byhand .=sms_board_but/ВРУЧНУ'),
+        new HTEL('button !=jurnal_sms .=sms_board_but/ЖУРНАЛ')
     ]),
     new HTEL('div !=sms_content .=sms_content')
 ]);
@@ -32,6 +33,16 @@ echo $board;
     $('#byhand').on('click', function () {
         $.ajax({
             url: 'blok/sms/sms_byhand.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#sms_content').html(response);
+            }
+        });
+    });
+
+    $('#jurnal_sms').on('click', function () {
+        $.ajax({
+            url: 'blok/sms/sms_info.php',
             dataType: 'html',
             success: function (response) {
                 $('#sms_content').html(response);

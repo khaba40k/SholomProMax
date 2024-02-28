@@ -1,9 +1,10 @@
-﻿<?php
+<?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $fs = new HTEL('fieldset .=fs_byhand_sms', [
     new HTEL('legend/Повідомлення'),
+    new HTEL('input ?=rec *=tel $=ім`я+(кому) maxlength=30'),
     new HTEL('input ?=tel *=tel $=номер+телефону maxlength=13 minlength=10 [r]'),
     new HTEL('textarea ?=mes $=ТЕКСТ+ПОВІДОМЛЕННЯ minlength=1 [r]'),
     new HTEL('button *=submit #=click/НАДІСЛАТИ'),

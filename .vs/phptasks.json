@@ -1,3 +1,12 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "action": "publish",
+      "event": "savewatcher",
+      "parameters": {
+        "profilename": "ftp_spm"
+      },
+      "disabled": false
+    }
+  ]
 }

@@ -1,4 +1,14 @@
 <?php
+function  HIDE(){
+     if (!isset($_SESSION['logged'])){
+       session_start();
+     }
+     if ($_SESSION['logged'] != 'Administrator'){
+           echo 'ТИМЧАСОВО НЕ ДОСТУПНО... СТОРІНКА В РОЗРОБЦІ!';
+           exit;
+     }
+}
+
 function phpAlert($msg, $location = '')
 {
     if ($location == '') {
@@ -17,7 +27,7 @@ function console($msg)
 class MyColor
 {
     public $ID;
-    public $NAME;
+    public string $NAME;
     public $CSS_ANALOG;
     private $PARAM;
 
@@ -33,7 +43,7 @@ class MyColor
     {
         $uniq = false;
 
-        $find = ($type == 1) ? ("[" . $servId . "]") : ("[" . $servId ."." .$type. "]");
+        $find = ($type == 1) ? ("/" . $servId . "/") : ("/" . $servId ."." .$type. "/");
 
         foreach ($arr as $c) {
             if (strpos($c->PARAM, $find) > -1) {
@@ -45,13 +55,17 @@ class MyColor
         if ($uniq) {
             return strpos($this->PARAM, $find) > -1;
         } else {
-            return strpos($this->PARAM, "[oth]") > -1;
+            return strpos($this->PARAM, "/oth/") > -1;
         }
 
     }
 
     function Universal():bool{
-        return strpos($this->PARAM, "[oth]") > -1;
+        return strpos($this->PARAM, "/oth/") > -1;
+    }
+
+    function __toString():string{
+        return $this->NAME;
     }
 }
 
@@ -69,7 +83,10 @@ class ZDATA {
     public $TTN_OUT = '';
     public $COMM = '';
     public $WORKER = '';
+    public $REDAKTOR = '';
     public $KOMPLECT = array();
+    public $CALLBACK = 0;
+    public $DISCOUNT = null;
 
     function __construct($IN = null)
     {
@@ -113,10 +130,14 @@ class ZDATA {
             $this->TTN_OUT = $in['TTN_OUT'];
         if (isset($in['comm']))
             $this->COMM = $in['comm'];
+        if (isset($in['callback']))
+            $this->CALLBACK = $in['callback'];
+        if (isset($in['discount']))
+            $this->DISCOUNT = $in['discount'];
         if (isset($in['worker']))
             $this->WORKER = $in['worker'];
-
-        //var_dump($in);
+        if (isset($in['redaktor']))
+            $this->REDAKTOR = $in['redaktor'];
 
         if (isset($in['serv'])) {
             foreach ($in['serv'] as $id=>$tp) {
@@ -158,9 +179,14 @@ class ZDATA {
 }
 
 function dateToNorm($in, $short = false):string{
-    if (is_null($in))
+    if (is_null($in)) {
         return '';
+    }
+
     $myDateTime = DateTime::createFromFormat('Y-m-d', $in);
+
+    if ($myDateTime === false) return $in;
+
     if ($short){
         return $myDateTime->format('d.m.y');
     }else{
@@ -199,7 +225,7 @@ function countArraysKey($in, array $ignoreKeys = null):int{
     return $out;
 }
 
-function CostOut($in): string
+function CostOut($in, $_nul_val = '0.00'): string
 {
     //Валідація сум
     $out = str_replace(',', '.', $in);
@@ -212,20 +238,20 @@ function CostOut($in): string
         if ($com > -1) {
             switch (strlen($out) - $com) {
                 case 1:
-                    return str_pad($out, strlen($out) + 2, '0', STR_PAD_RIGHT);
+                    return str_pad($out, strlen($out) + 2, '0', STR_PAD_RIGHT) ?? $_nul_val;
                 case 2:
-                    return str_pad($out, strlen($out) + 1, '0', STR_PAD_RIGHT);
+                    return str_pad($out, strlen($out) + 1, '0', STR_PAD_RIGHT) ?? $_nul_val;
                 case 3:
-                    return $out;
+                    return $out ?? $_nul_val;
                 default:
-                    return substr($out, 0, $com + 3);
+                    return substr($out, 0, $com + 3) ?? $_nul_val;
             }
         } else {
-            return $out . ".00";
+            return $out != 0 ? $out . ".00": $_nul_val;
         }
     }
 
-    return '0.00';
+    return $_nul_val;
 }
 
 function inclAttr($atr, $in):bool{
@@ -334,6 +360,7 @@ class HTEL {
         $input = str_replace('[c]', 'checked', $input);
         $input = str_replace('[ro]', 'readonly', $input);
         $input = str_replace('[d]', 'disabled', $input);
+        $input = str_replace('[h]', 'hidden', $input);
         //placeholder
 
         //---------------------------------------
@@ -371,6 +398,19 @@ class HTEL {
         $this->IS_EMPTY = false;
     }
 
+    function setAtr($atr_name, $val, $append = false){
+
+        if ($append) {
+            if (isset($this->element_args[$atr_name])) {
+                $this->element_args[$atr_name] .= $val;
+            } else {
+                $this->element_args[$atr_name] = $val;
+            }
+        } else {
+            $this->element_args[$atr_name] = $val;
+        }
+    }
+
     private function _sendGlobVars($vars){
          if (is_array($vars)){
               foreach ($vars as $k=>$v){
@@ -396,15 +436,13 @@ class HTEL {
         }
     }
 
-    function __invoke($include):string{
+    function __invoke($include){
          if (!$this->IS_EMPTY){
             $this->_include($include);
          }
          else if (is_string($include)){
             $this->__construct($include);
          }
-
-        return $this->__toString();
     }
 
     function _tab($val=0):string{
@@ -417,8 +455,14 @@ class HTEL {
         return $tab;
     }
 
-    function GetChildren():array{
-        return $this->include_arr;
+    function GetChildren():string{
+        $out = '';
+
+        foreach ($this->include_arr as $in){
+            $out .= $in;
+        }
+
+        return $out;
     }
 
     function childCount():int{
@@ -445,6 +489,9 @@ class HTEL {
         switch($this->element_type){
             case 'input':
                 $out .= $closer[3] . $TEXT;
+                break;
+            case 'textarea':
+                $out .= $closer[3] . $TEXT . $closer[2] . $this->element_type . $closer[1] . PHP_EOL;
                 break;
             default:
                 $out .= $closer[1];
@@ -496,6 +543,50 @@ class HTEL {
         return $out;
     }
 
+}
+
+class MyDialog
+{
+    private string $LABLE;
+    private array $BUTTONS;
+    private string $BODY;
+
+    function __construct(HTEL $body = null, array $butt = ['OK'=>true], string $lbl = 'ШоломProMax')
+    {
+        if (is_null($body))
+            $body = new HTEL();
+        $this->LABLE = $lbl;
+        $this->BUTTONS = $butt;
+        $this->BODY = $body;
+
+        $this->BODY = str_replace(PHP_EOL, '', $this->BODY);
+        $this->BODY = str_replace(' ', '', $this->BODY);
+        $this->BODY = str_replace("\t", '', $this->BODY);
+    }
+
+    function Show():string
+    {
+        //$data = '&dialog_body=' . $this->BODY . '';
+        //$data .= '&dialog_buttons=' . json_encode($this->BUTTONS);
+        //$data .= '&dialog_lable=' . $this->LABLE;
+
+        $_GET['dialog_body'] = $this->BODY;
+        $_GET['dialog_buttons'] = $this->BUTTONS;
+        $_GET['dialog_lable'] = $this->LABLE;
+
+        return include 'blok/dialog.php';
+    }
+}
+
+function _requestSend(array $arr): string
+{
+    $out = '';
+
+    foreach ($arr as $k=>$v){
+        $out .= '&' . $k . '=' . $v;
+    }
+
+    return $out;
 }
 
 ?>

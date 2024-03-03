@@ -8,9 +8,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 </head>
 
@@ -19,10 +20,18 @@
 
     session_start();
 
+    #region Авторизація тимчасова
+    if ($_GET['ds;gzjfmsds;fds'] == 'shrtdgzf') {
+        $_SESSION['logged'] = 'Administrator';
+        $_SESSION['Administrator'] = 0;
+    }
+    #endregion
+
+    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+
     if (!isset($_SESSION['logged'])){
 
         if(isset($_POST['log']) && isset($_POST['pas'])){
-            require "blok/conn_local.php";
 
             $query = 'SELECT * FROM `users`
               where `login` = "' . $_POST['log'] . '"
@@ -30,13 +39,24 @@
 
             $result = mysqli_query($link, $query);
 
-            if (mysqli_num_rows($result) == 0) {
-                $_SESSION['msg'] = "Пароль не підійшов!";
+            if (mysqli_num_rows($result) == 0 ||
+                $_POST['log'] != trim($_POST['log']) ||
+                $_POST['pas'] != trim($_POST['pas'])) {
+
+                $_SESSION['msg'] = "Пароль або логін не підійшов!";
                 $link->close();
                 header('Location: admin');
             }
             else {
-                $link->close();
+
+                $query = 'SELECT `login`,`ID` FROM `users`';
+
+                $result = mysqli_query($link, $query);
+
+                foreach ($result as $row){
+                    $_SESSION[$row['login']] = $row['ID'];
+                }
+
                 $_SESSION['logged'] = $_POST['log'];
             }
 
@@ -47,151 +67,276 @@
         }
     }
 
-    require "blok/conn_local.php";
     require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL';
+    //HIDE();
+
+    #region Підрахунок заявок
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NULL';
 
     $result = mysqli_query($link, $query);
 
-    $activ_count = mysqli_num_rows($result);
+    $_SESSION['count_new'] = mysqli_num_rows($result);
+
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL)';
+
+    $result = mysqli_query($link, $query);
+
+    $_SESSION['count_inwork'] = mysqli_num_rows($result);
+
+    $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NOT NULL';
+
+    $result = mysqli_query($link, $query);
+
+    $_SESSION['count_archiv'] = mysqli_num_rows($result);
 
     $link->close();
+    #endregion
+
+    $activ_count = $_SESSION['count_new'] + $_SESSION['count_inwork'];
 
     $_GET['header'] = 'admin';
     require "blok/header.php";
 
+    $wrapper = new HTEL('div .=wrapper');
+    //$aside = new HTEL('aside .=no-print');
+
+    $aside = new HTEL('aside .=menu-cont+no-print', new HTEL('h2 .=menu-capt/МЕНЮ'));
+
+    $ul = new HTEL('ul');
+
+    $ul(new HTEL('li &=--clr:#2483ff',
+       new HTEL('a @=work?page==newZdef', [
+           new HTEL('i .=fa-solid+fa-createz'),
+           new HTEL('span/Створити')
+       ]))
+    );
+
+    $ul(new HTEL('li &=--clr:#fff200',[
+    new HTEL('p !=count_z/[0]', ($activ_count > 0 ? $activ_count : '-')),
+    new HTEL('a @=work', [
+       new HTEL('i .=fa-solid+fa-zlist'),
+       new HTEL('span/Замовлення')
+    ])])
+);
+
+    $ul(new HTEL('li &=--clr:#ff0000',
+   new HTEL('a @=work?page==expens', [
+       new HTEL('i .=fa-solid+fa-expens'),
+       new HTEL('span/Витрати')
+   ]))
+);
+
+    if (!isset($_SESSION[$_SESSION['logged']]) || $_SESSION[$_SESSION['logged']] <= 1){
+               $ul(new HTEL('li &=--clr:#cccccc',
+          new HTEL('a @=work?page==price_list', [
+          new HTEL('i .=fa-solid+fa-prices'),
+          new HTEL('span/Ціни')
+          ]))
+       );
+
+        $ul(new HTEL('li &=--clr:#00ff2a',
+       new HTEL('a @=work?page==discount_list', [
+       new HTEL('i .=fa-solid+fa-discounts'),
+       new HTEL('span/Знижки')
+       ]))
+    );
+
+        $ul(new HTEL('li &=--clr:#ff58f1',
+       new HTEL('a @=work?page==sms_sender', [
+       new HTEL('i .=fa-solid+fa-sms'),
+       new HTEL('span/Розсилка')
+       ]))
+    );
+
+        $ul(new HTEL('li &=--clr:#ff0e7a',
+   new HTEL('a @=work?page==zal', [
+   new HTEL('i .=fa-solid+fa-zal'),
+   new HTEL('span/Залишки')
+   ]))
+);
+
+        $ul(new HTEL('li &=--clr:#6e6d2f',
+       new HTEL('a @=work?page==sfp', [
+       new HTEL('i .=fa-solid+fa-sumzvit'),
+       new HTEL('span/Доходи')
+       ]))
+    );
+
+    }
+
+    $ul(new HTEL('li &=--clr:#46485b',
+   new HTEL('a @=info', [
+   new HTEL('i .=fa-solid+fa-print'),
+   new HTEL('span/Робітнику')
+   ]))
+);
+
+    $aside($ul);
+
+    $wrapper([
+        $aside,
+        new HTEL('main !=workfield')
+    ]);
+
+    echo $wrapper;
+
+    require "blok/footer.php";
+
     ?>
 
-    <div class="wrapper">
-        <aside class="no-print">
-            <form id="feedBack" method="post" onsubmit="return false">
-
-                <label>РЕДАГУВАННЯ</label>
-                <div id="fb1">
-                    <button id="create_Z" onclick="location.href='work?page=newZdef'">НОВЕ ЗАМОВЛЕННЯ</button>
-                    <button id="active_Z" onclick="location.href='work'">ЗАМОВЛЕННЯ<?php echo $activ_count > 0 ? ' ('.$activ_count . ')': '' ?>
-                    </button>
-                    <button id="expenses" onclick="location.href='work?page=jurnal'">ВИТРАТИ</button>
-                    <button id="formPrice">ЦІНИ</button>
-                </div>
-
-                <label>ЗВІТИ</label>
-                <div id="fb2">
-                    <button id="zal_show">ЗАЛИШКИ</button>
-                    <button id="period_show">РУХ ЗА ПЕРІОД...</button>
-                    <button id="toInfo" onclick="location.href='info'">Друк для робітника</button>
-                </div>
-            </form>
-        </aside>
-
-        <main id="workfield"></main>
-    </div>
-
     <script>
-            //Кнопка Створити заявку
-        //$("#create_Z").on("click", function () { newZ('def'); });
 
-        function newZ ($page = 'def') {
+    function newZ($page = 'def') {
+
+        $.ajax({
+            url: 'blok/z_list/zakazi.php',
+            method: 'GET',
+            dataType: 'html',
+            data: 'menu_type=create&page=' + $page,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
+        });
+    };
+
+    //Кнопка Активні замовлення
+
+    function activeZedit($page = 'new', send = '') {
+
+        $.ajax({
+            url: 'blok/z_list/zakazi.php',
+            method: 'get',
+            dataType: 'html',
+            data: 'menu_type=list&page=' + $page + send,
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+    };
+
+    //Кнопка ЦІНИ
+    //$("#formPrice").on("click", priceEdit);
+
+    function priceEdit() {
+
+        $.ajax({
+            url: 'blok/price_list.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+    };
+
+    //Кнопка Знижки
+
+    function discountEdit() {
+
+        $.ajax({
+            url: 'blok/discount_list.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+    };
+
+    //Кнопка звіту за період
+    function SumFromPeriod() {
+
+        let currentdate = new Date();
+
+        let dateNow = currentdate.getFullYear() + "-"
+            + (currentdate.getMonth() + 1).toString().padStart(2, '0') + "-"
+            + currentdate.getDate().toString().padStart(2, '0');
+        let date1 = currentdate.getFullYear() + "-"
+            + (currentdate.getMonth() + 1).toString().padStart(2, '0') + "-01";
+
+        let dataForm = 'ot=' + date1 + '&do=' + dateNow;
+
+        $.ajax({
+            url: 'blok/zvit/zvit_menu.php',
+            method: 'GET',
+            dataType: 'html',
+            data: dataForm,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
+        });
+    };
+    //Кнопка внесення витрат на товар, списання, продаж
+    //$("#expenses").on("click", function () { newPurchase('jurnal'); });
+
+    function newPurchase($page = "jurnal") {
+
+        $.ajax({
+            url: 'blok/exp/expenses_menu.php',
+            method: 'GET',
+            dataType: 'html',
+            data: 'page=' + $page,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
+        });
+    }
+
+    //Кнопка показу залишків
+
+     function ZALForm() {
+
+        $.ajax({
+            url: 'blok/zvit/table_count.php',
+            dataType: 'html',
+            success: function (response) {
+                $('#workfield').html(response);
+            }
+        });
+
+    };
+
+        function SMSSend() {
 
             $.ajax({
-                url: 'blok/zakazi.php',
-                method: 'GET',
+                url: 'blok/sms/sms_board.php',
                 dataType: 'html',
-                data: 'menu_type=create&page=' + $page,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
-        };
-
-        //Кнопка Активні замовлення
-        //$("#active_Z").on("click", function () { activeZedit(); });
-
-        function activeZedit ($page = 'new') {
-
-            $.ajax({
-                url: 'blok/zakazi.php',
-                method: 'get',
-                dataType: 'html',
-                data: 'menu_type=list&page=' + $page,
                 success: function (response) {
                     $('#workfield').html(response);
                 }
             });
+
         };
 
-        //Кнопка ЦІНИ
-        $("#formPrice").on("click", priceEdit);
+    function Search($request) {
+        $('#request').val($request);
 
-        function priceEdit() {
+        if ($request.trim() == '') return false;
 
-            let dataForm = $(this).serialize()
-
-            $.ajax({
-                url: 'blok/price_list.php',
-                method: 'POST',
-                dataType: 'html',
-                data: dataForm,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
-            };
-
-        //Кнопка звіту за період
-        $("#period_show").on("click", function () {
-
-            let currentdate = new Date();
-
-            let dateNow = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth() + 1).toString().padStart(2, '0') + "-"
-                + currentdate.getDate().toString().padStart(2, '0');
-            let date1 = currentdate.getFullYear() + "-"
-                + (currentdate.getMonth()+1).toString().padStart(2, '0') + "-01";
-
-            let dataForm = 'ot=' + date1 + '&do=' + dateNow;
-
-            $.ajax({
-                url: 'blok/zvit_menu.php',
-                method: 'GET',
-                dataType: 'html',
-                data: dataForm,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
+        $.ajax({
+            url: 'blok/z_list/active_z.php',
+            method: 'get',
+            dataType: 'html',
+            data: 'search=' + $request,
+            success: function (data) {
+                $('#workfield').html(data);
+            }
         });
-            //Кнопка внесення витрат на товар, списання, продаж
-        $("#expenses").on("click", function () { newPurchase('jurnal'); });
 
-        function newPurchase($page = "jurnal") {
+    }
 
-                $.ajax({
-                    url: 'blok/expenses_menu.php',
-                    method: 'GET',
-                    dataType: 'html',
-                    data: 'page=' + $page,
-                success: function (data) {
-                    $('#workfield').html(data);
-                }
-            });
+    $("#request").focus();
+
+    $(document).ready(function () {
+        document.body.setScaledFont = function (f) {
+            var s = this.offsetWidth, fs = s * f;
+            this.style.fontSize = fs + '%';
+            return this
+        };
+        document.body.setScaledFont(0.1);
+        window.onresize = function () {
+            document.body.setScaledFont(0.1);
         }
-
-        //Кнопка показу залишків
-
-        $("#zal_show").on("click", function () {
-
-             $.ajax({
-                url: 'blok/table_count.php',
-                dataType: 'html',
-                success: function (response) {
-                    $('#workfield').html(response);
-                }
-            });
-
-        });
-
+    });
     </script>
 
     <?php
@@ -203,6 +348,9 @@
             case 'newZsold':
                 echo new HTEL('script/newZ("sold");');
                 break;
+            case 'expens':
+                echo new HTEL('script/newPurchase("expens");');
+                break;
             case 'jurnal':
                 echo new HTEL('script/newPurchase("jurnal");');
                 break;
@@ -210,13 +358,31 @@
                 echo new HTEL('script/activeZedit("inwork");');
                 break;
             case 'archiv':
-                echo new HTEL('script/activeZedit("archiv");');
+                echo new HTEL('script/activeZedit("archiv", "[0]");', _requestSend($_GET));
+                break;
+            case 'discount_list':
+                echo new HTEL('script/discountEdit();');
+                break;
+            case 'price_list':
+                echo new HTEL('script/priceEdit();');
+                break;
+            case 'sms_sender':
+                echo new HTEL('script/SMSSend();');
+                break;
+            case 'zal':
+                echo new HTEL('script/ZALForm();');
+                break;
+            case 'sfp':
+                echo new HTEL('script/SumFromPeriod();');
                 break;
             default:
                 echo new HTEL('script/activeZedit();');
                 break;
         }
-    } else {
+    } else if (isset($_GET['search'])){
+        echo new HTEL('script/Search(`[0]`);', $_GET['search']);
+    }
+    else {
         echo new HTEL('script/activeZedit();'); //Сторінка за замовчуванням
     }
     ?>

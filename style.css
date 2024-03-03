@@ -1,5 +1,10 @@
-﻿:root{
-    --formbutbckgrnd: olive;
+﻿:root {
+    /*--bckgrndclr: rgba(128, 128, 0, 0.90);*/
+    --bckgrndclr: rgba(255, 255, 255, 0.50);
+    --bg: #242424;
+    --clr: #fff;
+    --wh-menu-it: 80px;
+    --menu-font-size: 50%;
 }
 
 input:read-only{
@@ -12,6 +17,8 @@ button {
     padding: 10px 5px;
     font-weight: bold;
     border-radius: 5px;
+    font-size: 90%;
+    color: darkolivegreen;
 }
 
 .clicked_but {
@@ -29,8 +36,64 @@ caption.onlyPrint {
 }
 
 body {
-    font-size: 16px;
+    background-attachment: fixed;
+    font-size: 20px;
+    background-image: url(../img/fon.png);
+    background-repeat: repeat;
+    background-size: 20%;
+    min-height: 100%;
 }
+
+div.firstpage {
+    margin: 1%  5%;
+    padding: 1% 1%;
+}
+
+    div.firstpage > * {
+        display:inline-block;
+        width:100%;
+    }
+
+    div.firstpage > label {
+        margin-bottom: 20px;
+        font-size: 110%;
+    }
+
+    div.firstpage > button {
+        width: 70%;
+        margin-left: 15%;
+        margin-right:15%;
+        margin-top: 15px;
+        padding: 15px 0;
+        font-size: 130%;
+    }
+
+form#search {
+    display: inline-flex;
+    position: relative;
+    width: 50%;
+    height: 100%;
+    margin: 0 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+    form#search input {
+        text-align: left;
+        width: 80%;
+        height: 100%;
+        padding: 4px 8px;
+        border: 2px solid olive;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    form#search button {
+        width: 20%;
+        height: 100%;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
 
 .autorize {
     height: 80vh;
@@ -69,31 +132,46 @@ body {
     }
 
 header {
+    position:relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    background-color: #FFEB3B;
+    background-color: #444444;
     padding: 20px 10px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .wrap-logo {
+    margin-left: 1%;
     display: flex;
     align-items: center;
+    height: 64px;
+    background-image: url(../img/logo.png);
+    background-size: 64px 64px;
+    background-repeat: no-repeat;
+}
+
+.logo {
+    display: flex;
+    background: -webkit-linear-gradient(blue, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    padding-left: 64px;
+    font-weight: bold;
+    font-size: 170%;
 }
 
 header a {
     color: #212121;
     padding: 12px;
     text-decoration: none;
-    font-size: 18px;
     border-radius: 4px;
 }
-
-    header a.logo {
-        font-size: 25px;
-        font-weight: bold;
-    }
 
     header a:hover {
         background-color: #FBC02D;
@@ -104,6 +182,20 @@ header a {
         background-color: #FBC02D;
     }
 
+    .opis{
+        padding: 2% 2%;
+        background-color: #445f16;
+/*        background-image: url(../img/texture.png);
+*/        background-size: 10%;
+        border-radius: 25px;
+        font-size: 90%;
+        color: #b9dc16;
+    }
+
+        .opis > p, .opis > span {
+            /*opacity: 0.6;*/
+        }
+
 nav {
     display: flex;
     align-items: center;
@@ -112,6 +204,18 @@ nav {
 table {
     border: 2px solid #000;
     border-collapse: collapse;
+}
+
+    table td {
+        font-size: 90%;
+    }
+
+    table th {
+        font-size: 110%;
+    }
+
+fieldset, tbody {
+    background: var(--bckgrndclr);
 }
 
 th, td {
@@ -127,31 +231,214 @@ button:hover {
     cursor: pointer;
 }
 
+.info_cnt_cell:hover {
+    cursor: pointer;
+}
+
+td.info_cnt_cell_color:hover {
+    cursor: pointer;
+}
+
+.info_cnt_tbl th {
+    padding: 3px;
+}
+
+.info_cnt_tbl td {
+    padding: 2px 7px;
+}
+
+.info_cnt_tbl td {
+    padding: 2px 7px;
+}
+
+#detal_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .wrapper {
-    display: inline-block;
     width: 100%;
     padding: 10px 10px;
 }
 
 aside {
+    position: relative;
+    display: inline-block;
+    border-top: outset 45px green;
+    border-radius: 25px 0 25px 0;
+    background-color: var(--bg);
+    padding-left: 25px;
+    padding-top: 25px;
+    margin-top: 10px;
+    margin-left: 2%;
     float: left;
-    background: linear-gradient(to top left, white, blue);
-    width: 20%;
-    padding: 10px 10px;
 }
 
-    aside button {
-        width: 100%;
+.menu-capt {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 0 15px;
+    color: var(--clr);
+}
+
+.menu-cont ul {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+    .menu-cont ul > * {
+        margin-bottom: 25px;
+        margin-right: 25px;
     }
 
-    aside label {
-        font-size: large;
+aside ul li {
+    position: relative;
+    list-style: none;
+    width: var(--wh-menu-it);
+    height: var(--wh-menu-it);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+    aside ul li::before {
+        content: '';
+        position: absolute;
+        inset: 30px;
+        box-shadow: 0 0 0 10px var(--clr), 0 0 0 20px var(--bg), 0 0 0 22px var(--clr);
+        transition: 0.5s;
+    }
+
+    aside ul li:hover::before {
+        inset: 15px;
+    }
+
+    aside ul li::after {
+        content: '';
+        position: absolute;
+        inset: 0px;
+        background: var(--bg);
+        transform: rotate(45deg);
+        transition: 0.5s;
+    }
+
+    aside ul li:hover::after {
+        inset: 0px;
+        transform: rotate(0deg);
+    }
+
+    aside ul li a {
+        position: relative;
+        text-decoration: none;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        aside ul li a i {
+            font-size: 2em;
+            transition: 0.5s;
+            color: var(--clr);
+            opacity: 1;
+        }
+
+    aside ul li p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: -7px;
+        top: -10px;
+        font-size: 0.7em;
+        color: var(--clr);
+        opacity: 1;
+        background-color: red;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        z-index: 11;
         font-weight: bold;
     }
 
+    aside ul li:hover p {
+        background: none;
+    }
+
+    aside ul li:hover a i {
+        color: var(--clr);
+        transform: translateY(-40%);
+    }
+
+    aside ul li a span {
+        font-size: var(--menu-font-size);
+        position: absolute;
+        font-family: sans-serif;
+        color: var(--clr);
+        opacity: 0;
+        transition: 0.5s;
+        transform: scale(0) translateY(200%);
+    }
+
+    aside ul li:hover a span {
+        opacity: 1;
+        transform: scale(1) translateY(150%);
+    }
+
+    aside ul li:hover a i,
+    aside ul li a span {
+        filter: drop-shadow(0 0 20px var(--clr)) drop-shadow(0 0 40px var(--clr)) drop-shadow(0 0 60px var(--clr));
+    }
+
+.fa-solid {
+    width: calc(var(--wh-menu-it) / 2);
+    height: calc(var(--wh-menu-it) / 2);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.fa-createz {
+    background-image: url(/img/createz.png);
+}
+
+.fa-zlist {
+    background-image: url(/img/zlist.png);
+}
+
+.fa-expens {
+    background-image: url(/img/expens.png);
+}
+
+.fa-prices {
+    background-image: url(/img/prices.png);
+}
+
+.fa-discounts {
+    background-image: url(/img/discounts.png);
+}
+
+.fa-sms {
+    background-image: url(/img/sms.png);
+}
+
+.fa-zal {
+    background-image: url(/img/zal.png);
+}
+
+.fa-sumzvit {
+    background-image: url(/img/sumzvit.png);
+}
+
+.fa-print {
+    background-image: url(/img/print.png);
+}
+
 main {
-    float: right;
-    width: 80%;
+    overflow: auto;
 }
 
     main > form, main > table {
@@ -161,16 +448,10 @@ main {
     }
 
     .create_z > fieldset {
-        border: 2px solid #ff0000;
         float: left;
         width: 100%;
         padding: 10px 10px;
     }
-
-        .create_z > fieldset > legend {
-            font-size: large;
-            font-weight: bold;
-        }
 
 .create_z > button {
     width: auto;
@@ -178,31 +459,138 @@ main {
     float: right;
 }
 
+.dialog_w {
+    position: fixed;
+    margin: 0 10%;
+    padding: 1%;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: cadetblue;
+    color: black;
+    border: 5px solid blue;
+    border-radius: 20px;
+    border-top: 50px solid blue;
+    padding-bottom: 50px;
+    z-index: 999;
+}
+
+    .dialog_w label#top_dialog_lbl {
+        position: absolute;
+        height: 35px;
+        top: -45px;
+        left:10px;
+        color:yellow;
+        font-size: 33px;
+    }
+
+    #but_close {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        top: -45px;
+        right: 10px;
+        padding: 0;
+        color: red;
+        font-weight: bold;
+    }
+
+.bott_buts {
+    display: inline-flex;
+    position: absolute;
+    height: 35px;
+    bottom: 10px;
+    right: 10px;
+    padding: 0 5px;
+    color: blue;
+    font-weight: bold;
+}
+
+#but_apply {
+    position: absolute;
+    height: 35px;
+    bottom: 10px;
+    right: 10px;
+    padding: 0 5px;
+    color: blue;
+    font-weight: bold;
+}
+
+fieldset {
+    border-radius: 10px;
+}
+
+fieldset legend{
+    background-color: yellow;
+    color: blue;
+    border-radius:  10px;
+    padding: 10px 15px;
+}
+
+fieldset#fs1 {
+    border: 5px solid blue;
+    margin-bottom: 20px;
+}
+
+    fieldset#fs1 div {
+        font-size: 70%;
+    }
+
 fieldset#fs1 > div {
     display: inline-block;
     width: 100%;
-    height: 32px;
+    min-height: 32px;
     position: relative;
 }
 
-fieldset#fs1 > div > * {
-    position: absolute;
-    padding: 5px 5px;
-    margin: 5px 0;
-    font-size: 16px;
-    height: 100%;
-    right: 0;
-    width: 55%;
-}
+    fieldset#fs1 > div > * {
+        position: absolute;
+        padding: 5px 5px;
+        margin: 5px 0;
+        height: 100%;
+        right: 0;
+        width: 55%;
+        background: none;
+        color: blue;
+        font-weight: bold;
+    }
 
     fieldset#fs1 > div > label {
         left: 0;
         width: 35%;
     }
 
-fieldset#fs2 {
-    border: 2px solid #000;
+.NP_SELECTOR {
+    height: 116px;
 }
+
+    .NP_SELECTOR select, .NP_SELECTOR input {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 4px;
+        height: 32px;
+        background: none;
+        padding: 0;
+        color: blue;
+        font-size: 140%;
+    }
+
+        .NP_SELECTOR input{
+            background-color: white;
+            border-radius: 20px;
+            padding: 0 5px;
+        }
+
+    .NP_SELECTOR > div {
+        padding: 0;
+        border: 2px solid black;
+        background-color: red;
+    }
+
+    fieldset#fs2 {
+        border: 5px solid yellow;
+    }
 
 div#color_variant {
     display: grid;
@@ -241,19 +629,18 @@ div#color_variant {
     display: grid;
     grid-template-columns: 49% 49%;
     grid-column-gap: 2px;
+    grid-row-gap: 5px;
 }
 
 .opt_color {
     display: flex;
-    align-items: center;
     position: relative;
-    background: linear-gradient(to right, darkolivegreen, white);
+    background: linear-gradient(to right, olive, var(--bckgrndclr));
     border-radius: 10px;
     margin: 5px 5px;
-    padding: 5px 10px;
-    color: white;
+    padding: 1% 2%;
     width: 100%;
-    height: 30px;
+    height: 100%;
 }
 
     .opt_color:hover {
@@ -267,7 +654,6 @@ div#color_variant {
     }
 
 .type_variant {
-    /*appearance: none;*/
     background: none;
     height: 100%;
     border: none;
@@ -280,44 +666,66 @@ div#color_variant {
     }
 
 .left_z_menu {
-    position: absolute;
+    position: relative;
     align-items: center;
     display: flex;
-    width: 53%;
-    height:100%;
-}
-
-.left_z_menu * {
-    display: inline-flex;
-}
-
-    .left_z_menu > label {
-        font-size: small;
-    }
-
-    .convers {
-        position: absolute;
-    }
-
-label.convers {
-    right: 23px;
-}
-
-input.convers {
-    right: 2px;
-    width: 20px;
+    width: 45%;
     height: 100%;
+    display: inline-block;
 }
+
+    .left_z_menu > * {
+        display: inline-flex;
+    }
+
+    .left_z_menu > label, .left_z_menu > select {
+        position: relative;
+        width: 100%;
+        height: 55%;
+        padding: 1% 0;
+        margin: 0;
+        color: yellow;
+    }
+
+    .left_z_menu > select {
+        font-size: 80%;
+    }
+
+        div.convers {
+            height: 40%;
+            width: 90%;
+            margin-left: 10%;
+            border: 2px solid green;
+            border-radius: 5px;
+            padding: 5px;
+            align-items: center;
+        }
+
+    div.convers * {
+        display: inline-block;
+    }
+
+    div.convers label {
+        width: 70%;
+        color: black;
+        font-style: italic;
+        font-size: 70%;
+    }
+
+    div.convers input {
+        width: 20%;
+        margin-left: 5%;
+    }
 
 .right_menu {
     display: flex;
     position: absolute;
-    right: 2%;
+    right: 1%;
     height: 85%;
-    width: 43%;
+    width: 51%;
     justify-content: right;
     align-items: center;
-    padding-right: 10px;
+    padding-right: 5px;
     color: black;
 }
 
@@ -326,20 +734,19 @@ input.convers {
     }
 
     .right_menu > input, .right_menu > select {
-        margin-left: 5px;
+        margin-left: 1%;
     }
 
 .right_menu > input[type=checkbox] {
-    width: 20px;
+    width: 20%;
 }
 
 .right_menu > input[type=number] {
-    width: 65px;
+    width: 25%;
     text-align: right;
     border-radius: 5px;
-    background: olive;
+    background-color: olivedrab;
     color: white;
-    font-weight: bold;
 }
 
 .chb_yesno {
@@ -351,7 +758,6 @@ input.convers {
         display:flex;
         position: relative;
         height: 100%;
-/*        width: 60px;*/
         margin-left: 10px;
         border: 1px solid darkolivegreen;
         border-radius: 15px;
@@ -376,14 +782,6 @@ input.convers {
     width: 100%;
 }
 
-    .tbl_price table * {
-        font-size:  20px;
-    }
-
-    .tbl_price table caption {
-        font-size: 26px;
-    }
-
     .tbl_price button {
         float: right;
         margin-top: 15px;
@@ -395,6 +793,7 @@ input.convers {
     margin: 0;
     border: none;
     background: none;
+    font-size: inherit;
 }
 
 .price_name_cell {
@@ -406,13 +805,8 @@ input.convers {
     padding: 3px 4px;
 }
 
-.tbl_count * {
-    font-size: 20px;
-}
-
 .tbl_sum th {
     padding: 10px;
-    font-size: larger
 }
 
 .tbl_sum td  {
@@ -426,9 +820,171 @@ input.convers {
     background: #febaba;
 }
 
-#infoForm table * {
-    font-size: 20px;
+#shop_div{
+    width: 100%;
+    display: block;
+    background-color: red;
 }
+
+.shop_cell {
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 18%;
+    min-width: 192px;
+    background-color: white;
+    margin: 1%;
+    border: 2px solid darkolivegreen;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.shop_img{
+    position:absolute;
+    width: 40%;
+    height: auto;
+    left: 1%;
+    bottom:1%;
+    z-index:0;
+    background: none;
+}
+
+    .shop_cell input, .shop_bott label {
+        display: flex;
+        background:none;
+        border:none;
+    }
+
+     .shop_bott > label{
+         position: absolute;
+         z-index:1;
+         left: -20px;
+         top: -20px;
+         padding:  4px 6px;
+         padding-left: 15px;
+         font-weight: bold;
+         color:  rgb(0, 0, 255, 0.9);
+         border: 3px solid blue;
+         border-radius: 4px;
+         border-bottom-right-radius: 0;
+         border-top-left-radius: 30px;
+         background-color: rgb(255, 255, 0, 0.9);
+         max-width: 80%;
+     }
+
+        .shop_cell > label.L1 {
+            position: absolute;
+            padding: 5px;
+            bottom: -40px;
+            color: white;
+            font-weight: bold;
+        }
+
+    .shop_cell > input.I1 {
+        position: absolute;
+        padding: 1px;
+        bottom: -48px;
+        color: yellow;
+        font-style: italic;
+        font-size: 130%;
+        right: 2px;
+        width: 60%;
+        height: 46px;
+        text-align: right;
+    }
+
+.shop_bott > input.I2 {
+    position: absolute;
+    padding: 1px;
+    top: 3%;
+    color: blue;
+    font-weight: bold;
+    font-size: 100%;
+    right: 2px;
+    width: 40%;
+    text-align: right;
+}
+
+.shop_bott > input.I2:after {
+    content: ' грн.';
+}
+
+.shop_selected {
+    background-color: yellow;
+}
+
+.shop_bott{
+    min-height: 128px;
+}
+
+.shop_counter{
+    position: absolute;
+    display: block;
+    right:10px;
+    width: 20%;
+    height: 70%;
+    bottom: 10px;
+}
+
+    .shop_counter > *{
+        text-align: center;
+        width: 100%;
+        height: 33%;
+        font-size: 110%;
+    }
+
+#go_bottom{
+    position: fixed;
+    left: 1%;
+    bottom: 1%;
+    font-size: 200%;
+    color: darkolivegreen;
+    border: 3px solid blue;
+    background-color: yellow;
+    padding: 4px;
+    z-index: 999;
+}
+
+button.subm{
+    min-width: 170px;
+    min-height: 70px;
+    font-size: 130%;
+}
+
+.count_inp {
+    background: none;
+    border: none;
+}
+
+#tbl_disc td{
+    text-align: center;
+}
+
+#generator {
+    display: flex;
+    margin-top: 30px;
+    border: 5px solid yellow;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content:center;
+    align-items:center;
+}
+
+    #generator *{
+        display:inline-flex;
+        min-height: 40px;
+        min-width: 25%;
+        margin-left: 10px;
+        text-align: center;
+    }
+
+    #generator > input{
+        font-size: 130%;
+    }
+
+    #infoForm {
+        padding: 0 5%;
+    }
 
 #infoForm td {
     padding: 2px 4px;
@@ -441,15 +997,64 @@ input.convers {
 .activeZ {
     position: relative;
     display: grid;
-    grid-template-columns: 5% 30% 20% 15% 10% 10% 10%;
+    grid-template-columns: 10% 40% 25% 25%;
+    row-gap: 10px;
     width: 100%;
-    background: linear-gradient(to right, darkolivegreen, white);
+    min-height: 20px;
+    background: linear-gradient(to left, #fdff32, var(--bckgrndclr));
     border-radius: 10px;
-    padding: 5px;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    padding: 1%;
+    margin-left: 2px;
+    margin-bottom: 4px;
     align-items: center;
 }
+
+    .activeZ:hover {
+        margin-left: 10px;
+        margin-bottom: 10px;
+        box-shadow: -8px 5px 5px rgb(0,0,0, 0.5);
+    }
+
+    .activeZ div[class=buttons] {
+        display: none;
+        justify-content: end;
+        align-items: center;
+        border-top: 3px solid olive;
+        grid-column: span 7/8;
+    }
+
+.customcreator {
+    border: 7px dotted blue;
+}
+
+.customcreator > label{
+    color: blue;
+}
+
+.show_podmenu {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-top: 3px solid olive;
+    grid-column: span 7/8;
+}
+
+    .activeZ button {
+        margin-left: 5%;
+    }
+
+    .activeZ * {
+        font-size: 75%;
+    }
+
+    .activeZ p {
+        position: absolute;
+        font-size: 70%;
+        left: 5%;
+        top: 1%;
+        text-transform: uppercase;
+        color: rgb(34, 0, 255, 0.2);
+    }
 
 #zakaz_workplace{
     padding: 0 10%;
@@ -458,31 +1063,130 @@ input.convers {
 
 .activeZ * {
     text-align: center;
-    font-size: inherit;
     font-weight: bold;
-    color: white;
+    color: black;
     position: relative;
     margin: 2px 5px;
 }
 
-.but_cng, .but_del, .but_prt {
+.period_done {
+    display: flex;
+    width: 100%;
+    font-size: 120%;
+    justify-content: center;
+    align-items: center;
+}
+
+    .period_done * {
+        display: inline-flex;
+        min-width: 40px;
+        width:initial;
+        height: 100%;
+        font-size: inherit;
+        text-align: center;
+    }
+
+    .period_done input{
+        background: none;
+        border: none;
+    }
+
+    label.percent {
+        position: absolute;
+        left: -50px;
+        top: -5px;
+        background: none;
+        font-size: 130%;
+        color: rgb(0,0,255, 0.3);
+        font-weight: bold;
+        border: 4px solid rgb(0,0,255, 0.3);
+        padding: 3px 18px;
+        -webkit-transform: rotate(-15deg);
+        z-index: 0;
+    }
+
+label.term {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    background: none;
+    font-size: 150%;
+    color: rgb(255,0,0, 0.5);
+    font-weight: bold;
+    border: 10px double rgb(255,0,0, 0.5);
+    padding: 3px 18px;
+    -webkit-transform: rotate(10deg);
+    z-index: 0;
+}
+
+label.costs {
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
+    background: none;
+    color: rgb(0,0,0, 0.5);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 70%;
+    z-index: 999;
+    padding: 0;
+    margin: 0;
+}
+
+table.kompl {
+    border: none;
+    border-collapse: separate;
+    border-spacing: 4px 0;
+    font-size: 100%;
+    font-style: italic;
+}
+
+    table.kompl td {
+        padding: 0 2px;
+        border: none;
+        border-top: 3px solid darkolivegreen;
+    }
+
+.dis{
+    opacity: 0.3;
+}
+
+.but_sms {
+    background: url(/img/sms_z.png);
+}
+
+.but_send_sms {
+    background: url(/img/send_sms.png);
+}
+
+.but_cng {
+    background-image: url(../img/write_z.png);
+}
+
+.but_del {
+    background-image: url(../img/del_z.png);
+}
+
+.but_prt {
+    background-image: url(../img/printdone_z.png);
+}
+
+.buttons > button {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 32px;
     height: 32px;
     border: none;
+    z-index: 999;
 }
 
-.but_cng {
-    background-image: url(../img/img_chn.png);
-}
-
-.but_del {
-    background-image: url(../img/img_del.png);
-}
-
-.but_prt {
-    background-image: url(../img/img_prt.png);
+#qsms {
+    display: inline-block;
+    width: 50%;
+    font-size: 100%;
+    resize: vertical;
+    min-height: 150px;
+    text-align: left;
 }
 
 .printInfo {
@@ -497,22 +1201,36 @@ input.convers {
 .doneApply {
     display: flex;
     width: 100%;
+    padding: 5px 5px;
+    background: linear-gradient(to bottom, olive, var(--bckgrndclr));
+    border-radius: 5px;
     justify-content: right;
     align-items: center;
-    padding: 5px 10px;
-    background: linear-gradient(to bottom, olive, white); 
-    border-radius: 5px;
 }
 
-    .doneApply > input {
-        width: 90px;
-        margin: 2px 10px;
+    .doneApply > div {
+        display: inline-grid;
+        grid-template-rows: auto auto;
+        padding: 0 5px;
     }
 
-        .doneApply > input[type=number] {
-            width: 70px;
+        .doneApply * {
+            font-size: 80%;
+        }
+
+    .doneApply div > input {
+        width:100%;
+    }
+
+        .doneApply div > input[type=number] {
             text-align: right;
         }
+
+select#creator{
+    margin: 2px 3px;
+    border-radius: 3px;
+    background:none;
+}
 
 .zvitMenu, .expensesMenu {
     display: inline-block;
@@ -524,16 +1242,13 @@ input.convers {
     padding: 0 10%;
 }
 
-#zvitResult > table {
+#zvitResult > * {
     width:100%;
 }
 
-    #zvitResult > form {
-        width: 100%;
-    }
-
 #zvitMenu > button {
     width: 19%;
+    font-size: 60%;
 }
 
 #expensesMenu  > button{
@@ -549,7 +1264,7 @@ input.convers {
     .expenses_list th {
         padding: 5px 20px;
         text-align: left;
-        font-size: 170%;
+        font-size: 120%;
         color: blue;
     }
 
@@ -574,21 +1289,28 @@ input.convers {
         font-weight: bold;
     }
 
-    .del_cell {
+    td.del_cell {
+        position:relative;
         width:3%;
         padding: 0;
+        margin:0;
+        background-color:white;
     }
 
-.del_cell input{
+input.delrow {
+    position: absolute;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    left: 10%;
+    top:10%;
+    width: 80%;
+    height: 80%;
     border: none;
     color: white;
-    background-color: red;
+    background-color: rgba(255,0,0,0.7);
     font-weight: bold;
     margin: 0;
     padding: 0;
+    border-radius: 30px;
 }
 
     .delrow:hover {
@@ -601,16 +1323,12 @@ input.convers {
         display: inline-block;
     }
 
-#zvitResult > * {
-    width: 80%;
-}
-
 #periodVariant {
     color: white;
     font-weight: bold;
     margin-top: 10px;
     padding: 10px;
-    background: linear-gradient(to bottom, darkolivegreen, white);
+    background: linear-gradient(to bottom, darkolivegreen, var(--bckgrndclr));
     border-radius: 10px;
 }
 
@@ -634,17 +1352,11 @@ input.convers {
         padding: 10px 10px;
     }
 
-    .expenses_table > * {
-        font-size: 14px;
-    }
-
     .expenses_table > caption{
-        font-size: 20px;
         margin-bottom: 15px;
     }
 
         .expenses_table > caption > input {
-            font-size: 20px;
             width: auto;
         }
 
@@ -682,14 +1394,15 @@ input.convers {
 .row_comm {
     color: grey;
     border-top: 2px dotted grey;
-    background: linear-gradient(to left, #d5d5d5, white);
+    background: linear-gradient(to left, #d5d5d5, var(--bckgrndclr));
 }
 
     .row_comm td {
-        font-size: calc(100% * 0.9);
+        font-size: 60%;
         font-style: italic;
-        color: grey;
+        color: darkgreen;
         border-left: 2px dotted grey;
+        text-align:right;
     }
 
 .invalid {
@@ -700,27 +1413,143 @@ input.convers {
 
 .color_cell {
     font-weight: lighter;
-    font-size:smaller;
     padding: 0;
     margin: 0;
     width: 5%;
     color: white;
 }
 
-@media screen and (max-width: 1200px) {
+.sms_content{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.sms_content > button{
+    width: 28%;
+    margin: 0 2%;
+}
+
+#sms_content{
+    padding: 0 2%;
+}
+
+.fs_byhand_sms{
+    padding: 20px;
+}
+
+.fs_byhand_sms > * {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.fs_byhand_sms > textarea {
+    min-height: 100px;
+    resize: vertical;
+    width: 100%;
+}
+
+div.line_filter {
+    display: inline-flex;
+    padding: 5px;
+}
+
+    div.line_filter > *{
+        margin: 2px 5px;
+    }
+
+div.filter_ans * {
+    color: blue;
+    background: none;
+}
+
+#filters{
+    position: relative;
+}
+
+#filters > div{
+    border: 3px solid yellow;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+    #filters input[type=date] {
+        min-width: 10px;
+    }
+
+#clear_filter {
+    position: absolute;
+    right: 1%;
+    top: -15px;
+    padding: 5px 30px;
+}
+
+#clientlist {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client_row td {
+    padding: 0 4px;
+    text-align: center;
+}
+
+.period_jurnal{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .period_jurnal > *{
+        min-width: 50px;
+    }
+
+    .period_jurnal > label{
+        margin: 0 20px;
+    }
+
+    @media screen and (max-width: 1300px) {
+        body * {
+        font-size: 18px;
+    }
+
+    #grid_color {
+        grid-template-columns: 100%;
+        grid-column-gap: 0;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    :root {
+        --wh-menu-it: 60px;
+        --menu-font-size: 70%;
+    }
+
+    aside{
+        width: 96%;
+        border: none;
+        padding: 15px;
+        margin-top: 2px;
+    }
+
+    .menu-cont ul > * {
+        margin-bottom: 0;
+    }
+        .menu-capt{
+        visibility: hidden;
+    }
+
+    .menu-cont ul {
+        /*grid-template-columns: auto;*/
+        grid-template-columns: repeat(auto-fill, calc( var(--wh-menu-it) + 18px));
+    }
+
     body * {
-        font-size: 12px;
+        font-size: 16px;
     }
-
-    aside {
-        font-size: 12px;
-        display: flex;
-        width: 100%;
-    }
-
-        aside > form {
-            width: 100%;
-        }
 
     #feedBack > div * {
         display: inline-block;
@@ -730,48 +1559,35 @@ input.convers {
     main {
         float: left;
         width: 100%;
+        margin: 0;
+        padding: 0;
     }
 
-        main * {
-            font-size: 10px;
-        }
-
-        main > form, main > table {
+        main > form, main table {
             width: 100%;
             margin: 0;
         }
 
-    fieldset#fs1 > label, fieldset#fs1 > input {
-        font-size: 12px;
-    }
-
-    #grid_color {
-        grid-template-columns: 100%;
-        grid-column-gap: 0;
-    }
-
-    #workfield{
+    #workfield {
         margin-top: 10px;
-    }
-
-    #zakaz_workplace {
         padding: 0;
     }
+
+        #workfield tr * {
+            font-size: 75%;
+        }
+
+        #workfield th {
+            font-size: 85%;
+        }
+
+        #zakaz_workplace {
+            padding: 0;
+        }
 
     #zvitResult {
         padding: 0;
-    }
-
-    .expenses_table * {
-        font-size: 10px;
-    }
-
-    .expenses_table > caption {
-        font-size: 14px;
-    }
-
-    .doneApply *{
-        font-size: 10px;
+        font-size: 50%;
     }
 
     .doneApply > input {
@@ -780,73 +1596,85 @@ input.convers {
     }
 
         .doneApply > input[type=number] {
-            width: 50px;
             text-align: right;
         }
-
-    .tbl_count *{
-        font-size: 12px;
-    }
 }
 
 @media screen and (max-width: 720px) {
-
-    aside * {
-        font-size: 10px;
+    body * {
+        font-size: 14px;
     }
 
-    body {
-        font-size: 10px;
+/*    aside button {
+        font-size: 50%;
+    }
+*/
+    #workfield tr * {
+        font-size: 60%;
     }
 
+    #workfield th {
+        font-size: 65%;
+    }
+
+    #workfield tr option {
+        font-size: 120%;
+    }
+
+    .opt_color * {
+        font-size: 95%;
+    }
+
+    .shop_cell {
+        min-width: 0;
+        width: 48%;
+    }
 }
-
 @media print {
 
+    body *{
+        font-size: 16px;
+    }
+
     aside {
-        width: 0;
-        margin:0;
+        display: none !important;
     }
 
-    main {
-        width: 100%;
+    .wrapper{
         padding: 0;
-        margin:0;
+        margin: 0;
     }
 
-        main > * {
+    #workfield, #infoForm {
+        width: 90%;
+        margin-left: 10%;
+    }
+
+        #workfield > * {
             width: 100%;
             margin: 0;
             padding: 0;
         }
 
-    form{
-        width:100%;
-        margin:0;
-        padding:0;
-    }
+        table * {
+            background: none;
+        }
 
-    button, .no-print, .no-print * {
-        display: none !important;
-    }
+        button, .no-print, .no-print * {
+            display: none !important;
+        }
 
-    caption.onlyPrint {
-        display: table-caption;
-    }
+        caption.onlyPrint {
+            display: table-caption;
+        }
 
-    #zvitResult > * {
-        width: 100%;
-    }
+        table {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-    div {
-        width: 100%;
-        margin: 0;
-        padding: 0;
+            table * {
+                padding: 1px;
+            }
     }
-
-    table {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-}

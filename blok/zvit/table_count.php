@@ -1,17 +1,16 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $arr_cnt = array();
+
+$conn = new SQLconn();
 
 #region Вибірка послуг
      $arr_serv_name = array();
      $arr_types = array();
 
-     $query = 'SELECT `NAME`, `ID` FROM `service_ids` where `color` = 1 ORDER BY `order` ASC';
-
-     $result = mysqli_query($link, $query);
+     $result = $conn('SELECT `NAME`, `ID` FROM `service_ids` where `color` = 1 ORDER BY `order` ASC');
 
      foreach ($result as $row) {
          $arr_serv_name[$row["ID"]] = $row["NAME"];
@@ -20,9 +19,7 @@ $arr_cnt = array();
 #endregion
 
 #region ВИБІРКА ІСНУЮЧИХ ТИПІВ
-     $query = 'SELECT * FROM `type_ids`';
-
-     $result = mysqli_query($link, $query);
+     $result = $conn('SELECT * FROM type_ids');
 
      foreach ($result as $row) {
          $arr_types[$row["service_ID"]][$row["type_ID"]] = "(" . $row["name"] . ")";
@@ -32,14 +29,12 @@ $arr_cnt = array();
 #region Отримання списку кольорів
 $_COLORS = array();
 
-$query = 'SELECT * FROM `colors`';
+$result = $conn('SELECT * FROM colors');
 
-$result = mysqli_query($link, $query);
+$map = $conn('SELECT * FROM color_map');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COLORS[] = new MyColor($row['ID'], $row['color'], $row['serv_ids'], $row['css_name']);
-    }
+foreach ($result as $row) {
+    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 #endregion
 
@@ -49,12 +44,10 @@ if (mysqli_num_rows($result) != 0) {
     $query = 'SELECT `ID` FROM `client_info`
               where `TTN_IN` IS NOT NULL OR `TTN_OUT` IS NOT NULL';
 
-    $result = mysqli_query($link, $query);
+    $result = $conn($query);
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $arr_done_id[] = $row["ID"];
-        }
+    foreach ($result as $row) {
+        $arr_done_id[] = $row["ID"];
     }
 #endregion
 
@@ -64,16 +57,13 @@ foreach ($arr_serv_name as $i => $n) {
     $query = 'SELECT `type_ID`,`color`,`count` FROM `service_in`
               where `service_ID` = ' . $i . ' AND `color` IS NOT NULL';
 
-    $result = mysqli_query($link, $query);
+    $result = $conn($query);
 
-    if (mysqli_num_rows($result) > 0) {
+    foreach ($result as $row) {
+        if (!isset($arr_cnt[$i][$row["type_ID"]][$row["color"]]))
+            $arr_cnt[$i][$row["type_ID"]][$row["color"]] = 0;
 
-        while ($row = $result->fetch_assoc()) {
-            if (!isset($arr_cnt[$i][$row["type_ID"]][$row["color"]]))
-                $arr_cnt[$i][$row["type_ID"]][$row["color"]] = 0;
-
-            $arr_cnt[$i][$row["type_ID"]][$row["color"]] += $row["count"];
-        }
+        $arr_cnt[$i][$row["type_ID"]][$row["color"]] += $row["count"];
     }
 }
 
@@ -86,22 +76,19 @@ foreach ($arr_done_id as $ID){
     $query = 'SELECT * FROM `service_out`
               where `ID` = ' . $ID . ' AND `color` IS NOT NULL';
 
-    $result = mysqli_query($link, $query);
+    $result = $conn($query);
 
-    if (mysqli_num_rows($result) > 0) {
+    foreach ($result as $row) {
+        if (!isset($arr_cnt[$row["service_ID"]][$row["type_ID"]][$row["color"]]))
+            $arr_cnt[$row["service_ID"]][$row["type_ID"]][$row["color"]] = 0;
 
-        while ($row = $result->fetch_assoc()) {
-            if (!isset($arr_cnt[$row["service_ID"]][$row["type_ID"]][$row["color"]]))
-                $arr_cnt[$row["service_ID"]][$row["type_ID"]][$row["color"]] = 0;
-
-            $arr_cnt[$row["service_ID"]][$row["type_ID"]][$row["color"]] -= $row["count"];
-        }
+        $arr_cnt[$row["service_ID"]][$row["type_ID"]][$row["color"]] -= $row["count"];
     }
 }
 
 #endregion
 
-$link->close();
+$conn->close();
 
 #region Заповнення таблиці
 $table = new HTEL('table .=tbl_count');

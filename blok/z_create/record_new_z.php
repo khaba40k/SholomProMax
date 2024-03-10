@@ -9,20 +9,17 @@ $termin_ID = 21;
 
 $typeZ = $_GET['typeZ'] ?? 'def';//def / sold
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
-
 if (!isset($_GET['sol_num'])) {
     $_GET['sol_num'] = 0;
 }
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
+$conn = new SQLconn();
+
 #region Видалення старих даних
 if (isset($_GET['is_rewrite']) && $_GET['is_rewrite'] == 1) {
-
-    $query = 'DELETE FROM `service_out` WHERE ID=' . $_GET['ID'];
-    mysqli_query($link, $query);
-
+    $conn('DELETE FROM `service_out` WHERE ID=' . $_GET['ID']);
 }
 #endregion
 
@@ -40,15 +37,11 @@ $_service_id = array();
 
 $attr = 2;//
 
-$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
+$result = $conn('SELECT * FROM service_ids ORDER BY `order` ASC');
 
-$result = mysqli_query($link, $query);
-
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        if (inclAttr($attr, $row['atr'])) {
-            $_service_id[] = $row['ID'];
-        }
+foreach ($result as $row) {
+    if (inclAttr($attr, $row['atr'])) {
+        $_service_id[] = $row['ID'];
     }
 }
 
@@ -77,21 +70,15 @@ $perc_dsc = 1;
 
 if (!is_null($discount_code) && strlen($discount_code) == 5){
 
-    $query = 'SELECT * FROM `discount_list` WHERE `from_ID` = ' . $_GET['ID'];
+    $result = $conn('SELECT * FROM discount_list WHERE from_ID = ' . $_GET['ID']);
 
-    $result = mysqli_query($link, $query);
-
-    if (mysqli_num_rows($result) == 0) {//Знижки ще не було
+    if (count($result) == 0) {//Знижки ще не було
         $query = 'SELECT * FROM `discount_list` WHERE `code` = "' . $discount_code . '" AND `from_ID` IS NULL LIMIT 1';
 
-        $result = mysqli_query($link, $query);
+        $result = $conn($query);
 
-        if (mysqli_num_rows($result) == 1) {
-            foreach ($result as $row) {
-                $discont_perc = $row['percent'];
-                $perc_dsc = (100 - $discont_perc) / 100;
-            }
-        }
+        $discont_perc = $result[0]['percent'];
+        $perc_dsc = (100 - $discont_perc) / 100;
     }
 }
 
@@ -115,13 +102,9 @@ if (!isset($_GET['callback'])){
 if((!empty($_GET['ttn_in']) || ($typeZ != 'def' && $typeZ != 'def0')) && ($_GET['sol_num'] === 0)){
     $query = 'SELECT `' . $num_cell . '` FROM `client_info` order by `' . $num_cell . '` DESC LIMIT 1';
 
-    $result = mysqli_query($link, $query);
+    $result = $conn($query);
 
-    if (mysqli_num_rows($result) == 1) {
-        foreach ($result as $row) {
-            $_GET['sol_num'] = $row[$num_cell] + 1;
-        }
-    }
+    $_GET['sol_num'] = $result[0][$num_cell] + 1;
 
 }else if (empty($_GET['ttn_in']) && ($typeZ == 'def' || $typeZ == 'def0')){
     $_GET['sol_num'] = 0;
@@ -168,9 +151,7 @@ VALUES ("
     "worker=" . outVal($_GET['worker']) .
     "redaktor=" . outVal($creator, true);
 
-if ($link->query($query) !== TRUE) {
-    $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
-}
+$conn($query);
 
 if (!isset($_GET['cost_' . $termin_ID]))
     $_GET['cost_' . $termin_ID] = 0;
@@ -210,10 +191,7 @@ if ($err == ''){
                       outVal($price * $perc_dsc, true) .
                       ")";
 
-                  if ($link->query($query) !== TRUE) {
-                      $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
-                      break;
-                  }
+                  $conn($query);
               }
           }
      }
@@ -236,10 +214,7 @@ if ($err == ''){
                         outVal(CostOut($price * $perc_dsc), true) .
                      ")";
 
-                if ($link->query($query) !== TRUE) {
-                    $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
-                    break;
-                }
+                $conn($query);
             }
         }
 
@@ -254,9 +229,7 @@ if ($err == ''){
             outVal(CostOut($_GET['cost_' . $termin_ID]) * $perc_dsc) .
                  ")";
 
-            if ($link->query($query) !== TRUE) {
-                $err = "Помилка запису в базу даних:\n" . $query . "\n" . $link->error;
-            }
+            $conn($query);
         }
     }
 }
@@ -266,12 +239,12 @@ $ans = 'Запис успішно створено.';
 #region Дисконт як використаний
 if (!is_null($discount_code) && strlen($discount_code) == 5){
     $query = 'UPDATE `discount_list` SET `from_ID` = ' . $_GET['ID'] . ' WHERE `code` = "' . $discount_code . '"';
-    mysqli_query($link, $query);
+    $conn($query);
     $ans .= ' Врахована знижка [ ' . $discont_perc . ' % ]';
 }
 #endregion
 
-$link->close();
+$conn->close();
 
 if ($err == ''){
     $to_print = $_GET['TO_PRINT'] ?? 0;

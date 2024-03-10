@@ -1,6 +1,5 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //Вхідні дані
@@ -8,31 +7,27 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $attr = 2;//
 
+$conn = new SQLconn();
+
 #region Отримання списку кольорів
 $_COLORS = array();
 
-$query = 'SELECT * FROM `colors`';
+$result = $conn('SELECT * FROM colors');
 
-$result = mysqli_query($link, $query);
+$map = $conn('SELECT * FROM color_map');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COLORS[] = new MyColor($row['ID'], $row['color'], $row['serv_ids'], $row['css_name']);
-    }
+foreach ($result as $row) {
+    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 #endregion
 
 #region Отримання списку цін
 $_COASTS = array();
 
-$query = 'SELECT * FROM `price_list`';
+$result = $conn('SELECT * FROM price_list');
 
-$result = mysqli_query($link, $query);
-
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COASTS[$row['service_id']][$row['type_id']] = $row['cost'];
-    }
+foreach ($result as $row) {
+    $_COASTS[$row['service_id']][$row['type_id']] = $row['cost'];
 }
 #endregion
 
@@ -42,25 +37,21 @@ $_service_name = array();
 $_service_has_color = array();
 $_dep_map = array();
 
-$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
+$result = $conn('SELECT * FROM service_ids ORDER BY `order` ASC');
 
-$result = mysqli_query($link, $query);
+foreach ($result as $row) {
+    if(inclAttr($attr, $row['atr'])){
+        $_service_name[$row['ID']] = $row['NAME'];
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-         if(inclAttr($attr, $row['atr'])){
-                 $_service_name[$row['ID']] = $row['NAME'];
+        if ($row['dep'] !== null){
+            $_dep_map[$row['ID']] = explode('/', $row['dep']);
+        }
 
-                 if ($row['dep'] !== null){
-                     $_dep_map[$row['ID']] = explode('/', $row['dep']);
-                 }
-
-                 if ($row['color'] == '1') {
-                     $_service_has_color[$row['ID']] = true;
-                 } else {
-                     $_service_has_color[$row['ID']] = false;
-                 }
-         }
+        if ($row['color'] == '1') {
+            $_service_has_color[$row['ID']] = true;
+        } else {
+            $_service_has_color[$row['ID']] = false;
+        }
     }
 }
 #endregion
@@ -68,24 +59,17 @@ if (mysqli_num_rows($result) != 0) {
 #region Отримання типів
 $_service_type = array();
 
-$query = 'SELECT * FROM `type_ids`';
+$result = $conn('SELECT * FROM type_ids');
 
-$result = mysqli_query($link, $query);
-
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-      $_service_type[$row['service_ID']][$row['type_ID']] = $row['name'];
-    }
+foreach ($result as $row) {
+  $_service_type[$row['service_ID']][$row['type_ID']] = $row['name'];
 }
-
 #endregion
 
 #region ВИБІРКА ЗАЛИШКІВ
 $arr_cnt = array();
 
-$query = 'SELECT service_ID, type_ID, color, count FROM `service_in` WHERE color IS NOT NULL';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT service_ID, type_ID, color, count FROM `service_in` WHERE color IS NOT NULL');
 
 foreach ($result as $row) {
     if (!isset($arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']])) {
@@ -99,7 +83,7 @@ $query = 'SELECT service_ID, type_ID, color, count FROM `service_out`
 JOIN client_info ON service_out.ID=client_info.ID
 WHERE color IS NOT NULL AND (TTN_IN IS NOT NULL OR sold_number IS NOT NULL)';
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
 foreach ($result as $row) {
     if (!isset($arr_cnt[$row['service_ID']][$row['type_ID']][$row['color']])) {
@@ -110,7 +94,7 @@ foreach ($result as $row) {
 }
 #endregion
 
-$link->close();
+$conn->close();
 
 if (isset($_GET['set_select'])){
     $t = $_GET['set_type'] != '' ? $_GET['set_type'] : 1;
@@ -214,7 +198,7 @@ function rightFor($serv_id, $serv_type = 1):array{
     $GLOBALS['_COASTS'][$serv_id][$serv_type] :
     $GLOBALS['_COASTS'][$ustanovka][1];
 
-    $count = $GLOBALS['arr_cnt'][$serv_id][$serv_type];
+    $count = $GLOBALS['arr_cnt'][$serv_id][$serv_type] ?? 0;
 
     if (isset($_GET['cost_' . $serv_id . '_' . $serv_type])){
         $cost = $_GET['cost_' . $serv_id . '_' . $serv_type];
@@ -241,7 +225,7 @@ function rightFor($serv_id, $serv_type = 1):array{
 
     if ($serv_type > 0){
         if ($_has_col) {
-            if (!is_null($curCol) && $curCol->AppleTo($_colors, $serv_id, $serv_type) && $count[$curCol->ID] > 0) { //колір підходить
+            if (!is_null($curCol) && $curCol->AppleTo($serv_id, $serv_type) && $count[$curCol->ID] > 0) { //колір підходить
                     $right = new HTEL('input *=checkbox !=color_[0] ?=cb[0] #=[1] [2]',
                 [1 => $curCol->ID, SelectStatus($serv_id, $serv_type, $curCol->ID)]);
             } else { //не підходить
@@ -251,8 +235,8 @@ function rightFor($serv_id, $serv_type = 1):array{
                 $right(new HTEL('option #=- [0]/x', SelectStatus($serv_id, null, 'selected')));
 
                 foreach ($_colors as $c) {
-                    if ($c->AppleTo($_colors, $serv_id, $serv_type)) {
-                        if ($_GET['is_rewrite'] == 1 || $count[$c->ID] > 0) {
+                    if ($c->AppleTo($serv_id, $serv_type)) {
+                        if ((isset($_GET['is_rewrite']) && $_GET['is_rewrite'] == 1) || (isset($count[$c->ID]) && $count[$c->ID] > 0)) {
                             $right(new HTEL('option #=[0] [1]/+[2]', [$c->ID, SelectStatus($serv_id, $serv_type, $c->ID, 'selected'), $c->NAME]));
                         }
                     }

@@ -1,16 +1,15 @@
 <?php
-    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
-    require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
     $container = new HTEL('div .=sms-info');
 
-    $query = 'select * from message_text order by date_time desc';
+    $conn = new SQLconn();
 
-    $result = mysqli_query($link, $query);
+    $result = $conn('select * from message_text order by date_time desc');
 
     foreach ($result as $row){
 
-        $count = mysqli_query($link, 'select COUNT(*) as count from message_info WHERE mes_id = ' . $row['id']);
+        $count = $conn('select COUNT(*) as count from message_info WHERE mes_id = ' . $row['id']);
 
         foreach ($count as $c){
             $count = $c['count'];
@@ -30,6 +29,8 @@
            new HTEL('label/[0]', $row['sender'])
         ]));
     }
+
+    $conn->close();
 
     echo $container;
 ?>

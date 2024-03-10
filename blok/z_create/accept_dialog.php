@@ -3,19 +3,18 @@
 //var_dump($_GET);
 //exit;
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+
+$conn = new SQLconn();
 
 #region Отримання списку кольорів
 $_COLORS = array();
 
-$query = 'SELECT * FROM `colors`';
+$result = $conn('SELECT * FROM colors');
 
-$result = mysqli_query($link, $query);
+$map = $conn('SELECT * FROM color_map');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COLORS[$row['ID']] = new MyColor($row['ID'], $row['color'], $row['serv_ids'], $row['css_name']);
-    }
+foreach ($result as $row) {
+    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 #endregion
 
@@ -23,33 +22,23 @@ if (mysqli_num_rows($result) != 0) {
 $_service_name = array();
 $_service_type = array();
 
-$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
+$result = $conn('SELECT * FROM `service_ids` ORDER BY `order` ASC');
 
-$result = mysqli_query($link, $query);
-
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_service_name[$row['ID']] = $row['NAME'];
-        $_service_type[$row['ID']][1] = '';
-    }
+foreach ($result as $row) {
+    $_service_name[$row['ID']] = $row['NAME'];
+    $_service_type[$row['ID']][1] = '';
 }
 #endregion
 
 #region Отримання типів
+$result = $conn('SELECT * FROM `type_ids`');
 
-$query = 'SELECT * FROM `type_ids`';
-
-$result = mysqli_query($link, $query);
-
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_service_type[$row['service_ID']][$row['type_ID']] = $row['name'];
-    }
+foreach ($result as $row) {
+    $_service_type[$row['service_ID']][$row['type_ID']] = $row['name'];
 }
-
 #endregion
 
-$link->close();
+$conn->close();
 
 $in = '';
 $ind = array();

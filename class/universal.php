@@ -9,6 +9,66 @@ function  HIDE(){
      }
 }
 
+class SQLconn{
+
+    private $CONN;
+    private $host = '127.0.0.1';
+    private $database = 'sholompr_data';
+    private $user = 'sholompr_admin';
+    private $password = 'R[$cB{&A5n]$';
+    private $QUERYANS = null;
+
+    function __construct($query = '', $keepAlive = false){
+        $this->connect();
+
+        if (!empty($query)){
+            $this->QUERYANS = $this->query($query, $keepAlive);
+        }
+    }
+
+    private function connect(){
+        $this->CONN = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+
+        mysqli_query($this->CONN, "SET collation_connection = utf8_general_ci");
+        mysqli_query($this->CONN, "SET NAMES utf8");
+    }
+
+    function query($q = '', $keepAlive = true){
+        $result = mysqli_query($this->CONN, $q);
+
+        if ($result === true) return true;
+
+        if (!empty($this->CONN->error)) {
+            return $this->CONN->error;
+        }
+
+        $out_arr = array();
+
+        if (mysqli_num_rows($result) > 0){
+            foreach ($result as $row){
+                $out_arr[] = $row;
+            }
+        }
+
+        if (!$keepAlive) $this->close();
+
+        return $out_arr;
+    }
+
+    function close(){
+        $this->CONN->close();
+    }
+
+    function __invoke($query = '', $keepAlive = true){
+        if (empty($query)) return $this->QUERYANS;
+        return  $this->query($query, $keepAlive);
+    }
+
+    function ans(){
+        return $this->QUERYANS;
+    }
+}
+
 function phpAlert($msg, $location = '')
 {
     if ($location == '') {
@@ -24,50 +84,51 @@ function console($msg)
         echo '<script type="text/javascript">console.log("' . $msg . '")</script>';
 }
 
-class MyColor
+class MyColor2
 {
     public $ID;
     public string $NAME;
     public $CSS_ANALOG;
-    private $PARAM;
+    private $MAP;
+    private $IS_DEF;
 
-    function __construct($_id, $_name, $_param = "[oth]", $_css = '')
+    function __construct($_id, $_name, $_map, $_css = '', $_isdef = 0)
     {
+        $map = array();
+
+        foreach($_map as $m){
+            $map[$m['service_ID']][$m['type_ID']][$m['color_ID']] = true;
+        }
+
         $this->ID = $_id;
         $this->NAME = $_name;
-        $this->PARAM = $_param;
+        $this->MAP = $map;
         $this->CSS_ANALOG = $_css;
+        $this->IS_DEF = $_isdef != 0;
     }
 
-    function AppleTo($arr, $servId, $type = 1): bool
+    function AppleTo($servId, $type = 1): bool
     {
-        $uniq = false;
-
-        $find = ($type == 1) ? ("/" . $servId . "/") : ("/" . $servId ."." .$type. "/");
-
-        foreach ($arr as $c) {
-            if (strpos($c->PARAM, $find) > -1) {
-                $uniq = true;
-                break;
-            }
+        if (isset($this->MAP[$servId])){
+            return $this->MAP[$servId][$type][$this->ID] ?? false;
+        }else{
+            return $this->Universal();
         }
+    }
 
-        if ($uniq) {
-            return strpos($this->PARAM, $find) > -1;
-        } else {
-            return strpos($this->PARAM, "/oth/") > -1;
-        }
-
+    function ANS($si):bool{
+        return isset($this->MAP[$si]);
     }
 
     function Universal():bool{
-        return strpos($this->PARAM, "/oth/") > -1;
+        return $this->IS_DEF;
     }
 
     function __toString():string{
         return $this->NAME;
     }
 }
+
 
 class ZDATA {
     public $ID = 0;

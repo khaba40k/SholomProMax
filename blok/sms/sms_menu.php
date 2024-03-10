@@ -7,23 +7,15 @@ if (isset($_GET['new_f'])) {
     exit;
 }
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
-
 $KOMPL_LIST = array();
 
-$query = 'SELECT ID, NAME FROM service_ids WHERE atr >= 0 AND atr <> 16 ORDER BY `order`';
-
-$result = mysqli_query($link, $query);
+$result = new SQLconn('SELECT ID, NAME FROM service_ids WHERE atr >= 0 AND atr <> 16 ORDER BY `order`');
 
 $KOMPL_LIST[] = new HTEL('option # [d] [s]/обери...');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $KOMPL_LIST[] = new HTEL('option #=[0]/[1]', [$row['ID'], $row['NAME']]);
-    }
+foreach ($result() as $row) {
+    $KOMPL_LIST[] = new HTEL('option #=[0]/[1]', [$row['ID'], $row['NAME']]);
 }
-
-$link->close();
 
 if (isset($_GET['new_f_ans'])) {
     echo NewAnswerFromFilter($_GET['new_f_ans']);

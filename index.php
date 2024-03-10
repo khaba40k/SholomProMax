@@ -22,7 +22,6 @@
     require "blok/header.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
     if (!isset($_GET['page'])){
         $div = new HTEL('div .=firstpage');

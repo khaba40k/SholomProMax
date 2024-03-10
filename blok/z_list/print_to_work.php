@@ -1,5 +1,4 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $hideForWorker = $_GET['hideForWorker'] != 0;
@@ -12,18 +11,18 @@ if (!isset($_GET['variant'])){
 
 $cell_num = $_GET['variant'] == 'def' ? 'sholom_num' : 'sold_number';
 
+$conn = new SQLconn();
+
 //Отримання списку кольорів
 
 $_COLORS = array();
 
-$query = 'SELECT * FROM `colors`';
+$result = $conn('SELECT * FROM colors');
 
-$result = mysqli_query($link, $query);
+$map = $conn('SELECT * FROM color_map');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COLORS[$row['ID']] = new MyColor($row['ID'], $row['color'], $row['serv_ids']);
-    }
+foreach ($result as $row) {
+    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 
 //Отримання масиву послуг
@@ -31,27 +30,21 @@ if (mysqli_num_rows($result) != 0) {
 $_service_name = array();
 $arr_types = array();
 
-$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
+$result = $conn('SELECT * FROM `service_ids` ORDER BY `order` ASC');
 
-$result = mysqli_query($link, $query);
+foreach ($result as $row) {
+    $_service_name[$row['ID']] = $row['NAME'];
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_service_name[$row['ID']] = $row['NAME'];
-
-        if($row['ID'] != 19){
-            $arr_types[$row['ID']][1] = '';
-        }
-
-        $arr_types[19][$row['ID']] = " (" . $row['NAME'] . ")";
+    if($row['ID'] != 19){
+        $arr_types[$row['ID']][1] = '';
     }
+
+    $arr_types[19][$row['ID']] = " (" . $row['NAME'] . ")";
 }
 
 //ВИБІРКА ІСНУЮЧИХ ТИПІВ
 
-$query = 'SELECT * FROM `type_ids`';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM type_ids');
 
 foreach ($result as $row) {
     $arr_types[$row["service_ID"]][$row["type_ID"]] = " (" . $row["name"] . ")";
@@ -59,9 +52,7 @@ foreach ($result as $row) {
 
 //Введення даних отримувача
 
-$query = 'SELECT * FROM `client_info` where `ID` = '. $_GET['ID'];
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM `client_info` where `ID` = '. $_GET['ID'] . ' LIMIT 1');
 
 $serv_for_sol = '';
 
@@ -69,51 +60,49 @@ $table = new HTEL('table .=printInfo');
 
 $ttn = '';
 
-if (mysqli_num_rows($result) == 1) {
+foreach ($result as $row) {
 
-    foreach ($result as $row) {
+    $ID_NUM = $row[$cell_num] != 0 ? ' №'.$row[$cell_num]:'';
 
-        $ID_NUM = $row[$cell_num] != 0 ? ' №'.$row[$cell_num]:'';
+    $table(new HTEL('caption/ІНФОРМАЦІЯ ПО [0][1]', [ $_GET['variant'] == 'def' ? 'ШОЛОМУ':'ЗАМОВЛЕННЮ', $ID_NUM]));
 
-        $table(new HTEL('caption/ІНФОРМАЦІЯ ПО [0][1]', [ $_GET['variant'] == 'def' ? 'ШОЛОМУ':'ЗАМОВЛЕННЮ', $ID_NUM]));
+    $tbody = new HTEL('tbody');
 
-        $tbody = new HTEL('tbody');
+    $tbody(setRow('Дата надходження', dateToNorm($row['date_in']), 2));
+    $tbody(setRow('Термін', dateToNorm($row['date_max']), 2));
+    if ($type_Z == 'archiv') $tbody(setRow('Дата відправки', dateToNorm($row['date_out']), 2));
+    if (!$hideForWorker) $tbody(setRow('Номер телефону', $row['phone'], 2)); else
+        $tbody(setRow('Номер телефону', "..." . substr($row['phone'], -4), 2));//Показати останні 4 цифри
+    if (!$hideForWorker) $tbody(setRow('Прізвище, ім`я', $row['client_name'], 2));
+    if (!$hideForWorker) $tbody(setRow('Реквізити', $row['reqv'], 2));
 
-        $tbody(setRow('Дата надходження', dateToNorm($row['date_in']), 2));
-        $tbody(setRow('Термін', dateToNorm($row['date_max']), 2));
-        if ($type_Z == 'archiv') $tbody(setRow('Дата відправки', dateToNorm($row['date_out']), 2));
-        if (!$hideForWorker) $tbody(setRow('Номер телефону', $row['phone'], 2)); else
-            $tbody(setRow('Номер телефону', "..." . substr($row['phone'], -4), 2));//Показати останні 4 цифри
-        if (!$hideForWorker) $tbody(setRow('Прізвище, ім`я', $row['client_name'], 2));
-        if (!$hideForWorker) $tbody(setRow('Реквізити', $row['reqv'], 2));
+    $ttn = !empty($row['TTN_IN']) ? 'Вхідна: ' . $row['TTN_IN'] . '  ' : '';
+    if (!empty($row['TTN_OUT'])) $ttn .= 'Вихідна: ' . $row['TTN_OUT'];
+    if( $ttn != '') $tbody(setRow('ТТН', $ttn, 2));
 
-        $ttn = !empty($row['TTN_IN']) ? 'Вхідна: ' . $row['TTN_IN'] . '  ' : '';
-        if (!empty($row['TTN_OUT'])) $ttn .= 'Вихідна: ' . $row['TTN_OUT'];
-        if( $ttn != '') $tbody(setRow('ТТН', $ttn, 2));
+    $ttn = !is_null($row['TTN_OUT']) ? $row['TTN_OUT'] : '';
+    if ($row['comm'] != null) $tbody(setRow('Коментар', $row['comm'], 2));
+    if ($row['discount'] != null)
+        $tbody(setRow('Врахована знижка', $row['discount'].'%', 2));
 
-        $ttn = !is_null($row['TTN_OUT']) ? $row['TTN_OUT'] : '';
-        if ($row['comm'] != null) $tbody(setRow('Коментар', $row['comm'], 2));
-        if ($row['discount'] != null)
-            $tbody(setRow('Врахована знижка', $row['discount'].'%', 2));
+    $worker = $row['worker'];
+    if ($hideForWorker) $tbody(setRow('Відповідальний', $row['redaktor'], 2));
 
-        $worker = $row['worker'];
-        if ($hideForWorker) $tbody(setRow('Відповідальний', $row['redaktor'], 2));
+    $worker = !is_null($row['worker']) ? $row['worker'] : '';
 
-        $worker = !is_null($row['worker']) ? $row['worker'] : '';
-
-        $table($tbody);
-    }
+    $table($tbody);
 }
+
 
 //Введення комплектуючих
 
 $query = 'SELECT service_out.service_ID,service_out.type_ID,service_out.count,service_out.color,service_out.costs FROM service_out JOIN service_ids ON service_ids.ID=service_out.service_ID WHERE service_out.ID="' . $_GET['ID'] . '" ORDER BY `order` ASC';
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
 $sum = 0;
 
-if (mysqli_num_rows($result) > 0) {
+if (count($result) > 0) {
 
     $tbody(setRow('КОМПЛЕКТУЮЧІ', '', 1, $type_Z != 'archiv'));
 
@@ -144,7 +133,7 @@ else{
     $sum = null;
 }
 
-$link->close();
+$conn->close();
 
 $form = new HTEL('form !=infoForm onsubmit=return+rec([0],`[1]`);',[$_GET['ID'], $_GET['variant']]);
 
@@ -173,12 +162,6 @@ if (!$hideForWorker && $type_Z == 'inwork' && $sum !== null){//Підтверд�
     new HTEL('input !=sum_fact *=number step=0.01 min=0 ?=sum_fact #=[0] [r]', CostOut($sum))
     ]));
 
-    //$div(new HTEL('label for=worker/Працівник:'));
-    //$div(new HTEL('input !=worker *=text ?=worker #=[0] [r]', $worker));
-    //$div(new HTEL('label for=ttn_done/Вихідна ТТН:'));
-    //$div(new HTEL('input !=ttn_done *=tel ?=ttn_done #=[0] [r]',$ttn));
-    //$div(new HTEL('label for=sum_fact/Сума (факт):'));
-    //$div(new HTEL('input !=sum_fact *=number step=0.01 min=0 ?=sum_fact #=[0] [r]', CostOut($sum)));
     $div(new HTEL('button !=but_done *=submit/>Виконано'));
     $form($div);
 }

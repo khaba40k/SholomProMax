@@ -6,3 +6,6 @@
 tests/cover
 vendor/
 web/
+class/
+img/
+logs/

@@ -5,7 +5,9 @@ session_start();
 if ($_SESSION[$_SESSION['logged']] > 1)
     exit;
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
+$conn = new SQLconn();
 
 if (isset($_GET['disc_cnt'])) {
     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -26,34 +28,25 @@ if (isset($_GET['disc_cnt'])) {
     }
 
     foreach($out as $code){
-        $query = 'INSERT INTO `discount_list` SET `code`= "'.$code.'", `percent`='.$perc;
-        mysqli_query($link, $query);
+        $conn('INSERT INTO `discount_list` SET `code`= "'.$code.'", `percent`='.$perc);
     }
 
-    $link->close();
+    $conn->close();
     header('location: ../work?page=discount_list');
     exit;
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-
 #region Отримання існуючих дисконтів
-
 $discounts = array();
 
-$query = 'SELECT * FROM `discount_list` WHERE `from_ID` IS NULL ORDER BY `date_gen` DESC, `percent` DESC';
+$result = $conn('SELECT * FROM `discount_list` WHERE `from_ID` IS NULL ORDER BY `date_gen` DESC, `percent` DESC');
 
-$result = mysqli_query($link, $query);
-
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $discounts[$row['date_gen']][$row['percent']][] = $row['code'];
-    }
+foreach ($result as $row) {
+    $discounts[$row['date_gen']][$row['percent']][] = $row['code'];
 }
-
 #endregion
 
-$link->close();
+$conn->close();
 
 $coll_count = 10;
 

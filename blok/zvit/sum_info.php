@@ -6,9 +6,10 @@ $TYPE = $_GET['type'] ?? 1;
 if ($ID === null) exit;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 
 $OUT_ARR = array();
+
+$conn = new SQLconn();
 
 $query = 'SELECT date_in date, service_ids.NAME name, type_ids.name type, colors.color, count, costs, comm, redaktor FROM service_in
 LEFT JOIN colors ON service_in.color=colors.ID
@@ -17,7 +18,7 @@ LEFT JOIN type_ids ON service_in.service_ID=type_ids.service_ID AND service_in.t
 WHERE service_in.service_ID = '. $ID . ' AND service_in.type_ID = '. $TYPE . '
 ORDER BY date_in DESC';
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
 $counter = 0;
 $old_date = null;
@@ -47,7 +48,7 @@ LEFT JOIN type_ids ON service_out.service_ID=type_ids.service_ID AND service_out
 WHERE date_out IS NOT NULL AND service_out.service_ID = ' . $ID . ' AND service_out.type_ID = ' . $TYPE . '
 ORDER BY date DESC';
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
 foreach ($result as $row) {
 
@@ -65,7 +66,7 @@ krsort($OUT_ARR);
 
 //var_dump($OUT_ARR);
 
-$link->close();
+$conn->close();
 
 $tbody = new HTEL('tbody &=text-align:center;');
 

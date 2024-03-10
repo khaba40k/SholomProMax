@@ -1,6 +1,5 @@
-﻿<?php
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 session_start();
 
@@ -12,20 +11,18 @@ $cont = new HTEL('div .=list');
 
 $tbody = new HTEL('tbody');
 
-$query = 'select * from message_info WHERE mes_id =' . $ID;
+$result = new SQLconn('select * from message_info WHERE mes_id = ' . $ID);
 
-    $result = mysqli_query($link, $query);
+$counter = 1;
 
-    $counter = 1;
-
-    foreach ($result as $row){
-        $tbody(new HTEL('tr', [
-            new HTEL('td width=5%/[0].', $counter++),
-            new HTEL('td width=20%/[0]', $row['tel']),
-            new HTEL('td/[0]', get_stat($token, $row['id'])),
-            new HTEL('td/[0]', $row['receiver'])
-        ]));
-    }
+foreach ($result() as $row){
+    $tbody(new HTEL('tr', [
+        new HTEL('td width=5%/[0].', $counter++),
+        new HTEL('td width=20%/[0]', $row['tel']),
+        new HTEL('td/[0]', get_stat($token, $row['id'])),
+        new HTEL('td/[0]', $row['receiver'])
+    ]));
+}
 
 $cont(new HTEL('table .=smsresult', $tbody));
 

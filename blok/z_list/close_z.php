@@ -22,25 +22,24 @@
 //var_dump($_GET);
 //exit;
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $err = '';
+
+$conn = new SQLconn();
 
 $query = 'UPDATE `client_info` SET `date_out`= "' . date('Y-m-d') .
      '", `TTN_OUT`= "' . $_GET['ttn_done'] .
      '", `worker`="' . $_GET['worker'] .
      '" WHERE `ID`=' . $_GET['ID'];
 
-if ($link->query($query) !== TRUE) {
-    $err = "Помилка запису в базу даних: " . $query . "\n" . $link->error . "\n";
-}
+$conn($query);
 
 $kompl = array();
 
 $query = 'SELECT * FROM `service_out` where `ID` = ' . $_GET['ID']  . ' ORDER  BY `costs` DESC' ;
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
 foreach ($result as $row) {
     $kompl[$row['service_ID']][$row['type_ID']] = $row['costs'];
@@ -68,14 +67,11 @@ foreach ($korrect as $id => $kk) {
             ' AND `service_ID`=' . $id .
             ' AND `type_ID` =' . $t;
 
-        if ($link->query($query) !== TRUE) {
-            $err .= "Помилка запису в базу даних: " . $query . "\n" . $link->error;
-            break;
-        }
+        $conn($query);
     }
 }
 
-$link->close();
+$conn->close();
 
 if ($err == ''){
     phpAlert("Замовлення успішно виконано.");

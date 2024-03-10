@@ -1,10 +1,10 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-$query = 'DELETE FROM `price_list`';
-mysqli_query($link, $query);
+$conn = new SQLconn();
+
+$conn('DELETE FROM price_list');
 
 $record_arr = array();
 
@@ -15,17 +15,16 @@ foreach ($_GET as $k=>$v){
 
 $correct = true;
 
-    foreach ($record_arr as $sid=>$typearr) {
+foreach ($record_arr as $sid=>$typearr) {
 
-        foreach ($typearr as $t=>$cost){
-             $query = 'INSERT INTO `price_list` (service_id, type_id, cost)
+    foreach ($typearr as $t=>$cost){
+        $query = 'INSERT INTO `price_list` (service_id, type_id, cost)
              VALUES ('. $sid.','.$t.','.$cost.')';
-             $link->query($query);
-        }
-
+        $conn($query);
     }
+}
 
-$link->close();
+$conn->close();
 
 if ($correct) {
     phpAlert("Ціни оновлено успішно.", 'work');

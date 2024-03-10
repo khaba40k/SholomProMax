@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
 $TEXT = trim($_POST['mes']);
 
 $NUMBER = array();
@@ -130,18 +132,13 @@ function SEND_MORE_SMS(array $NUMBERS, $mes){
 }
 
 function RecOnBase($arr, string $mes){
-
-    //ЗАПИС В БАЗУ ДАНИХ
-
-    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
-
     session_start();
+
+    $conn = new SQLconn();
 
     $id_mes = 0;
 
-    $query = 'select max(id) from `message_text`';
-
-    $result = mysqli_query($link, $query);
+    $result = $conn('select max(id) from message_text');
 
     foreach ($result as $row){
         $id_mes = $row['max(id)'] === null ? 0 : $row['max(id)'] + 1;
@@ -151,18 +148,18 @@ function RecOnBase($arr, string $mes){
 
     $query = 'insert into message_text (id, text, sender)
     VALUES ('.$id_mes.',"'.$mes.'","'.$sender.'")';
-    mysqli_query($link, $query);
+    $conn($query);
 
     foreach($arr as $id=>$st){
         $phone = explode('-', $id)[2];
 
         $rec = $GLOBALS['RECEIVER_CUSTOM'] !== null ? "\"" . $GLOBALS['RECEIVER_CUSTOM'] . "\"": 'NULL';
 
-         mysqli_query($link, 'insert into message_info (id, tel, mes_id, receiver, status) '.
+        $conn('insert into message_info (id, tel, mes_id, receiver, status) '.
         'VALUES ("'.$id.'", "'.$phone.'", '.$id_mes.', '.$rec.', "'.$st.'")');
     }
 
-    $link->close();
+    $conn->close();
 }
 
 function GET_MARKER()

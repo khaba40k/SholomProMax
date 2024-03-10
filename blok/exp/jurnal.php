@@ -1,8 +1,10 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //ВИДАЛЕННЯ РЯДКА
+
+$conn = new SQLconn();
 
 if (isset($_GET['del'])){
 
@@ -16,9 +18,7 @@ if (isset($_GET['del'])){
         `type_ID`=' . $split[2] . ' AND
         `costs`=' . $split[3] . ' LIMIT 1';
 
-        $link->query($query);
-
-        $link->close();
+        $conn($query, 0);
 
         $dat = DateTime::createFromFormat('Y-m-d', $split[0]);
 
@@ -28,16 +28,12 @@ if (isset($_GET['del'])){
     }
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-
 //Вибірка послуг
 
 $arr_serv_name = array();
 $arr_types = array();
 
-$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM service_ids ORDER BY `order` ASC');
 
 foreach ($result as $row) {
     $arr_serv_name[$row["ID"]] = $row["NAME"];
@@ -47,9 +43,7 @@ foreach ($result as $row) {
 
 //ВИБІРКА ІСНУЮЧИХ ТИПІВ
 
-$query = 'SELECT * FROM `type_ids`';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM type_ids');
 
 foreach ($result as $row) {
     $arr_types[$row["service_ID"]][$row["type_ID"]] = " (" . $row["name"] . ")";
@@ -58,14 +52,12 @@ foreach ($result as $row) {
 #region Отримання списку кольорів
 $_COLORS = array();
 
-$query = 'SELECT * FROM `colors`';
+$result = $conn('SELECT * FROM colors');
 
-$result = mysqli_query($link, $query);
+$map = $conn('SELECT * FROM color_map');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COLORS[$row['ID']] = new MyColor($row['ID'], $row['color'], $row['serv_ids'], $row['css_name']);
-    }
+foreach ($result as $row) {
+    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 #endregion
 
@@ -87,32 +79,30 @@ if ($mnth < 12){
     $max_date = ($year + 1) . '-01-01';
 }
 
-$query = 'SELECT * FROM `service_in` WHERE `date_in` >= "'. $min_date .'" AND `date_in` < "' . $max_date . '"
-ORDER by `date_in` DESC';
+$query = 'SELECT * FROM service_in WHERE date_in >= "'. $min_date .'" AND date_in < "' . $max_date . '"
+ORDER by date_in DESC';
 
 if ($_SESSION[$_SESSION['logged']] > 1){
-    $query = 'SELECT * FROM `service_in` WHERE `redaktor` = "'.$_SESSION['logged'].'" order by `date_in` DESC';
+    $query = 'SELECT * FROM service_in WHERE date_in >= "'.$min_date .'" AND date_in < "'.$max_date .
+    '" AND redaktor = "'.$_SESSION['logged'].'" order by date_in DESC';
 }
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
+foreach ($result as $row) {
 
-        $serv_info[$row['date_in']][$row['redaktor']][] =
-        [
-            'id'=> $row['service_ID'],
-            'type' => $row['type_ID'],
-            'color' => $row['color'],
-            'cost' => $row['costs'],
-            'count' => $row['count'],
-            'comm' => $row['comm'],
-        ];
-
-    }
+    $serv_info[$row['date_in']][$row['redaktor']][] =
+    [
+        'id'=> $row['service_ID'],
+        'type' => $row['type_ID'],
+        'color' => $row['color'],
+        'cost' => $row['costs'],
+        'count' => $row['count'],
+        'comm' => $row['comm'],
+    ];
 }
 
-$link->close();
+$conn->close();
 
 #endregion
 

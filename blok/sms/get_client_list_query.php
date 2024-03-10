@@ -183,7 +183,9 @@ class QUERY_MASTER
 
 }
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
+$conn = new SQLconn();
 
 $n = new QUERY_MASTER($_POST);
 
@@ -194,14 +196,10 @@ $n_ids = array();
 $query = $n->GET_NEGATIVE();
 
 if (!empty($query)){
-    //echo '-: ' . $query . '<br><br>';
+    $result = $conn($query);
 
-    $result = mysqli_query($link, $query);
-
-    if (mysqli_num_rows($result) != 0) {
-        foreach ($result as $row) {
-            $n_ids[] = $row['ID'];
-        }
+    foreach ($result as $row) {
+        $n_ids[] = $row['ID'];
     }
 }
 //positive arr
@@ -212,25 +210,19 @@ $query = $n->GET_POSITIVE();
 
 if (!empty($query)) {
 
-    //echo '+: ' . $query . '<br><br>';
+    $result = $conn($query);
 
-    $result = mysqli_query($link, $query);
-
-    if (mysqli_num_rows($result) != 0) {
-        foreach ($result as $row) {
-            if (!in_array($row['ID'], $n_ids))
-                $p_ids[] = $row['ID'];
-        }
+    foreach ($result as $row) {
+        if (!in_array($row['ID'], $n_ids))
+            $p_ids[] = $row['ID'];
     }
 }
 
 if (count($p_ids) == 0) {
     echo 'НЕ ЗНАЙДЕНО!!!';
-    $link->close();
+    $conn->close();
     exit;
 }
-
-require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 $tbody = new HTEL('tbody');
 
@@ -238,34 +230,32 @@ $counter = 0;
 
 $query = 'SELECT phone, client_name, sholom_num, sold_number FROM client_info WHERE ID IN (' . implode(',', array_map('intval', $p_ids)) . ')';
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
+foreach ($result as $row) {
 
-        $phone_number = getCorrectPhone($row['phone']);
+    $phone_number = getCorrectPhone($row['phone']);
 
-        if (!empty($phone_number)){
-            $tr = new HTEL('tr .=client_row #=[0]', $counter);
+    if (!empty($phone_number)){
+        $tr = new HTEL('tr .=client_row #=[0]', $counter);
 
-            $tr(new HTEL('td', new HTEL('input *=checkbox ?=[0] #=[1] [c]', [1=> $phone_number])));
+        $tr(new HTEL('td', new HTEL('input *=checkbox ?=[0] #=[1] [c]', [1=> $phone_number])));
 
-            if (($row['sholom_num'] ?? $row['sold_number']) == 0) {
-                $tr(new HTEL('td/-'));
-            } else {
-                $tr(new HTEL('td/№ [0]', $row['sholom_num'] ?? $row['sold_number']));
-            }
-
-            $tr(new HTEL('td/[0]',  $phone_number));
-            $tr(new HTEL('td/[0]', $row['client_name']));
-
-            $tbody($tr);
-            $counter++;
+        if (($row['sholom_num'] ?? $row['sold_number']) == 0) {
+            $tr(new HTEL('td/-'));
+        } else {
+            $tr(new HTEL('td/№ [0]', $row['sholom_num'] ?? $row['sold_number']));
         }
+
+        $tr(new HTEL('td/[0]',  $phone_number));
+        $tr(new HTEL('td/[0]', $row['client_name']));
+
+        $tbody($tr);
+        $counter++;
     }
 }
 
-$link->close();
+$conn->close();
 
 $table = new HTEL('table', [new HTEL('caption /ЗАПИСIВ: [0]', count($p_ids)) ,$tbody]);
 

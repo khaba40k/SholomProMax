@@ -1,12 +1,11 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //отримання списку адміністраторів/редакторів
 
-$query = 'SELECT login FROM users';
+$conn = new SQLconn();
 
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT login FROM users');
 
 $users = array();
 
@@ -158,11 +157,11 @@ function _ukrPeriod($in):string{
     return $month . ' ' . $year;
 }
 
-$result = mysqli_query($link, $query);
+$result = $conn($query);
 
 session_start();
 
-$counter = mysqli_num_rows($result);
+$counter = count($result);
 
 if ($_GET['type'] == 'archiv' && $counter > 0){
     echo 'ЗАПИСІВ: [ ' . $counter . ' ]<br>';
@@ -299,7 +298,7 @@ if ($counter > 0){
         if ($row['date_out'] === null) {
             $query = 'SELECT * FROM `service_out` where `ID` = ' . $ID . ' AND `service_ID` = 21 LIMIT 1';
 
-            if (mysqli_num_rows(mysqli_query($link, $query)) == 1) {
+            if (count($conn($query)) == 1) {
                 $div(new HTEL('label .=term/T'));
             }
         }
@@ -311,8 +310,7 @@ else {
     echo 'ЗАПИСІВ НЕ ЗНАЙДЕНО !';
 }
 
-$link->close();
-
+$conn->close();
 
 function classFromCreator($creator):string{
     $us = $GLOBALS['users'];

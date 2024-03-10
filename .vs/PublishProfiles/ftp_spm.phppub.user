@@ -6,7 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include=".gitignore">
-      <publishTime>11/08/2023 16:13:08</publishTime>
+      <publishTime>03/03/2024 13:20:08</publishTime>
     </File>
     <File Include=".htaccess">
       <publishTime>10/21/2023 20:14:16</publishTime>
@@ -48,25 +48,25 @@
       <publishTime>02/07/2024 15:58:23</publishTime>
     </File>
     <File Include="blok/discount_list.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 15:40:30</publishTime>
     </File>
     <File Include="blok/error_log">
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/exp/expenses.php">
-      <publishTime>02/07/2024 15:33:28</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/exp/expenses_menu.php">
       <publishTime>02/07/2024 10:26:35</publishTime>
     </File>
     <File Include="blok/exp/jurnal.php">
-      <publishTime>02/07/2024 10:26:35</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/exp/jurnal_period.php">
       <publishTime>02/07/2024 10:26:35</publishTime>
     </File>
     <File Include="blok/exp/record_new_in.php">
-      <publishTime>10/21/2023 20:14:17</publishTime>
+      <publishTime>03/03/2024 14:00:04</publishTime>
     </File>
     <File Include="blok/expenses - Копировать.php">
       <publishTime>10/31/2023 00:47:43</publishTime>
@@ -105,7 +105,7 @@
       <publishTime>02/07/2024 10:35:39</publishTime>
     </File>
     <File Include="blok/price_list.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 15:42:50</publishTime>
     </File>
     <File Include="blok/print_to_work.php">
       <publishTime>02/07/2024 10:35:39</publishTime>
@@ -117,7 +117,7 @@
       <publishTime>12/04/2023 15:52:14</publishTime>
     </File>
     <File Include="blok/record_price.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 15:44:00</publishTime>
     </File>
     <File Include="blok/remowe_info.php">
       <publishTime>02/07/2024 10:35:39</publishTime>
@@ -129,7 +129,7 @@
       <publishTime>02/07/2024 10:35:39</publishTime>
     </File>
     <File Include="blok/sms/get_client_list_query.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 14:09:52</publishTime>
     </File>
     <File Include="blok/sms/sms_board.php">
       <publishTime>02/28/2024 16:15:04</publishTime>
@@ -138,16 +138,16 @@
       <publishTime>02/28/2024 16:18:39</publishTime>
     </File>
     <File Include="blok/sms/sms_info.php">
-      <publishTime>02/28/2024 15:35:17</publishTime>
+      <publishTime>03/03/2024 14:25:18</publishTime>
     </File>
     <File Include="blok/sms/sms_info_number_list.php">
-      <publishTime>02/28/2024 15:49:36</publishTime>
+      <publishTime>03/03/2024 14:25:08</publishTime>
     </File>
     <File Include="blok/sms/sms_menu.php">
-      <publishTime>02/07/2024 10:40:36</publishTime>
+      <publishTime>03/03/2024 14:18:26</publishTime>
     </File>
     <File Include="blok/sms/sms_send.php">
-      <publishTime>02/28/2024 16:08:20</publishTime>
+      <publishTime>03/03/2024 14:23:23</publishTime>
     </File>
     <File Include="blok/sms/sms_status.php">
       <publishTime>02/28/2024 15:47:33</publishTime>
@@ -180,16 +180,16 @@
       <publishTime>02/07/2024 10:45:04</publishTime>
     </File>
     <File Include="blok/zvit/count_info.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 15:28:17</publishTime>
     </File>
     <File Include="blok/zvit/sum_info.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 15:29:32</publishTime>
     </File>
     <File Include="blok/zvit/table_count.php">
-      <publishTime>02/07/2024 11:19:45</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/zvit/table_sum.php">
-      <publishTime>02/15/2024 16:09:13</publishTime>
+      <publishTime>03/03/2024 15:37:42</publishTime>
     </File>
     <File Include="blok/zvit/table_sum_1.php">
       <publishTime>02/15/2024 16:00:53</publishTime>
@@ -204,40 +204,40 @@
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="blok/z_create/accept_dialog.php">
-      <publishTime>02/07/2024 10:45:29</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/z_create/ch_var_col_set.php">
-      <publishTime>02/07/2024 10:44:37</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/z_create/get_NP_op.php">
       <publishTime>11/22/2023 19:10:04</publishTime>
     </File>
     <File Include="blok/z_create/new_Z.php">
-      <publishTime>02/07/2024 11:11:13</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/z_create/record_new_z.php">
-      <publishTime>02/07/2024 10:48:31</publishTime>
+      <publishTime>03/03/2024 14:56:54</publishTime>
     </File>
     <File Include="blok/z_create/shop.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/z_list/active_z.php">
-      <publishTime>02/28/2024 15:52:56</publishTime>
+      <publishTime>03/03/2024 15:13:51</publishTime>
     </File>
     <File Include="blok/z_list/close_z.php">
-      <publishTime>02/07/2024 11:09:12</publishTime>
+      <publishTime>03/03/2024 15:15:42</publishTime>
     </File>
     <File Include="blok/z_list/print_to_work.php">
-      <publishTime>02/27/2024 21:21:27</publishTime>
+      <publishTime>03/10/2024 10:29:03</publishTime>
     </File>
     <File Include="blok/z_list/remowe_info.php">
-      <publishTime>02/07/2024 10:35:37</publishTime>
+      <publishTime>03/03/2024 15:23:56</publishTime>
     </File>
     <File Include="blok/z_list/zakazi.php">
       <publishTime>02/07/2024 11:00:10</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>02/15/2024 15:58:28</publishTime>
+      <publishTime>03/10/2024 10:26:14</publishTime>
     </File>
     <File Include="composer.json">
       <publishTime>11/08/2023 16:16:56</publishTime>
@@ -477,7 +477,7 @@
       <publishTime>10/27/2023 14:45:29</publishTime>
     </File>
     <File Include="index.php">
-      <publishTime>02/27/2024 20:31:28</publishTime>
+      <publishTime>03/03/2024 15:45:04</publishTime>
     </File>
     <File Include="info.php">
       <publishTime>02/07/2024 11:09:12</publishTime>
@@ -534,7 +534,7 @@
       <publishTime>10/27/2023 15:42:20</publishTime>
     </File>
     <File Include="test.php">
-      <publishTime>02/28/2024 12:25:52</publishTime>
+      <publishTime>03/10/2024 10:27:23</publishTime>
     </File>
     <File Include="tests/NovaPoshtaApi2Test.php">
       <publishTime>02/07/2024 16:15:58</publishTime>
@@ -4059,7 +4059,7 @@
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="work.php">
-      <publishTime>02/28/2024 14:17:25</publishTime>
+      <publishTime>03/10/2024 08:01:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

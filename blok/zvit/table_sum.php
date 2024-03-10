@@ -1,10 +1,11 @@
-﻿<?php
+<?php
 
 //$_GET['ot'] = '2000-01-01';
 //$_GET['do'] = '2024-02-15';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+
+$conn = new SQLconn();
 
 $table = new HTEL('table .=tbl_sum');
 
@@ -24,22 +25,18 @@ $tbody($tr);
 
 //Вибірка послуг
 
-mysqli_query($link, 'SET SQL_BIG_SELECTS = 1');
+$conn('SET SQL_BIG_SELECTS = 1');
 
 $arr_serv_ids = array();
 $arr_serv_types = array();
 
-$query = 'SELECT * FROM `service_ids` ORDER BY `order` ASC';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM `service_ids` ORDER BY `order` ASC');
 
 foreach ($result as $row) {
     $arr_serv_ids[] = $row["ID"];
 }
 
-$query = 'SELECT service_ID, type_ID FROM type_ids';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT service_ID, type_ID FROM type_ids');
 
 foreach ($result as $row) {
     $arr_serv_types[$row['service_ID']][] = $row['type_ID'];
@@ -61,12 +58,12 @@ foreach ($arr_serv_ids as $i) {
                  INNER JOIN (SELECT SUM(_count)*-1 as _cnt_sps, SUM(_cost)*-1 AS _sum_sps FROM get_view_in WHERE _id = ' . $i . ' AND _type = ' . $t . ' AND _count < 0 AND _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '") _sps
                  INNER JOIN (SELECT string_name AS string_name2, string_type AS string_type2, SUM(_count) AS _cnt_out, SUM(_cost) AS _sum_out FROM get_view_out WHERE _id = ' . $i . ' AND _type = ' . $t . '  AND _date >= "'.$_GET['ot'].'" AND _date <= "' . $_GET['do'] . '") _out';
 
-        $result = mysqli_query($link, $query);
+        $result = $conn($query)[0];
 
-        foreach ($result as $row){
-            $result = $row;
-            break;
-        }
+        //foreach ($result as $row){
+        //    $result = $row;
+        //    break;
+        //}
 
         $name_ind = $result['string_name'] !== null ? '' : '2';
 
@@ -94,51 +91,30 @@ foreach ($arr_serv_ids as $i) {
 
 }
 
-//<tr style="border-style:inherit;">
-//                                <td id="10_1" class="sum_info" style="text-align:left;">
-//                                        Заробітна плата (працівники)
-//                                </td>
-//                                <td style="text-align:center;">
-//                                        17
-//                                </td>
-//                                <td style="text-align:right;">
-//                                        23600.00
-//                                </td>
-//                                <td style="text-align:center;">
-//                                        -
-//                                </td>
-//                                <td style="text-align:center;">
-//                                </td>
-//                                <td style="text-align:right;">
-//                                        -
-//                                </td>
-//                                <td style="text-align:right;font-weight:bold;">
-//                                        -23600.00
-//                                </td>
-//                        </tr>
-
 $tr = new HTEL('tr');
 
 $tr(new HTEL('th &=text-align:center;/РАЗОМ'));
 
 $sum_result = 0;
 
-$result = mysqli_query($link, 'SELECT SUM(_cost) as _cost FROM get_view_in WHERE _count > 0 AND _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '"');
+$result = $conn('SELECT SUM(_cost) as _cost FROM get_view_in WHERE _count > 0 AND _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '"');
 foreach ($result as $row) {
     $tr(new HTEL('th colspan=2 &=text-align:right;/[0]', $row['_cost']));
     $sum_result -= $row['_cost'];
 }
 
-$result = mysqli_query($link, 'SELECT SUM(_count)*-1 as _count FROM get_view_in WHERE _count < 0 AND _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '"');
+$result = $conn('SELECT SUM(_count)*-1 as _count FROM get_view_in WHERE _count < 0 AND _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '"');
 foreach ($result as $row) {
     $tr(new HTEL('th &=text-align:center;/[0]', $row['_count']));
 }
 
-$result = mysqli_query($link, 'SELECT SUM(_cost) as _cost FROM get_view_out WHERE _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '"');
+$result = $conn('SELECT SUM(_cost) as _cost FROM get_view_out WHERE _date >= "' . $_GET['ot'] . '" AND _date <= "' . $_GET['do'] . '"');
 foreach ($result as $row) {
     $tr(new HTEL('th colspan=2 &=text-align:right;/[0]', CostOut($row['_cost'])));
     $sum_result += CostOut($row['_cost']);
 }
+
+$conn->close();
 
 $tr(new HTEL('th &=text-align:right;/[0]', CostOut($sum_result)));
 
@@ -148,10 +124,7 @@ $table($tbody);
 
 echo $table;
 
-$link->close();
-
 ?>
-
 
 <script>
 

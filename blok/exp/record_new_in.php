@@ -1,5 +1,4 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 session_start();
@@ -25,6 +24,8 @@ for($i = 0; $i <= $lastId; $i++){
     }
 }
 
+$conn = new SQLconn();
+
 //Запис списання/надходження компл
 
 for ($i = 0; $i < count($arr_in); $i++){
@@ -34,12 +35,10 @@ for ($i = 0; $i < count($arr_in); $i++){
       outVal($arr_in[$i]['count']) .  outVal($arr_in[$i]['price']) .  outVal($arr_in[$i]['comm']) .
       outVal($_SESSION['logged'], true) . ")";
 
-    if ($link->query($query) !== TRUE) {
-        $err = "Помилка запису в базу даних: " . $query . "<br>" . $link->error;
-    }
+    $conn($query);
 }
 
-$link->close();
+$conn->close();
 
 if ($err == ''){
     phpAlert("Записи успішно створено.", 'work?page=jurnal');

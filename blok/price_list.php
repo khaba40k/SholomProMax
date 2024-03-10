@@ -1,15 +1,12 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-
+$conn = new SQLconn();
 //ВИБІРКА НАЙМЕНУВАНЬ/ забивка одиночних типів
 
 $arr_serv_name = array();
 $arr_types = array();
 
-$query = 'SELECT * FROM `service_ids` where `atr` <> 16 ORDER BY `order` ASC';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM `service_ids` where `atr` <> 16 ORDER BY `order` ASC');
 
 foreach ($result as $row) {
     $arr_serv_name[$row["ID"]] = $row["NAME"];
@@ -18,9 +15,7 @@ foreach ($result as $row) {
 
 //ВИБІРКА ІСНУЮЧИХ ТИПІВ
 
-$query = 'SELECT * FROM `type_ids`';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM type_ids');
 
 foreach ($result as $row) {
     $arr_types[$row["service_ID"]][$row["type_ID"]] = "(" . $row["name"] . ")";
@@ -30,15 +25,13 @@ foreach ($result as $row) {
 
 $arr_cst = array();
 
-$query = 'SELECT * FROM `price_list`';
-
-$result = mysqli_query($link, $query);
+$result = $conn('SELECT * FROM `price_list`');
 
 foreach ($result as $row) {
     $arr_cst[$row["service_id"]][$row["type_id"]] = $row["cost"];
 }
 
-$link->close();
+$conn->close();
 
 ?>
 

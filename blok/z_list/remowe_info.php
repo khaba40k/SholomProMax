@@ -1,18 +1,14 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-$query = 'DELETE FROM `service_out` WHERE `ID`=' . $_GET['ID'];
+$conn = new SQLconn();
 
-$result = mysqli_query($link, $query);
+$conn('DELETE FROM `service_out` WHERE `ID`=' . $_GET['ID']);
 
-$query = 'DELETE FROM `client_info` WHERE `ID`=' . $_GET['ID'];
-
-$result = mysqli_query($link, $query);
+$conn('DELETE FROM `client_info` WHERE `ID`=' . $_GET['ID']);
 
 #region Дисконт відновити
-    $query = 'UPDATE `discount_list` SET `from_ID` = NULL WHERE `from_ID` = ' . $_GET['ID'];
-    mysqli_query($link, $query);
+    $conn('UPDATE `discount_list` SET `from_ID` = NULL WHERE `from_ID` = ' . $_GET['ID'], 0);
 #endregion
 
 phpAlert('Запис успішно видалено.', 'work');

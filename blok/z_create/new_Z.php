@@ -36,22 +36,21 @@
 
 $TYPE_Z = $_GET['type'] ?? 'def';
 
-require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
 //HIDE();
 
+$conn = new SQLconn();
+
 #region Отримання списку кольорів
 $_COLORS = array();
 
-$query = 'SELECT * FROM `colors`';
+$result = $conn('SELECT * FROM colors');
 
-$result = mysqli_query($link, $query);
+$map = $conn('SELECT * FROM color_map');
 
-if (mysqli_num_rows($result) != 0) {
-    foreach ($result as $row) {
-        $_COLORS[] = new MyColor($row['ID'], $row['color'], $row['serv_ids'], $row['css_name']);
-    }
+foreach ($result as $row) {
+    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 #endregion
 
@@ -72,35 +71,25 @@ if ($IS_CHANGE == 1){//РЕДАГУВАННЯ
 
     #region Вибірка з бази клієнта/комплектуючих
 
-    $query = 'SELECT * FROM `client_info` WHERE `ID` = '. $_GET['ID']. ' LIMIT 1';
+    $result = $conn('SELECT * FROM client_info WHERE ID = '. $_GET['ID']. ' LIMIT 1');
 
-    $result = mysqli_query($link, $query);
+    $Z_DATA->SET($result[0] ?? array());
 
-    if (mysqli_num_rows($result) == 1) {
-        foreach ($result as $row) {
-            $Z_DATA->SET($row);
-        }
+    $result = $conn('SELECT * FROM service_out WHERE `ID` = ' . $_GET['ID']);
+
+    $in_arr = array();
+
+    foreach ($result as $row) {
+        $in_arr['serv'][$row['service_ID']][$row['type_ID']] =
+            [
+                'color' => $row['color'],
+                'count' => $row['count'],
+                'cost' => $row['costs']
+            ];
     }
 
-    $query = 'SELECT * FROM `service_out` WHERE `ID` = ' . $_GET['ID'];
-
-    $result = mysqli_query($link, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        $in_arr = array();
-
-        foreach ($result as $row) {
-            $in_arr['serv'][$row['service_ID']][$row['type_ID']] =
-                [
-                    'color' => $row['color'],
-                    'count' => $row['count'],
-                    'cost' => $row['costs']
-                ];
-        }
-
-        if (count($in_arr) > 0) {
-            $Z_DATA->SET($in_arr);
-        }
+    if (count($in_arr) > 0) {
+        $Z_DATA->SET($in_arr);
     }
 
     #endregion
@@ -108,19 +97,15 @@ if ($IS_CHANGE == 1){//РЕДАГУВАННЯ
     #region Обробка переміщень
     //наступний номер за відсутності
     if (!empty($Z_DATA->TTN_IN) && empty($Z_DATA->SHOLOM_NUM) && empty($Z_DATA->SOLD_NUM)) {
-
         $query = 'SELECT `' . $cell_num . '` FROM `client_info` order by `' . $cell_num . '` DESC LIMIT 1';
 
-        $result = mysqli_query($link, $query);
+        $result = $conn($query);
 
-        if (mysqli_num_rows($result) == 1) {
-            foreach ($result as $row) {
-                $Z_DATA->SHOLOM_NUM = $row[$cell_num] + 1;
-                $Z_DATA->SOLD_NUM = $row[$cell_num] + 1;
-            }
+        foreach ($result as $row) {
+            $Z_DATA->SHOLOM_NUM = $row[$cell_num] + 1;
+            $Z_DATA->SOLD_NUM = $row[$cell_num] + 1;
         }
     }
-
     #endregion
 
 }else{//НОВИЙ
@@ -132,15 +117,9 @@ if ($IS_CHANGE == 1){//РЕДАГУВАННЯ
 
     #region Отримання наступного номера ID
 
-        $query = 'SELECT `ID` FROM `client_info` order by `ID` DESC LIMIT 1';
+    $result = $conn('SELECT `ID` FROM `client_info` order by `ID` DESC LIMIT 1');
 
-        $result = mysqli_query($link, $query);
-
-        if (mysqli_num_rows($result) == 1) {
-            foreach ($result as $row) {
-                $Z_DATA->ID = $row['ID'] + 1;
-            }
-        }
+    $Z_DATA->ID = $result[0]['ID'] + 1;
 
      #endregion
 }
@@ -152,13 +131,11 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'sold')
 
     $query = 'SELECT `' . $cell_num . '` FROM `client_info` WHERE `' . $cell_num . '`<>' . ($TYPE_Z == 'def' ? $Z_DATA->SHOLOM_NUM : $Z_DATA->SOLD_NUM);
 
-    $result = mysqli_query($link, $query);
+    $result = $conn($query);
 
-    if (mysqli_num_rows($result) > 0) {
-        foreach ($result as $row) {
-            if ($row[$cell_num] != null)
-                $numbers_in_base[] = $row[$cell_num];
-        }
+    foreach ($result as $row) {
+        if ($row[$cell_num] != null)
+            $numbers_in_base[] = $row[$cell_num];
     }
 
     echo new HTEL('script/InvalidNumbers([0]);', json_encode($numbers_in_base));
@@ -323,13 +300,9 @@ $field1(new HTEL('div &=display:flex;height:150px;', [
 //Заповнення графи терміново
 
 if ($TYPE_Z == 'def' || $TYPE_Z == 'def0'){
-    $query = 'SELECT `cost` FROM `price_list` WHERE `service_id` = 21 LIMIT 1';
+    $result = $conn('SELECT `cost` FROM `price_list` WHERE `service_id` = 21 LIMIT 1');
 
-    $result = mysqli_query($link, $query);
-
-    foreach ($result as $row) {
-        $term_cost = $Z_DATA->GET_KOMPLECT(21) != '' ? $Z_DATA->GET_KOMPLECT(21) : $row['cost'];
-    }
+    $term_cost = $Z_DATA->GET_KOMPLECT(21) != '' ? $Z_DATA->GET_KOMPLECT(21) : $result[0]['cost'];
 
     $statusTerm = $Z_DATA->GET_KOMPLECT(21) != '' ? 'checked' : '';
 
@@ -406,19 +379,18 @@ if ($TYPE_Z == 'def' || $TYPE_Z == 'sold'){
 
     $query = 'SELECT `login` FROM `users` WHERE `login` <> "Administrator" AND `ID` > ' . $idaccess;
 
-    $result = mysqli_query($link, $query);
+    $result = $conn($query);
 
-    if (mysqli_num_rows($result) > 0){
-        $select = new HTEL('select !=creator ?=creator', new HTEL('option #=[0]/-', $_SESSION['logged']));
+    $select = new HTEL('select !=creator ?=creator', new HTEL('option #=[0]/-', $_SESSION['logged']));
 
-        foreach ($result as $row) {
-            $sel = $row['login'] == $Z_DATA->REDAKTOR ? 'selected' : '';
-            $select(new HTEL('option #=[0] [1]/[0]', [$row['login'], $sel]));
-        }
-
-        $div(new HTEL('label for=creator/Переглядає [0], доступ -> ', $_SESSION['logged']));
-        $div($select);
+    foreach ($result as $row) {
+        $sel = $row['login'] == $Z_DATA->REDAKTOR ? 'selected' : '';
+        $select(new HTEL('option #=[0] [1]/[0]', [$row['login'], $sel]));
     }
+
+    $div(new HTEL('label for=creator/Переглядає [0], доступ -> ', $_SESSION['logged']));
+
+    $div($select);
 
     $div([
         new HTEL('label  for=[0]/Працівник: '),
@@ -680,4 +652,4 @@ function selectStatus($bool = false):string{
     
 </script>
 
-<?php $link->close();?>
+<?php $conn->close();?>

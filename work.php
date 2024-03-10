@@ -20,40 +20,38 @@
 
     session_start();
 
+    #region Авторизація тимчасова
     $tempAuth = $_GET['ds;gzjfmsds;fds'] ?? null;
 
-    #region Авторизація тимчасова
     if ($tempAuth == 'shrtdgzf') {
         $_SESSION['logged'] = 'Administrator';
         $_SESSION['Administrator'] = 0;
     }
     #endregion
 
-    require $_SERVER['DOCUMENT_ROOT'] . "/blok/conn_local.php";
+    require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
+
+    $conn = new SQLconn();
 
     if (!isset($_SESSION['logged'])){
 
         if(isset($_POST['log']) && isset($_POST['pas'])){
 
-            $query = 'SELECT * FROM `users`
-              where `login` = "' . $_POST['log'] . '"
-              and `password` = "' . $_POST['pas'] . '"';
+            $query = 'SELECT * FROM users
+              where login = "' . $_POST['log'] . '"
+              and password = "' . $_POST['pas'] . '"';
 
-            $result = mysqli_query($link, $query);
+            $result = $conn($query);
 
-            if (mysqli_num_rows($result) == 0 ||
+            if (count($result) == 0 ||
                 $_POST['log'] != trim($_POST['log']) ||
                 $_POST['pas'] != trim($_POST['pas'])) {
 
                 $_SESSION['msg'] = "Пароль або логін не підійшов!";
-                $link->close();
                 header('Location: admin');
             }
             else {
-
-                $query = 'SELECT `login`,`ID` FROM `users`';
-
-                $result = mysqli_query($link, $query);
+                $result = $conn('SELECT login, ID FROM users');
 
                 foreach ($result as $row){
                     $_SESSION[$row['login']] = $row['ID'];
@@ -69,30 +67,20 @@
         }
     }
 
-    require $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
-
-    //HIDE();
-
     #region Підрахунок заявок
     $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND `TTN_IN` IS NULL';
 
-    $result = mysqli_query($link, $query);
-
-    $_SESSION['count_new'] = mysqli_num_rows($result);
+    $_SESSION['count_new'] = count($conn($query));
 
     $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NULL AND (`TTN_IN` IS NOT NULL OR `sold_number` IS NOT NULL)';
 
-    $result = mysqli_query($link, $query);
-
-    $_SESSION['count_inwork'] = mysqli_num_rows($result);
+    $_SESSION['count_inwork'] = count($conn($query));
 
     $query = 'SELECT `sholom_num` FROM `client_info` WHERE `date_out` IS NOT NULL';
 
-    $result = mysqli_query($link, $query);
+    $_SESSION['count_archiv'] = count($conn($query));
 
-    $_SESSION['count_archiv'] = mysqli_num_rows($result);
-
-    $link->close();
+    $conn->close();
     #endregion
 
     $activ_count = $_SESSION['count_new'] + $_SESSION['count_inwork'];
@@ -100,8 +88,9 @@
     $_GET['header'] = 'admin';
     require "blok/header.php";
 
+    HIDE();
+
     $wrapper = new HTEL('div .=wrapper');
-    //$aside = new HTEL('aside .=no-print');
 
     $aside = new HTEL('aside .=menu-cont+no-print', new HTEL('h2 .=menu-capt/МЕНЮ'));
 

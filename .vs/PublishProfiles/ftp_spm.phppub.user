@@ -54,13 +54,13 @@
       <publishTime>10/21/2023 20:14:18</publishTime>
     </File>
     <File Include="blok/exp/expenses.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/exp/expenses_menu.php">
       <publishTime>02/07/2024 10:26:35</publishTime>
     </File>
     <File Include="blok/exp/jurnal.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/exp/jurnal_period.php">
       <publishTime>02/07/2024 10:26:35</publishTime>
@@ -125,6 +125,21 @@
     <File Include="blok/search.php">
       <publishTime>10/22/2023 12:41:33</publishTime>
     </File>
+    <File Include="blok/set/menu.php">
+      <publishTime>03/10/2024 11:03:32</publishTime>
+    </File>
+    <File Include="blok/set/save_set.php">
+      <publishTime>03/23/2024 19:06:41</publishTime>
+    </File>
+    <File Include="blok/set/services.php">
+      <publishTime>03/22/2024 07:58:25</publishTime>
+    </File>
+    <File Include="blok/set/serv_one_info.php">
+      <publishTime>03/23/2024 19:05:39</publishTime>
+    </File>
+    <File Include="blok/set/upload_png.php">
+      <publishTime>03/23/2024 15:02:52</publishTime>
+    </File>
     <File Include="blok/shop.php">
       <publishTime>02/07/2024 10:35:39</publishTime>
     </File>
@@ -186,7 +201,7 @@
       <publishTime>03/03/2024 15:29:32</publishTime>
     </File>
     <File Include="blok/zvit/table_count.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/zvit/table_sum.php">
       <publishTime>03/03/2024 15:37:42</publishTime>
@@ -204,22 +219,22 @@
       <publishTime>10/21/2023 20:14:17</publishTime>
     </File>
     <File Include="blok/z_create/accept_dialog.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/z_create/ch_var_col_set.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/z_create/get_NP_op.php">
       <publishTime>11/22/2023 19:10:04</publishTime>
     </File>
     <File Include="blok/z_create/new_Z.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/z_create/record_new_z.php">
       <publishTime>03/03/2024 14:56:54</publishTime>
     </File>
     <File Include="blok/z_create/shop.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/z_list/active_z.php">
       <publishTime>03/03/2024 15:13:51</publishTime>
@@ -228,7 +243,7 @@
       <publishTime>03/03/2024 15:15:42</publishTime>
     </File>
     <File Include="blok/z_list/print_to_work.php">
-      <publishTime>03/10/2024 10:29:03</publishTime>
+      <publishTime>03/10/2024 10:35:27</publishTime>
     </File>
     <File Include="blok/z_list/remowe_info.php">
       <publishTime>03/03/2024 15:23:56</publishTime>
@@ -237,7 +252,7 @@
       <publishTime>02/07/2024 11:00:10</publishTime>
     </File>
     <File Include="class/universal.php">
-      <publishTime>03/10/2024 10:26:14</publishTime>
+      <publishTime>03/22/2024 07:34:26</publishTime>
     </File>
     <File Include="composer.json">
       <publishTime>11/08/2023 16:16:56</publishTime>
@@ -534,7 +549,7 @@
       <publishTime>10/27/2023 15:42:20</publishTime>
     </File>
     <File Include="test.php">
-      <publishTime>03/10/2024 10:27:23</publishTime>
+      <publishTime>03/10/2024 10:53:30</publishTime>
     </File>
     <File Include="tests/NovaPoshtaApi2Test.php">
       <publishTime>02/07/2024 16:15:58</publishTime>
@@ -4059,7 +4074,7 @@
       <publishTime>10/21/2023 20:14:16</publishTime>
     </File>
     <File Include="work.php">
-      <publishTime>03/10/2024 08:01:45</publishTime>
+      <publishTime>03/23/2024 16:50:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

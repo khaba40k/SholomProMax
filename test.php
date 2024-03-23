@@ -20,25 +20,7 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/class/universal.php";
 
-    $conn = new SQLconn();
-
-    $_COLORS = array();
-
-    $result = $conn('SELECT * FROM colors');
-    $map = $conn('SELECT * FROM color_map');
-
-    foreach ($result as $row) {
-        $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
-    }
-
-    $conn->close();
-
-    foreach ($_COLORS as $c){
-        echo $c->ID .' => '. $c->AppleTo(6,2) . "\n<br>";
-        //echo $c->ID .' => '. $c->ANS(9) . "\n<br>";
-    }
-
-    var_dump($_COLORS);
+    include 'blok/set/menu.php';
 
     ?>
 

@@ -84,7 +84,7 @@ function console($msg)
         echo '<script type="text/javascript">console.log("' . $msg . '")</script>';
 }
 
-class MyColor2
+class MyColor
 {
     public $ID;
     public string $NAME;
@@ -401,6 +401,7 @@ class HTEL {
         $abbr['~'] = 'url';
         $abbr['?'] = 'name';
         $abbr['#'] = 'value';
+        $abbr['##'] = 'data-value';
         $abbr['*'] = 'type';
         $abbr['&'] = 'style';
         $abbr['$'] = 'placeholder';

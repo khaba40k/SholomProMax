@@ -34,5 +34,6 @@
     <Folder Include="img\kompl\" />
     <Folder Include="img\s_seti\" />
     <Folder Include="logs\" />
+    <Folder Include="test\" />
   </ItemGroup>
 </Project>

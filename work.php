@@ -20,6 +20,8 @@
 
     session_start();
 
+    define ('SITE_ROOT', realpath(dirname(__FILE__)));
+
     #region Авторизація тимчасова
     $tempAuth = $_GET['ds;gzjfmsds;fds'] ?? null;
 
@@ -88,7 +90,7 @@
     $_GET['header'] = 'admin';
     require "blok/header.php";
 
-    HIDE();
+    //HIDE();
 
     $wrapper = new HTEL('div .=wrapper');
 

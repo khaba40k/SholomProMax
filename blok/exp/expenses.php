@@ -58,7 +58,7 @@ $result = $conn('SELECT * FROM colors');
 $map = $conn('SELECT * FROM color_map');
 
 foreach ($result as $row) {
-    $_COLORS[$row['ID']] = new MyColor2($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
+    $_COLORS[$row['ID']] = new MyColor($row['ID'], $row['color'], $map, $row['css_name'], $row['is_def']);
 }
 #endregion
 

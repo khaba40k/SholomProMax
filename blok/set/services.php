@@ -13,7 +13,13 @@
         $select(new HTEL('option #=[0]/[1]', [$serv['ID'],$serv['NAME']]));
     }
 
-    $container([$select, new HTEL('div !=workset')]);
+    $container([
+       $select,
+       new HTEL('input *=text min=3 !=new_name $=[0]', 'назва/перейменування'),
+       new HTEL('button *=button !=add_serv/Додати'),
+       new HTEL('button *=button !=del_serv/Видалити'),
+       new HTEL('div !=workset')
+    ]);
 
     $conn->close();
 
@@ -25,11 +31,13 @@
     $('.set_serv_cont').on('change', '#serv', function () {
         var _id = $(this).val();
 
+        var _serv_name = $(this).find('option:selected').text();
+
         $.ajax({
             url: 'blok/set/serv_one_info.php',
             method: 'GET',
             dataType: 'html',
-            data: 'ID=' + _id,
+            data: 'ID=' + _id + '&NAME=' + _serv_name,
             success: function (data) {
                 $('#workset').html(data);
             }
